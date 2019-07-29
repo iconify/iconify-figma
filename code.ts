@@ -31,6 +31,14 @@
         case 'PAGE':
           break;
 
+        case 'FRAME':
+          if (parent.parent.type === 'PAGE') {
+            // Frame with parent group should be parent for icon
+            break;
+          }
+          parent = parent.parent;
+          break;
+
         default:
           parent = parent.parent;
       }

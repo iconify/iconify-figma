@@ -1,7 +1,7 @@
 {
   "name": "Iconify",
-  "version": "0.5.0",
-  "html": "ui.html",
-  "script": "code.js",
-  "id": "735098390272716381"
+  "id": "735098390272716381",
+  "api": "0.6.0",
+  "main": "code.js",
+  "ui": "ui.html"
 }

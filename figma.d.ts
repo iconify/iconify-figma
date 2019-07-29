@@ -3,6 +3,8 @@ declare const figma: PluginAPI
 declare const __html__: string
 
 interface PluginAPI {
+  readonly apiVersion: "0.6.0"
+
   readonly currentPage: PageNode
 
   // Root of the current Figma document.
@@ -26,6 +28,9 @@ interface PluginAPI {
   // Access browser APIs and/or show UI to the user.
   showUI(html: string, options?: ShowUIOptions): void
   readonly ui: UIAPI
+
+  // Lets you store persistent data on the user's local machine
+  readonly clientStorage: ClientStorageAPI
 
   // This value is returned when a property is in a "mixed" state.
   // In order to check if a property is in a mixed state, always
@@ -72,11 +77,21 @@ interface PluginAPI {
   // Creates an Image object using the provided file contents.
   createImage(data: Uint8Array): Image
 
+  // Returns an existing Image object from a hash, which allow you to get the bytes of the image
+  getImageByHash(hash: string): Image
+
   // Groups every node in `nodes` under a new group.
   group(nodes: ReadonlyArray<BaseNode>, parent: BaseNode & ChildrenMixin, index?: number): FrameNode
 
   // Flattens every node in `nodes` into a single vector network.
   flatten(nodes: ReadonlyArray<BaseNode>, parent?: BaseNode & ChildrenMixin, index?: number): VectorNode
+}
+
+interface ClientStorageAPI {
+  // This stores information in the browser, not on the server. It's similar to localStorage, but is
+  // asynchronous, and allows storing objects, arrays, strings, numbers, booleans, null, undefined and Uint8Arrays.
+  getAsync(key: string): Promise<any | undefined>
+  setAsync(key: string, value: any): Promise<void>
 }
 
 type ShowUIOptions = {
@@ -85,17 +100,29 @@ type ShowUIOptions = {
   height?: number,   // defaults to 200
 }
 
+type UIPostMessageOptions = {
+  targetOrigin?: string, // defaults to '*'
+}
+
+type OnMessageProperties = {
+  sourceOrigin: string,
+}
+
 interface UIAPI {
   show(): void
   hide(): void
   resize(width: number, height: number): void
   close(): void
 
-  // Sends a message to the iframe.
-  postMessage(pluginMessage: any): void
+  // Sends a message to the iframe. If the `targetOrigin` option is provided, the message will
+  // only be delivered to the iframe if the origin of the document inside the iframe matches
+  // the `targetOrigin`. You can also use `'*'` to allow the message to be passed to any document.
+  postMessage(pluginMessage: any, options?: UIPostMessageOptions): void
 
-  // Registers a callback for messages sent by the iframe.
-  onmessage: ((pluginMessage: any) => void) | undefined
+  // Registers a callback for messages sent by the iframe. The `pluginMessage` argument
+  // contains the message provided by the iframe. The `sourceOrigin` property contains the origin
+  // of the document that sent the message.
+  onmessage: ((pluginMessage: any, props: OnMessageProperties) => void) | undefined
 }
 
 interface ViewportAPI {
@@ -113,8 +140,8 @@ interface ManifestJson {
   // Name of the plugin.
   name: string
 
-  // Version of the runtime that the plugin uses, e.g. '0.5.0'.
-  version: string
+  // Version of the runtime that the plugin uses, e.g. '0.6.0'.
+  api: string
 
   // The file name that contains the plugin code.
   script: string
@@ -170,6 +197,10 @@ interface FontName {
   readonly style: string
 }
 
+type TextCase = "ORIGINAL" | "UPPER" | "LOWER" | "TITLE"
+
+type TextDecoration = "NONE" | "UNDERLINE" | "STRIKETHROUGH"
+
 interface ArcData {
   readonly startingAngle: number
   readonly endingAngle: number
@@ -205,12 +236,25 @@ interface ColorStop {
   readonly color: RGBA
 }
 
+// All of these properties correspond to their equivalent in the Figma UI
+// and have range -1.0 to 1.0 and default to 0 when unspecified.
+interface ImageFilters {
+  exposure?: number
+  contrast?: number
+  saturation?: number
+  temperature?: number
+  tint?: number
+  highlights?: number
+  shadows?: number
+}
+
 interface SolidPaint {
   readonly type: "SOLID"
   readonly color: RGB
 
   readonly visible?: boolean
   readonly opacity?: number
+  readonly blendMode?: BlendMode
 }
 
 interface GradientPaint {
@@ -220,17 +264,20 @@ interface GradientPaint {
 
   readonly visible?: boolean
   readonly opacity?: number
+  readonly blendMode?: BlendMode
 }
 
 interface ImagePaint {
   readonly type: "IMAGE"
   readonly scaleMode: "FILL" | "FIT" | "CROP" | "TILE"
-  readonly image: Image | null
+  readonly imageHash: string | null
   readonly imageTransform?: Transform // setting for "CROP"
   readonly scalingFactor?: number // setting for "TILE"
+  readonly filters?: ImageFilters
 
   readonly visible?: boolean
   readonly opacity?: number
+  readonly blendMode?: BlendMode
 }
 
 type Paint = SolidPaint | GradientPaint | ImagePaint
@@ -242,7 +289,7 @@ interface Guide {
 
 interface RowsColsLayoutGrid {
   readonly pattern: "ROWS" | "COLUMNS"
-  readonly alignment: "MIN" | "STRETCH" | "CENTER"
+  readonly alignment: "MIN" | "MAX" | "STRETCH" | "CENTER"
   readonly gutterSize: number
 
   readonly count: number        // Infinity when "Auto" is set in the UI
@@ -328,9 +375,16 @@ interface VectorPath {
 
 type VectorPaths = ReadonlyArray<VectorPath>
 
-interface NumberWithUnits {
+type LetterSpacing = {
   readonly value: number
-  readonly units: "PIXELS" | "PERCENT"
+  readonly unit: "PIXELS" | "PERCENT"
+}
+
+type LineHeight = {
+  readonly value: number
+  readonly unit: "PIXELS" | "PERCENT"
+} | {
+  readonly unit: "AUTO"
 }
 
 type BlendMode =
@@ -364,9 +418,7 @@ interface Font {
 interface BaseNodeMixin {
   readonly id: string
   readonly parent: (BaseNode & ChildrenMixin) | null
-  name: string
-  visible: boolean
-  locked: boolean
+  name: string // Note: setting this also sets `autoRename` to false on TextNodes
   removed: boolean
   toString(): string
   remove(): void
@@ -383,6 +435,11 @@ interface BaseNodeMixin {
   // namespace you use.
   getSharedPluginData(namespace: string, key: string): string
   setSharedPluginData(namespace: string, key: string, value: string): void
+}
+
+interface SceneNodeMixin {
+  visible: boolean
+  locked: boolean
 }
 
 interface ChildrenMixin {
@@ -405,19 +462,17 @@ interface LayoutMixin {
   y: number // The same as "relativeTransform[1][2]"
   rotation: number // The angle of the x axis of "relativeTransform" in degrees. Returns values from -180 to 180.
 
-  readonly size: Vector
   readonly width: number // The same as "size.x"
   readonly height: number // The same as "size.y"
 
   // Resizes the node. If children of the node has constraints, it applies those constraints
-  // width and height must be >= 0.01
+  // width and height must be >= 0.01. Except for LINE nodes which must always be given a
+  // height of exactly 0.
   resize(width: number, height: number): void
 
   // Resizes the node. Children of the node are never resized, even if those children have
   // constraints. width and height must be >= 0.01
   resizeWithoutConstraints(width: number, height: number): void
-
-  constraints: Constraints
 }
 
 interface BlendMixin {
@@ -435,6 +490,9 @@ interface FrameMixin {
   guides: ReadonlyArray<Guide>
   gridStyleId: string
   backgroundStyleId: string
+
+  // Horizontal & vertical constraints of this node with respect to its containing frame
+  constraints: Constraints
 }
 
 type StrokeCap = "NONE" | "ROUND" | "SQUARE" | "ARROW_LINES" | "ARROW_EQUILATERAL"
@@ -451,6 +509,9 @@ interface GeometryMixin {
   dashPattern: ReadonlyArray<number>
   fillStyleId: string | symbol // This can return figma.mixed on TEXT nodes
   strokeStyleId: string
+
+  // Horizontal & vertical constraints of this node with respect to its containing frame
+  constraints: Constraints
 }
 
 interface CornerMixin {
@@ -479,20 +540,20 @@ interface PageNode extends BaseNodeMixin, ChildrenMixin, ExportMixin {
   clone(): PageNode // cloned node starts off inserted into current page
 
   guides: ReadonlyArray<Guide>
-  selection: ReadonlyArray<BaseNode>
+  selection: ReadonlyArray<SelectableNode>
 }
 
-interface FrameNode extends BaseNodeMixin, BlendMixin, ChildrenMixin, FrameMixin, LayoutMixin, ExportMixin {
+interface FrameNode extends BaseNodeMixin, SceneNodeMixin, BlendMixin, ChildrenMixin, FrameMixin, LayoutMixin, ExportMixin {
   readonly type: "FRAME" | "GROUP"
   clone(): FrameNode // cloned node starts off inserted into current page
 }
 
-interface SliceNode extends BaseNodeMixin, LayoutMixin, ExportMixin {
+interface SliceNode extends BaseNodeMixin, SceneNodeMixin, LayoutMixin, ExportMixin {
   readonly type: "SLICE"
   clone(): SliceNode // cloned node starts off inserted into current page
 }
 
-interface RectangleNode extends BaseNodeMixin, BlendMixin, CornerMixin, GeometryMixin, LayoutMixin, ExportMixin {
+interface RectangleNode extends BaseNodeMixin, SceneNodeMixin, BlendMixin, CornerMixin, GeometryMixin, LayoutMixin, ExportMixin {
   readonly type: "RECTANGLE"
   clone(): RectangleNode // cloned node starts off inserted into current page
   topLeftRadius: number
@@ -501,24 +562,24 @@ interface RectangleNode extends BaseNodeMixin, BlendMixin, CornerMixin, Geometry
   bottomRightRadius: number
 }
 
-interface LineNode extends BaseNodeMixin, BlendMixin, GeometryMixin, LayoutMixin, ExportMixin {
+interface LineNode extends BaseNodeMixin, SceneNodeMixin, BlendMixin, GeometryMixin, LayoutMixin, ExportMixin {
   readonly type: "LINE"
   clone(): LineNode // cloned node starts off inserted into current page
 }
 
-interface EllipseNode extends BaseNodeMixin, BlendMixin, CornerMixin, GeometryMixin, LayoutMixin, ExportMixin {
+interface EllipseNode extends BaseNodeMixin, SceneNodeMixin, BlendMixin, CornerMixin, GeometryMixin, LayoutMixin, ExportMixin {
   readonly type: "ELLIPSE"
   clone(): EllipseNode // cloned node starts off inserted into current page
   arcData: ArcData
 }
 
-interface PolygonNode extends BaseNodeMixin, BlendMixin, CornerMixin, GeometryMixin, LayoutMixin, ExportMixin {
+interface PolygonNode extends BaseNodeMixin, SceneNodeMixin, BlendMixin, CornerMixin, GeometryMixin, LayoutMixin, ExportMixin {
   readonly type: "POLYGON"
   clone(): PolygonNode // cloned node starts off inserted into current page
   pointCount: number
 }
 
-interface StarNode extends BaseNodeMixin, BlendMixin, CornerMixin, GeometryMixin, LayoutMixin, ExportMixin {
+interface StarNode extends BaseNodeMixin, SceneNodeMixin, BlendMixin, CornerMixin, GeometryMixin, LayoutMixin, ExportMixin {
   readonly type: "STAR"
   clone(): StarNode // cloned node starts off inserted into current page
   pointCount: number
@@ -527,7 +588,7 @@ interface StarNode extends BaseNodeMixin, BlendMixin, CornerMixin, GeometryMixin
   innerRadius: number
 }
 
-interface VectorNode extends BaseNodeMixin, BlendMixin, CornerMixin, GeometryMixin, LayoutMixin, ExportMixin {
+interface VectorNode extends BaseNodeMixin, SceneNodeMixin, BlendMixin, CornerMixin, GeometryMixin, LayoutMixin, ExportMixin {
   readonly type: "VECTOR"
   clone(): VectorNode // cloned node starts off inserted into current page
   vectorNetwork: VectorNetwork
@@ -535,7 +596,7 @@ interface VectorNode extends BaseNodeMixin, BlendMixin, CornerMixin, GeometryMix
   handleMirroring: HandleMirroring | symbol // This can return figma.mixed if vertices have different handleMirroring values
 }
 
-interface TextNode extends BaseNodeMixin, BlendMixin, GeometryMixin, LayoutMixin, ExportMixin {
+interface TextNode extends BaseNodeMixin, SceneNodeMixin, BlendMixin, GeometryMixin, LayoutMixin, ExportMixin {
   readonly type: "TEXT"
   clone(): TextNode // cloned node starts off inserted into current page
   characters: string
@@ -550,13 +611,33 @@ interface TextNode extends BaseNodeMixin, BlendMixin, GeometryMixin, LayoutMixin
   textStyleId: string | symbol
   fontSize: number | symbol
   fontName: FontName | symbol
-  textCase: "ORIGINAL" | "UPPER" | "LOWER" | "TITLE" | symbol
-  textDecoration: "NONE" | "UNDERLINE" | "STRIKETHROUGH" | symbol
-  letterSpacing: NumberWithUnits | symbol
-  lineHeight: NumberWithUnits | symbol
+  textCase: TextCase | symbol
+  textDecoration: TextDecoration | symbol
+  letterSpacing: LetterSpacing | symbol
+  lineHeight: LineHeight | symbol
+
+  // All getRangeX functions can all return figma.mixed if the text has multiple values in the requested range
+  getRangeFontSize(start: number, end: number): number | symbol
+  setRangeFontSize(start: number, end: number, value: number): void
+  getRangeFontName(start: number, end: number): FontName | symbol
+  setRangeFontName(start: number, end: number, value: FontName): void
+  getRangeTextCase(start: number, end: number): TextCase | symbol
+  setRangeTextCase(start: number, end: number, value: TextCase): void
+  getRangeTextDecoration(start: number, end: number): TextDecoration | symbol
+  setRangeTextDecoration(start: number, end: number, value: TextDecoration): void
+  getRangeLetterSpacing(start: number, end: number): LetterSpacing | symbol
+  setRangeLetterSpacing(start: number, end: number, value: LetterSpacing): void
+  getRangeLineHeight(start: number, end: number): LineHeight | symbol
+  setRangeLineHeight(start: number, end: number, value: LineHeight): void
+  getRangeFills(start: number, end: number): Paint[] | symbol
+  setRangeFills(start: number, end: number, value: Paint[]): void
+  getRangeTextStyleId(start: number, end: number): string | symbol
+  setRangeTextStyleId(start: number, end: number, value: string): void
+  getRangeFillStyleId(start: number, end: number): string | symbol
+  setRangeFillStyleId(start: number, end: number, value: string): void
 }
 
-interface ComponentNode extends BaseNodeMixin, BlendMixin, ChildrenMixin, FrameMixin, LayoutMixin, ExportMixin {
+interface ComponentNode extends BaseNodeMixin, SceneNodeMixin, BlendMixin, ChildrenMixin, FrameMixin, LayoutMixin, ExportMixin {
   readonly type: "COMPONENT"
   clone(): ComponentNode // cloned node starts off inserted into current page
 
@@ -566,13 +647,13 @@ interface ComponentNode extends BaseNodeMixin, BlendMixin, ChildrenMixin, FrameM
   readonly key: string // The key to use with "importComponentByKeyAsync"
 }
 
-interface InstanceNode extends BaseNodeMixin, BlendMixin, ChildrenMixin, FrameMixin, LayoutMixin, ExportMixin {
+interface InstanceNode extends BaseNodeMixin, SceneNodeMixin, BlendMixin, ChildrenMixin, FrameMixin, LayoutMixin, ExportMixin {
   readonly type: "INSTANCE"
   clone(): InstanceNode // cloned node starts off inserted into current page
   masterComponent: ComponentNode
 }
 
-interface BooleanOperationNode extends BaseNodeMixin, BlendMixin, ChildrenMixin, CornerMixin, GeometryMixin, LayoutMixin, ExportMixin {
+interface BooleanOperationNode extends BaseNodeMixin, SceneNodeMixin, BlendMixin, ChildrenMixin, CornerMixin, GeometryMixin, LayoutMixin, ExportMixin {
   readonly type: "BOOLEAN_OPERATION"
   clone(): BooleanOperationNode // cloned node starts off inserted into current page
   booleanOperation: "UNION" | "INTERSECT" | "SUBTRACT" | "EXCLUDE"
@@ -581,6 +662,9 @@ interface BooleanOperationNode extends BaseNodeMixin, BlendMixin, ChildrenMixin,
 type BaseNode =
   DocumentNode |
   PageNode |
+  SelectableNode
+
+type SelectableNode =
   SliceNode |
   FrameNode |
   ComponentNode |
@@ -619,7 +703,7 @@ interface BaseStyle {
   // The string to uniquely identify a style by
   readonly id: string
   readonly type: StyleType
-  name: string // Note: setting this also sets "autoRename" to false on TextNodes
+  name: string
   description: string
   remote: boolean
   readonly key: string // The key to use with "importStyleByKeyAsync"
@@ -634,13 +718,13 @@ interface PaintStyle extends BaseStyle {
 interface TextStyle extends BaseStyle {
   type: "TEXT"
   fontSize: number
-  textDecoration: "NONE" | "UNDERLINE" | "STRIKETHROUGH"
+  textDecoration: TextDecoration
   fontName: FontName
-  letterSpacing: NumberWithUnits
-  lineHeight: NumberWithUnits
+  letterSpacing: LetterSpacing
+  lineHeight: LineHeight
   paragraphIndent: number
   paragraphSpacing: number
-  textCase: "ORIGINAL" | "UPPER" | "LOWER" | "TITLE"
+  textCase: TextCase
 }
 
 interface EffectStyle extends BaseStyle {
