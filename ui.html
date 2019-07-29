@@ -2,30 +2,30 @@
 <script>
 
 (function() {
-  var plugin = {
-    load: {
-      scripts: [
-        {
-          src: 'https://code.iconify.design/1/1.0.2/iconify.min.js',
-          test: function() {
-            return window.Iconify !== void 0;
-          }
-        },
-        'https://code.iconify.design/samples.js',
-        'https://code.iconify.design/search/1/1.0.3/search.min.js'
-      ],
-      stylesheets: [
-        'https://fonts.googleapis.com/css?family=PT+Sans',
-        'https://code.iconify.design/search/1/1.0.3/style.css'
-      ],
-      styles: [
-        'html, body { margin: 0; padding: 0; } body { padding: 16px; background: #f2f2f2; }'
-      ]
-    },
-  };
+	var plugin = {
+		load: {
+			scripts: [
+				{
+					src: 'https://code.iconify.design/1/1.0.2/iconify.min.js',
+					test: function() {
+						return window.Iconify !== void 0;
+					}
+				},
+				'https://code.iconify.design/samples.js',
+				'https://code.iconify.design/search/1/1.0.3/search.min.js'
+			],
+			stylesheets: [
+				'https://fonts.googleapis.com/css?family=PT+Sans',
+				'https://code.iconify.design/search/1/1.0.3/style.css'
+			],
+			styles: [
+				'html, body { margin: 0; padding: 0; } body { padding: 16px; background: #f2f2f2; }'
+			]
+		},
+	};
 
-  var loading = false,
-    loaded = false;
+	var loading = false,
+		loaded = false;
 
 	/**
 	 * Call done() after test() is successful
@@ -33,7 +33,7 @@
 	 * @param {function} test
 	 * @param {function} done
 	 */
-   function delay(test, done) {
+	function delay(test, done) {
 		var counter = 0,
 			timer, result;
 
@@ -79,16 +79,16 @@
 	/**
 	 * Test if all dependencies have loaded
 	 */
-  function testDependencies() {
+	function testDependencies() {
 		return window.Iconify !== void 0 && window.IconifySearch !== void 0;
-  }
-  
+	}
+
 	/**
 	 * Load all dependencies, call done() when done
 	 *
 	 * @param {function} done
 	 */
-  function loadDependencies(done) {
+	function loadDependencies(done) {
 		var scripts, style, el;
 
 		function loadNextScript() {
@@ -163,7 +163,7 @@
 		// Start loading scripts
 		scripts = plugin.load.scripts.slice(0);
 		loadNextScript();
-  }
+	}
 
 
 	/**
@@ -172,7 +172,7 @@
 	 * @param icon
 	 * @return {string|null}
 	 */
-  function generateSVG(icon) {
+	function generateSVG(icon) {
 		var Iconify = window.Iconify,
 			name, data, colorless, width, height, counter, params, code;
 
@@ -233,12 +233,17 @@
 		return code;
 	}
 
-  // Load dependencies then show window
-  loadDependencies(function() {
-    var container = document.getElementById('container');
-    window.IconifySearch.create(container, {
+	// Load dependencies then show window
+	loadDependencies(function() {
+		var container = document.getElementById('container');
+		window.IconifySearch.create(container, {
+			// Uncomment next 2 lines and change value for 'prefix' to limit plug-in to one collection
 			// prefix: 'mdi',
 			// hidePrefix: true,
+
+			// Uncomment next line and change value of 'precies' to list of prefixes to limit plug-in to several collections
+			// prefixes: ['mdi', 'mdi-light'],
+
 			listView: false,
 			append: false,
 			show: true,
@@ -255,23 +260,23 @@
 				defaultColor: '#000'
 			},
 			callback: function(event, icon) {
-        var result = {
-          event: event
-        };
+				var result = {
+					event: event
+				};
 
 				switch (event) {
 					case 'submit':
 					case 'submit2':
-            result.icon = icon;
-            result.svg = generateSVG(icon);
+						result.icon = icon;
+						result.svg = generateSVG(icon);
 					case 'cancel':
-            parent.postMessage({
-              pluginMessage: result
-            }, '*');
+						parent.postMessage({
+							pluginMessage: result
+						}, '*');
 				}
 			}
 		});
-  });
+	});
 })();
 
 </script>
