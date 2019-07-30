@@ -78,6 +78,11 @@
       // Change parent node
       console.log('Iconify debug: changing parent node');
       parent.insertChild(parent.children.length, node);
+    } else {
+      // Move icon to middle of viewport
+      console.log('Iconify debug: moving to middle of viewport');
+      node.x = Math.round(figma.viewport.center.x - node.width);
+      node.y = Math.round(figma.viewport.center.y - node.height);
     }
 
     // Select node
