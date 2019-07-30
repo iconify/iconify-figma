@@ -165,6 +165,28 @@
 		loadNextScript();
 	}
 
+	/**
+	 * Normalize color
+	 * 
+	 * @param {*} value
+	 * @return {string}
+	 */
+	function normalizeColor(value) {
+		if (typeof value !== 'string' || !value.length) {
+			return '#000';
+		}
+
+		// Add # to hexadecimal color
+		switch (value.length) {
+			case 3:
+			case 6:
+			case 8:
+				if (value.match(/^[a-fA-F0-9]+$/)) {
+					return '#' + value;
+				}
+		}
+		return value;
+	}
 
 	/**
 	 * Generate SVG from icon data
@@ -227,7 +249,7 @@
 
 		// Replace color
 		if (colorless) {
-			code = code.replace(/currentColor/g, typeof icon.color === 'string' && icon.color.length ? icon.color : '#000');
+			code = code.replace(/currentColor/g, normalizeColor(icon.color));
 		}
 
 		return code;
