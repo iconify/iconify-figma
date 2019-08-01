@@ -1,4 +1,4 @@
-# Iconify plug-in for Figma Plus
+# Iconify plug-in for Figma
 
 Import Material Design Icons, FontAwesome, Jam Icons, EmojiOne, Twitter Emoji and many other icons (more than 50 icon sets containing over 40,000 icons) to Figma document as vector shapes.
 
