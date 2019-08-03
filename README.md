@@ -20,6 +20,8 @@ Figma plug-in offers easy way to import icons to project.
 
 You can browse and search icon sets directly from Figma. No need to copy/paste icons - plug-in will import icons you select.
 
+In future plug-in will be able to publish icons directly to Iconify, so it would take only 1 simple step from designing icon to using it on website. However that is a long term goal that requires massive amount of development, so hopefully it will be implemented by the end of 2019.
+
 ## Installation
 
 In Figma on dashboard select "Plugins", "Browse all plugins", search for "Iconify". Click "Install".
