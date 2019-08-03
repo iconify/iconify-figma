@@ -258,6 +258,9 @@
 	// Load dependencies then show window
 	loadDependencies(function() {
 		var container = document.getElementById('container');
+		window.IconifySearch.setLang({
+			poweredBy: 'Powered by <a href="https://iconify.design/" target="_blank" class="is-external-link">Iconify open source SVG framework</a><br /><span class="iconify" data-icon="arty-animated:16-link"></span> <a href="https://github.com/iconify/iconify-figma/issues/" target="_blank" class="is-external-link">Figma plug-in feedback</a>'
+		});
 		window.IconifySearch.create(container, {
 			// Uncomment next 2 lines and change value for 'prefix' to limit plug-in to one collection
 			// prefix: 'mdi',
