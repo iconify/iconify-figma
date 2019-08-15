@@ -301,6 +301,12 @@
 				}
 			}
 		});
+		setTimeout(function() {
+			var search = container.querySelector('input[type="text"]');
+			if (search) {
+				search.focus();
+			}
+		}, 500);
 	});
 })();
 
