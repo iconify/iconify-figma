@@ -240,7 +240,8 @@
 			'data-width': width,
 			'data-height': height,
 			'data-rotate': icon.rotate,
-			'data-flip': (icon.hFlip ? (icon.vFlip ? 'horizontal,vertical' : 'horizontal') : (icon.vFlip ? 'vertical' : ''))
+			'data-flip': (icon.hFlip ? (icon.vFlip ? 'horizontal,vertical' : 'horizontal') : (icon.vFlip ? 'vertical' : '')),
+			'data-inline': false
 		};
 		code = Iconify.getSVG(name, params);
 		if (code === null) {

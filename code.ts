@@ -33,7 +33,10 @@
 
         case 'FRAME':
           if (parent.parent.type === 'PAGE') {
-            // Frame with parent group should be parent for icon
+            // Frame with parent group should be parent for icon, unless its another icon
+            if (parent.name.indexOf('-') !== -1 || parent.name.indexOf(':') !== -1) {
+              parent = parent.parent;
+            }
             break;
           }
           parent = parent.parent;
