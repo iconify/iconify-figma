@@ -1,46 +1,6 @@
 "use strict";
 
-/**
- * Find parent node for import
- *
- * @param {object} env
- * @return {BaseNodeMixin|null}
- */
-function findParentNode(env) {
-	let parent = null;
-
-	if (figma.currentPage.selection.length) {
-		parent = figma.currentPage.selection[0];
-		switch (parent.type) {
-			case 'GROUP':
-			case 'PAGE':
-				break;
-
-			case 'FRAME':
-				if (parent.getSharedPluginData('iconify', 'source') !== void 0) {
-					// Imported icon
-					parent = parent.parent;
-					break;
-				}
-
-				if (parent.parent.type === 'PAGE') {
-					// Check for imported icon from old Iconify plugin
-					if (parent.name.indexOf('-') !== -1 || parent.name.indexOf(':') !== -1) {
-						parent = parent.parent;
-					}
-					break;
-				}
-
-				parent = parent.parent;
-				break;
-
-			default:
-				parent = parent.parent;
-		}
-	}
-
-	return parent;
-}
+import findParentNode from './parent-node';
 
 /**
  * Move node

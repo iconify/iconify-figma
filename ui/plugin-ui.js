@@ -102,6 +102,7 @@ if (process.env.ICONIFY_API) {
 // Load samples
 loadScript('https://code.iconify.design/samples.js');
 delay(counter => {
+    // Do not delay for more than 1 second
     return counter > 10 || Iconify.iconExists('mdi:account-check')
 }, () => {
     let iconifyConfig = {};
@@ -132,7 +133,7 @@ delay(counter => {
                 let params = {
                     iconify: iconifyConfig,
                     stored: message.config,
-                    callback: sendMessage
+                    callback: sendMessage,
                 };
                 ui = new UI(document.getElementById('container'), params);
                 break;

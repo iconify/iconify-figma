@@ -9,6 +9,7 @@ import importIconify from './import-iconify';
  * @type {object}
  */
 let env = {
+	loaded: false,
 	debug: false,
 	lastParent: null,
 };
@@ -18,7 +19,7 @@ let env = {
  */
 figma.showUI(__html__, {
 	width: 800,
-	height: 800
+	height: 800,
 });
 
 /**
@@ -31,11 +32,13 @@ figma.ui.onmessage = msg => {
 		case 'loaded':
 			env.debug = msg.data;
 			figma.clientStorage.getAsync('config').then(config => {
+				env.loaded = true;
 				figma.ui.postMessage({
 					event: 'show',
-					config: config
+					config: config,
 				});
 			}).catch(err => {
+				env.loaded = true;
 				figma.ui.postMessage({
 					event: 'show',
 				});
