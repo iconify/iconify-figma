@@ -6,6 +6,15 @@ To build plugin run `npm run build` after installing all dependencies.
 
 For stable version of plug-in see "v1" branch of this repository.
 
+Build modes:
+* `npm run build` - build production code. Output is stored in "dist".
+* `npm run dev` - build development code. Output is stored in "dist". Change debug stuff in ui/plugin-ui.js (see conditional statements that check process.env.SEARCH_DEV).
+* `npm run watch` - same as "dev", but also watches files for changes.
+* `npm run start` - debug UI without Figma. Creates web server on http://localhost:8080/ and shows UI. Change UI configuration in ui/dev-ui.js
+* `npm run test` - test Icon Finder core.
+
+
+
 # Iconify plug-in for Figma
 
 Import Material Design Icons, FontAwesome, Jam Icons, EmojiOne, Twitter Emoji and many other icons (more than 50 icon sets containing over 40,000 icons) to Figma document as vector shapes.

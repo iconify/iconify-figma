@@ -6,9 +6,16 @@ const webpack = require('webpack');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+/**
+ * Common configuration file for development and production.
+ * Returns configuration object
+ *
+ * @param {boolean} prod
+ * @return {object}
+ */
 module.exports = prod => {
     // Local API entry points
-    // Add custom data to api.json
+    // Add custom data to api.json (see api.json-localhost)
     // Also see config.dev-ui.js
     let localAPI = {
         iconify: null,
@@ -27,22 +34,30 @@ module.exports = prod => {
 
     // Return object
     return {
+        // Prevent eval() in source code
         devtool: false,
+
+        // Entries for UI and plug-in
         entry: {
             ui: './ui/plugin-ui.js',
             plugin: './plugin/plugin.ts'
         },
+
+        // Output: same as names in entries, stored in "dist"
         output: {
             filename: '[name].js',
             path: path.resolve(__dirname, 'dist')
         },
+
         module: {
             rules: [
+                // Typescript: use ts-loader
                 {
                     test: /\.tsx?$/,
                     exclude: /node_modules/,
                     use: 'ts-loader',
                 },
+                // JavaScript: use babel-loader
                 {
                     test: /\.(js|jsx)$/,
                     exclude: /node_modules/,
@@ -50,6 +65,7 @@ module.exports = prod => {
                         loader: 'babel-loader',
                     },
                 },
+                // SASS: use loaders to compile store it in js file
                 {
                     test: /\.s[ac]ss$/i,
                     use: [
@@ -60,7 +76,9 @@ module.exports = prod => {
                 },
             ],
         },
+
         plugins: [
+            // Conditional statements in js files, so dev version could have stuff like custom API entry and log debug stuff
             new webpack.DefinePlugin({
                 SEARCH_VERSION: JSON.stringify(require('./package.json').version),
                 'process.env': {
@@ -72,6 +90,8 @@ module.exports = prod => {
                     SEARCH_API_VALUE: JSON.stringify(localAPI.search),
                 },
             }),
+
+            // Parse HTML file, store it as ui.html. ui.js will be added inline
             new HtmlWebpackPlugin({
                 template: './ui/plugin-ui.html',
                 filename: 'ui.html',
@@ -80,13 +100,10 @@ module.exports = prod => {
             }),
             new HtmlWebpackInlineSourcePlugin(),
         ],
+
+        // List of extensions for ES imports
         resolve: {
             extensions: ['.tsx', '.ts', '.jsx', '.js'],
         },
-        // externals: {
-        //     '@iconify/iconify': {
-        //         root: 'Iconify'
-        //     }
-        // },
     };
 };

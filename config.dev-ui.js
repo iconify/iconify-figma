@@ -21,7 +21,11 @@ try {
 } catch (err) {
 }
 
-// WebPack config
+/**
+ * Configuration for UI debug
+ *
+ * @type {object}
+ */
 module.exports = {
     entry: './ui/dev-ui.js',
     module: {

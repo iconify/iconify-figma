@@ -79,6 +79,11 @@ function delay(test, done) {
     timer = window.setInterval(nextTick, 100);
 }
 
+// Show notice that plug-in is in development mode, not ready for publishing
+if (process.env.SEARCH_DEV) {
+    console.log('Running plug-in in development mode!');
+}
+
 // Disable Iconify storage
 Iconify.setConfig('localStorage', false);
 Iconify.setConfig('sessionStorage', false);
