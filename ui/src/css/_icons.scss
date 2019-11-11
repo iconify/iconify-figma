@@ -1,0 +1,83 @@
+
+// Icons list
+.plugin-block--icons {
+  svg {
+    display: block;
+  }
+}
+
+// Icons list wrapper
+.plugin-wrapper--icons {
+  margin: 8px 0 16px;
+  padding: 8px;
+  border: 1px solid $plugin-palette-border-grey;
+  background: $plugin-palette-background-darker-white;
+
+  &--empty {
+    border-width: 0;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+  }
+
+  .plugin-block--pagination {
+    margin-bottom: 0;
+  }
+
+  .plugin-block--icons {
+    border: 1px solid $plugin-palette-border-grey;
+    background: $plugin-palette-background-white;
+  }
+  &--list {
+    .plugin-block--icons {
+      border-top-width: 0;
+    }
+  }
+}
+
+// Icons header
+.plugin-block--icons-header {
+  margin: 0 0 8px;
+}
+
+.plugin-icons-list-header {
+  margin: 0;
+  display: flex;
+  width: 100%;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.plugin-icons-list-header-text {
+  flex-grow: 1;
+  text-align: left;
+}
+.plugin-icons-list-header-modes {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  box-sizing: border-box;
+  a {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 24px;
+    height: 24px;
+    padding: 5px;
+    line-height: 14px;
+    //color: $plugin-palette-color-black-muted;
+    color: $plugin-palette-color-black;
+    border-radius: $plugin-border-radius-small;
+    box-sizing: border-box;
+    &:hover {
+      background-color: $plugin-palette-background-hover;
+    }
+    &:active, &:focus {
+      box-shadow: $plugin-button-active-shadow;
+      outline: none;
+    }
+  }
+  svg {
+    display: block;
+  }
+}

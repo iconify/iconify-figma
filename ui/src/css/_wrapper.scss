@@ -1,0 +1,24 @@
+// Figma plug-in wrapper
+.plugin-wrapper {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.plugin-wrapper-content {
+  background: $plugin-palette-background-white;
+  padding: 0 8px 8px;
+}
+
+// Content container
+.plugin-content {
+  @include plugin-font-ui-pos('medium', 'normal');
+  padding: 16px;
+}
+
+// Footer
+.plugin-footer {
+  text-align: right;
+  clear: both;
+  margin-top: 16px;
+}

@@ -1,0 +1,9 @@
+// Code sample block
+.plugin-code-sample {
+  @include plugin-font-ui-pos('medium', 'normal');
+  background: $plugin-palette-background-darker-white-borderless;
+  color: $plugin-palette-color-black;
+  margin: 4px 0;
+  padding: 4px;
+  white-space: normal;
+}

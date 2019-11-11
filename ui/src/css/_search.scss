@@ -1,0 +1,30 @@
+
+// Search form
+.plugin-block--search {
+  div + & {
+    border-top: 1px solid $plugin-palette-border-grey;
+    margin-top: 8px;
+  }
+}
+
+.plugin-search-form {
+  margin: 8px 0;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.plugin-block:first-child > .plugin-search-form {
+  margin-top: 0;
+}
+
+.plugin-block--search {
+  > p {
+    @include plugin-font-ui-pos('medium', 'bold');
+    margin: 8px 0 0;
+    padding: 0;
+    + .plugin-search-form {
+      margin-top: 4px;
+    }
+  }
+}

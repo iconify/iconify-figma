@@ -1,0 +1,44 @@
+
+// Parent navigation
+.plugin-block--parent {
+  border: 1px solid $plugin-palette-background-selected-borderless;
+  background: $plugin-palette-background-selected-borderless;
+  margin: 8px 0;
+  padding: 3px;
+  @include plugin-font-ui-pos('medium', 'normal');
+
+  a {
+    display: block;
+    margin: 4px 0;
+    padding: 4px;
+    text-decoration: none;
+    color: $plugin-palette-color-black;
+
+    svg {
+      color: $plugin-palette-color-black-dimmed;
+      margin-right: 6px;
+      position: relative;
+      left: 2px;
+      transition: left .2s ease;
+    }
+  }
+
+  &:hover {
+    background-color: $plugin-palette-background-selected;
+    border-color: $plugin-palette-border-blue;
+
+    a {
+      color: $plugin-palette-color-link;
+    }
+  }
+
+  a {
+    &:hover, &:focus {
+      color: $plugin-palette-color-link-hover;
+      outline: none;
+      svg {
+        left: 0;
+      }
+    }
+  }
+}

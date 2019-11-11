@@ -1,0 +1,35 @@
+
+.options-panel {
+  float: left;
+  position: relative;
+  margin: 12px 16px 0 0;
+  padding: 16px 8px 8px 8px;
+  background: $plugin-palette-background-white;
+  border: 1px dashed $plugin-palette-border-grey;
+  border-radius: $plugin-border-radius-med;
+
+  .options-panel-title {
+    position: absolute;
+    left: 10px;
+    top: -6px;
+    line-height: 1em;
+    white-space: nowrap;
+    color: $plugin-palette-color-black-dimmed;
+    background: $plugin-palette-background-white;
+    padding: 0 6px;
+  }
+
+  &--active {
+    border: 1px solid $plugin-palette-border-darker-grey;
+    //border-style: solid;
+    .options-panel-title {
+      color: $plugin-palette-color-black;
+    }
+  }
+
+  &--height, &--rotation {
+    input {
+      max-width: 100px;
+    }
+  }
+}

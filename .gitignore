@@ -1,2 +1,5 @@
 .idea
-code.js
+.DS_Store
+api.json
+node_modules
+dist

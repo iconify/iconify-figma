@@ -1,0 +1,58 @@
+
+.plugin-icons-list--grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2px;
+  box-sizing: border-box;
+
+  .plugin-icon-item {
+    margin: 3px;
+    width: 50px;
+    height: 50px;
+    box-sizing: content-box;
+
+    a {
+      display: block;
+      font-size: 48px;
+      width: 1em;
+      height: 1em;
+      border: 1px solid transparent;
+      cursor: pointer;
+      color: $plugin-palette-color-black-dimmed;
+      text-decoration: none;
+
+      &:hover, &:active {
+        background: $plugin-palette-background-white;
+        border-color: $plugin-palette-border-blue;
+        color: $plugin-palette-color-link-hover;
+      }
+
+      &:active, &:focus {
+        box-shadow: 0 0 0 1px $plugin-palette-border-blue;
+        outline: none;
+      }
+    }
+  }
+
+  .plugin-icon-item--selected {
+    a {
+      background: $plugin-palette-background-selected-borderless;
+      border-color: $plugin-palette-background-selected-borderless;
+      color: $plugin-palette-color-black;
+
+      &:hover, &:active {
+        background: $plugin-palette-background-selected;
+        border-color: $plugin-palette-border-blue;
+        color: $plugin-palette-color-link-hover;
+      }
+    }
+  }
+
+  .plugin-icon-item--pending {
+    a {
+      //background: $plugin-palette-background-darker-white;
+      //border-color: $plugin-palette-border-grey;
+      //color: $plugin-palette-color-black-muted;
+    }
+  }
+}

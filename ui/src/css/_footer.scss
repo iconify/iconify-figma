@@ -1,0 +1,157 @@
+
+// Footer
+.plugin-block--footer {
+  margin: 16px 0;
+}
+
+// Icon
+.plugin-footer-icon-container {
+  display: flex;
+  width: 100%;
+  > div {
+    &:first-child {
+      margin: 0;
+    }
+    &:last-child {
+      flex-grow: 1;
+      margin: 0 0 8px 16px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    display: block;
+    > div {
+      &:first-child {
+        margin: 8px 0;
+        text-align: center;
+      }
+      &:last-child {
+        margin: 8px 0;
+      }
+    }
+  }
+}
+
+
+.plugin-footer-icon-name {
+  @include plugin-font-ui-pos('xlarge', 'normal');
+  line-height: 26px;
+  border: 1px solid $plugin-palette-border-grey;
+  background: $plugin-palette-background-darker-white;
+
+  svg {
+    display: block;
+    float: left;
+    margin: 0 4px;
+  }
+
+  .plugin-footer-icon-small-sample {
+    @include plugin-font-ui-pos('xxlarge', 'normal');
+    top: 5px;
+    line-height: 1em;
+    position: relative;
+  }
+  .plugin-footer-grid {
+    &--14 {
+      font-size: 14px;
+      top: 6px;
+    }
+    &--15 {
+      font-size: 15px;
+      top: 6px;
+    }
+    &--17 {
+      font-size: 17px;
+      top: 5px;
+    }
+    &--18 {
+      font-size: 18px;
+      top: 4px;
+    }
+    &--20 {
+      font-size: 20px;
+      top: 3px;
+    }
+    &--22 {
+      font-size: 22px;
+      top: 2px;
+    }
+    &--24 {
+      font-size: 24px;
+      top: 1px;
+    }
+    &--25 {
+      font-size: 25px;
+      top: 0;
+    }
+    &--26 {
+      font-size: 26px;
+      top: 0;
+    }
+  }
+
+  // Collection info
+  + .plugin-disclosure {
+    .plugin-disclosure-label {
+      @include plugin-font-ui-pos('medium', 'normal');
+    }
+  }
+}
+
+.plugin-footer-icon-sample {
+  margin: 0;
+  float: left;
+  border: 1px solid $plugin-palette-border-grey;
+  background: $plugin-palette-background-darker-white;
+  font-size: 64px;
+
+  &:hover {
+    border-color: $plugin-palette-border-blue;
+    color: $plugin-palette-color-link-hover;
+  }
+
+  @media (max-width: 600px) {
+    float: none;
+    display: inline-block;
+  }
+}
+
+.plugin-footer-icon-size {
+  clear: both;
+  margin: 2px 0 0;
+  text-align: center;
+  @include plugin-font-ui-pos('small', 'normal');
+
+  &:last-child {
+    margin-bottom: 8px;
+  }
+
+  & + .plugin-footer-icon-size {
+    opacity: .5;
+  }
+
+  span {
+    display: inline-block;
+    opacity: .5;
+    padding: 0 2px;
+  }
+}
+
+
+.plugin-footer-block {
+  &:after {
+    content: ' ';
+    display: table;
+    clear: both;
+  }
+}
+
+.plugin-footer-block-title {
+  @include plugin-font-ui-pos('medium', 'bold');
+  margin: 16px 0 0;
+  padding: 0;
+}
+
+.plugin-footer-block---code {
+  margin: 8px 0;
+}

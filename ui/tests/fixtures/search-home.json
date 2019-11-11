@@ -1,0 +1,480 @@
+{
+  "icons": [
+    "ant-design:home-fill",
+    "ant-design:home-outline",
+    "ant-design:home-twotone",
+    "bytesize:home",
+    "dashicons:admin-home",
+    "el:home",
+    "el:home-alt",
+    "el:iphone-home",
+    "entypo:home",
+    "fa-solid:home",
+    "fe:home",
+    "feather:home",
+    "flat-color-icons:home",
+    "foundation:home",
+    "ic:baseline-add-to-home-screen",
+    "ic:baseline-home",
+    "ic:outline-add-to-home-screen",
+    "ic:outline-home",
+    "ic:round-add-to-home-screen",
+    "ic:round-home",
+    "ic:sharp-add-to-home-screen",
+    "ic:sharp-home",
+    "ic:twotone-add-to-home-screen",
+    "ic:twotone-home",
+    "icomoon-free:home",
+    "icons8:home",
+    "ion:ios-home",
+    "ion:md-home",
+    "jam:home",
+    "jam:home-f",
+    "maki:home-11",
+    "maki:home-15",
+    "map:funeral-home",
+    "mdi:google-home",
+    "mdi:home",
+    "mdi:home-account",
+    "mdi:home-alert",
+    "mdi:home-assistant",
+    "mdi:home-automation",
+    "mdi:home-circle",
+    "mdi:home-city",
+    "mdi:home-city-outline",
+    "mdi:home-currency-usd",
+    "mdi:home-floor-0",
+    "mdi:home-floor-negative-1",
+    "mdi:home-group",
+    "mdi:home-heart",
+    "mdi:home-lock",
+    "mdi:home-lock-open",
+    "mdi:home-map-marker",
+    "mdi:home-minus",
+    "mdi:home-modern",
+    "mdi:home-outline",
+    "mdi:home-plus",
+    "mdi:home-variant",
+    "mdi:home-variant-outline",
+    "mdi:shield-home",
+    "mdi:shield-home-outline",
+    "mdi-light:home",
+    "octicon:home",
+    "oi:home",
+    "raphael:home",
+    "si-glyph:home-page",
+    "subway:home"
+  ],
+  "total": 64,
+  "limit": 64,
+  "start": 0,
+  "collections": {
+    "ant-design": {
+      "name": "Ant Design Icons",
+      "total": 728,
+      "author": "HeskeyBaozi",
+      "url": "https://github.com/ant-design/ant-design-icons",
+      "license": "MIT",
+      "height": 16,
+      "samples": [
+        "pushpin",
+        "pie-chart-outline",
+        "user-add-outline"
+      ],
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "bytesize": {
+      "name": "Bytesize Icons",
+      "total": 101,
+      "author": "Dan Klammer",
+      "url": "https://github.com/danklammer/bytesize-icons",
+      "license": "MIT",
+      "licenseURL": "https://github.com/danklammer/bytesize-icons/blob/master/LICENSE.md",
+      "height": 32,
+      "displayHeight": 24,
+      "samples": [
+        "desktop",
+        "code",
+        "sign-out"
+      ],
+      "version": "1.4.0",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "dashicons": {
+      "name": "Dashicons",
+      "total": 304,
+      "author": "WordPress",
+      "url": "https://github.com/WordPress/dashicons",
+      "license": "GPL v2",
+      "licenseURL": "http://www.gnu.org/licenses/gpl-2.0.html",
+      "height": 20,
+      "samples": [
+        "shortcode",
+        "businessperson",
+        "editor-expand"
+      ],
+      "version": "0.9.0",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "el": {
+      "name": "Elusive Icons",
+      "total": 304,
+      "author": "Team Redux",
+      "url": "http://elusiveicons.com/",
+      "license": "Open Font License",
+      "licenseURL": "http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL",
+      "height": 16,
+      "samples": [
+        "headphones",
+        "cog",
+        "user"
+      ],
+      "version": "2.0.0",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "entypo": {
+      "name": "Entypo+",
+      "total": 321,
+      "author": "Daniel Bruce",
+      "url": "http://www.entypo.com/",
+      "license": "CC BY-SA 4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "height": 20,
+      "samples": [
+        "bell",
+        "image",
+        "erase"
+      ],
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "fa-solid": {
+      "name": "Font Awesome 5 Solid",
+      "total": 956,
+      "author": "Dave Gandy",
+      "url": "http://fontawesome.io/",
+      "license": "CC BY 4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "height": 32,
+      "samples": [
+        "search-plus",
+        "paste",
+        "comment-dots"
+      ],
+      "version": "5.9.0",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "fe": {
+      "name": "Feather Icon",
+      "total": 255,
+      "author": "Megumi Hano",
+      "url": "https://github.com/feathericon/feathericon",
+      "license": "MIT",
+      "licenseURL": "https://github.com/feathericon/feathericon/blob/master/LICENSE",
+      "height": 24,
+      "samples": [
+        "add-cart",
+        "comments",
+        "link-external"
+      ],
+      "version": "1.0.2",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "feather": {
+      "name": "Feather Icons",
+      "total": 280,
+      "author": "Cole Bemis",
+      "url": "https://github.com/feathericons/feather",
+      "license": "MIT",
+      "licenseURL": "https://github.com/feathericons/feather/blob/master/LICENSE",
+      "height": 24,
+      "samples": [
+        "check-circle",
+        "award",
+        "home"
+      ],
+      "version": "0.0.0-development",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "flat-color-icons": {
+      "name": "Flat Color Icons",
+      "total": 329,
+      "author": "Icons8",
+      "url": "https://github.com/icons8/flat-Color-icons",
+      "license": "Good Boy License",
+      "licenseURL": "https://icons8.com/good-boy-license/",
+      "height": 24,
+      "samples": [
+        "edit-image",
+        "donate",
+        "planner"
+      ],
+      "version": "1.0.2",
+      "palette": "Colorful",
+      "category": "General"
+    },
+    "foundation": {
+      "name": "Foundation",
+      "total": 283,
+      "author": "Zurb",
+      "url": "https://github.com/zurb/foundation-icon-fonts",
+      "license": "MIT",
+      "licenseURL": "",
+      "height": 20,
+      "samples": [
+        "graph-trend",
+        "indent-more",
+        "lock"
+      ],
+      "version": "3.0.0",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "ic": {
+      "name": "Google Material Icons",
+      "total": 5375,
+      "author": "Material Design Authors",
+      "url": "https://github.com/cyberalien/google-material-design-icons-updated",
+      "license": "Apache 2.0",
+      "licenseURL": "https://github.com/cyberalien/google-material-design-icons-updated/blob/master/LICENSE",
+      "height": 24,
+      "samples": [
+        "baseline-notifications-active",
+        "outline-person-outline",
+        "twotone-videocam-off"
+      ],
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "icomoon-free": {
+      "name": "IcoMoon Free",
+      "total": 491,
+      "author": "Keyamoon",
+      "url": "https://github.com/Keyamoon/IcoMoon-Free",
+      "license": "GPL",
+      "licenseURL": "http://www.gnu.org/licenses/gpl.html",
+      "height": 16,
+      "samples": [
+        "bubbles3",
+        "forward",
+        "volume-medium"
+      ],
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "icons8": {
+      "name": "Icons8 Windows 10 Icons",
+      "total": 234,
+      "author": "Icons8",
+      "url": "https://github.com/icons8/windows-10-icons",
+      "license": "Good Boy License",
+      "licenseURL": "https://icons8.com/good-boy-license/",
+      "height": 32,
+      "displayHeight": 24,
+      "samples": [
+        "checked",
+        "create-new",
+        "group"
+      ],
+      "version": "1.0.0",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "ion": {
+      "name": "IonIcons",
+      "total": 696,
+      "author": "Ben Sperry",
+      "url": "https://github.com/driftyco/ionicons",
+      "license": "MIT",
+      "licenseURL": "https://github.com/driftyco/ionicons/blob/master/LICENSE",
+      "height": 32,
+      "displayHeight": 24,
+      "samples": [
+        "ios-add-circle-outline",
+        "ios-bicycle",
+        "md-person-add"
+      ],
+      "version": "4.5.9-1",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "jam": {
+      "name": "Jam Icons",
+      "total": 896,
+      "author": "Michael Amprimo",
+      "url": "https://github.com/michaelampr/jam",
+      "license": "MIT",
+      "licenseURL": "https://raw.githubusercontent.com/michaelampr/jam/master/LICENSE",
+      "height": 24,
+      "samples": [
+        "chevrons-square-up-right",
+        "luggage-f",
+        "rubber"
+      ],
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "maki": {
+      "name": "Maki",
+      "total": 352,
+      "author": "Mapbox",
+      "url": "https://github.com/mapbox/maki",
+      "license": "CC0",
+      "licenseURL": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "height": [
+        15,
+        11
+      ],
+      "samples": [
+        "entrance-alt1-11",
+        "clothing-store-11",
+        "grocery-15"
+      ],
+      "version": "6.1.0",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "map": {
+      "name": "Map Icons",
+      "total": 167,
+      "author": "Scott de Jonge",
+      "url": "https://github.com/scottdejonge/map-icons",
+      "license": "Open Font License",
+      "licenseURL": "http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL",
+      "height": 25,
+      "samples": [
+        "restaurant",
+        "real-estate-agency",
+        "wheelchair"
+      ],
+      "version": "3.0.2",
+      "palette": "Colorless",
+      "category": "Thematic"
+    },
+    "mdi": {
+      "name": "Material Design Icons",
+      "total": 3794,
+      "author": "Austin Andrews",
+      "url": "https://github.com/Templarian/MaterialDesign",
+      "license": "OFL-1.1",
+      "licenseURL": "https://raw.githubusercontent.com/Templarian/MaterialDesign/master/LICENSE",
+      "height": 24,
+      "samples": [
+        "account-check",
+        "bell-alert-outline",
+        "calendar-edit"
+      ],
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "mdi-light": {
+      "name": "Material Design Light",
+      "total": 267,
+      "author": "Austin Andrews",
+      "url": "https://github.com/Templarian/MaterialDesignLight",
+      "license": "OFL-1.1",
+      "licenseURL": "https://raw.githubusercontent.com/Templarian/MaterialDesignLight/master/LICENSE.md",
+      "height": 24,
+      "samples": [
+        "cart",
+        "home",
+        "login"
+      ],
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "octicon": {
+      "name": "Octicons",
+      "total": 184,
+      "author": "GitHub",
+      "url": "https://github.com/primer/octicons/",
+      "license": "Open Font License",
+      "licenseURL": "https://raw.githubusercontent.com/primer/octicons/master/LICENSE",
+      "height": 16,
+      "samples": [
+        "clippy",
+        "request-changes",
+        "pin"
+      ],
+      "version": "8.5.0",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "oi": {
+      "name": "Open Iconic",
+      "total": 223,
+      "author": "Iconic",
+      "url": "https://github.com/iconic/open-iconic",
+      "license": "MIT",
+      "licenseURL": "https://raw.githubusercontent.com/iconic/open-iconic/master/ICON-LICENSE",
+      "height": 8,
+      "samples": [
+        "bug",
+        "bullhorn",
+        "chat"
+      ],
+      "version": "1.1.1",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "raphael": {
+      "name": "Raphael",
+      "total": 266,
+      "author": "Dmitry Baranovskiy",
+      "url": "http://dmitrybaranovskiy.github.io/raphael/",
+      "license": "MIT",
+      "licenseURL": "",
+      "height": 32,
+      "displayHeight": 24,
+      "samples": [
+        "home",
+        "cloud",
+        "parent"
+      ],
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "si-glyph": {
+      "name": "SmartIcons Glyph",
+      "total": 800,
+      "author": "SmartIcons",
+      "url": "http://glyph.smarticons.co",
+      "license": "CC BY-SA 4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "samples": [
+        "circle-load-left",
+        "basket-arrow-right",
+        "slide-show"
+      ],
+      "version": "0.0.2",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "subway": {
+      "name": "Subway Icon Set",
+      "total": 306,
+      "author": "Mariusz Ostrowski",
+      "url": "https://github.com/mariuszostrowski/subway",
+      "license": "CC BY 4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "height": 16,
+      "samples": [
+        "call-2",
+        "power-batton",
+        "admin"
+      ],
+      "palette": "Colorless",
+      "category": "General"
+    }
+  },
+  "request": {
+    "query": "home"
+  }
+}

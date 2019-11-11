@@ -1,0 +1,124 @@
+// Button
+.plugin-button {
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-block;
+  flex-shrink: 0;
+  height: 30px;
+  margin: 1px 0 1px 8px;
+  padding: 5px 16px 5px 16px;
+
+  text-decoration: none;
+
+  border: 2px solid transparent;
+  border-radius: $plugin-border-radius-large;
+  outline: none;
+
+  //Primary
+  &--primary {
+    @include plugin-font-ui-neg('small', 'medium');
+
+    color: $plugin-palette-color-white;
+    background-color: $plugin-palette-background-blue;
+
+    &:enabled:active, &:enabled:focus {
+      border: 2px solid $plugin-palette-background-darker-blue;
+    }
+
+    &:disabled {
+      background-color: $plugin-palette-background-muted-black;
+    }
+  }
+
+  //Primary Destructive
+  &--primary-destructive {
+    @include plugin-font-ui-neg('small', 'medium');
+
+    color: $plugin-palette-color-white;
+    background-color: $plugin-palette-background-red;
+
+    &:enabled:active, &:enabled:focus {
+      border: 2px solid $plugin-palette-color-black-muted;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+    }
+  }
+
+  //Secondary
+  &--secondary {
+    @include plugin-font-ui-pos('small', 'medium');
+
+    color: $plugin-palette-color-black-dimmed;
+    border: 1px solid $plugin-palette-color-black-dimmed;
+    background-color: $plugin-palette-background-white;
+
+    &:enabled:active, &:enabled:focus {
+      padding: 4px 15px 4px 15px;
+
+      border: 2px solid $plugin-palette-border-blue;
+    }
+
+    &:disabled {
+      color: $plugin-palette-color-black-muted;
+      border: 1px solid $plugin-palette-color-black-muted;
+    }
+  }
+
+  &--secondary-destructive {
+    @include plugin-font-ui-pos('small', 'medium');
+
+    color: $plugin-palette-color-red;
+    border: 1px solid $plugin-palette-border-red;
+    background-color: $plugin-palette-background-white;
+
+    &:enabled:active, &:enabled:focus {
+      padding: 4px 15px 4px 15px;
+
+      border: 2px solid $plugin-palette-border-red;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+    }
+  }
+}
+
+// Icon button
+.plugin-icon-button {
+  cursor: pointer;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  padding: (30px - 2px - 12px) / 2;
+  border: 1px solid transparent;
+  border-radius: $plugin-border-radius-small;
+  text-align: center;
+  box-sizing: border-box;
+
+  color: $plugin-palette-color-black;
+  &:hover {
+    background-color: $plugin-palette-background-hover;
+  }
+  &:active, &:focus {
+    box-shadow: $plugin-button-active-shadow;
+    outline: none;
+  }
+
+  svg {
+    display: block;
+  }
+  & + & {
+    margin-left: 8px;
+  }
+
+  &--active {
+    &, &:hover, &:active, &:focus {
+      color: $plugin-palette-color-white;
+      background: $plugin-palette-background-blue;
+      border-color: $plugin-palette-background-blue;
+      box-shadow: none;
+    }
+  }
+}

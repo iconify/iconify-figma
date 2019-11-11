@@ -1,0 +1,116 @@
+.plugin-wrapper-header {
+  @include plugin-font-ui-neg('medium', 'normal');
+  background: $plugin-palette-background-medium-black;
+  height: 40px;
+  display: flex;
+
+  > div {
+    height: 40px;
+    display: flex;
+  }
+
+  .plugin-header-center {
+    flex-grow: 1;
+    text-align: center;
+    overflow: hidden;
+
+    // Temporary error message
+    span {
+      display: block;
+      width: 100%;
+      @include plugin-font-ui-pos('small', 'normal');
+      color: $plugin-palette-color-white;
+      white-space: normal;
+      padding: 12px 8px;
+      background: $plugin-palette-background-red;
+    }
+  }
+  .plugin-header-right {
+    text-align: right;
+  }
+
+  a {
+    color: $plugin-palette-color-white;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 12px;
+    white-space: nowrap;
+    text-decoration: none;
+    box-sizing: border-box;
+
+    &.plugin-nav--icon svg {
+      display: block;
+      position: relative;
+      top: 12px;
+    }
+
+    &:hover, &:focus {
+      background: $plugin-palette-background-full-black;
+      outline: none;
+    }
+
+    &.plugin-nav--selected {
+      background: $plugin-palette-background-blue;
+    }
+  }
+
+  .plugin-nav--selected {
+    pointer-events: none;
+  }
+
+  a.plugin-nav--external {
+    position: relative;
+    padding-right: 20px;
+
+    .plugin-icon--ext-link {
+      position: absolute;
+      top: 12px;
+      right: 4px;
+      opacity: .5;
+    }
+
+    &:hover .plugin-icon--ext-link {
+      opacity: 1;
+    }
+  }
+
+  .plugin-header-right a.plugin-nav--external:last-child {
+    padding-right: 24px;
+    .plugin-icon--ext-link {
+      right: 8px;
+    }
+  }
+}
+
+.plugin-header--with-menu {
+  .plugin-wrapper-header--primary {
+    background: $plugin-palette-background-almost-black;
+
+    .plugin-nav {
+      color: $plugin-palette-color-white-muted;
+      font-weight: bold;
+      &:hover, &:focus {
+        color: $plugin-palette-color-white;
+        background: $plugin-palette-background-medium-black;
+      }
+    }
+    .plugin-nav--selected {
+      background: $plugin-palette-background-medium-black;
+      color: $plugin-palette-color-white;
+      font-weight: bold;
+    }
+  }
+
+  .plugin-wrapper-header--secondary {
+    background: $plugin-palette-background-medium-black;
+    .plugin-nav--dev {
+      color: $plugin-palette-color-white-muted;
+    }
+    .plugin-nav {
+      &:hover, &:focus {
+        background: $plugin-palette-background-full-black;
+      }
+    }
+  }
+}

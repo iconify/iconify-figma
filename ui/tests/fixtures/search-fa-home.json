@@ -1,0 +1,49 @@
+{
+  "icons": [
+    "fa-solid:home",
+    "fa:home",
+    "fa-solid:tachometer-alt"
+  ],
+  "total": 3,
+  "limit": 64,
+  "start": 0,
+  "collections": {
+    "fa-solid": {
+      "name": "Font Awesome 5 Solid",
+      "total": 956,
+      "author": "Dave Gandy",
+      "url": "http://fontawesome.io/",
+      "license": "CC BY 4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "height": 32,
+      "samples": [
+        "search-plus",
+        "paste",
+        "comment-dots"
+      ],
+      "version": "5.9.0",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "fa": {
+      "name": "Font Awesome 4",
+      "total": 678,
+      "author": "Dave Gandy",
+      "url": "http://fontawesome.io/",
+      "license": "Open Font License",
+      "licenseURL": "http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL",
+      "samples": [
+        "wrench",
+        "bell-o",
+        "user-o"
+      ],
+      "version": "4.7.0",
+      "palette": "Colorless",
+      "category": "General"
+    }
+  },
+  "request": {
+    "query": "home",
+    "prefixes": "fa,fa-"
+  }
+}

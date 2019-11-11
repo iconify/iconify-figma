@@ -1,0 +1,98 @@
+// Based on figma-plugin-ds
+
+/*  Typography */
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 400;
+  src: url("https://rsms.me/inter/font-files/Inter-Regular.woff2?v=3.7") format("woff2"),
+  url("https://rsms.me/inter/font-files/Inter-Regular.woff?v=3.7") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 500;
+  src: url("https://rsms.me/inter/font-files/Inter-Medium.woff2?v=3.7") format("woff2"),
+  url("https://rsms.me/inter/font-files/Inter-Medium.woff2?v=3.7") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 600;
+  src: url("https://rsms.me/inter/font-files/Inter-SemiBold.woff2?v=3.7") format("woff2"),
+  url("https://rsms.me/inter/font-files/Inter-SemiBold.woff2?v=3.7") format("woff");
+}
+
+// Type mixins
+@mixin plugin-font-ui-pos($size, $weight) {
+  font-family: $plugin-font-stack;
+
+  //weight
+  @if $weight == 'bold' {
+    font-weight: $plugin-font-weight-bold;
+  } @else if $weight == 'medium' {
+    font-weight: $plugin-font-weight-medium;
+  } @else {
+    font-weight: $plugin-font-weight-normal;
+  }
+  //letterspacing + size
+  @if $size == 'small' {
+    font-size: $plugin-font-size-small;
+    line-height: $plugin-font-lineheight;
+    letter-spacing: $plugin-font-letterspacing-pos-small;
+  } @else if $size == 'medium' {
+    font-size: $plugin-font-size-medium;
+    line-height: $plugin-font-lineheight;
+    letter-spacing: $plugin-font-letterspacing-pos-medium;
+  } @else if $size == 'large' {
+    font-size: $plugin-font-size-large;
+    line-height: $plugin-font-lineheight-large;
+    letter-spacing: $plugin-font-letterspacing-pos-xlarge;
+  } @else if $size == 'xxlarge' {
+    font-size: $plugin-font-size-xxlarge;
+    line-height: $plugin-font-lineheight-large;
+    letter-spacing: $plugin-font-letterspacing-pos-xlarge;
+  } @else {
+    font-size: $plugin-font-size-xlarge;
+    line-height: $plugin-font-lineheight-large;
+    letter-spacing: $plugin-font-letterspacing-pos-xlarge;
+  }
+}
+
+@mixin plugin-font-ui-neg($size, $weight) {
+  font-family: $plugin-font-stack;
+
+  //weight
+  @if $weight == 'bold' {
+    font-weight: $plugin-font-weight-bold;
+  } @else if $weight == 'medium' {
+    font-weight: $plugin-font-weight-medium;
+  } @else {
+    font-weight: $plugin-font-weight-normal;
+  }
+
+  //letterspacing + size
+  @if $size == 'small' {
+    font-size: $plugin-font-size-small;
+    line-height: $plugin-font-lineheight;
+    letter-spacing: $plugin-font-letterspacing-neg-small;
+  } @else if $size == 'medium' {
+    font-size: $plugin-font-size-medium;
+    line-height: $plugin-font-lineheight;
+    letter-spacing: $plugin-font-letterspacing-neg-medium;
+  } @else if $size == 'large' {
+    font-size: $plugin-font-size-large;
+    line-height: $plugin-font-lineheight-large;
+    letter-spacing: $plugin-font-letterspacing-neg-xlarge;
+  } @else if $size == 'xxlarge' {
+    font-size: $plugin-font-size-xxlarge;
+    line-height: $plugin-font-lineheight-large;
+    letter-spacing: $plugin-font-letterspacing-pos-xlarge;
+  } @else {
+    font-size: $plugin-font-size-xlarge;
+    line-height: $plugin-font-lineheight-large;
+    letter-spacing: $plugin-font-letterspacing-neg-xlarge;
+  }
+}

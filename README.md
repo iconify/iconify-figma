@@ -1,3 +1,11 @@
+# Development notice
+
+This is version 2.0.0-dev of Iconify plug-in for Figma. It is currently in development and might not work correctly (or not work at all).
+
+To build plugin run `npm run build` after installing all dependencies.
+
+For stable version of plug-in see "v1" branch of this repository.
+
 # Iconify plug-in for Figma
 
 Import Material Design Icons, FontAwesome, Jam Icons, EmojiOne, Twitter Emoji and many other icons (more than 50 icon sets containing over 40,000 icons) to Figma document as vector shapes.
@@ -30,7 +38,7 @@ In Figma on dashboard select "Plugins", "Browse all plugins", search for "Iconif
 
 In Figma select main menu -> Plugins -> Iconify
 
-Browse or search icons, select any icon, click "Add" button. Plug-in will import icon to your current project.
+Browse or search icons, select any icon, click "Import" button. Plug-in will import icon to your current project.
 
 ![Iconify for Figma - loading plugin](https://iconify.github.io/iconify-figma-plus/samples/opening_plugin.png)
 
@@ -47,11 +55,19 @@ Collections list:
 ![Iconify for Figma - browse collections](https://iconify.github.io/iconify-figma-plus/samples/collections.png)
 
 
+## Development
+
+There are 3 development modes: production, plugin dev, ui dev. They have separate entry points, but share same code. Commands to run them:
+* production: `npm run build`
+* plugin development: `npm run dev`
+* ui development: `npm run start`
+
 ## License
 
-MIT. See license.txt
+Iconify Icon Finder is dual-licensed under Apache 2.0 and GPL 2.0 license. You may select, at your option, one of the above-listed licenses.
 
-This license does not apply to icons. Icons are released under different licenses, see each icons set for details.
-Icons available by default are all licensed under some kind of open source or free license.
+`SPDX-License-Identifier: Apache-2.0 OR GPL-2.0`
+
+Iconify plug-in for Figma is based on Iconify Icon Finder and shares same license as Icon Finder.
 
 © 2019 Vjacheslav Trushkin

@@ -1,0 +1,204 @@
+{
+  "icons": [
+    "cryptocurrency:nav",
+    "vs:naver",
+    "vs:naver-square",
+    "ei:navicon",
+    "ic:baseline-navigate-before",
+    "ic:baseline-navigate-next",
+    "ic:outline-navigate-before",
+    "ic:outline-navigate-next",
+    "ic:round-navigate-before",
+    "ic:round-navigate-next",
+    "ic:sharp-navigate-before",
+    "ic:sharp-navigate-next",
+    "ic:twotone-navigate-before",
+    "ic:twotone-navigate-next",
+    "ion:ios-navigate",
+    "ion:md-navigate",
+    "uil:navigator",
+    "feather:navigation",
+    "feather:navigation-2",
+    "ic:baseline-navigation",
+    "ic:outline-navigation",
+    "ic:round-navigation",
+    "ic:sharp-navigation",
+    "ic:twotone-navigation",
+    "mdi:navigation",
+    "whh:navigation",
+    "zmdi:navigation"
+  ],
+  "total": 27,
+  "limit": 64,
+  "start": 0,
+  "collections": {
+    "cryptocurrency": {
+      "name": "Cryptocurrency Icons",
+      "total": 425,
+      "author": "Christopher Downer",
+      "url": "https://github.com/atomiclabs/cryptocurrency-icons",
+      "license": "CC0 1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "height": 32,
+      "samples": [
+        "btc",
+        "ltc",
+        "eth"
+      ],
+      "version": "0.14.0",
+      "palette": "Colorless",
+      "category": "Thematic"
+    },
+    "ei": {
+      "name": "Evil Icons",
+      "total": 70,
+      "author": "Alexander Madyankin and Roman Shamin",
+      "url": "https://github.com/outpunk/evil-icons",
+      "license": "MIT",
+      "licenseURL": "https://raw.githubusercontent.com/outpunk/evil-icons/master/LICENSE.txt",
+      "height": 25,
+      "samples": [
+        "paperclip",
+        "like",
+        "arrow-right"
+      ],
+      "version": "1.10.1",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "feather": {
+      "name": "Feather Icons",
+      "total": 280,
+      "author": "Cole Bemis",
+      "url": "https://github.com/feathericons/feather",
+      "license": "MIT",
+      "licenseURL": "https://github.com/feathericons/feather/blob/master/LICENSE",
+      "height": 24,
+      "samples": [
+        "check-circle",
+        "award",
+        "home"
+      ],
+      "version": "0.0.0-development",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "ic": {
+      "name": "Google Material Icons",
+      "total": 5375,
+      "author": "Material Design Authors",
+      "url": "https://github.com/cyberalien/google-material-design-icons-updated",
+      "license": "Apache 2.0",
+      "licenseURL": "https://github.com/cyberalien/google-material-design-icons-updated/blob/master/LICENSE",
+      "height": 24,
+      "samples": [
+        "baseline-notifications-active",
+        "outline-person-outline",
+        "twotone-videocam-off"
+      ],
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "ion": {
+      "name": "IonIcons",
+      "total": 696,
+      "author": "Ben Sperry",
+      "url": "https://github.com/driftyco/ionicons",
+      "license": "MIT",
+      "licenseURL": "https://github.com/driftyco/ionicons/blob/master/LICENSE",
+      "height": 32,
+      "displayHeight": 24,
+      "samples": [
+        "ios-add-circle-outline",
+        "ios-bicycle",
+        "md-person-add"
+      ],
+      "version": "4.6.1",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "mdi": {
+      "name": "Material Design Icons",
+      "total": 3909,
+      "author": "Austin Andrews",
+      "url": "https://github.com/Templarian/MaterialDesign",
+      "license": "OFL-1.1",
+      "licenseURL": "https://raw.githubusercontent.com/Templarian/MaterialDesign/master/LICENSE",
+      "height": 24,
+      "samples": [
+        "account-check",
+        "bell-alert-outline",
+        "calendar-edit"
+      ],
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "uil": {
+      "name": "Unicons",
+      "total": 1113,
+      "author": "Iconscout",
+      "url": "https://github.com/Iconscout/unicons",
+      "license": "Apache-2.0",
+      "licenseURL": "https://raw.githubusercontent.com/Iconscout/unicons/master/LICENSE",
+      "height": 24,
+      "samples": [
+        "arrow-circle-right",
+        "chat-bubble-user",
+        "edit-alt"
+      ],
+      "version": "1.0.1",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "vs": {
+      "name": "Vesper Icons",
+      "total": 159,
+      "author": "TableCheck",
+      "url": "https://github.com/kkvesper/vesper-icons",
+      "license": "Open Font License",
+      "licenseURL": "http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL",
+      "samples": [
+        "edit-page",
+        "kakao-square",
+        "person"
+      ],
+      "version": "5.11.2",
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "whh": {
+      "name": "WebHostingHub Glyphs",
+      "total": 2125,
+      "author": "WebHostingHub",
+      "url": "http://www.webhostinghub.com/glyphs/",
+      "license": "OFL",
+      "licenseURL": "http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL",
+      "samples": [
+        "addtags",
+        "brightness",
+        "circlecallincoming"
+      ],
+      "palette": "Colorless",
+      "category": "General"
+    },
+    "zmdi": {
+      "name": "Material Design Iconic Font",
+      "total": 777,
+      "author": "MDI Community",
+      "url": "https://github.com/zavoloklom/material-design-iconic-font",
+      "license": "SIL OFL 1.1",
+      "licenseURL": "http://scripts.sil.org/OFL",
+      "samples": [
+        "alarm-snooze",
+        "cloud-off",
+        "library"
+      ],
+      "version": "2.2.0",
+      "palette": "Colorless",
+      "category": "General"
+    }
+  },
+  "request": {
+    "query": "nav"
+  }
+}

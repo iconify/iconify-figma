@@ -1,0 +1,4 @@
+{
+  "iconify": "http://127.0.0.1:3000/{prefix}.js?icons={icons}",
+  "search": "http://127.0.0.1:3000/"
+}
