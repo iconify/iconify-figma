@@ -35,7 +35,7 @@ function RecentView(props) {
             <IconsBlock {...props} block="icons" key={helpers.iconsBlockKey(props)} />
             <PaginationBlock {...props} block="pagination" />
         </div>
-        <FigmaFooter {...props} />
+        {(blocks.search.keyword !== '' || !blocks.icons.empty()) && <FigmaFooter {...props} />}
     </ViewContainer>;
 }
 

@@ -1,6 +1,6 @@
 "use strict";
 
-import moveSvg from './insert-svg';
+import moveSvg from './move-node';
 
 function importIconify(env, props) {
 	// Create node from SVG
