@@ -31,6 +31,16 @@ class UI {
         this.container = container;
         this.params = params;
 
+        // Expand stored parameters
+        if (typeof params.stored === 'object' && params.stored.version === version) {
+            ['storage', 'route', 'selection', 'custom', 'options'].forEach(attr => {
+                if (params.stored[attr] !== void 0) {
+                    params[attr] = params.stored[attr];
+                }
+            })
+        }
+        delete params.stored;
+
         // Local storage
         this.localStorage = params.storage ? params.storage : {};
 
@@ -170,6 +180,9 @@ class UI {
         let container = this.component;
 
         if (container.iconify) {
+            // Save route
+            container.saveIconifyRoute();
+
             // Sync Iconify options
             ['list'].forEach(key => {
                 container.options[key] = container.iconify.layout.iconify[key];

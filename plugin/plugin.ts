@@ -29,14 +29,28 @@ figma.showUI(__html__, {
 figma.ui.onmessage = msg => {
 	switch (msg.event) {
 		case 'loaded':
-			figma.ui.postMessage({
-				event: 'show'
-			});
 			env.debug = msg.data;
+			figma.clientStorage.getAsync('config').then(config => {
+				figma.ui.postMessage({
+					event: 'show',
+					config: config
+				});
+			}).catch(err => {
+				figma.ui.postMessage({
+					event: 'show',
+				});
+			});
 			break;
 
 		case 'close':
 			figma.closePlugin();
+			break;
+
+		case 'store':
+			figma.clientStorage.setAsync('config', msg.data).then(() => {
+			}).catch(err => {
+				console.error(err);
+			});
 			break;
 
 		case 'import-svg':

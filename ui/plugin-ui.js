@@ -131,6 +131,7 @@ delay(counter => {
             case 'show':
                 let params = {
                     iconify: iconifyConfig,
+                    stored: message.config,
                     callback: sendMessage
                 };
                 ui = new UI(document.getElementById('container'), params);

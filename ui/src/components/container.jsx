@@ -79,6 +79,7 @@ const defaultSelection = () => ({
  */
 const defaultCustomizations = () => ({
     color: '',
+    height: '',
     hFlip: false,
     vFlip: false,
     rotate: 0
@@ -113,7 +114,7 @@ class Container extends Component {
         this.custom = defaultCustomizations();
         if (typeof params.custom === 'object') {
             Object.keys(this.custom).forEach(attr => {
-                if (typeof params.custom[attr] === typeof this.custom[attr]) {
+                if (params.custom[attr] !== void 0) {
                     this.custom[attr] = params.custom[attr];
                 }
             });
@@ -248,9 +249,7 @@ class Container extends Component {
         }
 
         // Store old Iconify route
-        if (this._iconifyLoaded && this.iconify.page === this.route.page) {
-            this.route[this.route.page] = this.iconify.getRoute();
-        }
+        this.saveIconifyRoute();
 
         // Change route and page
         if (route !== void 0) {
@@ -343,12 +342,22 @@ class Container extends Component {
     }
 
     /**
+     * Store current Iconify route
+     */
+    saveIconifyRoute() {
+        if (this._iconifyLoaded && this.iconify.page === this.route.page) {
+            this.route[this.route.page] = this.iconify.getRoute();
+        }
+    }
+
+    /**
      * Triggered when current view has been changed in Iconify - trigger re-render
      *
      * @param view
      * @private
      */
     _onIconifyCurrentView(view) {
+        this.saveIconifyRoute();
         this.iconifyView = view;
         this.update();
     }
@@ -360,6 +369,7 @@ class Container extends Component {
      * @private
      */
     _onIconifyCurrentViewUpdated(view) {
+        this.saveIconifyRoute();
         this.update();
     }
 
