@@ -439,24 +439,27 @@ class Container extends Component {
         }
 
         // Create icon data
-        let data = Object.assign({
-            name: selection.iconName
-        }, ico.custom, ico.custom.height ? {} : {
-            height: this.scaleDownIcon(iconData.height, iconData.width, ico.custom.rotate)
-        });
+        let data = {
+            name: selection.iconName,
+            props: Object.assign({}, ico.custom),
+            height: ico.custom.height ? ico.custom.height : this.scaleDownIcon(iconData.height, iconData.width, ico.custom.rotate),
+            color: ico.custom.color === '' ? '#000' : ico.custom.color
+        };
+        delete data.props.height;
+        delete data.props.color;
 
         // Get SVG
         let svgProps = {
             'data-inline': false,
             'data-height': data.height,
-            'data-rotate': data.rotate,
+            'data-rotate': data.props.rotate,
         };
         if (data.hFlip) {
-            svgProps['data-flip'] = 'horizontal' + (data.vFlip ? ',vertical' : '');
-        } else if (data.vFlip) {
+            svgProps['data-flip'] = 'horizontal' + (data.props.vFlip ? ',vertical' : '');
+        } else if (data.props.vFlip) {
             svgProps['data-flip'] = 'vertical';
         }
-        data.svg = Iconify.getSVG(data.name, svgProps).replace(/currentColor/g, data.color === '' ? '#000' : data.color);
+        data.svg = Iconify.getSVG(data.name, svgProps).replace(/currentColor/g, data.color);
 
         // Send message to UI
         this.props.ui.sendMessage('import-iconify', data);
@@ -465,10 +468,12 @@ class Container extends Component {
     /**
      * Import SVG to Figma
      *
-     * @param code
+     * @param {string} code
      */
     importSVG(code) {
-        this.props.ui.sendMessage('import-svg', code);
+        this.props.ui.sendMessage('import-svg', {
+            svg: code
+        });
     }
 
     /**

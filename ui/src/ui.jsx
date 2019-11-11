@@ -60,15 +60,6 @@ class UI {
     }
 
     /**
-     * Import icon
-     *
-     * @param icon
-     */
-    importIcon(icon) {
-        this.sendMessage('import-svg', icon);
-    }
-
-    /**
      * Get stored items
      *
      * @return {Array}
