@@ -1,10 +1,8 @@
 # Development notice
 
-This is version 2.0.0-dev of Iconify plug-in for Figma. It is currently in development and might not work correctly (or not work at all).
+This is version 2.0.0-dev of Iconify plug-in for Figma.
 
-To build plugin run `npm run build` after installing all dependencies.
-
-For stable version of plug-in see "v1" branch of this repository.
+For previous version of plug-in see branch "v1" of this repository.
 
 Build modes:
 * `npm run build` - build production code. Output is stored in "dist".
@@ -13,6 +11,11 @@ Build modes:
 * `npm run start` - debug UI without Figma. Creates web server on http://localhost:8080/ and shows UI. Change UI configuration in ui/dev-ui.js
 * `npm run test` - test Icon Finder core.
 
+# Installing development version
+
+Development version of plug-in is functional.
+
+To install it first build plugin using `npm run build`, then open Figma, in menu select Plugins -> Development -> New Plugin. Click "Link existing plugin", navigate to manifest.json
 
 
 # Iconify plug-in for Figma
