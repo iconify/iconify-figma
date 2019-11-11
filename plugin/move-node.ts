@@ -1,6 +1,12 @@
 "use strict";
 
-function insertSVG(env, node) {
+/**
+ * Find parent node for import
+ *
+ * @param {object} env
+ * @return {BaseNodeMixin|null}
+ */
+function findParentNode(env) {
 	let parent = null;
 
 	if (figma.currentPage.selection.length) {
@@ -11,13 +17,20 @@ function insertSVG(env, node) {
 				break;
 
 			case 'FRAME':
+				if (parent.getSharedPluginData('iconify', 'source') !== void 0) {
+					// Imported icon
+					parent = parent.parent;
+					break;
+				}
+
 				if (parent.parent.type === 'PAGE') {
-					// Frame with parent group should be parent for icon, unless its another icon
+					// Check for imported icon from old Iconify plugin
 					if (parent.name.indexOf('-') !== -1 || parent.name.indexOf(':') !== -1) {
 						parent = parent.parent;
 					}
 					break;
 				}
+
 				parent = parent.parent;
 				break;
 
@@ -25,6 +38,18 @@ function insertSVG(env, node) {
 				parent = parent.parent;
 		}
 	}
+
+	return parent;
+}
+
+/**
+ * Move node
+ *
+ * @param {object} env
+ * @param {FrameNode} node
+ */
+function moveNode(env, node) {
+	let parent = findParentNode(env);
 
 	let x = 0,
 		y = 0;
@@ -66,4 +91,4 @@ function insertSVG(env, node) {
 	}
 }
 
-export default insertSVG;
+export default moveNode;

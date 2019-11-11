@@ -1,6 +1,6 @@
 "use strict";
 
-import insertSVG from './insert-svg';
+import moveSvg from './insert-svg';
 
 function importIconify(env, props) {
 	// Create node from SVG
@@ -12,6 +12,14 @@ function importIconify(env, props) {
 		return;
 	}
 
+	// Mark node as SVG import and store data
+	node.setSharedPluginData('iconify', 'source', 'iconify');
+	node.setSharedPluginData('iconify', 'props', JSON.stringify({
+		name: props.name,
+		color: props.color,
+		props: props.props,
+	}));
+
 	// Rename node
 	node.name = props.name;
 
@@ -19,7 +27,7 @@ function importIconify(env, props) {
 	if (!figma.currentPage) {
 		return;
 	}
-	insertSVG(env, node);
+	moveSvg(env, node);
 
 	// Select node
 	figma.currentPage.selection = [node];
