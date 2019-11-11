@@ -104,7 +104,7 @@ module.exports = instance => {
             submit: 'Import Icon',
             close: 'Close Plugin',
             color: 'Color',
-            height: 'Icon Height',
+            height: 'Height',
             rotate: 'Rotate',
             flip: 'Flip',
             hFlip: 'Horizontal',

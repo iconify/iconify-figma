@@ -18,7 +18,7 @@ let env = {
  * Show UI
  */
 figma.showUI(__html__, {
-	width: 800,
+	width: 690,
 	height: 800,
 });
 
