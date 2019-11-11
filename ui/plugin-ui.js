@@ -10,11 +10,18 @@ import UI from './src/ui';
 /**
  * Send message to plugin
  *
- * @param {object} message
+ * @param {string} event
+ * @param {object} [data]
  */
-function sendMessage(message) {
+function sendMessage(event, data) {
+    if (process.env.SEARCH_DEV) {
+        console.log('Message from UI', event, data);
+    }
     parent.postMessage({
-        pluginMessage: message
+        pluginMessage: {
+            event: event,
+            data: data
+        }
     }, '*');
 }
 
@@ -123,13 +130,14 @@ delay(counter => {
         switch (message.event) {
             case 'show':
                 let params = {
+                    iconify: iconifyConfig,
+                    callback: sendMessage
                 };
                 ui = new UI(document.getElementById('container'), params);
                 break;
         }
     };
 
-    sendMessage({
-        event: 'loaded'
-    });
+    // Notify plugin that UI has finished loading
+    sendMessage('loaded', process.env.SEARCH_DEV);
 });

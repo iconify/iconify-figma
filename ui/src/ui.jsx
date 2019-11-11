@@ -45,8 +45,8 @@ class UI {
      * Close plug-in
      */
     closePlugin() {
-        console.log('Closing plug-in');
-        // @TODO
+        this.sendMessage('store', this.getParams());
+        this.sendMessage('close');
     }
 
     /**
@@ -65,7 +65,7 @@ class UI {
      * @param icon
      */
     importIcon(icon) {
-
+        this.sendMessage('import-svg', icon);
     }
 
     /**
@@ -167,9 +167,7 @@ class UI {
      * Update recent icons list
      */
     updateStorage() {
-        // @TODO store data in Figma
-        console.log('Stored data:', this.localStorage);
-        console.log('getParams():', this.getParams());
+        this.sendMessage('store', this.getParams());
     }
 
     /**
@@ -198,6 +196,19 @@ class UI {
 
         // Copy object
         return JSON.parse(JSON.stringify(params));
+    }
+
+    /**
+     * Send message to Figma
+     *
+     * @param {string} event
+     * @param {*} [data]
+     */
+    sendMessage(event, data) {
+        let callback = this.params.callback;
+        if (typeof callback === 'function') {
+            callback(event, data);
+        }
     }
 }
 

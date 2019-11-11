@@ -204,8 +204,6 @@ class Container extends Component {
 
         // Mark as loaded
         this._iconifyLoaded = true;
-
-        console.log('Iconify route', this.iconify.getRoute());
     }
 
     /**
@@ -440,9 +438,6 @@ class Container extends Component {
             this.iconifyView.sync();
         }
 
-        // @TODO
-        console.log('Importing icon: ', selection.iconName);
-
         // Create icon data
         let data = Object.assign({
             name: selection.iconName
@@ -463,8 +458,8 @@ class Container extends Component {
         }
         data.svg = Iconify.getSVG(data.name, svgProps).replace(/currentColor/g, data.color === '' ? '#000' : data.color);
 
-        console.log(data);
-        console.log(data.svg);
+        // Send message to UI
+        this.props.ui.sendMessage('import-iconify', data);
     }
 
     /**
@@ -473,8 +468,7 @@ class Container extends Component {
      * @param code
      */
     importSVG(code) {
-        console.log('Importing SVG: ', code);
-        // @TODO
+        this.props.ui.sendMessage('import-svg', code);
     }
 
     /**

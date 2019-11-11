@@ -24,6 +24,10 @@ if (process.env.SEARCH_API) {
 }
 
 let params = {
+    callback: (event, data) => {
+        console.log('Callback to plugin:', event, data);
+    },
+
     iconify: iconifyConfig,
 
     // prefix: 'ic',
