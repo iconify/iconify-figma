@@ -29,7 +29,7 @@ function LoadingView(props) {
 
         <Notice>{props.phrases.loading.ui}</Notice>
 
-        <Footer {...props} />
+        {/*<Footer {...props} />*/}
     </ViewContainer>;
 }
 

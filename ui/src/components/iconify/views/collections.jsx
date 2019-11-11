@@ -37,7 +37,7 @@ function CollectionsView(props) {
             <FilterBlock {...props} block="filter" />
         </div>}
         <CollectionsBlock {...props} block="collections" />
-        <FigmaFooter {...props} />
+        {/*<FigmaFooter {...props} />*/}
     </ViewContainer>;
 }
 
