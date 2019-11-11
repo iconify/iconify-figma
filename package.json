@@ -5,10 +5,10 @@
   "author": "Vjacheslav Trushkin",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode production --config config.prod.js",
-    "dev": "webpack --mode development --config config.dev.js",
-    "watch": "webpack --mode development --config config.dev.js --watch",
-    "start": "webpack-dev-server --open --mode development --config config.dev-ui.js",
+    "build": "webpack --mode production --config webpack.config.js",
+    "dev": "webpack --mode development --config webpack.config.js",
+    "watch": "webpack --mode development --config webpack.config.js --watch",
+    "start": "webpack-dev-server --open --mode development --config webpack.config-ui.js",
     "test": "mocha ui/tests/*_test.js"
   },
   "bugs": "https://github.com/iconify/iconify-figma/issues",

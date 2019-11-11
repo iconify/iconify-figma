@@ -6,14 +6,9 @@ const webpack = require('webpack');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-/**
- * Common configuration file for development and production.
- * Returns configuration object
- *
- * @param {boolean} prod
- * @return {object}
- */
-module.exports = prod => {
+module.exports = (env, argv) => {
+    let prod = argv.mode === 'production';
+
     // Local API entry points
     // Add custom data to api.json (see api.json-localhost)
     // Also see config.dev-ui.js
@@ -35,7 +30,7 @@ module.exports = prod => {
     // Return object
     return {
         // Prevent eval() in source code
-        devtool: false,
+        devtool: prod ? false : 'inline-source-map',
 
         // Entries for UI and plug-in
         entry: {
