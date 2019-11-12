@@ -7,19 +7,24 @@ import Iconify from '@iconify/iconify';
 import style from './src/css/style.scss';
 import UI from './src/ui';
 
-let iconifyConfig = {};
+// UI configuration
+const itemsPerPage = 55; // 5 rows x 11 icons. Also see plugin-ui.js
+let iconifyConfig = {
+    config: {
+        itemsPerPage: itemsPerPage,
+        search: {
+            limit: itemsPerPage * 2,
+        },
+    }
+};
 
 // Use local API for development. See config.common.js
 if (process.env.ICONIFY_API) {
     Iconify.setConfig('defaultAPI', process.env.ICONIFY_API_VALUE);
 }
 if (process.env.SEARCH_API) {
-    iconifyConfig = {
-        config: {
-            API: {
-                URI: process.env.SEARCH_API_VALUE
-            }
-        }
+    iconifyConfig.config.API = {
+        URI: process.env.SEARCH_API_VALUE
     };
 }
 
@@ -59,7 +64,8 @@ let params = {
 
     // selected icon
     selection: {
-        iconName: 'mdi-home'
+        iconName: 'mdi-home',
+        node: '0:1'
     },
 
     // saved lists
@@ -75,6 +81,14 @@ let params = {
             'el:home-alt'
         ]
     },
+
+    // parent nodes
+    parentNodes: [
+        {"id":"0:1","type":"PAGE","name":"Tests","parents":[]},
+        {"id":"130:38","type":"FRAME","name":"footer","parents":["130:35","0:1"], "default": true},
+        {"id":"130:37","type":"GROUP","name":"header","parents":["130:35","0:1"]},
+        {"id":"130:35","type":"FRAME","name":"iOS stuff","parents":["0:1"]}
+    ],
 };
 
 var ui = new UI(document.getElementById('container'), params);
@@ -88,3 +102,15 @@ setTimeout(function () {
         height: 24,
     });
 }, 5000);
+
+// Test setSelectedNodes
+/*
+setTimeout(() => {
+    ui.setSelectedNodes([
+        {"id":"0:1","type":"PAGE","name":"Tests","parents":[]},
+        {"id":"130:38","type":"FRAME","name":"footer","parents":["130:35","0:1"], "default": true},
+        {"id":"130:37","type":"GROUP","name":"header","parents":["130:35","0:1"]},
+        {"id":"130:35","type":"FRAME","name":"iOS stuff","parents":["0:1"]}
+    ]);
+}, 1000);
+*/

@@ -117,11 +117,13 @@ module.exports = (instance, params, parent) => {
     let routeParams = {
         customType: view.customType,
         search: typeof view._params.search === 'string' ? view._params.search : (parent && parent.route && parent.route.params.search ? parent.route.params.search : ''),
-        page: typeof view._params.page === 'number' ? view._params.page : 0
+        page: typeof view._params.page === 'number' ? view._params.page : 0,
+        canDelete: view.canDelete,
     };
     let routeDefaults = {
         search: '',
-        page: 0
+        page: 0,
+        canDelete: false,
     };
     view.route = route('custom', routeParams, routeDefaults);
 

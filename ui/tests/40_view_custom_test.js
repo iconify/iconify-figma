@@ -70,11 +70,13 @@
                     params: {
                         customType: 'recent',
                         page: 0,
-                        search: ''
+                        search: '',
+                        canDelete: false
                     },
                     defaults: {
                         page: 0,
-                        search: ''
+                        search: '',
+                        canDelete: false
                     }
                 });
                 expect(view.getRoute()).to.be.eql({

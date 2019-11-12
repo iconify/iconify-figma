@@ -1,7 +1,9 @@
 "use strict";
 
+import updateSelection from './update-selection';
 import importSVG from './import-svg';
 import importIconify from './import-iconify';
+import { findParentNodes } from './node-functions';
 
 /**
  * Environment
@@ -12,6 +14,23 @@ let env = {
 	loaded: false,
 	debug: false,
 	lastParent: null,
+};
+
+/**
+ * Send message to UI to show UI
+ *
+ * @param config
+ */
+let showUI = config => {
+	// Mark as loaded
+	env.loaded = true;
+
+	// Tell UI to load
+	figma.ui.postMessage({
+		event: 'show',
+		config: config,
+		parentNodes: findParentNodes(env)
+	});
 };
 
 /**
@@ -32,16 +51,9 @@ figma.ui.onmessage = msg => {
 		case 'loaded':
 			env.debug = msg.data;
 			figma.clientStorage.getAsync('config').then(config => {
-				env.loaded = true;
-				figma.ui.postMessage({
-					event: 'show',
-					config: config,
-				});
+				showUI(config);
 			}).catch(err => {
-				env.loaded = true;
-				figma.ui.postMessage({
-					event: 'show',
-				});
+				showUI(void 0);
 			});
 			break;
 
@@ -65,3 +77,8 @@ figma.ui.onmessage = msg => {
 			break;
 	}
 };
+
+/**
+ * Selection change
+ */
+figma.on('selectionchange', () => updateSelection(env, 'selectionchange'));

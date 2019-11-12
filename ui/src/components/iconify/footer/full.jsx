@@ -12,6 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
+
 "use strict";
 
 import React, { Component } from 'react';
@@ -29,6 +30,8 @@ import FooterOptions from './options';
 import FooterCollection from './collection';
 import FooterSample from './sample';
 import FooterIconName from './icon-name';
+import FooterNodeOptions from './node';
+import FooterBlock from "./block";
 
 
 class FullFooter extends Component {
@@ -102,6 +105,7 @@ class FullFooter extends Component {
                         {...custom}
                     />
                     <FooterCode {...props} hasColor={hasColor} />
+                    <FooterNodeOptions {...props} />
                 </div>
             </FooterContainer>
 

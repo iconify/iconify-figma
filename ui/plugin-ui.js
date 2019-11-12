@@ -7,6 +7,9 @@ import Iconify from '@iconify/iconify';
 import style from './src/css/style.scss';
 import UI from './src/ui';
 
+// Items per page
+const itemsPerPage = 55; // 5 rows x 11 icons. Also see dev-ui.js
+
 /**
  * Send message to plugin
  *
@@ -105,16 +108,19 @@ delay(counter => {
     // Do not delay for more than 1 second
     return counter > 10 || Iconify.iconExists('mdi:account-check')
 }, () => {
-    let iconifyConfig = {};
+    let iconifyConfig = {
+        config: {
+            itemsPerPage: itemsPerPage,
+            search: {
+                limit: itemsPerPage * 2,
+            },
+        }
+    };
 
     if (process.env.SEARCH_API) {
         // Use local API for development. See config.common.js
-        iconifyConfig = {
-            config: {
-                API: {
-                    URI: process.env.SEARCH_API_VALUE
-                }
-            }
+        iconifyConfig.config.API = {
+            URI: process.env.SEARCH_API_VALUE
         };
     }
 
@@ -130,13 +136,19 @@ delay(counter => {
 
         switch (message.event) {
             case 'show':
+                // Show UI
                 let params = {
                     iconify: iconifyConfig,
                     stored: message.config,
+                    parentNodes: message.parentNodes,
                     callback: sendMessage,
                 };
                 ui = new UI(document.getElementById('container'), params);
                 break;
+
+            case 'selected-nodes':
+                // Update list of possible parent nodes
+                ui.setSelectedNodes(message.nodes)
         }
     };
 

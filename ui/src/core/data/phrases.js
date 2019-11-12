@@ -111,6 +111,7 @@ module.exports = instance => {
             vFlip: 'Vertical',
             customize: 'Customize icon:',
             code: 'How to use icon:',
+            'import-options': 'Import options:',
         },
     });
 

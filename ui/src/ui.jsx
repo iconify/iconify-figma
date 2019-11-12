@@ -41,6 +41,9 @@ class UI {
         }
         delete params.stored;
 
+        // Expand selected nodes list
+        params.selectedNodes = params.parentNodes ? this._convertSelectedNodes(params.parentNodes) : null;
+
         // Local storage
         this.localStorage = params.storage ? params.storage : {};
 
@@ -118,7 +121,7 @@ class UI {
      */
     deleteStoredIcon(key, icon) {
         this._deleteStoredIcon(key, icon);
-        this.updateStorage();
+        this.storeState();
     }
 
     /**
@@ -129,7 +132,7 @@ class UI {
      */
     deleteStoredItem(key, item) {
         this._deleteStoredItem(key, item);
-        this.updateStorage();
+        this.storeState();
     }
 
     /**
@@ -161,22 +164,27 @@ class UI {
         }
         this.localStorage[key].unshift(item);
 
-        this.updateStorage();
+        this.storeState();
     }
 
     /**
-     * Update recent icons list
+     * Store state in plug-in
      */
-    updateStorage() {
-        this.sendMessage('store', this.getParams());
+    storeState() {
+        let state = this.getParams(true);
+        if (this._lastStoredState !== state) {
+            this._lastStoredState = state;
+            this.sendMessage('store', JSON.parse(state));
+        }
     }
 
     /**
      * Get parameters for storage
      *
-     * @return {any}
+     * @param {boolean} [stringify]
+     * @return {string|object}
      */
-    getParams() {
+    getParams(stringify) {
         let container = this.component;
 
         if (container.iconify) {
@@ -199,7 +207,8 @@ class UI {
         };
 
         // Copy object
-        return JSON.parse(JSON.stringify(params));
+        let result = JSON.stringify(params);
+        return stringify ? result : JSON.parse(result);
     }
 
     /**
@@ -212,6 +221,66 @@ class UI {
         let callback = this.params.callback;
         if (typeof callback === 'function') {
             callback(event, data);
+        }
+    }
+
+    /**
+     * Convert selected nodes from array to tree
+     *
+     * @param {Array} nodes
+     * @return {object}
+     * @private
+     */
+    _convertSelectedNodes(nodes) {
+        // Sort nodes by number of parent nodes
+        nodes.sort((a, b) => a.parents.length - b.parents.length);
+
+        // Root node
+        let root = nodes.shift();
+        root.children = [];
+
+        let length = 1;
+        while (nodes.length > 0) {
+            nodes = nodes.filter(node => {
+                if (node.parents.length !== length) {
+                    return true;
+                }
+
+                // Find parent node
+                let parent = root,
+                    parents = node.parents.slice(0);
+
+                while (parents.length) {
+                    let id = parents.pop();
+                    parent.children.forEach(child => {
+                        if (child.id === id) {
+                            parent = child;
+                        }
+                    })
+                }
+
+                // Append node to parent node
+                node.children = [];
+                parent.children.push(node);
+                return false;
+            });
+
+            length ++;
+        }
+        return root;
+    }
+
+    /**
+     * Set selected nodes
+     *
+     * @param {Array} nodes
+     */
+    setSelectedNodes(nodes) {
+        let convertedNodes = this._convertSelectedNodes(nodes);
+        if (this.component) {
+            this.component.setSelectedNodes(convertedNodes);
+        } else {
+            this.params.selectedNodes = convertedNodes;
         }
     }
 }

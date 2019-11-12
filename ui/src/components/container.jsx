@@ -69,7 +69,8 @@ const defaultLayout = (params, options) => ({
  */
 const defaultSelection = () => ({
     icon: null,
-    iconName: null
+    iconName: null,
+    node: '',
 });
 
 /**
@@ -83,6 +84,19 @@ const defaultCustomizations = () => ({
     hFlip: false,
     vFlip: false,
     rotate: 0
+});
+
+/**
+ * Route for recent page
+ *
+ * @return {{type: string, params: {customType: string, canDelete: boolean}}}
+ */
+const recentRoute = () => ({
+    type: 'custom',
+    params: {
+        customType: 'recent',
+        canDelete: true
+    }
 });
 
 class Container extends Component {
@@ -120,7 +134,7 @@ class Container extends Component {
             });
         }
 
-        // Selected icon
+        // Selected items
         this.selection = defaultSelection();
         [params.icon, params.selection ? params.selection.iconName : null].forEach(icon => {
             let selectedIcon = typeof icon === 'string' ? iconObject(icon) : null;
@@ -130,17 +144,17 @@ class Container extends Component {
             }
         });
 
+        // Selected nodes tree
+        this.selectedNodes = params.selectedNodes ? [params.selectedNodes] : [];
+        if (params.selection && params.selection.node) {
+            this.selection.node = params.selection.node;
+        }
+
         // Page and routes
         this.route = params.route && params.route.page ? JSON.parse(JSON.stringify(params.route)) : {
             page: 'iconify'
         };
-        this.route.recent = {
-            type: 'custom',
-            params: {
-                customType: 'recent',
-                canDelete: true
-            }
-        };
+        this.route.recent = recentRoute();
 
         // Create Iconify importer instance
         this._iconifyLoaded = false;
@@ -199,6 +213,7 @@ class Container extends Component {
         this.iconify.layout = defaultLayout(params, this.options);
         this.iconify.custom = this.custom;
         this.iconify.selection = this.selection;
+        this.iconify.selectedNodes = this.selectedNodes;
 
         // Save current view
         this.iconifyView = this.iconify.view();
@@ -288,6 +303,7 @@ class Container extends Component {
         this._pendingUpdate = true;
         setTimeout(() => {
             if (this.props.ui.component === this) {
+                this.props.ui.storeState();
                 this._pendingUpdate = false;
                 this.setState({
                     counter: this.state.counter + 1
@@ -453,7 +469,8 @@ class Container extends Component {
             name: selection.iconName,
             props: Object.assign({}, ico.custom),
             height: ico.custom.height ? ico.custom.height : this.scaleDownIcon(iconData.height, iconData.width, ico.custom.rotate),
-            color: ico.custom.color === '' ? '#000' : ico.custom.color
+            color: ico.custom.color === '' ? '#000' : ico.custom.color,
+            node: ico.selectedFigmaNode,
         };
         delete data.props.height;
         delete data.props.color;
@@ -559,6 +576,21 @@ class Container extends Component {
         }
 
         return lastHeight;
+    }
+
+    /**
+     * Set selected nodes tree
+     *
+     * @param {object} tree
+     */
+    setSelectedNodes(tree) {
+        // Remove old root
+        this.selectedNodes.shift();
+
+        // Add new root
+        this.selectedNodes.push(tree);
+
+        this.update();
     }
 }
 

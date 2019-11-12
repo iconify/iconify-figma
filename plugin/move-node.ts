@@ -1,6 +1,6 @@
 "use strict";
 
-import findParentNode from './parent-node';
+import { findParentNode } from './node-functions';
 
 /**
  * Move node
@@ -9,7 +9,7 @@ import findParentNode from './parent-node';
  * @param {FrameNode} node
  */
 function moveNode(env, node) {
-	let parent = findParentNode(env);
+	let parent = findParentNode(env, void 0);
 
 	let x = 0,
 		y = 0;
