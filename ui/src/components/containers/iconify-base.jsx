@@ -117,9 +117,9 @@ class IconifyBaseContainer extends Component {
      * @private
      */
     _onSelectIcon(value) {
-        let app = this.props.container.iconify;
-        app.selectIcon(value);
-        this.props.container.update();
+        let options = this.props.container.options;
+        options.icon = value;
+        options.triggerChange();
     }
 
     /**

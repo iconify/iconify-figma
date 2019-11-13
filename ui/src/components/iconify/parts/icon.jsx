@@ -34,7 +34,7 @@ class ShortIcon extends Component {
         if (!loaded) {
             return <GridIcon
                 loading={true}
-                selected={props.app.selection.iconName === name}
+                selected={props.selected}
                 href={link}
                 onClick={this.onClick.bind(this)}
                 tooltip={name + '\n' + lang.loading}
@@ -58,7 +58,7 @@ class ShortIcon extends Component {
         });
 
         return <GridIcon
-            selected={props.app.selection.iconName === name}
+            selected={props.selected}
             href={link}
             tooltip={tooltip}
             onClick={this.onClick.bind(this)}

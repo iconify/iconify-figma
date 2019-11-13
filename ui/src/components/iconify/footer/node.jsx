@@ -82,7 +82,7 @@ class FooterNodeOptions extends Component {
 
         return <div key={key}>
             <a href="#" onClick={this.nodeClicked.bind(this, node.default ? '' : node.id)}>
-                {level + ' [' + node.id + '] :' + node.type + ': ' + node.name} {selected ? (node.default ? ' (default)' : ' (selected)') : (node.default ? ' (default)' : '')}
+                {level + ' [' + node.id + '] :' + node.type + ': ' + node.name} {selected ? (node.default ? ' (default, selected)' : ' (selected)') : (node.default ? ' (default)' : '')}
             </a>
         </div>;
     }

@@ -25,9 +25,10 @@ const lang = phrases.footer;
 
 function FooterCollection(props) {
     let app = props.app,
-        prefix = app.selection.icon.prefix;
+        icon = app.options.icon,
+        prefix = icon && icon.prefix !== '' ? icon.prefix : null;
 
-    if (!prefix) {
+    if (prefix === null) {
         return null;
     }
 

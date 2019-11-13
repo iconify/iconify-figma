@@ -50,10 +50,10 @@ class FullFooter extends Component {
             container = props.container;
 
         let app = props.app,
-            name = app.selection.iconName,
-            data = Iconify.getIcon(name),
+            iconName = props.iconName,
+            data = Iconify.getIcon(iconName),
             custom = typeof app.custom === 'object' ? app.custom : {},
-            sample = FullFooter.renderSample(name, custom),
+            sample = FullFooter.renderSample(iconName, custom),
             sampleHeight = container.scaleDownIcon(data.height, data.width, custom.rotate),
             sampleLimit = 128,
             hasColor = sample.indexOf('currentColor') !== -1;
@@ -98,7 +98,7 @@ class FullFooter extends Component {
                     {this.renderIconName()}
                     {this.renderCollection()}
                     <FooterOptions
-                        key={name}
+                        key={iconName}
                         {...props}
                         showColor={hasColor}
                         sampleHeight={sampleHeight}
@@ -126,12 +126,13 @@ class FullFooter extends Component {
         let props = this.props;
 
         let app = props.app,
-            name = app.selection.iconName,
-            showPrefix = !props.view || props.view.type !== 'collection' || props.view.prefix !== app.selection.icon.prefix,
-            text = showPrefix ? name : app.selection.icon.name,
-            data = Iconify.getIcon(name),
+            options = app.options,
+            iconName = props.iconName,
+            showPrefix = !props.view || props.view.type !== 'collection' || props.view.prefix !== options.icon.prefix,
+            text = showPrefix ? iconName : options.icon.name,
+            data = Iconify.getIcon(iconName),
             sampleHeight = props.container.scaleDownIcon(data.height), // ignore other attributes because rotation is not applied
-            sample = FullFooter.renderSample(name, {});
+            sample = FullFooter.renderSample(iconName, {});
 
         return <FooterIconName text={text} sampleHeight={sampleHeight} sample={sample} />;
     }

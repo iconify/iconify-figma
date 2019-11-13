@@ -18,7 +18,6 @@ import React, { Component } from 'react';
 import Iconify from '@iconify/iconify';
 
 const core = require('../core/search');
-const iconObject = require('../core/objects/icon');
 
 import FigmaNavigation from './header/navigation';
 import IconifyContainer from './containers/iconify';
@@ -40,17 +39,6 @@ const containers = {
  * @return {boolean}
  */
 const isIconifyPage = page => page === 'iconify' || page === 'recent';
-
-/**
- * Get default selection
- *
- * @return {{icon: null, iconName: null}}
- */
-const defaultSelection = () => ({
-    icon: null,
-    iconName: null,
-    node: '',
-});
 
 /**
  * Get default customizations
@@ -110,21 +98,8 @@ class Container extends Component {
             });
         }
 
-        // Selected items
-        this.selection = defaultSelection();
-        [params.icon, params.selection ? params.selection.iconName : null].forEach(icon => {
-            let selectedIcon = typeof icon === 'string' ? iconObject(icon) : null;
-            if (selectedIcon && typeof selectedIcon === 'object' && selectedIcon.prefix.length && selectedIcon.name.length) {
-                this.selection.icon = selectedIcon;
-                this.selection.iconName = selectedIcon.prefix + ':' + selectedIcon.name;
-            }
-        });
-
         // Selected nodes tree
         this.selectedNodes = params.selectedNodes ? [params.selectedNodes] : [];
-        if (params.selection && params.selection.node) {
-            this.selection.node = params.selection.node;
-        }
 
         // Page and routes
         this.route = params.route && params.route.page ? JSON.parse(JSON.stringify(params.route)) : {
@@ -188,7 +163,6 @@ class Container extends Component {
 
         // Pass some objects from container by reference
         this.iconify.custom = this.custom;
-        this.iconify.selection = this.selection;
         this.iconify.selectedNodes = this.selectedNodes;
         this.iconify.options = this.options;
 
@@ -319,13 +293,9 @@ class Container extends Component {
         // Reset custom options
         this.custom = defaultCustomizations();
 
-        // Reset selection
-        this.selection = defaultSelection();
-
         // Iconify stuff
         if (this.iconify) {
             this.iconify.custom = this.custom;
-            this.iconify.selection = this.selection;
 
             // Reset disclosures
             this.iconify.footerCodeSection = '';
@@ -417,26 +387,26 @@ class Container extends Component {
      */
     importIconifyIcon(event) {
         let ico = this.iconify,
-            selection = this.selection;
+            iconName = this.options.iconName;
 
         if (event && event.preventDefault) {
             event.preventDefault();
         }
 
         // Get selected icon
-        if (!selection.icon) {
+        if (iconName === null) {
             return;
         }
 
         // Get icon data
-        let iconData = Iconify.getIcon(selection.iconName);
+        let iconData = Iconify.getIcon(iconName);
         if (!iconData) {
             return;
         }
 
         // Add icon to recent list
         let ui = this.props.ui;
-        ui.storeIcon('recent', selection.icon);
+        ui.storeIcon('recent', iconName);
 
         if (this.route.page === 'recent' && this.iconifyView && this.iconifyView.sync) {
             this.iconifyView.sync();
@@ -444,7 +414,7 @@ class Container extends Component {
 
         // Create icon data
         let data = {
-            name: selection.iconName,
+            name: iconName,
             props: Object.assign({}, ico.custom),
             height: ico.custom.height ? ico.custom.height : this.scaleDownIcon(iconData.height, iconData.width, ico.custom.rotate),
             color: ico.custom.color === '' ? '#000' : ico.custom.color,

@@ -48,8 +48,8 @@ class FooterCode extends Component {
         let props = this.props,
             section = props.app.footerCodeSection,
             app = props.app,
-            name = app.selection.iconName,
-            icon = app.selection.icon;
+            name = props.iconName,
+            icon = app.options.icon;
 
         let version = Iconify.getVersion(),
             majorVersion = version.split('.').shift();

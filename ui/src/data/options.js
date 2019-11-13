@@ -1,12 +1,18 @@
 "use strict";
 
+const iconObject = require('../core/objects/icon');
+
 // Global options shared between all pages
 const globalOptions = {
     // Icon customizations
     color: '',
+    height: '',
     rotate: 0,
     hFlip: false,
     vFlip: false,
+
+    // Selected icon
+    icon: null,
 
     // Node for importing icons
     node: '',
@@ -31,6 +37,9 @@ class Options {
 
         // Create getters
         Object.keys(globalOptions).forEach(name => {
+            if (name === 'icon') {
+                return;
+            }
             Object.defineProperty(this, name, {
                 get: this.getGlobalOption.bind(this, name),
                 set: this.setGlobalOption.bind(this, name)
@@ -196,6 +205,13 @@ class Options {
 
         // Copy customized global options
         Object.keys(globalOptions).forEach(name => {
+            if (name === 'icon') {
+                if (this.options.icon !== null) {
+                    state[name] = this.iconName;
+                }
+                return;
+            }
+
             if (this.options[name] !== globalOptions[name]) {
                 state[name] = this.options[name];
             }
@@ -223,6 +239,11 @@ class Options {
 
         // Copy customized global options
         Object.keys(globalOptions).forEach(name => {
+            if (name === 'icon') {
+                this[name] = value[name];
+                return;
+            }
+
             if (value[name] !== void 0) {
                 this.options[name] = value[name];
             }
@@ -234,6 +255,50 @@ class Options {
                 this.pageOptions[name].iconify = value[name];
             }
         });
+    }
+
+    /**
+     * Get icon
+     *
+     * @return {object}
+     */
+    get icon() {
+        return this.options.icon;
+    }
+
+    /**
+     * Set icon
+     *
+     * @param {object|string} value
+     */
+    set icon(value) {
+        let icon;
+
+        if (!value || !(icon = iconObject(value)) || !icon.prefix.length || !icon.name.length) {
+            // Empty or invalid value
+            this.options.icon = null;
+            return;
+        }
+
+        this.options.icon = icon;
+    }
+
+    /**
+     * Get icon name
+     *
+     * @return {string|null}
+     */
+    get iconName() {
+        return this.options.icon ? this.options.icon.prefix + ':' + this.options.icon.name : null;
+    }
+
+    /**
+     * Set icon by name
+     *
+     * @param {string} value
+     */
+    set iconName(value) {
+        this.icon = value;
     }
 
     /**

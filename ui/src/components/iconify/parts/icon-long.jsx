@@ -47,7 +47,7 @@ class LongIcon extends Component {
         if (!loaded) {
             return <ListIcon
                 loading={true}
-                selected={props.app.selection.iconName === name}
+                selected={props.selected}
                 title={props.title}
                 onClick={this.onClick.bind(this)}
                 size={lang.loading}
@@ -121,7 +121,7 @@ class LongIcon extends Component {
         });
 
         return <ListIcon
-            selected={props.app.selection.iconName === name}
+            selected={props.selected}
             title={props.title}
             href={link}
             tooltip={tooltip}

@@ -169,35 +169,6 @@ let Search = {
                 let collections = instance.get('collections');
                 return collections ? collections.get(prefix) : null;
             },
-
-            /**
-             * Selected icon
-             */
-            selection: {
-                icon: null, // as object
-                iconName: null // as string
-            },
-
-            /**
-             * Select icon
-             *
-             * @param {string|object|null} value
-             */
-            selectIcon: value => {
-                if (value === null) {
-                    // Reset selection
-                    instance.selection.icon = null;
-                    instance.selection.iconName = null;
-                    return;
-                }
-
-                // Convert to object
-                let icon = iconObject(value);
-                if (icon && icon.prefix.length && icon.name.length) {
-                    instance.selection.icon = icon;
-                    instance.selection.iconName = icon.prefix + ':' + icon.name;
-                }
-            }
         };
 
         return instance;
@@ -242,11 +213,6 @@ let Search = {
                 });
             }
         });
-
-        // Select icon
-        if (instance.params.selected) {
-            instance.selectIcon(instance.params.selected);
-        }
 
         // Set home page
         let views = instance.get('views');

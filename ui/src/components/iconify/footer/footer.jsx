@@ -36,16 +36,16 @@ class Footer extends Component {
      */
     render() {
         let app = this.props.app,
-            icon = app.selection.iconName;
+            iconName = app.options.iconName;
 
         // No icon selected - render SimpleFooter
-        if (!icon) {
+        if (iconName === null) {
             return <SimpleFooter {...this.props} />;
         }
 
         // Check if icon has been loaded
-        if (!Iconify.iconExists(icon)) {
-            Iconify.preloadImages([icon]);
+        if (!Iconify.iconExists(iconName)) {
+            Iconify.preloadImages([iconName]);
             if (!this._listener) {
                 this._listener = this.iconsLoaded.bind(this);
                 document.addEventListener('IconifyAddedIcons', this._listener, true);
@@ -54,7 +54,7 @@ class Footer extends Component {
         }
 
         // Loaded
-        return <FullFooter {...this.props} />;
+        return <FullFooter {...this.props} iconName={iconName} />;
     }
 
     /**

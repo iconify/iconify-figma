@@ -41,7 +41,9 @@ class IconsBlock extends Component {
         let props = this.props,
             name = props.block,
             block = props.view.blocks[name],
-            list = props.app.options.list,
+            options = props.app.options,
+            list = options.list,
+            selectedIcon = options.iconName,
             Component = list ? LongIcon : Icon;
 
         if (!block || block.empty()) {
@@ -72,6 +74,7 @@ class IconsBlock extends Component {
                 name={key}
                 icon={icon}
                 title={title}
+                selected={selectedIcon === key}
                 onClick={this.onClick.bind(this, key)}
             />);
         });

@@ -52,20 +52,21 @@ let params = {
         }
     },
 
-    // layout
-    list: true,
+    // state
+    options: {
+        // selected icon
+        icon: 'mdi:home',
 
-    // custom changes
-    custom: {
+        // selected node
+        node: '0:11',
+
+        // icon changes
         color: '#a20',
         hFlip: true,
-        rotate: 1
-    },
+        rotate: 1,
 
-    // selected icon
-    selection: {
-        iconName: 'mdi-home',
-        node: '0:1'
+        // layout
+        list: true,
     },
 
     // saved lists
