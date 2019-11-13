@@ -20,6 +20,7 @@ import IconifyBlock from '../parts/block';
 import SearchForm from '../parts/search-form';
 
 const phrases = require('../../../data/phrases');
+const lang = phrases.search;
 
 function SearchBlock(props) {
     let app = props.app,
@@ -38,11 +39,11 @@ function SearchBlock(props) {
                 info = app.collection(prefix),
                 collectionTitle = info ? info.title : prefix;
 
-            searchTitle = phrases.search.titleNamed.replace('{name}', collectionTitle);
-        } else if (view.type === 'custom') {
-            searchTitle = phrases.search['title-' + view.customType];
+            searchTitle = lang.namedTitle.replace('{name}', collectionTitle);
+        } else if (view.type === 'custom' && lang[view.customType + 'Title'] !== void 0) {
+            searchTitle = lang[view.customType + 'Title'];
         } else {
-            searchTitle = phrases.search.title;
+            searchTitle = lang.title;
         }
     }
 

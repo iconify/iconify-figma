@@ -20,6 +20,9 @@ import Disclosure from '../../parts/disclosure';
 import DisclosureItem from '../../parts/disclosure-item';
 import CollectionInfo from '../parts/collection-info-list';
 
+const phrases = require('../../../data/phrases');
+const lang = phrases.footer;
+
 function FooterCollection(props) {
     let app = props.app,
         prefix = app.selection.icon.prefix;
@@ -34,7 +37,7 @@ function FooterCollection(props) {
     }
 
     return <Disclosure active={app.expandCollectionInfo ? 'info' : ''}>
-        <DisclosureItem key="info" title={'About ' + info.title} onToggle={() => app.expandCollectionInfo = !app.expandCollectionInfo}>
+        <DisclosureItem key="info" title={lang.aboutCollection.replace('{title}', info.title)} onToggle={() => app.expandCollectionInfo = !app.expandCollectionInfo}>
             <CollectionInfo {...props} prefix={prefix} showTitle={false} showPalette={false} showViewLink={true} />
         </DisclosureItem>
     </Disclosure>;

@@ -15,10 +15,6 @@
 "use strict";
 
 module.exports = {
-    // Convert dash-syntax to camelCase
-    camelCase: str => str.split('-').map((item, index) => index ? item.slice(0, 1).toUpperCase() + item.slice(1) : item).join(''),
-
-    // Phrases
     loading: 'Loading...',
     navigation: {
         notavailable: 'This menu is not available yet.',
@@ -44,6 +40,15 @@ module.exports = {
         noIconsFound: 'No icons found.',
         noIconsFoundTip: 'Try looking for something that could be part of icon name, such as "home", "arrow", "alert".',
     },
+    paste: {
+        invalidSVG: 'Invalid SVG code',
+        fontNotice: 'Looks like you are trying to import SVG font. Currently plug-in does not support importing fonts.',
+        importButton: 'Import',
+        clearButton: 'Clear',
+        text1: 'Paste SVG to import it to Figma document:',
+        text2: 'You can also paste "data:image/svg+xml" URI and plugin will try to decode it.',
+        foreignObject: 'SVG contains dangerous HTML code.',
+    },
     crumbs: {
         collections: 'Return to collections list',
         collection: 'Return to {name}',
@@ -51,15 +56,15 @@ module.exports = {
     },
     search: {
         placeholder: 'Search all icons',
-        placeholderNamed: 'Search {name}',
-        placeholderCollections: 'Filter collections',
-        'placeholder-recent': 'Search recent icons',
+        namedPlaceholder: 'Search {name}',
+        collectionsPlaceholder: 'Filter collections',
+        recentPlaceholder: 'Search recent icons',
         button: 'Find Icons',
-        'button-named': 'Search',
+        namedButton: 'Search', // 'Search {name}',
         reset: 'Clear Search',
         title: 'Search all icons:',
-        titleNamed: 'Search {name}:',
-        'title-recent': 'Search recent icons:',
+        namedTitle: 'Search {name}:',
+        recentTitle: 'Search recent icons:',
     },
     filters: {
         uncategorized: 'Uncategorized',
@@ -80,19 +85,25 @@ module.exports = {
         colorless: 'colorless',
         colors: 'has palette',
         loading: 'Loading...',
-        'size-list': '{width} x {height}',
-        'header-search-more': 'Displaying {count} icons (click second page to load more results):',
-        'header-search-full': 'Displaying {count} icons:',
-        'header-search-max': 'Too many search results. Showing only first {count} icons:',
-        'header-search-0': 'No icons to display.',
-        'header-search-1': 'Displaying 1 icon:',
-        'header-count': 'Displaying {count} icons:',
-        'header-count-0': 'No icons to display.',
-        'header-count-1': 'Displaying 1 icon:',
-        'header-empty-filter': 'No matches found.',
-        'header-custom-recent-0': 'Recent icons list is empty. Icons will be automatically added here when you import Iconify icons.',
+        sizeList: '{width} x {height}',
+        headerSearch: {
+            more: 'Displaying {count} icons (click second page to load more results):',
+            full: 'Displaying {count} icons:',
+            max: 'Too many search results. Showing only first {count} icons:',
+            '0': 'No icons to display.',
+            '1': 'Displaying 1 icon:',
+        },
+        headerCount: {
+            default: 'Displaying {count} icons:',
+            '0': 'No icons to display.',
+            '1': 'Displaying 1 icon:',
+        },
+        headerEmptyFilter: 'No matches found.',
+        headerCustom: {
+            recent0: 'Recent icons list is empty. Icons will be automatically added here when you import Iconify icons.',
+        },
         mode: 'Change layout',
-        'delete-recent': 'Remove'
+        delete: 'Remove',
     },
     pagination: {
         more: 'Find more icons',
@@ -107,7 +118,7 @@ module.exports = {
         collections: 'Return to icon sets list',
         generic: 'Return to previous page',
     },
-    'collection-info': {
+    collectionInfo: {
         total: 'Number of icons:',
         height: 'Height of icons:',
         author: 'Author:',
@@ -128,7 +139,8 @@ module.exports = {
         vFlip: 'Vertical',
         customize: 'Customize icon:',
         code: 'How to use icon:',
-        'import-options': 'Import options:',
+        importOptions: 'Import options:',
+        parentNode: 'Select parent node:',
         htmlCode1: '1. Add Iconify script to your page:',
         htmlCode2: '2. Use icon placeholder where you want to show icon (similar to icon fonts):',
         htmlCodeText: 'Change icon size using css (similar to icon fonts):',
@@ -142,5 +154,6 @@ module.exports = {
         reactCode4Start: 'For more details see ',
         reactCode4Link: 'Iconify for React repository',
         reactCode4End: '.',
+        aboutCollection: 'About {title}',
     },
 };

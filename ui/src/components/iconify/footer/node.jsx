@@ -19,6 +19,7 @@ import React, { Component } from 'react';
 import FooterBlock from './block';
 
 const phrases = require('../../../data/phrases');
+const lang = phrases.footer;
 
 const viewportId = 'viewport';
 
@@ -88,9 +89,9 @@ class FooterNodeOptions extends Component {
         });
 
 
-        return <FooterBlock type="nodes" title={phrases.footer['import-options']}>
+        return <FooterBlock type="nodes" title={lang.importOptions}>
             <div className="plugin-footer-nodes">
-                <div>Select parent node:</div>
+                <div>{lang.parentNode}</div>
                 {items}
             </div>
         </FooterBlock>;

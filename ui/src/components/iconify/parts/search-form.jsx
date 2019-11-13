@@ -19,6 +19,7 @@ import React, { Component } from 'react';
 import SearchForm from '../../parts/inputs/search-form';
 
 const phrases = require('../../../data/phrases');
+const lang = phrases.search;
 
 class IconifySearchForm extends Component {
     render() {
@@ -28,30 +29,31 @@ class IconifySearchForm extends Component {
             view = props.view,
             block = view.blocks[blockName],
             value = typeof block.value === 'string' ? block.value : block.keyword,
-            buttonTitle = phrases.search.button,
-            placeholder;
+            buttonTitle = lang.button,
+            isNamed = false,
+            placeholder, prefix, info;
 
         // Get placeholder
         if (blockName === 'filter') {
-            placeholder = phrases.search.placeholderCollections;
+            placeholder = lang.collectionsPlaceholder;
         } else if (view.type === 'collection' && blockName === 'search') {
-            let prefix = view.prefix,
-                info = app.collection(prefix);
+            prefix = view.prefix;
+            info = app.collection(prefix);
+            isNamed = true;
 
-            placeholder = phrases.search.placeholderNamed.replace('{name}', info ? info.title : prefix);
-        } else if (blockName === 'search' && view.type === 'custom') {
-            placeholder = phrases.search['placeholder-' + view.customType];
+            placeholder = lang.namedPlaceholder.replace('{name}', info ? info.title : prefix);
+        } else if (blockName === 'search' && view.type === 'custom' && lang[view.customType + 'Placeholder'] !== void 0) {
+            placeholder = lang[view.customType + 'Placeholder'];
         } else {
-            placeholder = phrases.search.placeholder;
+            placeholder = lang.placeholder;
         }
 
         // Check for auto-focus
         let autoFocus = blockName === 'search';
 
         let showButton = true;
-        if (view.type === 'collection' && blockName === 'search') {
-            // showButton = false;
-            buttonTitle = phrases.search['button-named'];
+        if (isNamed) {
+            buttonTitle = lang.namedButton.replace('{name}', info ? info.title : prefix);
         } else if (blockName === 'filter') {
             showButton = false;
         }

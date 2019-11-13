@@ -20,6 +20,7 @@ import IconifyBlock from '../parts/block';
 import Filter from '../../parts/filter';
 
 const phrases = require('../../../data/phrases');
+const lang = phrases.filters;
 
 class FiltersBlock extends Component {
     render() {
@@ -42,7 +43,7 @@ class FiltersBlock extends Component {
                 selected = hasActive && activeFilters.indexOf(key) !== -1;
 
             if (title === '') {
-                title = phrases.filters.uncategorized;
+                title = lang.uncategorized;
             }
 
             filters.push(<Filter
@@ -59,12 +60,12 @@ class FiltersBlock extends Component {
         // Get title
         let title = null;
 
-        if (phrases.filters[block.filtersType] !== void 0) {
+        if (lang[block.filtersType] !== void 0) {
             let view = props.view;
             // Do not show title if view has only 1 filter type
             // Always show title for collections
             if (blockName === 'collections' || !view || view.multipleFilters !== false) {
-                title = <p>{phrases.filters[block.filtersType]}</p>;
+                title = <p>{lang[block.filtersType]}</p>;
             }
         }
 

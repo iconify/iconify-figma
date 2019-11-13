@@ -20,6 +20,9 @@ import Button from '../parts/inputs/button';
 import CloseButton from '../parts/inputs/close-button';
 import FooterButtons from '../iconify/footer/buttons';
 
+const phrases = require('../../data/phrases');
+const lang = phrases.paste;
+
 class PasteContainer extends Component {
     constructor(props) {
         super(props);
@@ -52,21 +55,21 @@ class PasteContainer extends Component {
 
             if (isValid !== true && !this.state.focused) {
                 inputClassName += ' plugin-input--invalid';
-                notices.push(<p key="invalid" className="plugin-paste-notice plugin-paste-notice--error">{typeof isValid === 'string' ? isValid : 'Invalid SVG code'}</p>);
+                notices.push(<p key="invalid" className="plugin-paste-notice plugin-paste-notice--error">{typeof isValid === 'string' ? isValid : lang.invalidSVG}</p>);
             }
 
             if (this.state.isFont) {
-                notices.push(<p key="font" className="plugin-paste-notice plugin-paste-notice--warning">Looks like you are trying to import SVG font. Currently plug-in does not support importing fonts.</p>);
+                notices.push(<p key="font" className="plugin-paste-notice plugin-paste-notice--warning">{lang.fontNotice}</p>);
             }
 
             if (isValid === true) {
-                extraButtons.push(<Button key="submit" type="primary" title="Import" onClick={this._onSubmit.bind(this)} />);
+                extraButtons.push(<Button key="submit" type="primary" title={lang.importButton} onClick={this._onSubmit.bind(this)} />);
 
                 let sampleSource = 'data:image/svg+xml;base64,' + window.btoa(this._cleanup());
                 sample = <div className="plugin-paste-sample">Sample:<br /><img src={sampleSource} /></div>;
             }
 
-            extraButtons.push(<Button key="clear" type="secondary" title="Clear" onClick={this._onClear.bind(this)} />);
+            extraButtons.push(<Button key="clear" type="secondary" title={lang.clearButton} onClick={this._onClear.bind(this)} />);
         }
 
         // Merge notices
@@ -76,8 +79,8 @@ class PasteContainer extends Component {
 
         return <div className="plugin-content">
             <form onSubmit={this._onSubmit.bind(this)}>
-                <p>Paste SVG to import it to Figma document:</p>
-                <p className="plugin-paste-comment">You can also paste "data:image/svg+xml" URI and plugin will try to decode it.</p>
+                <p>{lang.text1}</p>
+                <p className="plugin-paste-comment">{lang.text2}</p>
                 <textarea onFocus={this._onFocus.bind(this, true)} onBlur={this._onFocus.bind(this, false)} className={inputClassName} value={this.state.value} onChange={this._onChange.bind(this)} ref={input => this.input = input}/>
                 {notices}
                 {sample}
@@ -195,7 +198,7 @@ class PasteContainer extends Component {
             valueLC = value.toLowerCase();
 
         if (valueLC.indexOf('<foreignobject') !== -1 || valueLC.indexOf('<script') !== -1) {
-            return 'SVG contains dangerous HTML code.';
+            return lang.foreignObject;
         }
 
         value = this._cleanup();

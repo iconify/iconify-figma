@@ -19,13 +19,13 @@ import Iconify from '@iconify/iconify';
 import GridIcon from '../../parts/icon-grid';
 
 const phrases = require('../../../data/phrases');
+const lang = phrases.icons;
 
 class ShortIcon extends Component {
     render() {
         let props = this.props,
             name = props.name,
             icon = props.icon,
-            lang = phrases.icons,
             loaded = Iconify.iconExists(name);
 
         // Generate link and tooltip

@@ -34,6 +34,7 @@ import FooterNodeOptions from './node';
 import FooterBlock from "./block";
 
 const phrases = require('../../../data/phrases');
+const lang = phrases.footer;
 
 class FullFooter extends Component {
     constructor(props) {
@@ -110,7 +111,7 @@ class FullFooter extends Component {
             </FooterContainer>
 
             <FooterButtons>
-                <Button type="primary" title={phrases.footer.submit} onClick={container.importIconifyIcon.bind(container)} />
+                <Button type="primary" title={lang.submit} onClick={container.importIconifyIcon.bind(container)} />
                 <CloseButton container={container} />
             </FooterButtons>
         </IconifyBlock>;

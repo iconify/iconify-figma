@@ -20,6 +20,7 @@ import IconifyBlock from '../parts/block';
 import Button from '../../parts/inputs/button';
 
 const phrases = require('../../../data/phrases');
+const lang = phrases.collectionInfo;
 
 function CollectionInfoList(props) {
     let app = props.app,
@@ -41,12 +42,12 @@ function CollectionInfoList(props) {
     if (info.author) {
         if (info.author.url) {
             list.push(<dl key="author">
-                <dt>{phrases['collection-info'].author}</dt>
+                <dt>{lang.author}</dt>
                 <dd><a href={info.author.url} target="_blank">{info.author.name}</a></dd>
             </dl>);
         } else {
             list.push(<dl key="author">
-                <dt>{phrases['collection-info'].author}</dt>
+                <dt>{lang.author}</dt>
                 <dd>{info.author.name}</dd>
             </dl>);
         }
@@ -56,12 +57,12 @@ function CollectionInfoList(props) {
     if (info.license) {
         if (info.license.url) {
             list.push(<dl key="license">
-                <dt>{phrases['collection-info'].license}</dt>
+                <dt>{lang.license}</dt>
                 <dd><a href={info.license.url} target="_blank">{info.license.title}</a></dd>
             </dl>);
         } else {
             list.push(<dl key="license">
-                <dt>{phrases['collection-info'].license}</dt>
+                <dt>{lang.license}</dt>
                 <dd>{info.license.title}</dd>
             </dl>);
         }
@@ -69,14 +70,14 @@ function CollectionInfoList(props) {
 
     // Number of icons
     list.push(<dl key="total">
-        <dt>{phrases['collection-info'].total}</dt>
+        <dt>{lang.total}</dt>
         <dd>{info.total}</dd>
     </dl>);
 
     // Icon size
     if (info.height && props.showHeight !== false) {
         list.push(<dl key="height">
-            <dt>{phrases['collection-info'].height}</dt>
+            <dt>{lang.height}</dt>
             <dd>{typeof info.height === 'object' ? info.height.join(', ') : info.height}</dd>
         </dl>);
     }
@@ -84,8 +85,8 @@ function CollectionInfoList(props) {
     // Palette
     if (info.palette && props.showPalette !== false) {
         list.push(<dl key="palette">
-            <dt>{phrases['collection-info'].palette}</dt>
-            <dd>{phrases['collection-info'][info.palette === 'Colorless' ? 'colorless' : 'colorful']}</dd>
+            <dt>{lang.palette}</dt>
+            <dd>{lang[info.palette === 'Colorless' ? 'colorless' : 'colorful']}</dd>
         </dl>);
     }
 
@@ -106,7 +107,7 @@ function CollectionInfoList(props) {
                         type: 'collections'
                     }
                 })
-            }} title={phrases['collection-info'].link.replace('{title}', info.title)} />
+            }} title={lang.link.replace('{title}', info.title)} />
         </div>);
     }
 

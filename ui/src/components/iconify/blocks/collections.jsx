@@ -22,6 +22,7 @@ import CollectionsListSection from '../../parts/collections-list-section';
 import CollectionsListItem from '../../parts/collections-list-item';
 
 const phrases = require('../../../data/phrases');
+const lang = phrases.collections;
 
 class CollectionsBlock extends Component {
     render() {
@@ -31,7 +32,7 @@ class CollectionsBlock extends Component {
 
         if (!block || block.empty()) {
             return <IconifyBlock type="error">
-                <Notice type="error">{phrases.collections.empty}</Notice>
+                <Notice type="error">{lang.empty}</Notice>
             </IconifyBlock>;
         }
 
@@ -53,7 +54,7 @@ class CollectionsBlock extends Component {
                     title={item.title}
                     onClick={this.onClick.bind(this, prefix)}
                     href={link.replace('{prefix}', prefix)}
-                    info={item.author && item.author.name ? phrases.collections.by + item.author.name : ''}
+                    info={item.author && item.author.name ? lang.by + item.author.name : ''}
                     total={item.total}
                     height={item.height}
                     displayHeight={item.displayHeight}

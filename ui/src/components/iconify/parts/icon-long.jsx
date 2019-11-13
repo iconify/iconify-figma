@@ -24,6 +24,7 @@ import Icon from '../../parts/icon-decoration';
 import Filter from '../../parts/filter';
 
 const phrases = require('../../../data/phrases');
+const lang = phrases.icons;
 
 class LongIcon extends Component {
     render() {
@@ -39,7 +40,7 @@ class LongIcon extends Component {
                 key="delete"
                 onClick={this.deleteClicked.bind(this)}
                 className="plugin-icon-item-delete"
-                title={phrases.icons['delete-' + props.view.customType]}
+                title={lang.delete}
             ><Icon name="trash" /></a>;
         }
 
@@ -49,12 +50,11 @@ class LongIcon extends Component {
                 selected={props.app.selection.iconName === name}
                 title={props.title}
                 onClick={this.onClick.bind(this)}
-                size={phrases.icons.loading}
+                size={lang.loading}
             >{deleteButton}</ListIcon>;
         }
 
         let icon = props.icon,
-            lang = phrases.icons,
             iconData = Iconify.getIcon(name);
 
         // Generate link and tooltip
@@ -68,7 +68,7 @@ class LongIcon extends Component {
         tooltip = tooltip.join('\n');
 
         // Text
-        let size = lang['size-list'].replace('{width}', iconData.width).replace('{height}', iconData.height);
+        let size = lang.sizeList.replace('{width}', iconData.width).replace('{height}', iconData.height);
 
         // Filters/tags
         let filtersList = [];

@@ -18,8 +18,7 @@ import React from 'react';
 import CollectionInfoList from './collection-info-list';
 
 function CollectionInfo(props) {
-    let app = props.app,
-        view = props.view,
+    let view = props.view,
         prefix = view.prefix;
 
     if (!prefix) {
