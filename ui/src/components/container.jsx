@@ -42,27 +42,6 @@ const containers = {
 const isIconifyPage = page => page === 'iconify' || page === 'recent';
 
 /**
- * Get default layout
- *
- * @param {object} params
- * @param {object} options
- * @return {object}
- */
-const defaultLayout = (params, options) => ({
-    iconify: options,
-    recent: {
-        list: true,
-        forceList: true,
-        showPrefix: true
-    },
-    bookmarks: {
-        list: true,
-        forceList: true,
-        showPrefix: true
-    },
-});
-
-/**
  * Get default selection
  *
  * @return {{icon: null, iconName: null}}
@@ -119,10 +98,7 @@ class Container extends Component {
         Iconify.setConfig('sessionStorage', false);
 
         // Options
-        this.options = {
-            list: !!(params.options && params.options.list === true),
-            showPrefix: typeof params.prefix !== 'string' || !params.prefix.length
-        };
+        this.options = ui.options;
 
         // Save customizations
         this.custom = defaultCustomizations();
@@ -208,12 +184,13 @@ class Container extends Component {
 
         // Save current page
         this.iconify.page = iconifyPage;
+        this.options.page = iconifyPage;
 
         // Pass some objects from container by reference
-        this.iconify.layout = defaultLayout(params, this.options);
         this.iconify.custom = this.custom;
         this.iconify.selection = this.selection;
         this.iconify.selectedNodes = this.selectedNodes;
+        this.iconify.options = this.options;
 
         // Save current view
         this.iconifyView = this.iconify.view();
@@ -227,6 +204,8 @@ class Container extends Component {
      */
     componentDidMount() {
         this.props.ui.component = this;
+        this.options.onChangeListener = this;
+        this.options.onChange = this.update.bind(this);
     }
 
     /**
@@ -235,6 +214,10 @@ class Container extends Component {
     componentWillUnmount() {
         if (this.props.ui.component === this) {
             this.props.ui.component = null;
+        }
+        if (this.options.onChangeListener === this) {
+            this.options.onChangeListener = null;
+            this.options.onChange = null;
         }
     }
 
@@ -285,6 +268,7 @@ class Container extends Component {
 
             // Load route
             this.iconify.page = page;
+            this.options.page = page;
             this.iconify.setRoute(this.route[page]);
         }
 
@@ -330,7 +314,7 @@ class Container extends Component {
         };
 
         // Reset options
-        this.options.list = false;
+        this.options.setDefaults();
 
         // Reset custom options
         this.custom = defaultCustomizations();
@@ -338,16 +322,10 @@ class Container extends Component {
         // Reset selection
         this.selection = defaultSelection();
 
-        // Iconify layout
+        // Iconify stuff
         if (this.iconify) {
             this.iconify.custom = this.custom;
             this.iconify.selection = this.selection;
-
-            // Reset layout
-            this.iconify.layout = defaultLayout(Object.assign({},
-                this.props.ui.params, {
-                    list: false
-                }), this.options);
 
             // Reset disclosures
             this.iconify.footerCodeSection = '';
@@ -470,7 +448,7 @@ class Container extends Component {
             props: Object.assign({}, ico.custom),
             height: ico.custom.height ? ico.custom.height : this.scaleDownIcon(iconData.height, iconData.width, ico.custom.rotate),
             color: ico.custom.color === '' ? '#000' : ico.custom.color,
-            node: ico.selectedFigmaNode,
+            node: this.options.node,
         };
         delete data.props.height;
         delete data.props.color;

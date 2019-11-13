@@ -126,14 +126,14 @@ class FullFooter extends Component {
         let props = this.props;
 
         let app = props.app,
-            layout = props.app.layout[props.app.page],
             name = app.selection.iconName,
-            text = layout.showPrefix ? name : app.selection.icon.name,
+            showPrefix = !props.view || props.view.type !== 'collection' || props.view.prefix !== app.selection.icon.prefix,
+            text = showPrefix ? name : app.selection.icon.name,
             data = Iconify.getIcon(name),
             sampleHeight = props.container.scaleDownIcon(data.height), // ignore other attributes because rotation is not applied
             sample = FullFooter.renderSample(name, {});
 
-        return <FooterIconName name={text} sampleHeight={sampleHeight} sample={sample} />;
+        return <FooterIconName text={text} sampleHeight={sampleHeight} sample={sample} />;
     }
 
     /**

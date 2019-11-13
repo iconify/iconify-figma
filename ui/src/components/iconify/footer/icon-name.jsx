@@ -19,7 +19,7 @@ import React from 'react';
 function FooterIconName(props) {
     return <div className="plugin-footer-icon-name">
         {props.sample && <span className={'plugin-footer-icon-small-sample plugin-footer-grid--' + props.sampleHeight} dangerouslySetInnerHTML={{__html: props.sample}} />}
-        {props.name}
+        {props.text}
     </div>
 }
 

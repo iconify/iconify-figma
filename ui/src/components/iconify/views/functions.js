@@ -31,8 +31,7 @@ const functions = {
      * @return {string}
      */
     iconsWrapperClass: props => {
-        let layout = props.app.layout[props.app.page],
-            list = layout ? (layout.forceList || layout.list) : true;
+        let list = props.app.options.list;
 
         return 'plugin-wrapper plugin-wrapper--icons plugin-wrapper--icons--' + (list ? 'list' : 'grid') + (props.view.blocks.pagination.length ? '' : ' plugin-wrapper--icons--empty');
     },

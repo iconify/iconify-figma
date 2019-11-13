@@ -41,8 +41,8 @@ class IconsBlock extends Component {
         let props = this.props,
             name = props.block,
             block = props.view.blocks[name],
-            layout = props.app.layout[props.app.page],
-            Component = layout.forceList || layout.list ? LongIcon : Icon;
+            list = props.app.options.list,
+            Component = list ? LongIcon : Icon;
 
         if (!block || block.empty()) {
             return null;
@@ -77,7 +77,7 @@ class IconsBlock extends Component {
         });
 
         return <IconifyBlock type="icons">
-            <IconsContainer list={layout.forceList || layout.list}>
+            <IconsContainer list={list}>
                 {icons}
             </IconsContainer>
         </IconifyBlock>;

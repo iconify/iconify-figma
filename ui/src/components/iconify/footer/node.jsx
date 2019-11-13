@@ -23,22 +23,6 @@ const lang = phrases.footer;
 
 const viewportId = 'viewport';
 
-/**
- * Check if selected node exists
- *
- * @param {Array} nodes
- * @param {string} selectedId
- * @return {boolean}
- */
-function findSelectedNode(nodes, selectedId) {
-    for (let i = 0; i < nodes.length; i++) {
-        if (nodes[i].id === selectedId || findSelectedNode(nodes[i].children, selectedId)) {
-            return true;
-        }
-    }
-    return false;
-}
-
 class FooterNodeOptions extends Component {
     constructor(props) {
         super(props);
@@ -57,12 +41,8 @@ class FooterNodeOptions extends Component {
         }
 
         // Get selected node
-        let selectedId = typeof props.app.selection.node === 'string' ? props.app.selection.node : '',
-            hasSelection = selectedId ? selectedId === viewportId || findSelectedNode(nodes, selectedId) : false;
-
-        if (selectedId && !hasSelection) {
-            props.app.selection.node = '';
-        }
+        let selectedId = props.app.options.node,
+            hasSelection = selectedId !== '';
 
         // Add components for all nodes
         let items = [];
@@ -115,10 +95,10 @@ class FooterNodeOptions extends Component {
      */
     nodeClicked(id, event) {
         event.preventDefault();
-        if (this.props.app.selection.node === id) {
+        if (this.props.app.options.node === id) {
             return;
         }
-        this.props.app.selection.node = id;
+        this.props.app.options.node = id;
         this.setState({
             counter: this.state.counter + 1
         });

@@ -28,7 +28,7 @@ class IconsHeader extends Component {
     render() {
         let props = this.props,
             view = props.view,
-            layout = props.app.layout[props.app.page],
+            options = props.app.options,
             pagination = view.blocks.pagination,
             isError = pagination.length === 0,
             text;
@@ -75,8 +75,8 @@ class IconsHeader extends Component {
 
         // Check mode
         let headerProps = {};
-        if (!layout.forceList) {
-            let newMode = layout.list ? 'grid' : 'list';
+        if (!options.forceList) {
+            let newMode = options.list ? 'grid' : 'list';
             headerProps.layout = newMode;
             headerProps.onLayoutChange = this.changeMode.bind(this);
             headerProps.layoutTitle = lang.mode;
@@ -92,10 +92,14 @@ class IconsHeader extends Component {
      * Change display mode
      */
     changeMode() {
-        let app = this.props.app,
-            layout = app.layout[app.page];
+        let options = this.props.app.options;
 
-        this.props.onLayoutChange('list', !layout.list);
+        if (options.forceList) {
+            return;
+        }
+
+        options.list = !options.list;
+        options.triggerChange();
     }
 }
 

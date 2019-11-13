@@ -18,6 +18,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 import Container from './components/container';
+import Options from './data/options';
 
 const version = 1;
 
@@ -33,13 +34,16 @@ class UI {
 
         // Expand stored parameters
         if (typeof params.stored === 'object' && params.stored.version === version) {
-            ['storage', 'route', 'selection', 'custom', 'options'].forEach(attr => {
+            ['storage', 'route', 'options'].forEach(attr => {
                 if (params.stored[attr] !== void 0) {
                     params[attr] = params.stored[attr];
                 }
             })
         }
         delete params.stored;
+
+        // Set options
+        this.options = new Options(params.options);
 
         // Expand selected nodes list
         params.selectedNodes = params.parentNodes ? this._convertSelectedNodes(params.parentNodes) : null;
@@ -190,19 +194,13 @@ class UI {
         if (container.iconify) {
             // Save route
             container.saveIconifyRoute();
-
-            // Sync Iconify options
-            ['list'].forEach(key => {
-                container.options[key] = container.iconify.layout.iconify[key];
-            });
         }
 
         let params = {
             version: version,
             route: container.route,
             selection: container.selection,
-            options: container.options,
-            custom: container.custom,
+            options: container.options.state,
             storage: this.localStorage
         };
 
@@ -232,6 +230,12 @@ class UI {
      * @private
      */
     _convertSelectedNodes(nodes) {
+        // Check if currently selected node exists
+        let selectedNode = this.options.node;
+        if (selectedNode !== '' && !nodes.find(node => node.id === selectedNode)) {
+            this.options.node = void 0;
+        }
+
         // Sort nodes by number of parent nodes
         nodes.sort((a, b) => a.parents.length - b.parents.length);
 

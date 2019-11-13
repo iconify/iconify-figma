@@ -106,23 +106,8 @@ class IconifyBaseContainer extends Component {
             blocks={blocks}
             /* expand storage for easy access */
             config={app.get('config').data}
-            onLayoutChange={this._onLayoutChange.bind(this)}
             onSelectIcon={this._onSelectIcon.bind(this)}
         />;
-    }
-
-    /**
-     * Change layout
-     *
-     * @param key
-     * @param value
-     * @private
-     */
-    _onLayoutChange(key, value) {
-        let app = this.props.container.iconify;
-
-        app.layout[app.page][key] = value;
-        this.props.container.update();
     }
 
     /**
