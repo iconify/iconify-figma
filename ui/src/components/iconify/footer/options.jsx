@@ -42,8 +42,6 @@ class FooterOptions extends Component {
      * @return {*}
      */
     render() {
-        let props = this.props;
-
         return <FooterBlock type="options" title={lang.customize}>
             {this.renderColorPicker()}
             {this.renderHeight()}
@@ -64,8 +62,8 @@ class FooterOptions extends Component {
             return null;
         }
 
-        let color = typeof props.color === 'string' ? props.color : '',
-            active = color.length > 0;
+        let color = typeof props.transformations.color === 'string' ? props.transformations.color : '',
+            active = color !== '';
 
         return <OptionsPanel type="color" title={lang.color} active={active}>
             <ColorInput className={active ? 'plugin-input--outlined' : ''} placeholder="#000" defaultColor="#000" value={color} onChange={this._changeColor.bind(this)} onTemporaryChange={this._changeColor.bind(this)} />
@@ -80,7 +78,7 @@ class FooterOptions extends Component {
     renderHeight() {
         let props = this.props,
             defaultHeight = props.sampleHeight,
-            height = props.height,
+            height = props.transformations.height,
             active = !!height;
 
         // icon="arrows-vertical"
@@ -96,7 +94,7 @@ class FooterOptions extends Component {
      */
     renderRotation() {
         let props = this.props,
-            value = props.rotate ? props.rotate : 0,
+            value = props.transformations.rotate,
             active = value > 0;
 
         return <OptionsPanel type="rotation" title={lang.rotate} active={active}>
@@ -111,11 +109,12 @@ class FooterOptions extends Component {
      */
     renderFlip() {
         let props = this.props,
-            active = props.hFlip || props.vFlip;
+            hFlip = props.transformations.hFlip,
+            vFlip = props.transformations.vFlip;
 
-        return <OptionsPanel type="flip" title={lang.flip} active={active}>
-            <IconButton icon="arrows-horizontal" title={lang.hFlip} onClick={this._flipClicked.bind(this, 'hFlip')} active={props.hFlip} />
-            <IconButton icon="arrows-vertical" title={lang.vFlip} onClick={this._flipClicked.bind(this, 'vFlip')} active={props.vFlip} />
+        return <OptionsPanel type="flip" title={lang.flip} active={hFlip || vFlip}>
+            <IconButton icon="arrows-horizontal" title={lang.hFlip} onClick={this._flipClicked.bind(this, 'hFlip')} active={hFlip} />
+            <IconButton icon="arrows-vertical" title={lang.vFlip} onClick={this._flipClicked.bind(this, 'vFlip')} active={vFlip} />
         </OptionsPanel>;
     }
 
@@ -126,8 +125,7 @@ class FooterOptions extends Component {
      * @private
      */
     _changeColor(value) {
-        this.props.app.custom.color = value;
-        this.props.onChange();
+        this.props.onOptionChange('color', value);
     }
 
     /**
@@ -161,8 +159,8 @@ class FooterOptions extends Component {
             numericValue = '';
         }
 
-        this.props.app.custom.height = numericValue;
-        this.props.onChange();
+        this.props.onOptionChange('height', numericValue);
+
         return value;
     }
 
@@ -173,8 +171,7 @@ class FooterOptions extends Component {
      * @private
      */
     _changeRotation(value) {
-        this.props.app.custom.rotate = value;
-        this.props.onChange();
+        this.props.onOptionChange('rotate', parseInt(value));
     }
 
     /**
@@ -188,8 +185,9 @@ class FooterOptions extends Component {
         if (event) {
             event.preventDefault();
         }
-        this.props.app.custom[type] = !this.props.app.custom[type];
-        this.props.onChange();
+
+        let options = this.props.app.options;
+        this.props.onOptionChange(type, !options[type]);
     }
 }
 

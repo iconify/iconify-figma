@@ -49,32 +49,33 @@ class FooterCode extends Component {
             section = props.app.footerCodeSection,
             app = props.app,
             name = props.iconName,
-            icon = app.options.icon;
+            icon = app.options.icon,
+            transformations = props.transformations;
 
         let version = Iconify.getVersion(),
             majorVersion = version.split('.').shift();
 
         let htmlAttribs = [],
             reactAttribs = [];
-        if (props.hasColor && app.custom.color) {
-            htmlAttribs.push(' style="color: ' + app.custom.color + ';"');
-            reactAttribs.push(' color="' + app.custom.color + '"');
+        if (props.hasColor && transformations.color) {
+            htmlAttribs.push(' style="color: ' + transformations.color + ';"');
+            reactAttribs.push(' color="' + transformations.color + '"');
         }
 
-        if (app.custom.hFlip) {
+        if (transformations.hFlip) {
             reactAttribs.push(' hFlip={true}');
-            htmlAttribs.push(' data-flip="horizontal' + (app.custom.vFlip ? ',vertical' : '') + '"');
+            htmlAttribs.push(' data-flip="horizontal' + (transformations.vFlip ? ',vertical' : '') + '"');
         }
-        if (app.custom.vFlip) {
+        if (transformations.vFlip) {
             reactAttribs.push(' vFlip={true}');
-            if (!app.custom.hFlip) {
+            if (!transformations.hFlip) {
                 htmlAttribs.push(' data-flip="vertical"');
             }
         }
 
-        if (app.custom.rotate > 0) {
-            reactAttribs.push(' rotate="' + (app.custom.rotate * 90) + 'deg"');
-            htmlAttribs.push(' data-rotate="' + (app.custom.rotate * 90) + 'deg"');
+        if (transformations.rotate > 0) {
+            reactAttribs.push(' rotate="' + (transformations.rotate * 90) + 'deg"');
+            htmlAttribs.push(' data-rotate="' + (transformations.rotate * 90) + 'deg"');
         }
 
         // Generate HTML code

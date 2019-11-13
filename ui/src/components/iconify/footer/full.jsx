@@ -52,15 +52,16 @@ class FullFooter extends Component {
         let app = props.app,
             iconName = props.iconName,
             data = Iconify.getIcon(iconName),
-            custom = typeof app.custom === 'object' ? app.custom : {},
-            sample = FullFooter.renderSample(iconName, custom),
-            sampleHeight = container.scaleDownIcon(data.height, data.width, custom.rotate),
+            options = app.options,
+            transformations = options.getIconTransformations(true),
+            sample = FullFooter.renderSample(iconName, transformations),
+            sampleHeight = container.scaleDownIcon(data.height, data.width, transformations.rotate),
             sampleLimit = 128,
             hasColor = sample.indexOf('currentColor') !== -1;
 
         // Change color in sample
-        if (typeof custom.color === 'string' && custom.color.length) {
-            sample = sample.replace(/currentColor/g, custom.color);
+        if (hasColor && transformations.color !== '') {
+            sample = sample.replace(/currentColor/g, transformations.color);
         }
 
         // Big sample
@@ -68,12 +69,12 @@ class FullFooter extends Component {
             ratio = data.width / data.height,
             customHeight = false;
 
-        if ((custom.rotate % 2) === 1) {
+        if ((transformations.rotate % 2) === 1) {
             ratio = 1 / ratio;
         }
 
-        if (typeof custom.height === 'number') {
-            bigSampleHeight = custom.height;
+        if (typeof transformations.height === 'number') {
+            bigSampleHeight = transformations.height;
             customHeight = true;
             sampleLimit = 200;
         } else {
@@ -102,10 +103,10 @@ class FullFooter extends Component {
                         {...props}
                         showColor={hasColor}
                         sampleHeight={sampleHeight}
-                        onChange={this._onOptionsChange.bind(this)}
-                        {...custom}
+                        onOptionChange={this._onOptionsChange.bind(this)}
+                        transformations={transformations}
                     />
-                    <FooterCode {...props} hasColor={hasColor} />
+                    <FooterCode {...props} hasColor={hasColor} transformations={transformations} />
                     <FooterNodeOptions {...props} />
                 </div>
             </FooterContainer>
@@ -166,7 +167,10 @@ class FullFooter extends Component {
      *
      * @private
      */
-    _onOptionsChange() {
+    _onOptionsChange(key, value) {
+        let options = this.props.app.options;
+        options[key] = value;
+
         if (this._mounted && !this._pendingUpdate) {
             // No more than 1 update per cycle
             this._pendingUpdate = true;

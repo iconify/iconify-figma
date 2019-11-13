@@ -30,6 +30,10 @@ const pages = ['iconify', 'recent', 'bookmarks'];
 // List of pages where list view is forced
 const forceList = ['recent', 'bookmarks'];
 
+// List of attributes for icon transformations
+const iconTransformations = ['rotate', 'vFlip', 'hFlip'];
+const iconExtraProperties = ['color', 'height'];
+
 class Options {
     constructor(state) {
         this.options = {}; // [option] = value
@@ -299,6 +303,28 @@ class Options {
      */
     set iconName(value) {
         this.icon = value;
+    }
+
+    /**
+     * Get icon transformations
+     *
+     * @return {object}
+     */
+    getIconTransformations(includeExtra) {
+        let result = {};
+
+        iconTransformations.forEach(attr => {
+            result[attr] = this.options[attr];
+        });
+
+        if (includeExtra) {
+            // Include color and height
+            iconExtraProperties.forEach(attr => {
+                result[attr] = this.options[attr]
+            });
+        }
+
+        return result;
     }
 
     /**

@@ -41,19 +41,6 @@ const containers = {
 const isIconifyPage = page => page === 'iconify' || page === 'recent';
 
 /**
- * Get default customizations
- *
- * @return {{color: string, hFlip: boolean, vFlip: boolean, rotate: number}}
- */
-const defaultCustomizations = () => ({
-    color: '',
-    height: '',
-    hFlip: false,
-    vFlip: false,
-    rotate: 0
-});
-
-/**
  * Route for recent page
  *
  * @return {{type: string, params: {customType: string, canDelete: boolean}}}
@@ -87,16 +74,6 @@ class Container extends Component {
 
         // Options
         this.options = ui.options;
-
-        // Save customizations
-        this.custom = defaultCustomizations();
-        if (typeof params.custom === 'object') {
-            Object.keys(this.custom).forEach(attr => {
-                if (params.custom[attr] !== void 0) {
-                    this.custom[attr] = params.custom[attr];
-                }
-            });
-        }
 
         // Selected nodes tree
         this.selectedNodes = params.selectedNodes ? [params.selectedNodes] : [];
@@ -162,7 +139,6 @@ class Container extends Component {
         this.options.page = iconifyPage;
 
         // Pass some objects from container by reference
-        this.iconify.custom = this.custom;
         this.iconify.selectedNodes = this.selectedNodes;
         this.iconify.options = this.options;
 
@@ -290,13 +266,8 @@ class Container extends Component {
         // Reset options
         this.options.setDefaults();
 
-        // Reset custom options
-        this.custom = defaultCustomizations();
-
         // Iconify stuff
         if (this.iconify) {
-            this.iconify.custom = this.custom;
-
             // Reset disclosures
             this.iconify.footerCodeSection = '';
             this.iconify.expandCollectionInfo = false;
@@ -413,15 +384,17 @@ class Container extends Component {
         }
 
         // Create icon data
+        let attributes = this.options.getIconTransformations(),
+            height = this.options.height,
+            color = this.options.color;
+
         let data = {
             name: iconName,
-            props: Object.assign({}, ico.custom),
-            height: ico.custom.height ? ico.custom.height : this.scaleDownIcon(iconData.height, iconData.width, ico.custom.rotate),
-            color: ico.custom.color === '' ? '#000' : ico.custom.color,
+            props: attributes,
+            height: height ? height : this.scaleDownIcon(iconData.height, iconData.width, attributes.rotate),
+            color: color === '' ? '#000' : color,
             node: this.options.node,
         };
-        delete data.props.height;
-        delete data.props.color;
 
         // Get SVG
         let svgProps = {
