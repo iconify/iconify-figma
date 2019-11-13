@@ -18,6 +18,9 @@ import React, { Component } from 'react';
 
 import Icon from '../parts/icon-decoration';
 
+const phrases = require('../../data/phrases');
+const lang = phrases.navigation;
+
 // Delay for error message
 const delay = 2500;
 
@@ -44,9 +47,8 @@ class Navigation extends Component {
     }
 
     render() {
-        let error = this.state.error ? <span>This menu is not available yet.</span> : null,
+        let error = this.state.error ? <span>{lang.notavailable}</span> : null,
             route = this.props.route,
-            page = route.page,
             section = this.state.section,
             inactiveClass = 'plugin-nav',
             activeClass = 'plugin-nav plugin-nav--selected',
@@ -72,12 +74,12 @@ class Navigation extends Component {
         return <div className={'plugin-header' + (secondaryMenu ? ' plugin-header--with-menu' : ' plugin-header--no-menu')}>
             <div className="plugin-wrapper-header plugin-wrapper-header--primary">
                 <div className="plugin-header-left">
-                    <a className={(section === 'menu' ? activeClass : inactiveClass) + ' plugin-nav--icon'} href="#" onClick={this.onChangeSection.bind(this, 'menu')}><Icon name="menu" /></a>
-                    <a className={section === 'import' ? activeClass : inactiveClass} href="#" onClick={this.onChangeSection.bind(this, 'import')}>Import Icons</a>
+                    <a className={(section === 'menu' ? activeClass : inactiveClass) + ' plugin-nav--icon'} href="#" onClick={this.onChangeSection.bind(this, 'menu')} title={lang.menu}><Icon name="menu" /></a>
+                    <a className={section === 'import' ? activeClass : inactiveClass} href="#" onClick={this.onChangeSection.bind(this, 'import')}>{lang.import}</a>
                 </div>
                 <div className="plugin-header-center">{error}</div>
                 <div className="plugin-header-right">
-                    <a className={section === 'github' ? activeClass : inactiveClass} href="#" onClick={this.onChangeSectionAndPage.bind(this, 'github', 'github')}>About / GitHub</a>
+                    <a className={section === 'github' ? activeClass : inactiveClass} href="#" onClick={this.onChangeSectionAndPage.bind(this, 'github', 'github')}>{lang.about}</a>
                 </div>
             </div>
             {secondaryMenu}
@@ -97,13 +99,13 @@ class Navigation extends Component {
 
         return <div className="plugin-wrapper-header plugin-wrapper-header--secondary">
             <div className="plugin-header-left">
-                {this.renderPageLink('options', 'Options')}
-                {this.renderPageLink('options/import', 'Import')}
-                {this.renderPageLink('options/export', 'Export')}
+                {this.renderPageLink('options', lang.options)}
+                {this.renderPageLink('options/import', lang.importOptions)}
+                {this.renderPageLink('options/export', lang.exportOptions)}
             </div>
             <div className="plugin-header-center" />
             <div className="plugin-header-right">
-                <a className={inactiveClass} href="#" onClick={this.onResetRoutes.bind(this)}>Reset</a>
+                <a className={inactiveClass} href="#" onClick={this.onResetRoutes.bind(this)}>{lang.reset}</a>
             </div>
         </div>;
     }
@@ -121,14 +123,14 @@ class Navigation extends Component {
 
         return <div className="plugin-wrapper-header plugin-wrapper-header--secondary">
             <div className="plugin-header-left">
-                {this.renderPageLink('iconify', 'Iconify')}
-                {this.renderPageLink('paste', 'Paste SVG')}
-                {/*{this.renderPageLink('font', 'Font')}*/}
+                {this.renderPageLink('iconify', lang.importIconify)}
+                {this.renderPageLink('paste', lang.importSVG)}
+                {/*{this.renderPageLink('font', lang.importFont)}*/}
             </div>
             <div className="plugin-header-center" />
             <div className="plugin-header-right">
-                {this.renderPageLink('recent', 'Recent')}
-                {/*{this.renderPageLink('bookmarks', 'Bookmarked')}*/}
+                {this.renderPageLink('recent', lang.recent)}
+                {/*{this.renderPageLink('bookmarks', lang.bookmarks)}*/}
             </div>
         </div>;
     }
@@ -141,14 +143,14 @@ class Navigation extends Component {
     renderGitHub() {
         return <div className="plugin-wrapper-header plugin-wrapper-header--secondary">
             <div className="plugin-header-left">
-                {this.renderPageLink('github', 'About')}
-                {this.renderExternalLink('http://github.com/iconify/iconify-figma', 'Plug-in Repository')}
-                {this.renderExternalLink('http://github.com/iconify/iconify-figma/issues', 'Support')}
+                {this.renderPageLink('github', lang.aboutMain)}
+                {this.renderExternalLink('http://github.com/iconify/iconify-figma', lang.pluginRepo)}
+                {this.renderExternalLink('http://github.com/iconify/iconify-figma/issues', lang.support)}
             </div>
             <div className="plugin-header-center" />
             <div className="plugin-header-right">
-                {this.renderExternalLink('http://github.com/iconify/iconify', 'Iconify for HTML')}
-                {this.renderExternalLink('http://github.com/iconify/iconify-react', 'Iconify for React')}
+                {this.renderExternalLink('http://github.com/iconify/iconify', lang.iconifyRepo)}
+                {this.renderExternalLink('http://github.com/iconify/iconify-react', lang.reactRepo)}
             </div>
         </div>;
     }

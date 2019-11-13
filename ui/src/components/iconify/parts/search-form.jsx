@@ -18,6 +18,8 @@ import React, { Component } from 'react';
 
 import SearchForm from '../../parts/inputs/search-form';
 
+const phrases = require('../../../data/phrases');
+
 class IconifySearchForm extends Component {
     render() {
         let props = this.props,
@@ -26,21 +28,21 @@ class IconifySearchForm extends Component {
             view = props.view,
             block = view.blocks[blockName],
             value = typeof block.value === 'string' ? block.value : block.keyword,
-            buttonTitle = props.phrases.search.button,
+            buttonTitle = phrases.search.button,
             placeholder;
 
         // Get placeholder
         if (blockName === 'filter') {
-            placeholder = props.phrases.search.placeholderCollections;
+            placeholder = phrases.search.placeholderCollections;
         } else if (view.type === 'collection' && blockName === 'search') {
             let prefix = view.prefix,
                 info = app.collection(prefix);
 
-            placeholder = props.phrases.search.placeholderNamed.replace('{name}', info ? info.title : prefix);
+            placeholder = phrases.search.placeholderNamed.replace('{name}', info ? info.title : prefix);
         } else if (blockName === 'search' && view.type === 'custom') {
-            placeholder = props.phrases.search['placeholder-' + view.customType];
+            placeholder = phrases.search['placeholder-' + view.customType];
         } else {
-            placeholder = props.phrases.search.placeholder;
+            placeholder = phrases.search.placeholder;
         }
 
         // Check for auto-focus
@@ -49,7 +51,7 @@ class IconifySearchForm extends Component {
         let showButton = true;
         if (view.type === 'collection' && blockName === 'search') {
             // showButton = false;
-            buttonTitle = props.phrases.search['button-named'];
+            buttonTitle = phrases.search['button-named'];
         } else if (blockName === 'filter') {
             showButton = false;
         }

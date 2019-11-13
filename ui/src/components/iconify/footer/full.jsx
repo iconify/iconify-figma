@@ -33,6 +33,7 @@ import FooterIconName from './icon-name';
 import FooterNodeOptions from './node';
 import FooterBlock from "./block";
 
+const phrases = require('../../../data/phrases');
 
 class FullFooter extends Component {
     constructor(props) {
@@ -45,7 +46,6 @@ class FullFooter extends Component {
 
     render() {
         let props = this.props,
-            phrases = props.phrases.footer,
             container = props.container;
 
         let app = props.app,
@@ -110,7 +110,7 @@ class FullFooter extends Component {
             </FooterContainer>
 
             <FooterButtons>
-                <Button type="primary" title={phrases.submit} onClick={container.importIconifyIcon.bind(container)} />
+                <Button type="primary" title={phrases.footer.submit} onClick={container.importIconifyIcon.bind(container)} />
                 <CloseButton container={container} />
             </FooterButtons>
         </IconifyBlock>;

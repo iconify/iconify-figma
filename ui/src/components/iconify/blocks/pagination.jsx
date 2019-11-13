@@ -19,6 +19,8 @@ import React, { Component } from 'react';
 import IconifyBlock from '../parts/block';
 import Icon from '../../parts/icon-decoration';
 
+const phrases = require('../../../data/phrases');
+
 class PaginationBlock extends Component {
     render() {
         let props = this.props,
@@ -35,7 +37,7 @@ class PaginationBlock extends Component {
 
         // First page
         if (block.page > 0) {
-            pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--arrow plugin-pagination-page--prev" onClick={this.setPage.bind(this, block.page - 1)} key="prev" title={props.phrases.pagination.prev}><Icon name="arrow-left" /></a>);
+            pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--arrow plugin-pagination-page--prev" onClick={this.setPage.bind(this, block.page - 1)} key="prev" title={phrases.pagination.prev}><Icon name="arrow-left" /></a>);
         }
 
         // Add all pages
@@ -45,7 +47,7 @@ class PaginationBlock extends Component {
             }
 
             if (page === 'more') {
-                pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--more" onClick={this.setPage.bind(this, 'more')} key="more">{props.phrases.pagination.more}</a>);
+                pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--more" onClick={this.setPage.bind(this, 'more')} key="more">{phrases.pagination.more}</a>);
                 return;
             }
 
@@ -55,7 +57,7 @@ class PaginationBlock extends Component {
 
         // Next page
         if (block.page !== prev) {
-            pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--arrow plugin-pagination-page--next" onClick={this.setPage.bind(this, block.page + 1)} key="next" title={props.phrases.pagination.next}><Icon name="arrow-right" /></a>);
+            pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--arrow plugin-pagination-page--next" onClick={this.setPage.bind(this, block.page + 1)} key="next" title={phrases.pagination.next}><Icon name="arrow-right" /></a>);
 
         }
 

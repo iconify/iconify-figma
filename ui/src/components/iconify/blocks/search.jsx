@@ -19,6 +19,8 @@ import React from 'react';
 import IconifyBlock from '../parts/block';
 import SearchForm from '../parts/search-form';
 
+const phrases = require('../../../data/phrases');
+
 function SearchBlock(props) {
     let app = props.app,
         view = props.view,
@@ -36,11 +38,11 @@ function SearchBlock(props) {
                 info = app.collection(prefix),
                 collectionTitle = info ? info.title : prefix;
 
-            searchTitle = props.phrases.search.titleNamed.replace('{name}', collectionTitle);
+            searchTitle = phrases.search.titleNamed.replace('{name}', collectionTitle);
         } else if (view.type === 'custom') {
-            searchTitle = props.phrases.search['title-' + view.customType];
+            searchTitle = phrases.search['title-' + view.customType];
         } else {
-            searchTitle = props.phrases.search.title;
+            searchTitle = phrases.search.title;
         }
     }
 

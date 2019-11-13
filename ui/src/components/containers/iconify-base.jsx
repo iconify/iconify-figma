@@ -106,7 +106,6 @@ class IconifyBaseContainer extends Component {
             blocks={blocks}
             /* expand storage for easy access */
             config={app.get('config').data}
-            phrases={app.get('phrases').data}
             onLayoutChange={this._onLayoutChange.bind(this)}
             onSelectIcon={this._onSelectIcon.bind(this)}
         />;

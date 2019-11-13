@@ -21,6 +21,8 @@ import IconifyBlock from '../parts/block';
 import CollectionsListSection from '../../parts/collections-list-section';
 import CollectionsListItem from '../../parts/collections-list-item';
 
+const phrases = require('../../../data/phrases');
+
 class CollectionsBlock extends Component {
     render() {
         let props = this.props,
@@ -29,14 +31,13 @@ class CollectionsBlock extends Component {
 
         if (!block || block.empty()) {
             return <IconifyBlock type="error">
-                <Notice type="error">{props.phrases.collections.empty}</Notice>
+                <Notice type="error">{phrases.collections.empty}</Notice>
             </IconifyBlock>;
         }
 
         // Parse each category
         let sections = [],
-            link = props.config.links.collection,
-            phrases = props.phrases.collections;
+            link = props.config.links.collection;
 
         Object.keys(block.collections).forEach(title => {
             let collections = block.collections[title],
@@ -52,7 +53,7 @@ class CollectionsBlock extends Component {
                     title={item.title}
                     onClick={this.onClick.bind(this, prefix)}
                     href={link.replace('{prefix}', prefix)}
-                    info={item.author && item.author.name ? phrases.by + item.author.name : ''}
+                    info={item.author && item.author.name ? phrases.collections.by + item.author.name : ''}
                     total={item.total}
                     height={item.height}
                     displayHeight={item.displayHeight}

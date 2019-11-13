@@ -19,6 +19,8 @@ import React, { Component } from 'react';
 import IconifyBlock from '../parts/block';
 import Icon from '../../parts/icon-decoration';
 
+const phrases = require('../../../data/phrases');
+
 class ParentBlock extends Component {
     render() {
         let props = this.props,
@@ -29,24 +31,22 @@ class ParentBlock extends Component {
             return null;
         }
 
-        let phrases = props.phrases.parent;
-
         let renderParent = parent => {
             let key = JSON.stringify(parent.getRoute()),
-                title = phrases.generic;
+                title = phrases.parent.generic;
 
             switch (parent.type) {
                 case 'collections':
-                    title = phrases.collections;
+                    title = phrases.parent.collections;
                     break;
 
                 case 'collection':
                     let info = props.app.collection(parent.prefix);
-                    title = phrases.collection.replace('{title}', info ? info.title : parent.prefix);
+                    title = phrases.parent.collection.replace('{title}', info ? info.title : parent.prefix);
                     break;
 
                 case 'search':
-                    title = phrases.search.replace('{keyword}', parent.route.params.search);
+                    title = phrases.parent.search.replace('{keyword}', parent.route.params.search);
             }
 
             parents.unshift(<a

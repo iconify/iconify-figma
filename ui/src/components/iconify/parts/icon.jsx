@@ -18,12 +18,14 @@ import React, { Component } from 'react';
 import Iconify from '@iconify/iconify';
 import GridIcon from '../../parts/icon-grid';
 
+const phrases = require('../../../data/phrases');
+
 class ShortIcon extends Component {
     render() {
         let props = this.props,
             name = props.name,
             icon = props.icon,
-            lang = props.phrases.icons,
+            lang = phrases.icons,
             loaded = Iconify.iconExists(name);
 
         // Generate link and tooltip

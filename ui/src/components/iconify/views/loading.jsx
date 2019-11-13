@@ -22,12 +22,14 @@ import SearchBlock from '../blocks/search';
 import Footer from '../footer/footer';
 import Notice from '../../parts/notice';
 
+const phrases = require('../../../data/phrases');
+
 function LoadingView(props) {
     return <ViewContainer type="loading">
         {props.view && <SearchBlock {...props} block="search" />}
         {props.view && <ParentBlock {...props} block="parent" />}
 
-        <Notice>{props.phrases.loading.ui}</Notice>
+        <Notice>{phrases.loading}</Notice>
 
         {/*<Footer {...props} />*/}
     </ViewContainer>;

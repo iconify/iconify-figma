@@ -18,6 +18,8 @@ import React, { Component } from 'react';
 
 import FooterBlock from './block';
 
+const phrases = require('../../../data/phrases');
+
 const viewportId = 'viewport';
 
 /**
@@ -47,8 +49,7 @@ class FooterNodeOptions extends Component {
 
     render() {
         let props = this.props,
-            nodes = props.app.selectedNodes,
-            phrases = props.phrases.footer;
+            nodes = props.app.selectedNodes;
 
         if (!nodes || !nodes.length) {
             return null;
@@ -87,7 +88,7 @@ class FooterNodeOptions extends Component {
         });
 
 
-        return <FooterBlock type="nodes" title={phrases['import-options']}>
+        return <FooterBlock type="nodes" title={phrases.footer['import-options']}>
             <div className="plugin-footer-nodes">
                 <div>Select parent node:</div>
                 {items}

@@ -23,6 +23,8 @@ import ListIcon from '../../parts/icon-list';
 import Icon from '../../parts/icon-decoration';
 import Filter from '../../parts/filter';
 
+const phrases = require('../../../data/phrases');
+
 class LongIcon extends Component {
     render() {
         let props = this.props,
@@ -37,7 +39,7 @@ class LongIcon extends Component {
                 key="delete"
                 onClick={this.deleteClicked.bind(this)}
                 className="plugin-icon-item-delete"
-                title={props.phrases.icons['delete-' + props.view.customType]}
+                title={phrases.icons['delete-' + props.view.customType]}
             ><Icon name="trash" /></a>;
         }
 
@@ -47,12 +49,12 @@ class LongIcon extends Component {
                 selected={props.app.selection.iconName === name}
                 title={props.title}
                 onClick={this.onClick.bind(this)}
-                size={props.phrases.icons.loading}
+                size={phrases.icons.loading}
             >{deleteButton}</ListIcon>;
         }
 
         let icon = props.icon,
-            lang = props.phrases.icons,
+            lang = phrases.icons,
             iconData = Iconify.getIcon(name);
 
         // Generate link and tooltip

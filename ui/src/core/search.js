@@ -23,7 +23,6 @@ const iconObject = require('./objects/icon');
  */
 let Search = {
     config: require('./data/config'),
-    phrases: require('./data/phrases'),
     collections: require('./data/collections'),
     events: require('./events'),
     views: require('./views/views'),

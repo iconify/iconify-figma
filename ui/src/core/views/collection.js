@@ -286,14 +286,6 @@ module.exports = (instance, params, parent) => {
                 });
                 view.route.params[filter.route] = view.blocks[filter.key].getActive();
 
-                // Uncategorized
-                if (filter.key === 'tags' && view.blocks[filter.key].filters[''] !== void 0) {
-                    let phrases = instance.get('phrases');
-                    if (phrases) {
-                        view.blocks[filter.key].filters[''] = phrases.get('filters.uncategorized');
-                    }
-                }
-
                 filtersCount ++;
                 index += Object.keys(view.blocks[filter.key].filters).length;
             } else {

@@ -21,10 +21,12 @@ import Icon from '../../parts/icon-decoration';
 import Header from '../../parts/icons-header';
 import Notice from '../../parts/notice';
 
+const phrases = require('../../../data/phrases');
+
 class IconsHeader extends Component {
     render() {
         let props = this.props,
-            phrases = props.phrases.icons,
+            lang = phrases.icons,
             view = props.view,
             layout = props.app.layout[props.app.page],
             pagination = view.blocks.pagination,
@@ -34,37 +36,37 @@ class IconsHeader extends Component {
         // Generate text
         switch (view.type) {
             case 'search':
-                if (phrases['header-search-' + pagination.length] !== void 0) {
-                    text = phrases['header-search-' + pagination.length];
+                if (lang['header-search-' + pagination.length] !== void 0) {
+                    text = lang['header-search-' + pagination.length];
                 } else {
-                    text = (pagination.more ? phrases['header-search-more'] : phrases['header-search-full']);
+                    text = (pagination.more ? lang['header-search-more'] : lang['header-search-full']);
                     if (!pagination.more && pagination.length === props.config.search.fullLimit) {
-                        text = phrases['header-search-max'];
+                        text = lang['header-search-max'];
                     }
                 }
                 break;
 
             default:
                 if (view.type === 'collection' || view.type === 'custom') {
-                    if (!pagination.length && view.route.params.search.length && phrases['header-empty-filter'] !== void 0) {
-                        text = phrases['header-empty-filter'];
+                    if (!pagination.length && view.route.params.search.length && lang['header-empty-filter'] !== void 0) {
+                        text = lang['header-empty-filter'];
                         break;
                     }
                 }
 
                 if (view.type === 'custom') {
-                    if (phrases['header-custom-' + view.customType + '-' + pagination.length] !== void 0) {
-                        text = phrases['header-custom-' + view.customType + '-' + pagination.length];
+                    if (lang['header-custom-' + view.customType + '-' + pagination.length] !== void 0) {
+                        text = lang['header-custom-' + view.customType + '-' + pagination.length];
                         break;
                     }
                 }
 
-                if (phrases['header-count-' + pagination.length] !== void 0) {
-                    text = phrases['header-count-' + pagination.length];
+                if (lang['header-count-' + pagination.length] !== void 0) {
+                    text = lang['header-count-' + pagination.length];
                     break;
                 }
 
-                text = phrases['header-count'];
+                text = lang['header-count'];
         }
         text = text
             .replace('{count}', pagination.length)
@@ -77,7 +79,7 @@ class IconsHeader extends Component {
             let newMode = layout.list ? 'grid' : 'list';
             headerProps.layout = newMode;
             headerProps.onLayoutChange = this.changeMode.bind(this);
-            headerProps.layoutTitle = phrases.mode;
+            headerProps.layoutTitle = lang.mode;
         }
 
         return <IconifyBlock type="icons-header">

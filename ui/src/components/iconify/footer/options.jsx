@@ -24,6 +24,8 @@ import IconButton from '../../parts/inputs/icon-button';
 import OptionsPanel from '../../parts/options-panel';
 import FooterBlock from './block';
 
+const phrases = require('../../../data/phrases');
+
 const deg = String.fromCharCode(176);
 const rotationOptions = {
     0: '0' + deg,
@@ -41,7 +43,7 @@ class FooterOptions extends Component {
     render() {
         let props = this.props;
 
-        return <FooterBlock type="options" title={props.phrases.footer.customize}>
+        return <FooterBlock type="options" title={phrases.footer.customize}>
             {this.renderColorPicker()}
             {this.renderHeight()}
             {this.renderFlip()}
@@ -61,11 +63,10 @@ class FooterOptions extends Component {
             return null;
         }
 
-        let phrases = props.phrases.footer,
-            color = typeof props.color === 'string' ? props.color : '',
+        let color = typeof props.color === 'string' ? props.color : '',
             active = color.length > 0;
 
-        return <OptionsPanel type="color" title={phrases.color} active={active}>
+        return <OptionsPanel type="color" title={phrases.footer.color} active={active}>
             <ColorInput className={active ? 'plugin-input--outlined' : ''} placeholder="#000" defaultColor="#000" value={color} onChange={this._changeColor.bind(this)} onTemporaryChange={this._changeColor.bind(this)} />
         </OptionsPanel>;
     }
@@ -79,11 +80,10 @@ class FooterOptions extends Component {
         let props = this.props,
             defaultHeight = props.sampleHeight,
             height = props.height,
-            phrases = props.phrases.footer,
             active = !!height;
 
         // icon="arrows-vertical"
-        return <OptionsPanel type="height" title={phrases.height} active={active}>
+        return <OptionsPanel type="height" title={phrases.footer.height} active={active}>
             <Input className={'plugin-input--number' + (active ? ' plugin-input--outlined' : '')} placeholder={defaultHeight} value={height} onChange={this._changeHeight.bind(this, true)} onTemporaryChange={this._changeHeight.bind(this, false)} />
         </OptionsPanel>;
     }
@@ -95,11 +95,10 @@ class FooterOptions extends Component {
      */
     renderRotation() {
         let props = this.props,
-            phrases = props.phrases.footer,
             value = props.rotate ? props.rotate : 0,
             active = value > 0;
 
-        return <OptionsPanel type="rotation" title={phrases.rotate} active={active}>
+        return <OptionsPanel type="rotation" title={phrases.footer.rotate} active={active}>
             <Select icon="angle" className={'plugin-input--angle' + (active ? ' plugin-input--outlined' : '')} placeholder={rotationOptions[0]} value={value} options={rotationOptions} onChange={this._changeRotation.bind(this)} />
         </OptionsPanel>;
     }
@@ -111,12 +110,11 @@ class FooterOptions extends Component {
      */
     renderFlip() {
         let props = this.props,
-            phrases = props.phrases.footer,
             active = props.hFlip || props.vFlip;
 
-        return <OptionsPanel type="flip" title={phrases.flip} active={active}>
-            <IconButton icon="arrows-horizontal" title={phrases.hFlip} onClick={this._flipClicked.bind(this, 'hFlip')} active={props.hFlip} />
-            <IconButton icon="arrows-vertical" title={phrases.vFlip} onClick={this._flipClicked.bind(this, 'vFlip')} active={props.vFlip} />
+        return <OptionsPanel type="flip" title={phrases.footer.flip} active={active}>
+            <IconButton icon="arrows-horizontal" title={phrases.footer.hFlip} onClick={this._flipClicked.bind(this, 'hFlip')} active={props.hFlip} />
+            <IconButton icon="arrows-vertical" title={phrases.footer.vFlip} onClick={this._flipClicked.bind(this, 'vFlip')} active={props.vFlip} />
         </OptionsPanel>;
     }
 

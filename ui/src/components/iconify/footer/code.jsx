@@ -21,6 +21,9 @@ import FooterBlock from './block';
 import Disclosure from '../../parts/disclosure';
 import DisclosureItem from '../../parts/disclosure-item';
 
+const phrases = require('../../../data/phrases');
+const lang = phrases.footer;
+
 const activeClass = 'disclosure__item disclosure--expanded';
 const inactiveClass = 'disclosure__item';
 
@@ -44,7 +47,6 @@ class FooterCode extends Component {
     render() {
         let props = this.props,
             section = props.app.footerCodeSection,
-            phrases = props.phrases.footer,
             app = props.app,
             name = app.selection.iconName,
             icon = app.selection.icon;
@@ -78,8 +80,7 @@ class FooterCode extends Component {
         // Generate HTML code
         let html = '<iconify-icon data-icon="' + name + '"' + htmlAttribs.join('') + '></iconify-icon>',
             html2 = '<iconify-icon data-icon="' + name + '" style="font-size: 24px;' + (props.hasColor ? ' color: red;' : '') + '"></iconify-icon>',
-            script = '<script src="https://code.iconify.design/' + majorVersion + '/' + version + '/iconify.min.js"></script>',
-            html2Text = 'Change icon size' + (props.hasColor ? ' and color' : '') + ' using css (similar to icon fonts):';
+            script = '<script src="https://code.iconify.design/' + majorVersion + '/' + version + '/iconify.min.js"></script>';
 
         let reactInstall = 'npm install --save-dev @iconify/react @iconify/icons-' + icon.prefix,
             varName = camelCase(icon.name),
@@ -87,27 +88,27 @@ class FooterCode extends Component {
             reactImport2 = 'import ' + varName + ' from \'@iconify/icons-' + icon.prefix + '/' + icon.name + '\';',
             reactUsage = '<Icon icon={' + varName + '}' + reactAttribs.join('') + ' />';
 
-        return <FooterBlock type="code" title={phrases.code}>
+        return <FooterBlock type="code" title={lang.code}>
             <Disclosure active={section} onToggle={this._changeSection.bind(this)}>
                 <DisclosureItem key="html" title="HTML code">
-                    1. Add Iconify script to your page:
+                    {lang.htmlCode1}
                     <div className="plugin-code-sample">{script}</div>
-                    2. Use icon placeholder where you want to show icon (similar to icon fonts):
+                    {lang.htmlCode2}
                     <div className="plugin-code-sample">{html}</div>
                     <div className="plugin-code-sample">{html.replace('<iconify-icon', '<span class="iconify" data-inline="false"').replace('</iconify-icon>', '</span>')}</div>
-                    {html2Text}
+                    {props.hasColor ? lang.htmlCodeTextColor : lang.htmlCodeText}
                     <div className="plugin-code-sample">{html2}</div>
                     <div className="plugin-code-sample">{html2.replace('<iconify-icon', '<span class="iconify" data-inline="false"').replace('</iconify-icon>', '</span>')}</div>
-                    For more details see <a href="https://iconify.design/docs/iconify-in-pages/" target="_blank">Iconify documentation</a>.
+                    {lang.htmlCode3Start}<a href="https://iconify.design/docs/iconify-in-pages/" target="_blank">{lang.htmlCode3Link}</a>{lang.htmlCode3End}
                 </DisclosureItem>
                 <DisclosureItem key="react" title="React component">
-                    1. Install components:
+                    {lang.reactCode1}
                     <div className="plugin-code-sample">{reactInstall}</div>
-                    2. Import icon component and icon data:
+                    {lang.reactCode2}
                     <div className="plugin-code-sample">{reactImport1}<br />{reactImport2}</div>
-                    3. Use it in your code:
+                    {lang.reactCode3}
                     <div className="plugin-code-sample">{reactUsage}</div>
-                    For more details see <a href="https://github.com/iconify/iconify-react" target="_blank">Iconify for React repository</a>.
+                    {lang.reactCode4Start}<a href="https://github.com/iconify/iconify-react" target="_blank">{lang.reactCode4Link}</a>{lang.reactCode4End}
                 </DisclosureItem>
             </Disclosure>
         </FooterBlock>;

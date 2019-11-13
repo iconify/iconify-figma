@@ -18,8 +18,11 @@ import React from 'react';
 
 import Notice from '../../parts/notice';
 
+const phrases = require('../../../data/phrases');
+const lang = phrases.errors;
+
 function SearchError(props) {
-    return <Notice type="error">No icons found.<br />Try looking for something that could be part of icon name, such as "home", "arrow", "alert".</Notice>;
+    return <Notice type="error">{lang.noIconsFound}<br />{lang.noIconsFoundTip}</Notice>;
 }
 
 export default SearchError;
