@@ -83,7 +83,7 @@ class FooterOptions extends Component {
 
         // icon="arrows-vertical"
         return <OptionsPanel type="height" title={lang.height} active={active}>
-            <Input className={'plugin-input--number' + (active ? ' plugin-input--outlined' : '')} placeholder={defaultHeight} value={height} onChange={this._changeHeight.bind(this, true)} onTemporaryChange={this._changeHeight.bind(this, false)} />
+            <Input icon="height" className={'plugin-input--number' + (active ? ' plugin-input--outlined' : '')} placeholder={defaultHeight} value={height} onChange={this._changeHeight.bind(this, true)} onTemporaryChange={this._changeHeight.bind(this, false)} />
         </OptionsPanel>;
     }
 

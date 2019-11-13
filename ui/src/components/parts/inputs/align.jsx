@@ -84,14 +84,18 @@ class AlignInput extends Component {
         let result = '<svg xmlns="http://www.w3.org/2000/svg" width="61" height="61" viewBox="0 0 61 61">' +
             '<path d="M18.5 18.5h24v24h-24v-24z" class="plugin-box-icon--grid" stroke-dasharray="2"/>';
 
+        let paths = {
+            selected: [],
+            unselected: []
+        };
+
         Object.keys(iconParts).forEach(key => {
             let selected = values.indexOf(key) !== -1;
-
-            result += '<path d="' + iconParts[key][selected ? 'selected' : 'unselected'] + '" class="plugin-box-icon--' + (selected ? 'selected' : 'unselected') + '"/>';
+            paths[selected ? 'selected' : 'unselected'].push('<path d="' + iconParts[key][selected ? 'selected' : 'unselected'] + '" class="plugin-box-icon--' + (selected ? 'selected' : 'unselected') + '"/>');
         });
 
-        result += '</svg>';
-        return result;
+        // Add unselected paths first to make sure selected paths are always fully visible above unselected paths
+        return result + paths.unselected.join('') + paths.selected.join('') + '</svg>';
     }
 
     /**

@@ -45,10 +45,13 @@
   }
 
   &--with-icon {
-    padding-left: 30px;
-    &--search, &--angle, &--arrows-horizontal, &--arrows-vertical {
-      padding-left: 24px;
+    padding-left: 24px;
+    /*
+    // old code for bigger icon, reuse if needed
+    &--something {
+      padding-left: 30px;
     }
+    */
     &--color {
       padding-left: 28px;
     }
@@ -117,20 +120,24 @@
   // Icon before input
   &-icon {
     position: absolute;
-    left: 0;
+    color: $plugin-palette-color-black-muted;
     top: 0;
-    bottom: 0;
-    width: 30px;
+    text-align: center;
+    pointer-events: none;
 
-    &--search, &--angle, &--arrows-horizontal, &--arrows-vertical {
-      width: 20px;
-      left: 4px;
-      opacity: .5;
-      padding-top: (30px - 12px) / 2;
-      bottom: auto;
-      text-align: center;
-      pointer-events: none;
+    // 12px icons
+    width: 20px;
+    left: 4px;
+    padding-top: (30px - 12px) / 2;
+
+    /*
+    // old code for bigger icon, reuse if needed
+    &--something {
+      left: 0;
+      bottom: 0;
+      width: 30px;
     }
+    */
   }
 
   // Reset after input and dropdown for select

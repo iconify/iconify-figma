@@ -118,6 +118,14 @@ function IconDecoration(props) {
             return <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" style={{transform: 'rotate(90deg)'}} className={classPrefix + name}>
                 <Arrows />
             </svg>;
+
+        case 'height':
+            return <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" className={classPrefix + name}>
+                <g fill="currentColor" fillRule="evenodd">
+                    <path d="M3 2h1v8H3zM8 2h1v8H8z"/>
+                    <path d="M3.5 5.5h5v1h-5z"/>
+                </g>
+            </svg>;
     }
 
     return <span {...params}>Icon: {name}</span>;
