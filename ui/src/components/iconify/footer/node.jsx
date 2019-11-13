@@ -17,6 +17,7 @@
 import React, { Component } from 'react';
 
 import FooterBlock from './block';
+import Align from '../../parts/inputs/align';
 
 const phrases = require('../../../data/phrases');
 const lang = phrases.footer;
@@ -24,55 +25,57 @@ const lang = phrases.footer;
 const viewportId = 'viewport';
 
 class FooterNodeOptions extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            counter: 1
-        };
-    }
-
     render() {
         let props = this.props,
-            nodes = props.app.selectedNodes;
+            options = props.app.options,
+            nodes = props.app.selectedNodes,
+            showNodes = true,
+            items = [];
 
         if (!nodes || !nodes.length) {
-            return null;
+            showNodes = false;
+        } else {
+            // Get selected node
+            let selectedId = options.node,
+                hasSelection = selectedId !== '';
+
+            // Add components for all nodes
+            const add = (node, level) => {
+                items.push(this.renderNode(node, level, hasSelection ? node.id === selectedId : node.default));
+
+                // Add children
+                node.children.forEach(child => {
+                    add(child, level + 1);
+                });
+            };
+
+            // Add component for viewport
+            items.push(this.renderNode({
+                id: viewportId,
+                type: 'VIEWPORT',
+                name: 'Viewport',
+            }, 0, selectedId === viewportId));
+
+            // Add all nodes
+            nodes.forEach(node => {
+                add(node, 0)
+            });
+
         }
 
-        // Get selected node
-        let selectedId = props.app.options.node,
-            hasSelection = selectedId !== '';
-
-        // Add components for all nodes
-        let items = [];
-
-        const add = (node, level) => {
-            items.push(this.renderNode(node, level, hasSelection ? node.id === selectedId : node.default));
-
-            // Add children
-            node.children.forEach(child => {
-                add(child, level + 1);
-            });
-        };
-
-        // Add component for viewport
-        items.push(this.renderNode({
-            id: viewportId,
-            type: 'VIEWPORT',
-            name: 'Viewport',
-        }, 0, selectedId === viewportId));
-
-        // Add all nodes
-        nodes.forEach(node => {
-            add(node, 0)
-        });
-
-
         return <FooterBlock type="nodes" title={lang.importOptions}>
-            <div className="plugin-footer-nodes">
-                <div>{lang.parentNode}</div>
-                {items}
+            <div className="plugin-footer-nodes-wrapper">
+                {showNodes && <div className="plugin-footer-nodes">
+                    <div>{lang.parentNode}</div>
+                    {items}
+                </div>}
+                <div className="plugin-footer-nodes-align">
+                    <Align
+                        x={options.nodeX}
+                        y={options.nodeY}
+                        onChange={this.changeAlign.bind(this)}
+                    />
+                </div>
             </div>
         </FooterBlock>;
     }
@@ -98,10 +101,17 @@ class FooterNodeOptions extends Component {
         if (this.props.app.options.node === id) {
             return;
         }
-        this.props.app.options.node = id;
-        this.setState({
-            counter: this.state.counter + 1
-        });
+        this.props.onOptionChange('node', id);
+    }
+
+    /**
+     * Change align
+     *
+     * @param {boolean} horizontal
+     * @param {string} value
+     */
+    changeAlign(horizontal, value) {
+        this.props.onOptionChange('node' + (horizontal ? 'X' : 'Y'), value);
     }
 }
 

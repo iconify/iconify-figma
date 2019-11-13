@@ -46,7 +46,7 @@
 
   &--with-icon {
     padding-left: 30px;
-    &--search, &--angle, &--arrows-vertical {
+    &--search, &--angle, &--arrows-horizontal, &--arrows-vertical {
       padding-left: 24px;
     }
     &--color {
@@ -122,7 +122,7 @@
     bottom: 0;
     width: 30px;
 
-    &--search, &--angle, &--arrows-vertical {
+    &--search, &--angle, &--arrows-horizontal, &--arrows-vertical {
       width: 20px;
       left: 4px;
       opacity: .5;

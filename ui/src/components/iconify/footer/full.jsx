@@ -107,7 +107,10 @@ class FullFooter extends Component {
                         transformations={transformations}
                     />
                     <FooterCode {...props} hasColor={hasColor} transformations={transformations} />
-                    <FooterNodeOptions {...props} />
+                    <FooterNodeOptions
+                        {...props}
+                        onOptionChange={this._onOptionsChange.bind(this)}
+                    />
                 </div>
             </FooterContainer>
 

@@ -2,6 +2,9 @@
 
 const iconObject = require('../core/objects/icon');
 
+const constants = require('./const');
+const iconifyPages = constants.pages;
+
 // Global options shared between all pages
 const globalOptions = {
     // Icon customizations
@@ -16,6 +19,8 @@ const globalOptions = {
 
     // Node for importing icons
     node: '',
+    nodeX: constants.alignX[1],
+    nodeY: constants.alignY[1],
 };
 
 // Page specific options
@@ -23,9 +28,6 @@ const pageOptions = {
     list: false,
     forceList: false,
 };
-
-// List of all available pages where page specific options are used
-const pages = ['iconify', 'recent', 'bookmarks'];
 
 // List of pages where list view is forced
 const forceList = ['recent', 'bookmarks'];
@@ -74,7 +76,7 @@ class Options {
             this.pageOptions[name] = {};
 
             // Set defaults
-            pages.forEach(page => {
+            iconifyPages.forEach(page => {
                 this.pageOptions[name][page] = pageOptions[name];
             });
         });
@@ -158,7 +160,7 @@ class Options {
      * @param {string} value
      */
     set page(value) {
-        if (pages.indexOf(value) === -1) {
+        if (iconifyPages.indexOf(value) === -1) {
             // Throw error to make sure new pages are added to options object
             throw 'Unknown page: ' + value;
         }

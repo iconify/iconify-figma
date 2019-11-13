@@ -156,4 +156,14 @@ module.exports = {
         reactCode4End: '.',
         aboutCollection: 'About {title}',
     },
+    alignX: {
+        left: 'Left',
+        center: 'Center',
+        right: 'Right',
+    },
+    alignY: {
+        top: 'Top',
+        middle: 'Middle',
+        bottom: 'Bottom',
+    },
 };

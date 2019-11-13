@@ -1,0 +1,42 @@
+.plugin-align {
+  display: block;
+  width: $plugin-align-box + 2px + 8px + $plugin-align-input;
+
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+.plugin-align-box {
+  float: left;
+  width: $plugin-align-box;
+  height: $plugin-align-box;
+  border: 1px solid $plugin-palette-border-grey;
+  border-radius: $plugin-border-radius-small;
+  box-sizing: content-box;
+
+  a {
+    display: block;
+    width: $plugin-align-box;
+    height: $plugin-align-box;
+    outline: none;
+    text-decoration: none;
+  }
+
+  .plugin-box-icon--grid {
+    stroke: $plugin-palette-border-grey;
+    fill: none;
+  }
+  .plugin-box-icon--selected {
+    fill: $plugin-palette-blue;
+  }
+  .plugin-box-icon--unselected {
+    fill: $plugin-palette-color-black;
+  }
+}
+
+.plugin-align-select {
+  margin-left: $plugin-align-box + 8px;
+}

@@ -18,6 +18,8 @@ import React, { Component } from 'react';
 import Iconify from '@iconify/iconify';
 
 const core = require('../core/search');
+const constants = require('../data/const');
+const iconifyPages = constants.pages;
 
 import FigmaNavigation from './header/navigation';
 import IconifyContainer from './containers/iconify';
@@ -38,7 +40,7 @@ const containers = {
  * @param {string} page
  * @return {boolean}
  */
-const isIconifyPage = page => page === 'iconify' || page === 'recent';
+const isIconifyPage = page => iconifyPages.indexOf(page) !== -1;
 
 /**
  * Route for recent page
@@ -389,11 +391,20 @@ class Container extends Component {
             color = this.options.color;
 
         let data = {
+            // Name
             name: iconName,
+
+            // Attributes to store
             props: attributes,
+
+            // Items that are currently used only to generate SVG
             height: height ? height : this.scaleDownIcon(iconData.height, iconData.width, attributes.rotate),
             color: color === '' ? '#000' : color,
+
+            // Target node and alignment
             node: this.options.node,
+            x: this.options.nodeX,
+            y: this.options.nodeY,
         };
 
         // Get SVG
