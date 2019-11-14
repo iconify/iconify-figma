@@ -77,9 +77,12 @@ module.exports = (instance, params, parent) => {
                 let icon = iconObject(value);
 
                 // Remove icon from list
-                let oldLength = view._data.icons.length;
                 view._data.icons = view._data.icons.filter(item => item.prefix !== icon.prefix || item.name !== icon.name);
-                if (view._data.icons.length !== oldLength) {
+                if (view._data.icons.length !== view.total) {
+                    // Update counters
+                    view.total = view._data.icons.length;
+                    view.empty = view.total < 1;
+
                     let events = instance.get('events');
 
                     // Fire event to notify that icon was deleted
@@ -169,7 +172,8 @@ module.exports = (instance, params, parent) => {
             };
 
             // Empty
-            view.empty = view._data.icons.length < 1;
+            view.total = view._data.icons.length;
+            view.empty = view.total < 1;
 
             // Notify that view has been loaded
             view._triggerViewLoaded();

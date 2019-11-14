@@ -39,6 +39,8 @@ module.exports = {
     errors: {
         noIconsFound: 'No icons found.',
         noIconsFoundTip: 'Try looking for something that could be part of icon name, such as "home", "arrow", "alert".',
+        recentLimit: 'Recent icons list is full. Oldest icons will be removed from list when new icons are added.',
+        bookmarksLimit: 'Bookmarked icons list is full. Oldest icons will be removed from list when new icons are added.',
     },
     paste: {
         invalidSVG: 'Invalid SVG code',

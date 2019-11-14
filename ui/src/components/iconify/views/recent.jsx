@@ -24,12 +24,20 @@ import IconsBlock from '../blocks/icons';
 import PaginationBlock from '../blocks/pagination';
 import IconsHeader from '../parts/icons-header';
 import FigmaFooter from '../footer/footer';
+import Notice from '../../parts/notice';
+
+const phrases = require('../../../data/phrases');
+const lang = phrases.errors;
 
 function RecentView(props) {
-    let blocks = props.blocks;
+    let blocks = props.blocks,
+        view = props.view,
+        options = props.app.options,
+        limitNotice = view.total >= options.storageLimit;
 
     return <ViewContainer type="collection">
         {(blocks.search.keyword !== '' || !blocks.icons.empty()) && <SearchBlock {...props} block="search" />}
+        {limitNotice && lang[view.customType + 'Limit'] !== void 0 && <Notice type="notice">{lang[view.customType + 'Limit']}</Notice>}
         <div className={helpers.iconsWrapperClass(props)}>
             <IconsHeader {...props} />
             <IconsBlock {...props} block="icons" key={helpers.iconsBlockKey(props)} />

@@ -21,6 +21,9 @@ const globalOptions = {
     node: '',
     nodeX: constants.alignX[1],
     nodeY: constants.alignY[1],
+
+    // Limit for recent icons / bookmarks
+    storageLimit: 4,
 };
 
 // Page specific options

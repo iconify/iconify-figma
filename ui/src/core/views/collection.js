@@ -297,7 +297,8 @@ module.exports = (instance, params, parent) => {
         view.multipleFilters = filtersCount > 1;
 
         // Empty
-        view.empty = view._data.icons.length < 1;
+        view.total = view._data.icons.length;
+        view.empty = view.total < 1;
 
         // Notify that view has been loaded
         view._triggerViewLoaded();

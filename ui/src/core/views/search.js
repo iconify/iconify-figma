@@ -247,7 +247,8 @@ module.exports = (instance, params, parent) => {
         view._data = helpers.convert(data);
 
         // Check if result is empty
-        view.empty = view._data.icons.length < 1;
+        view.total = view._data.icons.length;
+        view.empty = view.total < 1;
 
         // Update collections list
         if (!view.empty && view._data.collections) {

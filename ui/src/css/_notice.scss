@@ -12,4 +12,7 @@
   &--error {
     background: $plugin-palette-background-red;
   }
+  &--notice {
+    opacity: .3;
+  }
 }

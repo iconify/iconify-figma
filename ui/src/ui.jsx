@@ -166,8 +166,16 @@ class UI {
         if (this.localStorage[key] === void 0) {
             this.localStorage[key] = [];
         }
+
+        // Remove last item if there are too many items
+        if (this.localStorage[key].length >= this.options.storageLimit) {
+            this.localStorage[key].pop();
+        }
+
+        // Add new item as first item
         this.localStorage[key].unshift(item);
 
+        // Save state
         this.storeState();
     }
 
