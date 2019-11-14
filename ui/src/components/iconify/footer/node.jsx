@@ -77,7 +77,7 @@ class FooterNodeOptions extends Component {
                     <Align
                         x={options.nodeX}
                         y={options.nodeY}
-                        onChange={this.changeAlign.bind(this)}
+                        onChange={this._onAlignChange.bind(this)}
                     />
                 </div>}
             </div>
@@ -95,7 +95,7 @@ class FooterNodeOptions extends Component {
             selected={selected}
             icon={node.type.toLowerCase()}
             skipToggle={true}
-            onClick={this.nodeClicked.bind(this, node.default ? '' : node.id)}
+            onClick={this._onNodeClick.bind(this, node.default ? '' : node.id)}
         />;
     }
 
@@ -103,8 +103,9 @@ class FooterNodeOptions extends Component {
      * Change selected node
      *
      * @param {string} id
+     * @private
      */
-    nodeClicked(id) {
+    _onNodeClick(id) {
         if (this.props.app.options.node === id) {
             return;
         }
@@ -116,8 +117,9 @@ class FooterNodeOptions extends Component {
      *
      * @param {boolean} horizontal
      * @param {string} value
+     * @private
      */
-    changeAlign(horizontal, value) {
+    _onAlignChange(horizontal, value) {
         this.props.onOptionChange('node' + (horizontal ? 'X' : 'Y'), value);
     }
 }

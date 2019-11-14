@@ -52,7 +52,7 @@ class FiltersBlock extends Component {
                 selected={hasActive && selected}
                 unselected={hasActive && !selected}
                 disabled={hasDisabled && block.disabled.indexOf(key) !== -1}
-                onClick={this.toggleFilter.bind(this, key)}
+                onClick={this._onClick.bind(this, key)}
                 title={title}
             />);
         });
@@ -80,8 +80,9 @@ class FiltersBlock extends Component {
      *
      * @param {string} name
      * @param {Event} event
+     * @private
      */
-    toggleFilter(name, event) {
+    _onClick(name, event) {
         event.preventDefault();
 
         let props = this.props,

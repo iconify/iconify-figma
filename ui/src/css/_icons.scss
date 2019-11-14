@@ -72,9 +72,11 @@
     &:hover {
       background-color: $plugin-palette-background-hover;
     }
-    &:active, &:focus {
-      box-shadow: $plugin-button-active-shadow;
+    &:focus {
       outline: none;
+    }
+    &:active, &:not(:hover):focus {
+      box-shadow: $plugin-button-active-shadow;
     }
   }
   svg {

@@ -90,7 +90,7 @@ class FooterCode extends Component {
             reactUsage = '<Icon icon={' + varName + '}' + reactAttribs.join('') + ' />';
 
         return <FooterBlock type="code" title={lang.code}>
-            <Disclosure active={section} onToggle={this._changeSection.bind(this)}>
+            <Disclosure active={section} onToggle={this._onChangeSection.bind(this)}>
                 <DisclosureItem key="html" title="HTML code">
                     {lang.htmlCode1}
                     <div className="plugin-code-sample">{script}</div>
@@ -121,7 +121,7 @@ class FooterCode extends Component {
      * @param section
      * @private
      */
-    _changeSection(section) {
+    _onChangeSection(section) {
         this.props.app.footerCodeSection = section;
     }
 }

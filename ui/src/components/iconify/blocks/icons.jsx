@@ -75,7 +75,7 @@ class IconsBlock extends Component {
                 icon={icon}
                 title={title}
                 selected={selectedIcon === key}
-                onClick={this.onClick.bind(this, key)}
+                onClick={this._onClick.bind(this, key)}
             />);
         });
 
@@ -90,7 +90,7 @@ class IconsBlock extends Component {
      * Subscribe to event listener
      */
     componentDidMount() {
-        this._listener = this.iconsLoaded.bind(this);
+        this._listener = this._onIconsLoaded.bind(this);
         document.addEventListener('IconifyAddedIcons', this._listener, true);
     }
 
@@ -104,8 +104,10 @@ class IconsBlock extends Component {
 
     /**
      * New icons have been loaded. Re-render
+     *
+     * @private
      */
-    iconsLoaded() {
+    _onIconsLoaded() {
         if (this._listener && !this._pendingReload) {
             // Change state only once per cycle
             this._pendingReload = true;
@@ -124,8 +126,9 @@ class IconsBlock extends Component {
      * Icon clicked
      *
      * @param name
+     * @private
      */
-    onClick(name) {
+    _onClick(name) {
         this.props.onSelectIcon(name);
     }
 }

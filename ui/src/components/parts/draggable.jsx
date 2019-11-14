@@ -16,9 +16,15 @@ class Draggable extends Component {
 
     _onDragStart(event) {
         let rect = event.target.getBoundingClientRect();
+        console.log(event);
         this._diff = {
+            // Difference from left top corner
             x: event.clientX - rect.x,
-            y: event.clientY - rect.y
+            y: event.clientY - rect.y,
+            minX: event.screenX - event.clientX,
+            minY: event.screenY - event.clientY,
+            maxX: event.screenX - event.clientX + window.innerWidth,
+            maxY: event.screenY - event.clientY + window.innerHeight,
         };
     }
 
@@ -28,10 +34,21 @@ class Draggable extends Component {
             return;
         }
 
+        // Check if mouse event is inside plugin window
+        if (
+            event.screenX > this._diff.minX && event.screenX < this._diff.maxX &&
+            event.screenY > this._diff.minY && event.screenY < this._diff.maxY
+        ) {
+            console.log('Dropped inside window');
+            return;
+        }
+
+        // Calculate X and Y differences
         this.props.onDrag({
             x: event.clientX - (window.outerWidth / 2) + this._diff.x,
             y: event.clientY - (window.outerHeight / 2) + this._diff.y,
         });
+
     }
 }
 

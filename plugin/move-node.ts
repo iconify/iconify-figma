@@ -19,7 +19,8 @@ function dropNode(env, node, props) {
 
 	node.y = Math.round(figma.viewport.center.y - node.height / 2);
 	if (typeof props.y === 'number') {
-		node.y += Math.round(props.y / figma.viewport.zoom);
+		// account for toolbar
+		node.y += Math.round((props.y - 40) / figma.viewport.zoom);
 	}
 
 	// Change parent node

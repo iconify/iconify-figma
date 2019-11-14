@@ -63,8 +63,8 @@ class IconifySearchForm extends Component {
             placeholder={placeholder}
             focus={autoFocus}
             button={showButton ? buttonTitle : void 0}
-            onChange={this.changeValue.bind(this, true)}
-            onSubmit={this.changeValue.bind(this, false)}
+            onChange={this._onChange.bind(this, true)}
+            onSubmit={this._onChange.bind(this, false)}
         />;
     }
 
@@ -73,8 +73,9 @@ class IconifySearchForm extends Component {
      *
      * @param {boolean} temporary
      * @param {string} value
+     * @private
      */
-    changeValue(temporary, value) {
+    _onChange(temporary, value) {
         let props = this.props,
             blockName = props.block,
             view = props.view,

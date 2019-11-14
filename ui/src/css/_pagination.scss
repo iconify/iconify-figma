@@ -10,7 +10,6 @@
     padding: 6px 8px;
     box-sizing: border-box;
     height: $plugin-font-lineheight + 12px;
-    box-sizing: border-box;
   }
 
   span {
@@ -30,9 +29,11 @@
       background-color: $plugin-palette-background-hover;
     }
 
-    &:active, &:focus {
-      box-shadow: $plugin-button-active-shadow;
+    &:focus {
       outline: none;
+    }
+    &:active, &:not(:hover):focus {
+      box-shadow: $plugin-button-active-shadow;
     }
   }
 
@@ -43,6 +44,7 @@
   .plugin-pagination-page--selected {
     background: $plugin-palette-background-selected-borderless;
     color: $plugin-palette-color-black;
+    box-shadow: none !important;
     pointer-events: none;
   }
 

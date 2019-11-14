@@ -56,7 +56,7 @@ class Input extends Component {
             className += ' plugin-input--with-reset';
             if (value.length) {
                 let title = props.resetTitle ? props.resetTitle : 'Reset';
-                resetButton = <span className="plugin-input-reset" onClick={this._resetValue.bind(this)} title={title}><Icon name="reset" /></span>;
+                resetButton = <span className="plugin-input-reset" onClick={this._onResetClick.bind(this)} title={title}><Icon name="reset" /></span>;
             }
         }
 
@@ -224,7 +224,7 @@ class Input extends Component {
      * @param event
      * @private
      */
-    _resetValue(event) {
+    _onResetClick(event) {
         event.preventDefault();
         this._changeValue('', true);
     }

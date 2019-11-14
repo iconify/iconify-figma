@@ -78,7 +78,7 @@ class IconsHeader extends Component {
         if (!options.forceList) {
             let newMode = options.list ? 'grid' : 'list';
             headerProps.layout = newMode;
-            headerProps.onLayoutChange = this.changeMode.bind(this);
+            headerProps.onLayoutChange = this._onModeChange.bind(this);
             headerProps.layoutTitle = lang.mode;
         }
 
@@ -90,8 +90,10 @@ class IconsHeader extends Component {
 
     /**
      * Change display mode
+     *
+     * @private
      */
-    changeMode() {
+    _onModeChange() {
         let options = this.props.app.options;
 
         if (options.forceList) {

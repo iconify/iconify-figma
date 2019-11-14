@@ -47,7 +47,7 @@ class Footer extends Component {
         if (!Iconify.iconExists(iconName)) {
             Iconify.preloadImages([iconName]);
             if (!this._listener) {
-                this._listener = this.iconsLoaded.bind(this);
+                this._listener = this._onIconsLoaded.bind(this);
                 document.addEventListener('IconifyAddedIcons', this._listener, true);
             }
             return <SimpleFooter {...this.props} />;
@@ -69,8 +69,10 @@ class Footer extends Component {
 
     /**
      * New icons have been loaded. Re-render
+     *
+     * @private
      */
-    iconsLoaded() {
+    _onIconsLoaded() {
         if (this._listener && !this._pendingUpdate) {
             // No more than 1 update per cycle
             this._pendingUpdate = true;

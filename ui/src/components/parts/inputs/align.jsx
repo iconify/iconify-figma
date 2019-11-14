@@ -66,13 +66,13 @@ class AlignInput extends Component {
             <div className="plugin-align-box">
                 <a
                     href="#"
-                    onClick={this.boxClicked.bind(this)}
+                    onClick={this._onBoxClick.bind(this)}
                     dangerouslySetInnerHTML={{__html: this._renderSVG([x, y])}} ref={node => this.linkNode = node}
                 />
             </div>
             <div className="plugin-align-select">
-                <Select icon="arrows-horizontal" value={x} options={options.x} onChange={this.onChange.bind(this, true)} />
-                <Select icon="arrows-vertical" value={y} options={options.y} onChange={this.onChange.bind(this, false)} />
+                <Select icon="arrows-horizontal" value={x} options={options.x} onChange={this._onChange.bind(this, true)} />
+                <Select icon="arrows-vertical" value={y} options={options.y} onChange={this._onChange.bind(this, false)} />
             </div>
         </div>
     }
@@ -107,8 +107,9 @@ class AlignInput extends Component {
      *
      * @param {boolean} horizontal
      * @param {string} value
+     * @private
      */
-    onChange(horizontal, value) {
+    _onChange(horizontal, value) {
         let props = this.props;
         if (props.onChange) {
             props.onChange(horizontal, value);
@@ -119,8 +120,9 @@ class AlignInput extends Component {
      * Click on box
      *
      * @param event
+     * @private
      */
-    boxClicked(event) {
+    _onBoxClick(event) {
         let x, y;
 
         event.preventDefault();
@@ -141,7 +143,7 @@ class AlignInput extends Component {
             // left or right
             if (y >= gridSideWidth && y < gridOtherSide) {
                 // middle
-                this.onChange(true, constants.alignX[x < gridSideWidth ? 0 : 2]);
+                this._onChange(true, constants.alignX[x < gridSideWidth ? 0 : 2]);
             }
             return;
         }
@@ -149,7 +151,7 @@ class AlignInput extends Component {
         // Check vertical location for top/bottom
         if (y < gridSideWidth || y >= gridOtherSide) {
             // top or bottom, but not left/right
-            this.onChange(false, constants.alignY[y < gridSideWidth ? 0 : 2]);
+            this._onChange(false, constants.alignY[y < gridSideWidth ? 0 : 2]);
             return;
         }
 
@@ -165,7 +167,7 @@ class AlignInput extends Component {
 
             if (xCentered !== yCentered) {
                 // Center remaining coordinate
-                this.onChange(yCentered, constants[yCentered ? 'alignX' : 'alignY'][1]);
+                this._onChange(yCentered, constants[yCentered ? 'alignX' : 'alignY'][1]);
                 return;
             }
         }
@@ -182,7 +184,7 @@ class AlignInput extends Component {
                 horizontal = false;
             }
         }
-        this.onChange(horizontal, constants[horizontal ? 'alignX' : 'alignY'][1]);
+        this._onChange(horizontal, constants[horizontal ? 'alignX' : 'alignY'][1]);
     }
 }
 

@@ -78,7 +78,14 @@ class ShortIcon extends Component {
             iconName: this.props.name,
             node: 'drag',
             x: props.x,
-            y: props.y
+            y: props.y,
+            props: {
+                rotate: 0,
+                hFlip: false,
+                vFlip: false,
+            },
+            color: '',
+            height: '',
         });
     }
 

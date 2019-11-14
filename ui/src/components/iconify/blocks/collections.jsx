@@ -52,7 +52,7 @@ class CollectionsBlock extends Component {
                     index={item.index}
                     prefix={prefix}
                     title={item.title}
-                    onClick={this.onClick.bind(this, prefix)}
+                    onClick={this._onClick.bind(this, prefix)}
                     href={link.replace('{prefix}', prefix)}
                     info={item.author && item.author.name ? lang.by + item.author.name : ''}
                     total={item.total}
@@ -77,8 +77,9 @@ class CollectionsBlock extends Component {
      *
      * @param {string} prefix
      * @param {Event} event
+     * @private
      */
-    onClick(prefix, event) {
+    _onClick(prefix, event) {
         event.preventDefault();
 
         let props = this.props,

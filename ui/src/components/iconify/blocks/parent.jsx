@@ -53,7 +53,7 @@ class ParentBlock extends Component {
             parents.unshift(<a
                 key={key}
                 href="#"
-                onClick={this.onClick.bind(this, parent)}
+                onClick={this._onClick.bind(this, parent)}
             >
                 <Icon name="arrow-left" />
                 {title}
@@ -69,7 +69,14 @@ class ParentBlock extends Component {
         return <IconifyBlock type="parent">{parents}</IconifyBlock>;
     }
 
-    onClick(view, event) {
+    /**
+     * Parent link clicked
+     *
+     * @param view
+     * @param event
+     * @private
+     */
+    _onClick(view, event) {
         event.preventDefault();
         this.props.view.action('parent', view);
     }

@@ -38,7 +38,7 @@ class LongIcon extends Component {
             deleteButton = <a
                 href="#"
                 key="delete"
-                onClick={this.deleteClicked.bind(this)}
+                onClick={this._onDeleteClick.bind(this)}
                 className="plugin-icon-item-delete"
                 title={lang.delete}
             ><Icon name="trash" /></a>;
@@ -81,7 +81,7 @@ class LongIcon extends Component {
                     key={icon.prefix}
                     title={block.filters[icon.prefix]}
                     index={Object.keys(block.filters).indexOf(icon.prefix)}
-                    onClick={this.filterClicked.bind(this, 'collections', icon.prefix)}
+                    onClick={this._onFilterClick.bind(this, 'collections', icon.prefix)}
                 />);
             }
         }
@@ -103,7 +103,7 @@ class LongIcon extends Component {
                     key={filter.key + '-' + value}
                     title={value}
                     index={block.index + Object.keys(block.filters).indexOf(value)}
-                    onClick={this.filterClicked.bind(this, filter.key, value)}
+                    onClick={this._onFilterClick.bind(this, filter.key, value)}
                 />);
             });
         });
@@ -145,7 +145,14 @@ class LongIcon extends Component {
             iconName: this.props.name,
             node: 'drag',
             x: props.x,
-            y: props.y
+            y: props.y,
+            props: {
+                rotate: 0,
+                hFlip: false,
+                vFlip: false,
+            },
+            color: '',
+            height: '',
         });
     }
 
@@ -168,8 +175,9 @@ class LongIcon extends Component {
      * @param {string} name
      * @param {string} value
      * @param event
+     * @private
      */
-    filterClicked(name, value, event) {
+    _onFilterClick(name, value, event) {
         event.preventDefault();
         this.props.view.action(name, value);
     }
@@ -178,8 +186,9 @@ class LongIcon extends Component {
      * Delete icon
      *
      * @param event
+     * @private
      */
-    deleteClicked(event) {
+    _onDeleteClick(event) {
         event.preventDefault();
         this.props.view.action('delete', this.props.icon)
     }

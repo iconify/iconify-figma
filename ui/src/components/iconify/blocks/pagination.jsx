@@ -38,7 +38,7 @@ class PaginationBlock extends Component {
 
         // First page
         if (block.page > 0) {
-            pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--arrow plugin-pagination-page--prev" onClick={this.setPage.bind(this, block.page - 1)} key="prev" title={lang.prev}><Icon name="arrow-left" /></a>);
+            pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--arrow plugin-pagination-page--prev" onClick={this._onClick.bind(this, block.page - 1)} key="prev" title={lang.prev}><Icon name="arrow-left" /></a>);
         }
 
         // Add all pages
@@ -48,28 +48,37 @@ class PaginationBlock extends Component {
             }
 
             if (page === 'more') {
-                pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--more" onClick={this.setPage.bind(this, 'more')} key="more">{lang.more}</a>);
+                pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--more" onClick={this._onClick.bind(this, 'more')} key="more">{lang.more}</a>);
                 return;
             }
 
-            pagination.push(<a href="#" className={'plugin-pagination-page' + (block.page === page ? ' plugin-pagination-page--selected' : '')} onClick={this.setPage.bind(this, page)} key={page}>{page + 1}</a>);
+            pagination.push(<a href="#" className={'plugin-pagination-page' + (block.page === page ? ' plugin-pagination-page--selected' : '')} onClick={this._onClick.bind(this, page)} key={page}>{page + 1}</a>);
             prev = page;
         });
 
         // Next page
         if (block.page !== prev) {
-            pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--arrow plugin-pagination-page--next" onClick={this.setPage.bind(this, block.page + 1)} key="next" title={lang.next}><Icon name="arrow-right" /></a>);
+            pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--arrow plugin-pagination-page--next" onClick={this._onClick.bind(this, block.page + 1)} key="next" title={lang.next}><Icon name="arrow-right" /></a>);
 
         }
 
         return <IconifyBlock type="pagination">{pagination}</IconifyBlock>;
     }
 
-    setPage(page, event) {
+    /**
+     * Set page
+     *
+     * @param {*} page
+     * @param {*} event
+     * @private
+     */
+    _onClick(page, event) {
         event.preventDefault();
+
         let props = this.props,
             name = props.block,
             block = props.view.blocks[name];
+
         block.action(page);
     }
 }

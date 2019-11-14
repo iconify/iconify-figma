@@ -21,7 +21,7 @@
     color: $plugin-palette-color-white;
     background-color: $plugin-palette-background-blue;
 
-    &:enabled:active, &:enabled:focus {
+    &:enabled:active, &:enabled:not(:hover):focus {
       border: 2px solid $plugin-palette-background-darker-blue;
     }
 
@@ -37,7 +37,7 @@
     color: $plugin-palette-color-white;
     background-color: $plugin-palette-background-red;
 
-    &:enabled:active, &:enabled:focus {
+    &:enabled:active, &:enabled:not(:hover):focus {
       border: 2px solid $plugin-palette-color-black-muted;
     }
 
@@ -54,7 +54,7 @@
     border: 1px solid $plugin-palette-color-black-dimmed;
     background-color: $plugin-palette-background-white;
 
-    &:enabled:active, &:enabled:focus {
+    &:enabled:active, &:enabled:not(:hover):focus {
       padding: 4px 15px 4px 15px;
 
       border: 2px solid $plugin-palette-border-blue;
@@ -73,7 +73,7 @@
     border: 1px solid $plugin-palette-border-red;
     background-color: $plugin-palette-background-white;
 
-    &:enabled:active, &:enabled:focus {
+    &:enabled:active, &:enabled:not(:hover):focus {
       padding: 4px 15px 4px 15px;
 
       border: 2px solid $plugin-palette-border-red;
@@ -101,9 +101,11 @@
   &:hover {
     background-color: $plugin-palette-background-hover;
   }
-  &:active, &:focus {
-    box-shadow: $plugin-button-active-shadow;
+  &:focus {
     outline: none;
+  }
+  &:active, &:not(:hover):focus {
+    box-shadow: $plugin-button-active-shadow;
   }
 
   svg {
