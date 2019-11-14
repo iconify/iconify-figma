@@ -9,6 +9,8 @@
     @include plugin-font-ui-pos('medium', 'normal');
     padding: 6px 8px;
     box-sizing: border-box;
+    height: $plugin-font-lineheight + 12px;
+    box-sizing: border-box;
   }
 
   span {
@@ -48,6 +50,9 @@
     position: absolute;
     top: 50%;
     margin-top: -14px;
+    svg {
+      margin: 4px 0;
+    }
   }
   .plugin-pagination-page--prev {
     left: 0;
