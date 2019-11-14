@@ -12,6 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
+
 "use strict";
 
 import React, { Component } from 'react';
@@ -26,6 +27,7 @@ import IconifyContainer from './containers/iconify';
 import RecentContainer from './containers/recent';
 import PasteSVGContainer from './containers/paste';
 import GitHubContainer from './containers/github';
+import FloatingNotices from './parts/floating-notices';
 
 const containers = {
     iconify: IconifyContainer,
@@ -73,6 +75,9 @@ class Container extends Component {
         // Disable cache for icons
         Iconify.setConfig('localStorage', false);
         Iconify.setConfig('sessionStorage', false);
+
+        // Notices
+        this.notices = [];
 
         // Options
         this.options = ui.options;
@@ -155,6 +160,7 @@ class Container extends Component {
      * Assign component in UI instance
      */
     componentDidMount() {
+        this.mounted = true;
         this.props.ui.component = this;
         this.options.onChangeListener = this;
         this.options.onChange = this.update.bind(this);
@@ -164,6 +170,7 @@ class Container extends Component {
      * Unassign component in UI instance
      */
     componentWillUnmount() {
+        this.mounted = false;
         if (this.props.ui.component === this) {
             this.props.ui.component = null;
         }
@@ -184,6 +191,7 @@ class Container extends Component {
         return <div className={'plugin-wrapper plugin-wrapper--' + this.route.page}>
             <FigmaNavigation route={this.route} container={this} />
             <Content container={this} route={this.route[this.route.page]}/>
+            <FloatingNotices notices={this.notices} onDelete={this._onDeleteNotice.bind(this)} />
         </div>;
     }
 
@@ -232,9 +240,10 @@ class Container extends Component {
      * Re-render container
      */
     update() {
-        if (this.props.ui.component !== this || this._pendingUpdate) {
+        if (!this.mounted || this.props.ui.component !== this || this._pendingUpdate) {
             return;
         }
+
         // No more than 1 update per cycle
         this._pendingUpdate = true;
         setTimeout(() => {
@@ -541,6 +550,67 @@ class Container extends Component {
         this.selectedNodes.push(tree);
 
         this.update();
+    }
+
+    /**
+     * Add notice
+     *
+     * @param {string} message
+     * @param {object} [options]
+     */
+    addNotice(message, options) {
+        options = Object.assign({
+            type: 'notice',
+            expiration: 5000,
+            key: null
+        }, typeof options === 'object' ? options : {});
+
+        let time = Math.round(Date.now() / 1000);
+        while (this.notices.find(notice => notice.time === time) !== void 0) {
+            time ++;
+        }
+
+        // Remove duplicate notice if unique key is set
+        if (options.key) {
+            this.notices = this.notices.filter(notice => notice.key !== options.key);
+        }
+
+        // Add notice
+        this.notices.push({
+            time: time,
+            expiration: options.expiration,
+            expires: time + options.expiration,
+            type: options.type,
+            message: message,
+            key: options.key
+        });
+
+        // Remove notice on timer
+        setTimeout(this._onDeleteNotice.bind(this, time), options.expiration);
+
+        // Update component
+        this.update();
+    }
+
+    /**
+     * Delete notice
+     *
+     * @param {number} time
+     * @private
+     */
+    _onDeleteNotice(time) {
+        if (!this.mounted) {
+            return;
+        }
+
+        let oldCount = this.notices.length,
+            currentTime = Math.round(Date.now() / 1000);
+
+        this.notices = this.notices.filter(notice => notice.expires > currentTime && notice.time !== time);
+
+        if (this.notices.length !== oldCount) {
+            this.update();
+        }
     }
 }
 

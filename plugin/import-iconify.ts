@@ -1,7 +1,7 @@
 "use strict";
 
 import moveSvg from './move-node';
-import { addToSelection } from './node-functions';
+import {addToSelection, findParentNodes} from './node-functions';
 
 function importIconify(env, props) {
 	// Create node from SVG
@@ -32,6 +32,12 @@ function importIconify(env, props) {
 
 	// Select node
 	addToSelection(env, node);
+
+	// Send notice
+	figma.ui.postMessage({
+		event: 'success',
+		message: 'Icon "' + props.name + '" was imported to ' + node.parent.type.toLowerCase() + ' "' + node.parent.name + '"',
+	});
 }
 
 export default importIconify;

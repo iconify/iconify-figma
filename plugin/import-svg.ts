@@ -24,6 +24,12 @@ function importSVG(env, props) {
 
 	// Select node
 	addToSelection(env, node);
+
+	// Send notice
+	figma.ui.postMessage({
+		event: 'success',
+		message: 'SVG was imported to ' + node.parent.type.toLowerCase() + ' "' + node.parent.name + '"',
+	});
 }
 
 export default importSVG;

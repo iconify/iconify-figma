@@ -298,6 +298,18 @@ class UI {
             this.params.selectedNodes = convertedNodes;
         }
     }
+
+    /**
+     * Add notice
+     *
+     * @param {string} message
+     * @param {object} [options]
+     */
+    addNotice(message, options) {
+        if (this.component) {
+            this.component.addNotice(message, options);
+        }
+    }
 }
 
 export default UI;

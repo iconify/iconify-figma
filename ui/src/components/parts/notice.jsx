@@ -17,12 +17,18 @@
 import React from 'react';
 
 function Notice(props) {
-    let className = 'plugin-notice';
-    if (props.type !== void 0) {
-        className += ' plugin-notice--' + props.type;
+    let { children, type, ...attribs } = props;
+
+    // Resolve className
+    if (typeof attribs.className !== 'string') {
+        attribs.className = '';
+    }
+    attribs.className += ' plugin-notice';
+    if (type !== void 0) {
+        attribs.className += ' plugin-notice--' + props.type;
     }
 
-    return <div className={className}>{props.children}</div>;
+    return <div {...attribs}>{children}</div>;
 }
 
 export default Notice;

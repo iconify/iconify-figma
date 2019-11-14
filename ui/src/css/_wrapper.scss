@@ -22,3 +22,17 @@
   clear: both;
   margin-top: 16px;
 }
+
+// Floating notice
+.plugin-floating-notice {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 0;
+  z-index: 3;
+  opacity: .8;
+  transition: opacity .2s ease;
+  &:hover {
+    opacity: 1;
+  }
+}

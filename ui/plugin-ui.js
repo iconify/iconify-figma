@@ -148,7 +148,16 @@ delay(counter => {
 
             case 'selected-nodes':
                 // Update list of possible parent nodes
-                ui.setSelectedNodes(message.nodes)
+                ui.setSelectedNodes(message.nodes);
+                break;
+
+            case 'error':
+            case 'notice':
+            case 'success':
+                ui.addNotice(message.message, Object.assign({
+                    type: message.event
+                }, message));
+                break;
         }
     };
 

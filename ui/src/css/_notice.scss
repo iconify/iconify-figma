@@ -12,7 +12,44 @@
   &--error {
     background: $plugin-palette-background-red;
   }
-  &--notice {
-    opacity: .3;
+  &--warning {
+    background: $plugin-palette-background-blue;
+  }
+  &--success {
+    background: $plugin-palette-background-green;
+  }
+
+  &--floating {
+    animation-name: plugin-floating-notice;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    cursor: pointer;
+    display: table;
+    margin: 16px auto;
+    text-align: center;
+  }
+  &--3000 {
+    animation-duration: 3s;
+  }
+  &--10000 {
+    animation-duration: 10s;
+  }
+}
+
+@keyframes plugin-floating-notice {
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
