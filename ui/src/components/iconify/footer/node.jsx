@@ -28,51 +28,58 @@ class FooterNodeOptions extends Component {
         let props = this.props,
             options = props.app.options,
             nodes = props.app.selectedNodes,
-            showNodes = true,
+            showAlign = true,
             items = [];
 
-        if (!nodes || !nodes.length) {
-            showNodes = false;
-        } else {
-            // Get selected node
-            let selectedId = options.node,
-                hasSelection = selectedId !== '';
-
-            // Add components for all nodes
-            const add = (node, level) => {
-                items.push(this.renderNode(node, level, hasSelection ? node.id === selectedId : node.default));
-
-                // Add children
-                node.children.forEach(child => {
-                    add(child, level + 1);
-                });
-            };
-
-            // Add all nodes
-            nodes.forEach(node => {
-                add(node, 0)
-            });
-
-            // Check if there are viable choices
-            if (items.length < 2) {
-                showNodes = false;
-            }
+        if (!nodes || !nodes.length || !nodes[0]) {
+            return null;
         }
 
-        return <FooterBlock type="nodes" title={showNodes ? lang.nodeOptions : lang.nodeOptionsEmpty}>
+        // Get selected node
+        let selectedId = options.node,
+            hasSelection = selectedId !== '';
+
+        // Add components for all nodes
+        const add = (node, level) => {
+            items.push(this.renderNode(node, level, hasSelection ? node.id === selectedId : node.default));
+
+            // Check for node type. Cannot show alignment on page node yet
+            if (node.id === selectedId) {
+                if (node.type === 'PAGE') {
+                    showAlign = false;
+                }
+            }
+
+            // Add children
+            node.children.forEach(child => {
+                add(child, level + 1);
+            });
+        };
+
+        // Add all nodes
+        nodes.forEach(node => {
+            add(node, 0)
+        });
+
+        // Check if there are viable choices
+        if (items.length < 2) {
+            return null;
+        }
+
+        return <FooterBlock type="nodes" title={showAlign ? lang.nodeOptions : lang.nodeOptionsPage}>
             <div className="plugin-footer-nodes-wrapper">
-                {showNodes && <div className="plugin-footer-nodes">
+                <div className="plugin-footer-nodes">
                     <div className="plugin-layers">
                         {items}
                     </div>
-                </div>}
-                <div className="plugin-footer-nodes-align">
+                </div>
+                {showAlign && <div className="plugin-footer-nodes-align">
                     <Align
                         x={options.nodeX}
                         y={options.nodeY}
                         onChange={this.changeAlign.bind(this)}
                     />
-                </div>
+                </div>}
             </div>
         </FooterBlock>;
     }

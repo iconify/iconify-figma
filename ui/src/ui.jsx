@@ -241,6 +241,9 @@ class UI {
 
         // Root node
         let root = nodes.shift();
+        if (root === void 0) {
+            return null;
+        }
         root.children = [];
 
         let length = 1;

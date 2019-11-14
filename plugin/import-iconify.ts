@@ -1,6 +1,7 @@
 "use strict";
 
 import moveSvg from './move-node';
+import { addToSelection } from './node-functions';
 
 function importIconify(env, props) {
 	// Create node from SVG
@@ -27,10 +28,10 @@ function importIconify(env, props) {
 	if (!figma.currentPage) {
 		return;
 	}
-	moveSvg(env, node);
+	moveSvg(env, node, props);
 
 	// Select node
-	figma.currentPage.selection = [node];
+	addToSelection(env, node);
 }
 
 export default importIconify;

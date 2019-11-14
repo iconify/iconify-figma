@@ -1,6 +1,7 @@
 "use strict";
 
 import moveSvg from './move-node';
+import { addToSelection } from './node-functions';
 
 function importSVG(env, props) {
 	// Create node from SVG
@@ -19,10 +20,10 @@ function importSVG(env, props) {
 	if (!figma.currentPage) {
 		return;
 	}
-	moveSvg(env, node);
+	moveSvg(env, node, props);
 
 	// Select node
-	figma.currentPage.selection = [node];
+	addToSelection(env, node);
 }
 
 export default importSVG;

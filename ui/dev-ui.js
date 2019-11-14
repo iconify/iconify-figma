@@ -105,13 +105,11 @@ setTimeout(function () {
 }, 5000);
 
 // Test setSelectedNodes
-/*
 setTimeout(() => {
     ui.setSelectedNodes([
-        {"id":"0:1","type":"PAGE","name":"Tests","parents":[]},
-        {"id":"130:38","type":"FRAME","name":"footer","parents":["130:35","0:1"], "default": true},
-        {"id":"130:37","type":"GROUP","name":"header","parents":["130:35","0:1"]},
-        {"id":"130:35","type":"FRAME","name":"iOS stuff","parents":["0:1"]}
+        // {"id":"0:1","type":"PAGE","name":"Tests","parents":[]},
+        // {"id":"130:38","type":"FRAME","name":"footer","parents":["130:35","0:1"], "default": true},
+        // {"id":"130:37","type":"GROUP","name":"header","parents":["130:35","0:1"]},
+        // {"id":"130:35","type":"FRAME","name":"iOS stuff","parents":["0:1"]}
     ]);
 }, 1000);
-*/

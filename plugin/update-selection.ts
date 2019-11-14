@@ -35,9 +35,9 @@ function checkLayers(env) {
  * @param {string} event
  */
 function updateSelection(env, event) {
-	// Ignore event if ignoreNextSelection > 0 (used when new layers are added by plugin)
-	if (event === 'selectionchanged' && env.ignoreNextSelection) {
-		env.ignoreNextSelection --;
+	// Ignore event if ignoreNextSelection is set (used when new layers are added by plugin)
+	if (env.ignoreNextSelection) {
+		env.ignoreNextSelection = false;
 		return;
 	}
 

@@ -517,7 +517,9 @@ class Container extends Component {
      */
     setSelectedNodes(tree) {
         // Remove old root
-        this.selectedNodes.shift();
+        while (this.selectedNodes && this.selectedNodes.length) {
+            this.selectedNodes.shift();
+        }
 
         // Add new root
         this.selectedNodes.push(tree);
