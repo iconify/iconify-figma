@@ -16,6 +16,8 @@
 
 import React from 'react';
 
+import Draggable from './draggable';
+
 function GridIcon(props) {
     let className = 'plugin-icon-item';
     if (props.loading) {
@@ -32,7 +34,11 @@ function GridIcon(props) {
         onClick: props.onClick
     };
     if (!props.loading && props.svg) {
-        linkProps.dangerouslySetInnerHTML = {__html: props.svg};
+        if (props.onDrag) {
+            linkProps.children = <Draggable onDrag={props.onDrag} dangerouslySetInnerHTML={{__html: props.svg}} />;
+        } else {
+            linkProps.dangerouslySetInnerHTML = {__html: props.svg};
+        }
     }
 
     return <div className={className}>

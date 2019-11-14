@@ -3,6 +3,32 @@
 import { findParentNode, findParentNodeById } from './node-functions';
 
 /**
+ * Drop node
+ *
+ * @param {object} env
+ * @param {FrameNode} node
+ * @param {object} props
+ */
+function dropNode(env, node, props) {
+	let parent = figma.currentPage;
+
+	node.x = Math.round(figma.viewport.center.x - node.width / 2);
+	if (typeof props.x === 'number') {
+		node.x += Math.round(props.x / figma.viewport.zoom);
+	}
+
+	node.y = Math.round(figma.viewport.center.y - node.height / 2);
+	if (typeof props.y === 'number') {
+		node.y += Math.round(props.y / figma.viewport.zoom);
+	}
+
+	// Change parent node
+	if (parent !== node.parent) {
+		parent.insertChild(parent.children.length, node);
+	}
+}
+
+/**
  * Move node
  *
  * @param {object} env
@@ -11,6 +37,12 @@ import { findParentNode, findParentNodeById } from './node-functions';
  */
 function moveNode(env, node, props) {
 	let parent = null;
+
+	if (props && props.node === 'drag') {
+		dropNode(env, node, props);
+		return;
+	}
+
 	if (props && typeof props.node === 'string') {
 		parent = findParentNodeById(env, props.node);
 	}

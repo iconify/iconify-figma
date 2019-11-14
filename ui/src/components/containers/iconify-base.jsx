@@ -145,9 +145,10 @@ class IconifyBaseContainer extends Component {
      * Import currently selected Iconify icon
      *
      * @param [event]
+     * @param [options]
      */
-    importIconifyIcon(event) {
-        this.props.container.importIconifyIcon(event);
+    importIconifyIcon(event, options) {
+        this.props.container.importIconifyIcon(event, options);
     }
 
     /**

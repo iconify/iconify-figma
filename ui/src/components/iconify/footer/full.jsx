@@ -94,6 +94,7 @@ class FullFooter extends Component {
                     width={data.width}
                     height={data.height}
                     customHeight={customHeight ? bigSampleHeight : void 0}
+                    onSampleDrag={this._onSampleDrag.bind(this)}
                 />
                 <div>
                     {this.renderIconName()}
@@ -163,6 +164,20 @@ class FullFooter extends Component {
      */
     componentWillUnmount() {
         this._mounted = false;
+    }
+
+    /**
+     * Sample was dragged
+     *
+     * @param {object} coords
+     * @private
+     */
+    _onSampleDrag(coords) {
+        this.props.container.importIconifyIcon(null, {
+            node: 'drag',
+            x: coords.x,
+            y: coords.y
+        });
     }
 
     /**

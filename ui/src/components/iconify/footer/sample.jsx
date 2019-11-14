@@ -15,6 +15,7 @@
 "use strict";
 
 import React from 'react';
+import Draggable from '../../parts/draggable';
 
 function FooterSample(props) {
     let style = {};
@@ -24,7 +25,7 @@ function FooterSample(props) {
         };
     }
 
-    return <div>
+    return <Draggable onDrag={props.onSampleDrag}>
         <div className="plugin-footer-icon-sample" dangerouslySetInnerHTML={{__html: props.svg}} style={style} />
         {
             props.width && props.height &&
@@ -38,7 +39,7 @@ function FooterSample(props) {
                 ({props.customHeight})
             </div>
         }
-    </div>;
+    </Draggable>;
 }
 
 export default FooterSample;

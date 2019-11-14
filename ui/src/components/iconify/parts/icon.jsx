@@ -36,7 +36,7 @@ class ShortIcon extends Component {
                 loading={true}
                 selected={props.selected}
                 href={link}
-                onClick={this.onClick.bind(this)}
+                onClick={this._onClick.bind(this)}
                 tooltip={name + '\n' + lang.loading}
             />;
         }
@@ -61,17 +61,34 @@ class ShortIcon extends Component {
             selected={props.selected}
             href={link}
             tooltip={tooltip}
-            onClick={this.onClick.bind(this)}
+            onClick={this._onClick.bind(this)}
+            onDrag={this._onDrag.bind(this)}
             svg={svg}
         />;
+    }
+
+    /**
+     * Icon dragged
+     *
+     * @param {object} props
+     * @private
+     */
+    _onDrag(props) {
+        this.props.container.importIconifyIcon(null, {
+            iconName: this.props.name,
+            node: 'drag',
+            x: props.x,
+            y: props.y
+        });
     }
 
     /**
      * Icon clicked
      *
      * @param event
+     * @private
      */
-    onClick(event) {
+    _onClick(event) {
         event.preventDefault();
         if (this.props.onClick) {
             this.props.onClick(this.props.icon);

@@ -16,6 +16,8 @@
 
 import React from 'react';
 
+import Draggable from './draggable';
+
 function ListIcon(props) {
     let className = 'plugin-icon-item';
     if (props.loading) {
@@ -25,8 +27,26 @@ function ListIcon(props) {
         className += ' plugin-icon-item--selected';
     }
 
+    let sample = null;
+    if (!props.pending && props.svg) {
+        let linkProps = {
+            className: 'plugin-icon-item-svg',
+            href: props.href ? props.href : '#',
+            title: props.tooltip,
+            onClick: props.onClick
+        };
+
+        if (props.onDrag) {
+            linkProps.children = <Draggable onDrag={props.onDrag} dangerouslySetInnerHTML={{__html: props.svg}} />;
+        } else {
+            linkProps.dangerouslySetInnerHTML = {__html: props.svg};
+        }
+
+        sample = <a {...linkProps}/>;
+    }
+
     return <div className={className}>
-        {!props.pending && props.svg && <a className="plugin-icon-item-svg" href={props.href ? props.href : '#'} title={props.tooltip} onClick={props.onClick} dangerouslySetInnerHTML={{__html: props.svg}} />}
+        {sample}
         <div className="plugin-icon-item-data">
             <a className="plugin-icon-item-title" href={props.href ? props.href : '#'} title={props.tooltip} onClick={props.onClick}>{props.title}</a>
             {props.size && <span className="plugin-icon-item-size">{props.size}</span>}

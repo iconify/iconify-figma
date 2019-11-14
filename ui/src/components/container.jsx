@@ -357,8 +357,9 @@ class Container extends Component {
      * Import currently selected Iconify icon
      *
      * @param [event]
+     * @param [options]
      */
-    importIconifyIcon(event) {
+    importIconifyIcon(event, options) {
         let ico = this.iconify,
             iconName = this.options.iconName;
 
@@ -367,6 +368,10 @@ class Container extends Component {
         }
 
         // Get selected icon
+        if (options && options.iconName !== void 0) {
+            iconName = options.iconName;
+            delete options.iconName;
+        }
         if (iconName === null) {
             return;
         }
@@ -387,8 +392,14 @@ class Container extends Component {
 
         // Create icon data
         let attributes = this.options.getIconTransformations(),
-            height = this.options.height,
-            color = this.options.color;
+            height = options && options.height ? options.height : this.options.height,
+            color = options && options.color ? options.color : this.options.color;
+
+        // Custom options for this export
+        if (options && options.props) {
+            Object.assign(attributes, options.props);
+            delete options.props;
+        }
 
         let data = {
             // Name
@@ -406,6 +417,11 @@ class Container extends Component {
             x: this.options.nodeX,
             y: this.options.nodeY,
         };
+
+        // Custom options for this export
+        if (options) {
+            Object.assign(data, options);
+        }
 
         // Get SVG
         let svgProps = {

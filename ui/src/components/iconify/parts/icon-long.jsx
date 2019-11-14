@@ -49,7 +49,7 @@ class LongIcon extends Component {
                 loading={true}
                 selected={props.selected}
                 title={props.title}
-                onClick={this.onClick.bind(this)}
+                onClick={this._onClick.bind(this)}
                 size={lang.loading}
             >{deleteButton}</ListIcon>;
         }
@@ -125,7 +125,8 @@ class LongIcon extends Component {
             title={props.title}
             href={link}
             tooltip={tooltip}
-            onClick={this.onClick.bind(this)}
+            onClick={this._onClick.bind(this)}
+            onDrag={this._onDrag.bind(this)}
             svg={svg}
             size={size}
         >
@@ -134,11 +135,27 @@ class LongIcon extends Component {
     }
 
     /**
+     * Icon dragged
+     *
+     * @param {object} props
+     * @private
+     */
+    _onDrag(props) {
+        this.props.container.importIconifyIcon(null, {
+            iconName: this.props.name,
+            node: 'drag',
+            x: props.x,
+            y: props.y
+        });
+    }
+
+    /**
      * Icon clicked
      *
      * @param event
+     * @private
      */
-    onClick(event) {
+    _onClick(event) {
         event.preventDefault();
         if (this.props.onClick) {
             this.props.onClick(this.props.icon);
