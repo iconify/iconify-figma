@@ -87,7 +87,7 @@ let params = {
     parentNodes: [
         {"id":"0:1","type":"PAGE","name":"Tests","parents":[]},
         {"id":"130:38","type":"FRAME","name":"footer","parents":["130:35","0:1"], "default": true},
-        {"id":"130:37","type":"GROUP","name":"header","parents":["130:35","0:1"]},
+        {"id":"130:37","type":"GROUP","name":"Layer with a very very very very very very very very very very long name to test overflow","parents":["130:35","0:1"]},
         {"id":"130:35","type":"FRAME","name":"iOS stuff","parents":["0:1"]}
     ],
 };

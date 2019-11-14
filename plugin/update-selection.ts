@@ -1,6 +1,6 @@
 "use strict";
 
-import { isRootNode, findParentNode, findParentNodes } from './node-functions';
+import { findParentNodes } from './node-functions';
 
 let pendingEvent = false;
 let lastList = null;

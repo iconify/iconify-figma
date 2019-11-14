@@ -155,3 +155,26 @@
 .plugin-footer-block---code {
   margin: 8px 0;
 }
+
+// Nodes list
+.plugin-footer-nodes-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 8px 0 16px;
+
+  .plugin-footer-nodes {
+    margin-right: 16px;
+    margin-bottom: 16px;
+    flex-grow: 1;
+    max-width: calc(100% - #{$plugin-align-block-width + 16px});
+
+    @media (max-width: 600px) {
+      max-width: 100%;
+    }
+  }
+
+  .plugin-footer-nodes-align {
+    width: $plugin-align-block-width;
+  }
+}

@@ -126,6 +126,54 @@ function IconDecoration(props) {
                     <path d="M3.5 5.5h5v1h-5z"/>
                 </g>
             </svg>;
+
+        // Layers
+        case 'layer-opened':
+            return <svg width="16" height="32" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="M5 14h6l-3 4z" fillRule="evenodd"/>
+            </svg>;
+
+        case 'layer-closed':
+            return <svg width="16" height="32" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="M6 13l4 3-4 3z" fillRule="evenodd"/>
+            </svg>;
+
+        case 'layer-none':
+            return <svg width="16" height="32" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg"/>;
+
+        case 'layer-frame':
+            return <svg width="16" height="32" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.5 13.5h11m-11 5h11m-8-8v11m5-11v11" fill="none" strokeLinecap="square" stroke="currentColor"/>
+            </svg>;
+
+        case 'layer-group':
+            return <svg width="16" height="32" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fillRule="evenodd" stroke="currentColor">
+                    <path d="M3.5 12.5v-1h1m7 0h1v1m0 7v1h-1m-7 0h-1v-1"/>
+                    <path strokeLinecap="square" d="M7 11.5h2m-2 9h2M3.5 15v2m9-2v2"/>
+                </g>
+            </svg>;
+
+        case 'layer-page':
+            return <svg width="16" height="32" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" d="M3.5 10.5h5l4 4v7h-9z" fill="none"/>
+            </svg>;
+
+        case 'layer-instance':
+        case 'layer-component':
+            return <svg width="16" height="32" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="currentColor" d="M8 9l7 7-7 7-7-7z" fill="none"/>
+            </svg>;
+
+        /*
+        case 'layer-viewport':
+            return <svg width="16" height="32" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(1 12.5)" fill="none" fillRule="evenodd">
+                    <path d="M6.99 0C4.73 0 2.41 1.096.582 3.29a.337.337 0 00-.008.431C1.978 5.561 4.267 7 6.99 7c2.694 0 5.03-1.443 6.436-3.287a.34.34 0 000-.425C12.017 1.465 9.664 0 6.99 0z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle fill="currentColor" cx="7" cy="3.5" r="2"/>
+                </g>
+            </svg>;
+        */
     }
 
     return <span {...params}>Icon: {name}</span>;

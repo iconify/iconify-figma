@@ -94,10 +94,16 @@ $plugin-button-active-shadow: 0 0 0 2px $plugin-palette-border-blue inset;
 $plugin-simple-focus-shadow: 0 0 0 1px $plugin-palette-border-blue;
 
 // Alignment
-$plugin-align-box: 61px;
-$plugin-align-input: 120px;
+$plugin-align-box-size: 61px;
+$plugin-align-input-width: 120px;
+$plugin-align-block-width: $plugin-align-box-size + 2px + 8px + $plugin-align-input-width;
 
 // Collections list
 $plugin-collection-border-width: 1px; // Collection border
 $plugin-collection-stats-width: 80px + $plugin-collection-border-width; // Stats block width
 $plugin-collection-min-width: 200px; // Entire block min-width
+
+// Layer
+$plugin-layer-height: 32px;
+$plugin-layer-padding: 12px; // Figma uses 24px. Changed for more compact layout
+$plugin-layer-icon-width: 16px;

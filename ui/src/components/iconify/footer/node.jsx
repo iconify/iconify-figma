@@ -18,11 +18,10 @@ import React, { Component } from 'react';
 
 import FooterBlock from './block';
 import Align from '../../parts/inputs/align';
+import Layer from '../../parts/layer';
 
 const phrases = require('../../../data/phrases');
 const lang = phrases.footer;
-
-const viewportId = 'viewport';
 
 class FooterNodeOptions extends Component {
     render() {
@@ -49,25 +48,23 @@ class FooterNodeOptions extends Component {
                 });
             };
 
-            // Add component for viewport
-            items.push(this.renderNode({
-                id: viewportId,
-                type: 'VIEWPORT',
-                name: 'Viewport',
-            }, 0, selectedId === viewportId));
-
             // Add all nodes
             nodes.forEach(node => {
                 add(node, 0)
             });
 
+            // Check if there are viable choices
+            if (items.length < 2) {
+                showNodes = false;
+            }
         }
 
-        return <FooterBlock type="nodes" title={lang.importOptions}>
+        return <FooterBlock type="nodes" title={showNodes ? lang.nodeOptions : lang.nodeOptionsEmpty}>
             <div className="plugin-footer-nodes-wrapper">
                 {showNodes && <div className="plugin-footer-nodes">
-                    <div>{lang.parentNode}</div>
-                    {items}
+                    <div className="plugin-layers">
+                        {items}
+                    </div>
                 </div>}
                 <div className="plugin-footer-nodes-align">
                     <Align
@@ -83,21 +80,24 @@ class FooterNodeOptions extends Component {
     renderNode(node, level, selected) {
         let key = node.id + '-' + level;
 
-        return <div key={key}>
-            <a href="#" onClick={this.nodeClicked.bind(this, node.default ? '' : node.id)}>
-                {level + ' [' + node.id + '] :' + node.type + ': ' + node.name} {selected ? (node.default ? ' (default, selected)' : ' (selected)') : (node.default ? ' (default)' : '')}
-            </a>
-        </div>;
+        // {level + ' [' + node.id + '] :' + node.type + ': ' + node.name} {selected ? (node.default ? ' (default, selected)' : ' (selected)') : (node.default ? ' (default)' : '')}
+        return <Layer
+            key={key}
+            level={level}
+            title={node.name}
+            selected={selected}
+            icon={node.type.toLowerCase()}
+            skipToggle={true}
+            onClick={this.nodeClicked.bind(this, node.default ? '' : node.id)}
+        />;
     }
 
     /**
      * Change selected node
      *
      * @param {string} id
-     * @param event
      */
-    nodeClicked(id, event) {
-        event.preventDefault();
+    nodeClicked(id) {
         if (this.props.app.options.node === id) {
             return;
         }

@@ -64,7 +64,11 @@ class AlignInput extends Component {
 
         return <div className="plugin-align">
             <div className="plugin-align-box">
-                <a href="#" onClick={this.boxClicked.bind(this)} dangerouslySetInnerHTML={{__html: this._renderSVG([x, y])}} ref={node => this.linkNode = node} />
+                <a
+                    href="#"
+                    onClick={this.boxClicked.bind(this)}
+                    dangerouslySetInnerHTML={{__html: this._renderSVG([x, y])}} ref={node => this.linkNode = node}
+                />
             </div>
             <div className="plugin-align-select">
                 <Select icon="arrows-horizontal" value={x} options={options.x} onChange={this.onChange.bind(this, true)} />
