@@ -74,19 +74,10 @@ class ShortIcon extends Component {
      * @private
      */
     _onDrag(props) {
-        this.props.container.importIconifyIcon(null, {
+        this.props.container.dropIconifyIcon({
+            isSample: false,
             iconName: this.props.name,
-            node: 'drag',
-            x: props.x,
-            y: props.y,
-            props: {
-                rotate: 0,
-                hFlip: false,
-                vFlip: false,
-            },
-            color: '',
-            height: '',
-        });
+        }, props);
     }
 
     /**

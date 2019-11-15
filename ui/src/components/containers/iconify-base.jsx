@@ -152,6 +152,29 @@ class IconifyBaseContainer extends Component {
     }
 
     /**
+     * Drop icon
+     *
+     * @param {object} props
+     * @param {object} coords
+     */
+    dropIconifyIcon(props, coords) {
+        let options = Object.assign({
+            node: 'drag'
+        }, coords, props.isSample ? {} : {
+            iconName: props.iconName,
+            props: {
+                rotate: 0,
+                hFlip: false,
+                vFlip: false,
+            },
+            color: '',
+            height: '',
+        });
+
+        this.props.container.importIconifyIcon(null, options);
+    }
+
+    /**
      * Scale down icon
      *
      * @param {number} height

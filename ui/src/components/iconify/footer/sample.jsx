@@ -25,7 +25,7 @@ function FooterSample(props) {
         };
     }
 
-    return <Draggable onDrag={props.onSampleDrag}>
+    return <Draggable onDrag={props.onSampleDrag} offsetY={-200}>
         <div className="plugin-footer-icon-sample" dangerouslySetInnerHTML={{__html: props.svg}} style={style} />
         {
             props.width && props.height &&

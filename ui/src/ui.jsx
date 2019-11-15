@@ -212,9 +212,17 @@ class UI {
             storage: this.localStorage
         };
 
-        // Copy object
-        let result = JSON.stringify(params);
-        return stringify ? result : JSON.parse(result);
+        // Deep copy object
+        let result = JSON.parse(JSON.stringify(params));
+
+        // Remove routes except Iconify
+        Object.keys(result.route).forEach(key => {
+            if (key !== 'page' && key !== 'iconify') {
+                delete result.route[key];
+            }
+        });
+
+        return stringify ? JSON.stringify(result) : result;
     }
 
     /**

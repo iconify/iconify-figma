@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 class Draggable extends Component {
     render() {
-        let { onDrag, children, ...props } = this.props;
+        let { onDrag, offsetX, offsetY, children, ...props } = this.props;
 
         return <div
             {...props}
@@ -29,6 +29,8 @@ class Draggable extends Component {
     }
 
     _onDragEnd(event) {
+        let props = this.props;
+
         event.preventDefault();
         if (this._diff === void 0) {
             return;
@@ -44,9 +46,9 @@ class Draggable extends Component {
         }
 
         // Calculate X and Y differences
-        this.props.onDrag({
-            x: event.clientX - (window.outerWidth / 2) + this._diff.x,
-            y: event.clientY - (window.outerHeight / 2) + this._diff.y,
+        props.onDrag({
+            x: event.clientX - (window.outerWidth / 2) + this._diff.x + (props.offsetX ? props.offsetX : 0),
+            y: event.clientY - (window.outerHeight / 2) + this._diff.y + (props.offsetY ? props.offsetY : 0),
         });
 
     }

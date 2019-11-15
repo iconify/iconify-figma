@@ -173,11 +173,9 @@ class FullFooter extends Component {
      * @private
      */
     _onSampleDrag(coords) {
-        this.props.container.importIconifyIcon(null, {
-            node: 'drag',
-            x: coords.x,
-            y: coords.y
-        });
+        this.props.container.dropIconifyIcon({
+            isSample: true
+        }, coords);
     }
 
     /**
