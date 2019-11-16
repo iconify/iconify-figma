@@ -170,8 +170,22 @@ module.exports = {
         bottom: 'Bottom',
     },
     selectNodes: {
-        add: 'Add imported node to selection',
-        replace: 'Select imported node',
-        none: 'Do not select imported node',
-    }
+        add: 'Add imported frame to current selection.',
+        replace: 'Select imported frame, deselect previously selected nodes.',
+        none: 'Do not select imported icon.',
+    },
+    options: {
+        layout: 'Layout options',
+        compactLayout: 'Enable compact layout.',
+        dragDrop: 'Drag and drop options',
+        dragDropHint: 'You can drag icons from plug-in to Figma instead of clicking Import button. Change options below to change drag and drop behavior.',
+        customizeDrop: 'Apply icon customizations to icons drag and dropped icons.',
+        dropFrame: 'Import to nearest frame instead of current page.',
+        import: 'Import options',
+        selectNodes: 'Select imported icon:',
+        selectNodesHint: 'What would you like plug-in to do after importing icon?',
+        storage: 'Storage options',
+        storageLimit: 'Recent icons limit:',
+        storageLimitHint: 'Set to 0 to remove limit.',
+    },
 };

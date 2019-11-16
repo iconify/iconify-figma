@@ -186,6 +186,7 @@
   position: absolute;
   z-index: 2;
   left: 0;
+  right: 0;
   top: 0;
   display: flex;
   flex-direction: column;
@@ -201,8 +202,10 @@
 
 .plugin-select-option {
   display: block;
-  white-space: nowrap;
-  min-width: 100px;
+  white-space: normal;
+  //white-space: nowrap;
+  //overflow: hidden;
+  //text-overflow: ellipsis;
   cursor: pointer;
   color: $plugin-palette-color-white;
   text-decoration: none;

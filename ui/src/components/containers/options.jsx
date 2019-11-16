@@ -22,6 +22,7 @@ import SelectOption from '../parts/options/select';
 
 const constants = require('../../data/const');
 const phrases = require('../../data/phrases');
+const lang = phrases.options;
 
 /**
  * Create options list from constants/phrases
@@ -43,49 +44,49 @@ class OptionsContainer extends Component {
 
         return <div className="plugin-content plugin-content--page">
             <section>
-                <h1>Layout</h1>
+                <h1>{lang.layout}</h1>
                 <ToggleOption
                     id="ctrl_compact_layout"
                     value={options.compactLayout}
                     onChange={this._onChange.bind(this, 'compactLayout')}
-                    text="Enable compact layout."
+                    text={lang.compactLayout}
                 />
             </section>
             <section>
-                <h1>Drag and drop options</h1>
-                <p className="plugin-hint">You can drag icons from plug-in to Figma instead of clicking Import button. Change options below to
-                    change drag and drop behavior.</p>
+                <h1>{lang.dragDrop}</h1>
+                <p className="plugin-hint">{lang.dragDropHint}</p>
                 <ToggleOption
                     id="ctrl_customize_drop"
                     value={options.customizeDrop}
                     onChange={this._onChange.bind(this, 'customizeDrop')}
-                    text="Apply icon customizations to icons drag and dropped icons."
+                    text={lang.customizeDrop}
                 />
                 <ToggleOption
                     id="ctrl_drop_to_frame"
                     value={options.dropToFrame}
                     onChange={this._onChange.bind(this, 'dropToFrame')}
-                    text="Import to nearest frame instead of current page."
+                    text={lang.dropFrame}
                 />
             </section>
             <section>
-                <h1>Import options</h1>
+                <h1>{lang.import}</h1>
                 <SelectOption
-                    text="Select imported node:"
+                    text={lang.selectNodes}
                     value={options.selectNodes}
                     options={makeOptions('selectNodes')}
                     placeholder={options.getDefaultValue('selectNodes')}
                     onChange={this._onChange.bind(this, 'selectNodes')}
+                    hint={lang.selectNodesHint}
                 />
             </section>
             <section>
-                <h1>Storage options</h1>
+                <h1>{lang.storage}</h1>
                 <InputOption
-                    text="Recent icons limit:"
+                    text={lang.storageLimit}
                     value={options.storageLimit}
                     placeholder={options.getDefaultValue('storageLimit')}
                     onChange={this._onChange.bind(this, 'storageLimit')}
-                    hint="Set to 0 to remove limit."
+                    hint={lang.storageLimitHint}
                 />
             </section>
         </div>;
