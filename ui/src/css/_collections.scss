@@ -65,6 +65,11 @@
   padding: 8px 12px 8px ($plugin-collection-stats-width + 8px);
   background: $plugin-palette-background-darker-white-borderless;
   position: relative;
+
+  @media (max-width: 600px) {
+    max-width: none;
+    margin-right: 0;
+  }
 }
 
 // Text block

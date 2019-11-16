@@ -112,5 +112,25 @@
         background: $plugin-palette-background-full-black;
       }
     }
+    .plugin-nav--selected {
+      &, &:hover, &:focus {
+        background: $plugin-palette-background-blue;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .plugin-wrapper-header--primary {
+      position: relative;
+      z-index: 2;
+    }
+    .plugin-wrapper-header--secondary {
+      position: relative;
+      margin-top: -36px;
+      transition: margin-top .2s ease;
+    }
+    &:hover .plugin-wrapper-header--secondary {
+      margin-top: 0;
+    }
   }
 }

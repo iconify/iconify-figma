@@ -1,6 +1,13 @@
 // Wrappers for custom pages
 .plugin-wrapper--github {
   background: $plugin-palette-background-darker-white-borderless;
+  .plugin-content--page {
+    section {
+      background: $plugin-palette-background-white;
+      border: 1px solid $plugin-palette-border-grey;
+      padding: 16px 16px 8px;
+    }
+  }
 }
 
 .plugin-wrapper--paste {
@@ -11,12 +18,9 @@
   }
 }
 
-// Content for page with sections
+// Custom page
 .plugin-content--page {
   section {
-    background: $plugin-palette-background-white;
-    border: 1px solid $plugin-palette-border-grey;
-    padding: 16px 16px 8px;
     margin: 0 0 16px;
     h1 {
       @include plugin-font-ui-pos('xxlarge', 'bold');
@@ -38,13 +42,18 @@
   p {
     @include plugin-font-ui-pos('medium', 'normal');
     margin: 0 0 8px;
+
+    &.plugin-hint {
+      color: $plugin-palette-color-black-dimmed;
+      @include plugin-font-ui-pos('small', 'normal');
+    }
   }
 
   .code {
     margin-bottom: 12px;
   }
 
-  ul {
+  > ul {
     li {
       margin: 0 0 8px;
       padding: 0;
@@ -88,4 +97,14 @@
   @include plugin-font-ui-pos('small', 'normal');
   color: $plugin-palette-color-black-dimmed;
   margin-top: -8px;
+}
+
+// Options
+.plugin-wrapper--options {
+  section {
+    border-bottom: 1px solid $plugin-palette-border-grey;
+    &:last-child {
+      border-bottom-width: 0;
+    }
+  }
 }

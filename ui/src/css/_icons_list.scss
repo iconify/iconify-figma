@@ -72,6 +72,14 @@
 
   .plugin-filter {
     margin: 3px 4px;
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (max-width: 600px) {
+      margin: 3px 2px;
+      max-width: 42px;
+    }
   }
 
   .plugin-icon-item-size {

@@ -27,6 +27,7 @@ import IconifyContainer from './containers/iconify';
 import RecentContainer from './containers/recent';
 import PasteSVGContainer from './containers/paste';
 import GitHubContainer from './containers/github';
+import OptionsContainer from './containers/options';
 import FloatingNotices from './parts/floating-notices';
 
 const containers = {
@@ -34,6 +35,7 @@ const containers = {
     recent: RecentContainer,
     paste: PasteSVGContainer,
     github: GitHubContainer,
+    options: OptionsContainer,
 };
 
 /**
@@ -425,6 +427,7 @@ class Container extends Component {
             node: this.options.node,
             x: this.options.nodeX,
             y: this.options.nodeY,
+            select: this.options.selectNodes,
         };
 
         // Custom options for this export
@@ -456,7 +459,8 @@ class Container extends Component {
      */
     importSVG(code) {
         this.props.ui.sendMessage('import-svg', {
-            svg: code
+            svg: code,
+            select: this.options.selectNodes,
         });
     }
 

@@ -169,4 +169,9 @@ module.exports = {
         middle: 'Middle',
         bottom: 'Bottom',
     },
+    selectNodes: {
+        add: 'Add imported node to selection',
+        replace: 'Select imported node',
+        none: 'Do not select imported node',
+    }
 };

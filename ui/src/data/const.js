@@ -14,4 +14,7 @@ module.exports = {
 
     // Options for vertical alignment
     alignY: ['top', 'middle', 'bottom'],
+
+    // Options for selecting nodes after import
+    selectNodes: ['add', 'replace', 'none'],
 };

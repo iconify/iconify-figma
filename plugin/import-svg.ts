@@ -1,7 +1,7 @@
 "use strict";
 
 import moveSvg from './move-node';
-import { addToSelection } from './node-functions';
+import { addToSelection, replaceSelection } from './node-functions';
 
 function importSVG(env, props) {
 	// Create node from SVG
@@ -23,7 +23,14 @@ function importSVG(env, props) {
 	moveSvg(env, node, props);
 
 	// Select node
-	addToSelection(env, node);
+	switch (props.select) {
+		case 'add':
+			addToSelection(env, node);
+			break;
+
+		case 'replace':
+			replaceSelection(env, node);
+	}
 
 	// Send notice
 	figma.ui.postMessage({

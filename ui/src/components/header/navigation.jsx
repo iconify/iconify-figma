@@ -74,8 +74,8 @@ class Navigation extends Component {
         return <div className={'plugin-header' + (secondaryMenu ? ' plugin-header--with-menu' : ' plugin-header--no-menu')}>
             <div className="plugin-wrapper-header plugin-wrapper-header--primary">
                 <div className="plugin-header-left">
-                    <a className={(section === 'menu' ? activeClass : inactiveClass) + ' plugin-nav--icon'} href="#" onClick={this.onChangeSection.bind(this, 'menu')} title={lang.menu}><Icon name="menu" /></a>
-                    <a className={section === 'import' ? activeClass : inactiveClass} href="#" onClick={this.onChangeSection.bind(this, 'import')}>{lang.import}</a>
+                    <a className={(section === 'menu' ? activeClass : inactiveClass) + ' plugin-nav--icon'} href="#" onClick={this.onChangeSectionAndPage.bind(this, 'menu', 'options')} title={lang.menu}><Icon name="menu" /></a>
+                    <a className={section === 'import' ? activeClass : inactiveClass} href="#" onClick={this.onChangeSectionAndPage.bind(this, 'import', 'iconify')}>{lang.import}</a>
                 </div>
                 <div className="plugin-header-center">{error}</div>
                 <div className="plugin-header-right">
@@ -100,8 +100,8 @@ class Navigation extends Component {
         return <div className="plugin-wrapper-header plugin-wrapper-header--secondary">
             <div className="plugin-header-left">
                 {this.renderPageLink('options', lang.options)}
-                {this.renderPageLink('options/import', lang.importOptions)}
-                {this.renderPageLink('options/export', lang.exportOptions)}
+                {/*{this.renderPageLink('options/import', lang.importOptions)}*/}
+                {/*{this.renderPageLink('options/export', lang.exportOptions)}*/}
             </div>
             <div className="plugin-header-center" />
             <div className="plugin-header-right">
@@ -144,13 +144,11 @@ class Navigation extends Component {
         return <div className="plugin-wrapper-header plugin-wrapper-header--secondary">
             <div className="plugin-header-left">
                 {this.renderPageLink('github', lang.aboutMain)}
-                {this.renderExternalLink('http://github.com/iconify/iconify-figma', lang.pluginRepo)}
-                {this.renderExternalLink('http://github.com/iconify/iconify-figma/issues', lang.support)}
             </div>
             <div className="plugin-header-center" />
             <div className="plugin-header-right">
-                {this.renderExternalLink('http://github.com/iconify/iconify', lang.iconifyRepo)}
-                {this.renderExternalLink('http://github.com/iconify/iconify-react', lang.reactRepo)}
+                {this.renderExternalLink('http://github.com/iconify/iconify-figma', lang.pluginRepo)}
+                {this.renderExternalLink('http://github.com/iconify/iconify-figma/issues', lang.support)}
             </div>
         </div>;
     }
@@ -207,23 +205,6 @@ class Navigation extends Component {
      * @param event
      */
     onChangeSection(section, event) {
-        let currentPage = this.props.route.page;
-
-        // For some sections change page as well if current page belongs to different section
-        switch (section) {
-            case 'import':
-                switch (currentPage) {
-                    case 'iconify':
-                    case 'import':
-                    case 'paste':
-                        break;
-
-                    default:
-                        this.onChangePage('iconify', event);
-                }
-                break;
-        }
-
         event.preventDefault();
 
         this.setState({
@@ -267,7 +248,7 @@ class Navigation extends Component {
      */
     onResetRoutes(event) {
         this.props.container.resetPlugin();
-        this.onChangeSection('import', event);
+        this.onChangeSectionAndPage('import', 'iconify', event);
     }
 
     /**

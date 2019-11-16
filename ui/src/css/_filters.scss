@@ -1,4 +1,4 @@
-.plugin-block----filters {
+.plugin-block--filters {
   margin: 7px 0;
   padding: 1px 0;
   max-height: 108px;
@@ -10,11 +10,10 @@
     margin: 8px 0 4px;
     padding: 0;
   }
-}
 
-.plugin-block----filters--active,
-.plugin-block----filters--collections {
-  max-height: 288px; /* 108 + 30 * 6 */
+  &--active, &--collections {
+    max-height: 288px; /* 108 + 30 * 6 */
+  }
 }
 
 .plugin-filter {
@@ -29,6 +28,10 @@
   border: 1px solid $plugin-palette-background-rotation-blue;
   //border-radius: $plugin-border-radius-small;
   @include plugin-font-ui-pos('small', 'normal');
+
+  @media (max-width: 600px) {
+    padding: 3px 5px;
+  }
 
   &:hover, &:active {
     background: $plugin-palette-background-white;
@@ -59,40 +62,41 @@
       }
     }
   }
-}
 
-.plugin-filter--unselected {
-  color: $plugin-palette-color-black-dimmed;
-  background: $plugin-palette-background-white;
-  border-color: $plugin-palette-border-darker-grey;
-  &:hover {
-    background: $plugin-palette-background-selected;
-    border-color: $plugin-palette-border-blue;
+
+  &--unselected {
+    color: $plugin-palette-color-black-dimmed;
+    background: $plugin-palette-background-white;
+    border-color: $plugin-palette-border-darker-grey;
+    &:hover {
+      background: $plugin-palette-background-selected;
+      border-color: $plugin-palette-border-blue;
+      color: $plugin-palette-color-black;
+    }
+    &:active, &:focus {
+      border-color: $plugin-palette-border-blue;
+      box-shadow: 0 0 0 1px $plugin-palette-border-blue;
+    }
+  }
+
+  &--disabled {
+    color: $plugin-palette-color-black-muted;
+    background: transparent;
+    border-color: transparent;
+  }
+
+  &--selected {
+    background: $plugin-palette-background-selected-borderless;
+    border-color: $plugin-palette-background-selected-borderless;
     color: $plugin-palette-color-black;
-  }
-  &:active, &:focus {
-    border-color: $plugin-palette-border-blue;
-    box-shadow: 0 0 0 1px $plugin-palette-border-blue;
-  }
-}
-
-.plugin-filter--disabled {
-  color: $plugin-palette-color-black-muted;
-  background: transparent;
-  border-color: transparent;
-}
-
-.plugin-filter--selected {
-  background: $plugin-palette-background-selected-borderless;
-  border-color: $plugin-palette-background-selected-borderless;
-  color: $plugin-palette-color-black;
-  &:hover {
-    background: $plugin-palette-background-selected;
-    border-color: $plugin-palette-border-blue;
-    color: $plugin-palette-color-black;
-  }
-  &:active, &:focus {
-    border-color: $plugin-palette-border-blue;
-    box-shadow: 0 0 0 1px $plugin-palette-border-blue;
+    &:hover {
+      background: $plugin-palette-background-selected;
+      border-color: $plugin-palette-border-blue;
+      color: $plugin-palette-color-black;
+    }
+    &:active, &:focus {
+      border-color: $plugin-palette-border-blue;
+      box-shadow: 0 0 0 1px $plugin-palette-border-blue;
+    }
   }
 }

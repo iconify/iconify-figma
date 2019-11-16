@@ -35,10 +35,12 @@ let params = {
 
     iconify: iconifyConfig,
 
+    // Prefix to limit plugin to one collection. Changing this might be broken by stored route and require reset of options
     // prefix: 'ic',
 
+    // Route
     route: {
-        page: 'iconify',
+        page: 'options',
         iconify: {
             type: 'collection',
             params: {
@@ -52,7 +54,7 @@ let params = {
         }
     },
 
-    // state
+    // State
     options: {
         // selected icon
         icon: 'mdi:home',
@@ -69,7 +71,7 @@ let params = {
         list: true,
     },
 
-    // saved lists
+    // Saved lists
     storage: {
         recent: [
             'mdi:home',
@@ -94,7 +96,8 @@ let params = {
 
 var ui = new UI(document.getElementById('container'), params);
 
-// Test showCode()
+// @TODO Test showCode()
+/*
 setTimeout(function () {
     ui.showCode({
         icon: 'fe:home',
@@ -103,8 +106,10 @@ setTimeout(function () {
         height: 24,
     });
 }, 5000);
+*/
 
 // Test notices
+/*
 setTimeout(() => {
     ui.addNotice('Testing notice!');
 }, 1000);
@@ -120,3 +125,4 @@ setTimeout(() => {
 setTimeout(() => {
     ui.addNotice('A very very very very very very very very very very very very very very very very very very very very long notice to test text wrapping?');
 }, 6000);
+*/

@@ -3,6 +3,92 @@
 import { findParentNode, findParentNodeById } from './node-functions';
 
 /**
+ * Find frame at coordinates
+ *
+ * @param env
+ * @param {number} x
+ * @param {number} y
+ * @return {object}
+ */
+function findFrameAt(env, x, y) {
+	/**
+	 * Check coordinates
+	 *
+	 * @param {BaseNode} node
+	 * @param {number} offsetX
+	 * @param {number} offsetY
+	 * @return {boolean}
+	 */
+	function testCoordinates(node, offsetX, offsetY) {
+		let left = node.x - offsetX,
+			top = node.y - offsetY,
+			right = left + node.width,
+			bottom = top + node.height;
+
+		return x > left && y > top && x < right && y < bottom;
+	}
+
+	/**
+	 * Test if node is within coordinates, scan child nodes
+	 *
+	 * @param {BaseNode} node
+	 * @param {number} offsetX
+	 * @param {number} offsetY
+	 * @return {object}
+	 */
+	function testNode(node, offsetX, offsetY) {
+		let result;
+
+		switch (node.type) {
+			case 'FRAME':
+				if (testCoordinates(node, offsetX, offsetY)) {
+					result = scanChildren(node, offsetX + node.x, offsetY + node.y);
+					return result === null ? {
+						node: node,
+						offsetX: offsetX + node.x,
+						offsetY: offsetY + node.y,
+					} : result;
+				}
+				break;
+
+			case 'GROUP':
+				if (testCoordinates(node, offsetX, offsetY)) {
+					result = scanChildren(node, offsetX, offsetY);
+					return result === null ? {
+						node: node,
+						offsetX: offsetX,
+						offsetY: offsetY,
+					} : result;
+				}
+				break;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Scan node's children
+	 *
+	 * @param {BaseNode} node
+	 * @param {number} offsetX
+	 * @param {number} offsetY
+	 * @return {object}
+	 */
+	function scanChildren(node, offsetX, offsetY) {
+		for (let i = 0; i < node.children.length; i++) {
+			let result = testNode(node.children[i], offsetX, offsetY);
+			if (result !== null) {
+				return result;
+			}
+		}
+
+		return null;
+	}
+
+	return scanChildren(figma.currentPage, 0, 0);
+}
+
+/**
  * Drop node
  *
  * @param {object} env
@@ -21,6 +107,17 @@ function dropNode(env, node, props) {
 	if (typeof props.y === 'number') {
 		// account for toolbar
 		node.y += Math.round((props.y - 40) / figma.viewport.zoom);
+	}
+
+	// Look for frame
+	if (props.dropToFrame) {
+		let frame = findFrameAt(env, node.x, node.y);
+		if (frame !== null) {
+			// console.log('Found parent frame: ' + JSON.stringify(frame));
+			node.x -= frame.offsetX;
+			node.y -= frame.offsetY;
+			parent = frame.node;
+		}
 	}
 
 	// Change parent node

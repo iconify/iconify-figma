@@ -1,7 +1,7 @@
 "use strict";
 
 import moveSvg from './move-node';
-import {addToSelection, findParentNodes} from './node-functions';
+import { addToSelection, replaceSelection } from './node-functions';
 
 function importIconify(env, props) {
 	// Create node from SVG
@@ -31,7 +31,14 @@ function importIconify(env, props) {
 	moveSvg(env, node, props);
 
 	// Select node
-	addToSelection(env, node);
+	switch (props.select) {
+		case 'add':
+			addToSelection(env, node);
+			break;
+
+		case 'replace':
+			replaceSelection(env, node);
+	}
 
 	// Send notice
 	figma.ui.postMessage({

@@ -40,6 +40,7 @@ function Filter(props) {
         href={props.href ? props.href : '#'}
         onClick={props.onClick ? props.onClick : void 0}
         className={className}
+        title={props.title}
     >{props.title}</a>
 }
 

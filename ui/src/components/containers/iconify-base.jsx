@@ -158,10 +158,16 @@ class IconifyBaseContainer extends Component {
      * @param {object} coords
      */
     dropIconifyIcon(props, coords) {
+        let container = this.props.container;
+
         let options = Object.assign({
             node: 'drag'
-        }, coords, props.isSample ? {} : {
+        }, coords, props.isSample ? {} : (container.options.customizeDrop ? {
             iconName: props.iconName,
+            dropToFrame: container.options.dropToFrame,
+        } : {
+            iconName: props.iconName,
+            dropToFrame: container.options.dropToFrame,
             props: {
                 rotate: 0,
                 hFlip: false,
@@ -169,9 +175,9 @@ class IconifyBaseContainer extends Component {
             },
             color: '',
             height: '',
-        });
+        }));
 
-        this.props.container.importIconifyIcon(null, options);
+        container.importIconifyIcon(null, options);
     }
 
     /**

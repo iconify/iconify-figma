@@ -200,5 +200,17 @@ function addToSelection(env, node) {
 	figma.currentPage.selection = selection;
 }
 
+/**
+ * Select node
+ *
+ * @param env
+ * @param node
+ */
+function replaceSelection(env, node) {
+	env.ignoreNextSelection = true;
+
+	figma.currentPage.selection = [node];
+}
+
 // Export functions
-export { isRootNode, findParentNode, findParentNodes, findParentNodeById, addToSelection };
+export { isRootNode, findParentNode, findParentNodes, findParentNodeById, addToSelection, replaceSelection };

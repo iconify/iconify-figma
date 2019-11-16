@@ -104,6 +104,10 @@ $plugin-collection-border-width: 1px; // Collection border
 $plugin-collection-stats-width: 80px + $plugin-collection-border-width; // Stats block width
 $plugin-collection-min-width: 200px; // Entire block min-width
 
+// Icons
+$plugin-icon-grid-size: 48px;
+$plugin-icon-grid-compact-size: 32px;
+
 // Layer
 $plugin-layer-height: 32px;
 $plugin-layer-padding: 12px; // Figma uses 24px. Changed for more compact layout

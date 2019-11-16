@@ -7,6 +7,9 @@ const iconifyPages = constants.pages;
 
 // Global options shared between all pages
 const globalOptions = {
+    // Layout
+    compactLayout: false,
+
     // Icon customizations
     color: '',
     height: '',
@@ -16,6 +19,11 @@ const globalOptions = {
 
     // Selected icon
     icon: null,
+
+    // Import and drag/drop options
+    customizeDrop: false,
+    dropToFrame: false,
+    selectNodes: 'add',
 
     // Node for importing icons
     node: '',
@@ -96,6 +104,16 @@ class Options {
             this.pageOptions.list[page] = true;
             this.pageOptions.forceList[page] = true;
         });
+    }
+
+    /**
+     * Get default value
+     *
+     * @param {string} name
+     * @return {*}
+     */
+    getDefaultValue(name) {
+        return pageOptions[name] === void 0 ? globalOptions[name] : pageOptions[name]
     }
 
     /**

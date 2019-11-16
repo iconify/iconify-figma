@@ -33,7 +33,8 @@ function RecentView(props) {
     let blocks = props.blocks,
         view = props.view,
         options = props.app.options,
-        limitNotice = view.total >= options.storageLimit;
+        limit = options.storageLimit,
+        limitNotice = limit > 0 && view.total >= options.storageLimit;
 
     return <ViewContainer type="collection">
         {(blocks.search.keyword !== '' || !blocks.icons.empty()) && <SearchBlock {...props} block="search" />}

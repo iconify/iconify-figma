@@ -14,7 +14,7 @@
  */
 "use strict";
 
-import React, { Component } from 'react';
+import React from 'react';
 import Iconify from '@iconify/iconify';
 
 function GitHubContainer(props) {

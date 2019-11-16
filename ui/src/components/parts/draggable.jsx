@@ -16,7 +16,7 @@ class Draggable extends Component {
 
     _onDragStart(event) {
         let rect = event.target.getBoundingClientRect();
-        console.log(event);
+        // console.log(event);
         this._diff = {
             // Difference from left top corner
             x: event.clientX - rect.x,
@@ -41,7 +41,7 @@ class Draggable extends Component {
             event.screenX > this._diff.minX && event.screenX < this._diff.maxX &&
             event.screenY > this._diff.minY && event.screenY < this._diff.maxY
         ) {
-            console.log('Dropped inside window');
+            // console.log('Dropped inside window');
             return;
         }
 
