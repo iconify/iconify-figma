@@ -19,6 +19,7 @@ import React, { Component } from 'react';
 import Button from '../parts/inputs/button';
 import CloseButton from '../parts/inputs/close-button';
 import FooterButtons from '../iconify/footer/buttons';
+import Draggable from '../parts/draggable';
 
 const phrases = require('../../data/phrases');
 const lang = phrases.paste;
@@ -66,7 +67,11 @@ class PasteContainer extends Component {
                 extraButtons.push(<Button key="submit" type="primary" title={lang.importButton} onClick={this._onSubmit.bind(this)} />);
 
                 let sampleSource = 'data:image/svg+xml;base64,' + window.btoa(this._cleanup());
-                sample = <div className="plugin-paste-sample">Sample:<br /><img src={sampleSource} /></div>;
+                sample = <div className="plugin-paste-sample">Sample:<br />
+                    <Draggable onDrag={this._onDrag.bind(this)}>
+                        <img src={sampleSource} />
+                    </Draggable>
+                </div>;
             }
 
             extraButtons.push(<Button key="clear" type="secondary" title={lang.clearButton} onClick={this._onClear.bind(this)} />);
@@ -131,6 +136,21 @@ class PasteContainer extends Component {
      */
     _onChange(event) {
         this._setValue(event.target.value);
+    }
+
+    /**
+     * Icon was dropped
+     *
+     * @param props
+     * @private
+     */
+    _onDrag(props) {
+        if (this._isEmpty() || this._isValid() !== true) {
+            return;
+        }
+
+        let value = this._cleanup();
+        this.props.container.importSVG(value, props);
     }
 
     /**

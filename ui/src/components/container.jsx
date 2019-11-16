@@ -21,6 +21,7 @@ import Iconify from '@iconify/iconify';
 const core = require('../core/search');
 const constants = require('../data/const');
 const iconifyPages = constants.pages;
+const colors = require('cyberalien-color');
 
 import FigmaNavigation from './header/navigation';
 import IconifyContainer from './containers/iconify';
@@ -406,6 +407,14 @@ class Container extends Component {
             height = options && options.height ? options.height : this.options.height,
             color = options && options.color ? options.color : this.options.color;
 
+        // Convert color to 6 digit hex
+        if (typeof color === 'string' && color !== '') {
+            let clr = colors.fromString(color);
+            if (clr) {
+                color = clr.toHex(false);
+            }
+        }
+
         // Custom options for this export
         if (options && options.props) {
             Object.assign(attributes, options.props);
@@ -421,7 +430,7 @@ class Container extends Component {
 
             // Items that are currently used only to generate SVG
             height: height ? height : this.scaleDownIcon(iconData.height, iconData.width, attributes.rotate),
-            color: color === '' ? '#000' : color,
+            color: color === '' ? '#000000' : color,
 
             // Target node and alignment
             node: this.options.node,
@@ -446,7 +455,13 @@ class Container extends Component {
         } else if (data.props.vFlip) {
             svgProps['data-flip'] = 'vertical';
         }
-        data.svg = Iconify.getSVG(data.name, svgProps).replace(/currentColor/g, data.color);
+        data.svg = Iconify.getSVG(data.name, svgProps);
+
+        // Replace color, add colorless flag
+        data.colorless = data.svg.indexOf('currentColor') !== -1;
+        if (data.colorless) {
+            data.svg = data.svg.replace(/currentColor/g, data.color);
+        }
 
         // Send message to UI
         this.props.ui.sendMessage('import-iconify', data);
@@ -456,12 +471,16 @@ class Container extends Component {
      * Import SVG to Figma
      *
      * @param {string} code
+     * @param {object} [props] Properties for drag/drop
      */
-    importSVG(code) {
-        this.props.ui.sendMessage('import-svg', {
+    importSVG(code, props) {
+        this.props.ui.sendMessage('import-svg', Object.assign({
             svg: code,
             select: this.options.selectNodes,
-        });
+        }, props ? {
+            node: 'drag',
+            dropToFrame: this.options.dropToFrame,
+        } : {}, props ? props : {}));
     }
 
     /**
