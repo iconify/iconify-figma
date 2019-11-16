@@ -22,7 +22,7 @@ const globalOptions = {
 
     // Import and drag/drop options
     customizeDrop: false,
-    dropToFrame: false,
+    dropToFrame: true,
     selectNodes: 'add',
 
     // Node for importing icons
