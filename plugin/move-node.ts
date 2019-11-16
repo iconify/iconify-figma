@@ -8,9 +8,10 @@ import { findParentNode, findParentNodeById } from './node-functions';
  * @param env
  * @param {number} x
  * @param {number} y
+ * @param {Array} ignoreNodes Array of node ids to ignore
  * @return {object}
  */
-function findFrameAt(env, x, y) {
+function findFrameAt(env, x, y, ignoreNodes) {
 	/**
 	 * Check coordinates
 	 *
@@ -20,8 +21,8 @@ function findFrameAt(env, x, y) {
 	 * @return {boolean}
 	 */
 	function testCoordinates(node, offsetX, offsetY) {
-		let left = node.x - offsetX,
-			top = node.y - offsetY,
+		let left = node.x + offsetX,
+			top = node.y + offsetY,
 			right = left + node.width,
 			bottom = top + node.height;
 
@@ -39,8 +40,16 @@ function findFrameAt(env, x, y) {
 	function testNode(node, offsetX, offsetY) {
 		let result;
 
+		// Exclude ignored ids
+		if (ignoreNodes.indexOf(node.id) !== -1) {
+			return null;
+		}
+
 		switch (node.type) {
 			case 'FRAME':
+				if (!node.visible || node.locked) {
+					return null;
+				}
 				if (testCoordinates(node, offsetX, offsetY)) {
 					result = scanChildren(node, offsetX + node.x, offsetY + node.y);
 					return result === null ? {
@@ -52,6 +61,9 @@ function findFrameAt(env, x, y) {
 				break;
 
 			case 'GROUP':
+				if (!node.visible || node.locked) {
+					return null;
+				}
 				if (testCoordinates(node, offsetX, offsetY)) {
 					result = scanChildren(node, offsetX, offsetY);
 					return result === null ? {
@@ -75,7 +87,7 @@ function findFrameAt(env, x, y) {
 	 * @return {object}
 	 */
 	function scanChildren(node, offsetX, offsetY) {
-		for (let i = 0; i < node.children.length; i++) {
+		for (let i = node.children.length - 1; i >= 0; i--) {
 			let result = testNode(node.children[i], offsetX, offsetY);
 			if (result !== null) {
 				return result;
@@ -111,9 +123,8 @@ function dropNode(env, node, props) {
 
 	// Look for frame
 	if (props.dropToFrame) {
-		let frame = findFrameAt(env, node.x, node.y);
+		let frame = findFrameAt(env, node.x + node.width / 2, node.y + node.height / 2, [node.id]);
 		if (frame !== null) {
-			// console.log('Found parent frame: ' + JSON.stringify(frame));
 			node.x -= frame.offsetX;
 			node.y -= frame.offsetY;
 			parent = frame.node;
@@ -154,11 +165,6 @@ function moveNode(env, node, props) {
 		let align = {
 				x: typeof props.x === 'string' ? props.x : 'center',
 				y: typeof props.y === 'string' ? props.y : 'middle',
-			},
-			// Icon coordinates within parent
-			coords = {
-				x: 0,
-				y: 0,
 			},
 			// Offset of parent (to add to coordinates)
 			offset = {

@@ -11,13 +11,43 @@ function isRootNode(node) {
 }
 
 /**
+ * Check if frame is imported Iconify icon
+ *
+ * @param {BaseNode} node
+ * @return {boolean}
+ */
+function isIconifyFrame(node) {
+	if (node.type !== 'FRAME') {
+		return false;
+	}
+
+	if (node.getSharedPluginData('iconify', 'source').length) {
+		// Imported icon
+		return true;
+	}
+
+	// Check for imported icon from old Iconify plugin
+	// Frame without parent frame
+	if (
+		node.parent && node.parent.type === 'PAGE' &&
+		(node.name.indexOf('-') !== -1 || node.name.indexOf(':') !== -1) &&
+		node.name.match(/^[a-z0-9]+[a-z0-9:-]+[a-z0-9]+$/) &&
+		node.name.split(':').length < 3
+	) {
+		return true;
+	}
+
+	return false;
+}
+
+/**
  * Find parent node
  *
  * @param {object} env
  * @param {BaseNode} node
  * @return {BaseNode}
  */
-function skipIconifyFrames(env, node) {
+function findLastUsableParent(env, node) {
 	let lastValidNode = node;
 
 	while (true) {
@@ -25,21 +55,17 @@ function skipIconifyFrames(env, node) {
 			return lastValidNode;
 		}
 
+		// Check group and frame nodes
 		switch (node.type) {
 			case 'GROUP':
+				if (!node.visible || node.locked) {
+					lastValidNode = node.parent;
+				}
 				break;
 
 			case 'FRAME':
-				if (node.getSharedPluginData('iconify', 'source').length) {
-					// Imported icon
+				if (isIconifyFrame(node) || !node.visible || node.locked) {
 					lastValidNode = node.parent;
-					break;
-				}
-
-				// Check for imported icon from old Iconify plugin
-				// Frame without parent frame
-				if (isRootNode(node.parent) && (node.name.indexOf('-') !== -1 || node.name.indexOf(':') !== -1)) {
-					return node.parent;
 				}
 				break;
 
@@ -62,18 +88,25 @@ function skipIconifyFrames(env, node) {
 function findParentNode(env, node) {
 	if (node) {
 		// Use node passed as argument
-		return skipIconifyFrames(env, node);
+		return findLastUsableParent(env, node);
 	}
 
 	if (figma.currentPage.selection.length) {
 		// Use first available selected node
-		return skipIconifyFrames(env, figma.currentPage.selection[0]);
+		return findLastUsableParent(env, figma.currentPage.selection[0]);
 	}
 
 	// Use current page
 	return figma.currentPage;
 }
 
+/**
+ * Find all viable parent nodes
+ *
+ * @param env
+ * @param {function} callback Callback to add or test each node
+ * @private
+ */
 function _findParentNodes(env, callback) {
 	// Find usable parent nodes for all selected nodes, as well as their parent nodes
 	if (figma.currentPage) {
@@ -113,10 +146,13 @@ function findParentNodes(env) {
 
 	_findParentNodes(env, node => {
 		let id = node.id;
+
+		// Check if node has already been added
 		if (nodes[id]) {
 			return false;
 		}
 
+		// Return item
 		let item = {
 			id: id,
 			type: node.type,
