@@ -40,7 +40,7 @@ let params = {
 
     // Route
     route: {
-        page: 'options',
+        page: 'iconify',
         iconify: {
             type: 'collection',
             params: {

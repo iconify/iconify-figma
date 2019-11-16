@@ -87,6 +87,7 @@ class FullFooter extends Component {
 
         // Render sample
         return <IconifyBlock type="footer">
+            {this.renderIconName()}
             <FooterContainer>
                 <FooterSample
                     svg={sample}
@@ -97,7 +98,6 @@ class FullFooter extends Component {
                     onSampleDrag={this._onSampleDrag.bind(this)}
                 />
                 <div>
-                    {this.renderIconName()}
                     {this.renderCollection()}
                     <FooterOptions
                         key={iconName}

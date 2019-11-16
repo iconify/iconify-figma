@@ -25,8 +25,10 @@ function FooterSample(props) {
         };
     }
 
-    return <Draggable onDrag={props.onSampleDrag} offsetY={-200}>
-        <div className="plugin-footer-icon-sample" dangerouslySetInnerHTML={{__html: props.svg}} style={style} />
+    return <div>
+        <Draggable onDrag={props.onSampleDrag} offsetY={-200}>
+            <div className="plugin-footer-icon-sample" dangerouslySetInnerHTML={{__html: props.svg}} style={style} />
+        </Draggable>
         {
             props.width && props.height &&
             <div className="plugin-footer-icon-size">
@@ -39,7 +41,7 @@ function FooterSample(props) {
                 ({props.customHeight})
             </div>
         }
-    </Draggable>;
+    </div>;
 }
 
 export default FooterSample;
