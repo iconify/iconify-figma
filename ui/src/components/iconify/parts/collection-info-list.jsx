@@ -95,7 +95,7 @@ function CollectionInfoList(props) {
             <Button type="secondary" onClick={event => {
                 event.preventDefault();
                 if (app.page === 'iconify') {
-                    props.view.action('collections', prefix);
+                    props.view.action('collections', prefix, '');
                     return;
                 }
                 props.container.changePage('iconify', {
@@ -106,7 +106,7 @@ function CollectionInfoList(props) {
                     parent: {
                         type: 'collections'
                     }
-                })
+                });
             }} title={lang.link.replace('{title}', info.title)} />
         </div>);
     }

@@ -153,7 +153,7 @@ module.exports = (instance, params, parent) => {
                 // Create child view of parent view if possible
                 childView = view.createChild('collection', {
                     prefix: value,
-                    search: view.route.params.keyword
+                    search: typeof optional === 'string' ? optional : view.route.params.keyword
                 });
                 return childView;
         }
