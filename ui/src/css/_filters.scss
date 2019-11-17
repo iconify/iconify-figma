@@ -1,13 +1,13 @@
 .plugin-block--filters {
-  margin: 7px 0;
-  padding: 1px 0;
+  margin: 7px -1px;
+  padding: 1px;
   max-height: 108px;
   overflow-y: auto;
   transition: max-height .3s ease;
 
   > p {
     @include plugin-font-ui-pos('medium', 'normal');
-    margin: 8px 0 4px;
+    margin: 8px 1px 4px;
     padding: 0;
   }
 
