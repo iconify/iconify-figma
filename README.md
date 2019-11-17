@@ -1,26 +1,7 @@
-# Development notice
-
-This is version 2.0.0-dev of Iconify plug-in for Figma.
-
-For previous version of plug-in see branch "v1" of this repository.
-
-Build modes:
-* `npm run build` - build production code. Output is stored in "dist".
-* `npm run dev` - build development code. Output is stored in "dist". Change debug stuff in ui/plugin-ui.js (see conditional statements that check process.env.SEARCH_DEV).
-* `npm run watch` - same as "dev", but also watches files for changes.
-* `npm run start` - debug UI without Figma. Creates web server on http://localhost:8080/ and shows UI. Change UI configuration in ui/dev-ui.js
-* `npm run test` - test Icon Finder core.
-
-# Installing development version
-
-Development version of plug-in is functional.
-
-To install it first build plugin using `npm run build`, then open Figma, in menu select Plugins -> Development -> New Plugin. Click "Link existing plugin", navigate to manifest.json
-
-
 # Iconify plug-in for Figma
 
 Import Material Design Icons, FontAwesome, Jam Icons, EmojiOne, Twitter Emoji and many other icons (more than 50 icon sets containing over 40,000 icons) to Figma document as vector shapes.
+
 
 ## What is Iconify?
 
@@ -34,6 +15,7 @@ In addition to script, Iconify is available as React component, Angular componen
 
 See [https://github.com/iconify/iconify-react](https://github.com/iconify/iconify-react) and [https://github.com/iconify/iconify-angular](https://github.com/iconify/iconify-angular)
 
+
 ## What can Figma plug-in do?
 
 Figma plug-in offers easy way to import icons to project.
@@ -42,39 +24,75 @@ You can browse and search icon sets directly from Figma. No need to copy/paste i
 
 In future plug-in will be able to publish icons directly to Iconify, so it would take only 1 simple step from designing icon to using it on website. However that is a long term goal that requires massive amount of development, so hopefully it will be implemented by the end of 2019.
 
+
 ## Installation
 
 In Figma on dashboard select "Plugins", "Browse all plugins", search for "Iconify". Click "Install".
+
 
 ## Usage
 
 In Figma select main menu -> Plugins -> Iconify
 
-Browse or search icons, select any icon, click "Import" button. Plug-in will import icon to your current project.
+Browse or search icons, select any icon, click "Import" button or drag icon to Figma document. Plug-in will import icon to your current project.
 
-![Iconify for Figma - loading plugin](https://iconify.github.io/iconify-figma-plus/samples/opening_plugin.png)
 
 ## Screenshots
 
-Big choice of "home" icons:
-![Iconify for Figma - search results](https://iconify.github.io/iconify-figma-plus/samples/search1.png)
-![Iconify for Figma - search results](https://iconify.github.io/iconify-figma-plus/samples/search2.png)
+Collections list:
+![Iconify for Figma - browse collections](https://iconify.github.io/iconify-figma/screenshots/collections.png)
+
+Searching icons:
+![Iconify for Figma - search results](https://iconify.github.io/iconify-figma/screenshots/search.png)
 
 Browsing Material Design icons:
-![Iconify for Figma - browsing icons set](https://iconify.github.io/iconify-figma-plus/samples/material-design.png)
+![Iconify for Figma - browsing icons set](https://iconify.github.io/iconify-figma/screenshots/collection.png)
 
-Collections list:
-![Iconify for Figma - browse collections](https://iconify.github.io/iconify-figma-plus/samples/collections.png)
+Browsing IonIcons in compact mode:
+![Iconify for Figma - compact mode](https://iconify.github.io/iconify-figma/screenshots/compact.png)
+
+Drag and drop:
+![Iconify for Figma - drag and drop](https://iconify.github.io/iconify-figma/screenshots/drag-drop.png)
+
+Recent icons:
+![Iconify for Figma - recent icons](https://iconify.github.io/iconify-figma/screenshots/recent.png)
+
+Paste SVG:
+![Iconify for Figma - paste SVG](https://iconify.github.io/iconify-figma/screenshots/paste.png)
 
 
-## Development
+## Drag and drop
 
-There are 3 development modes: production, plugin dev, ui dev. They have separate entry points, but share same code. Commands to run them:
-* production: `npm run build`
-* plugin development: `npm run dev`
-* ui development: `npm run start`
+Due to Figma plug-in system limitations, drag and drop is approximate.
+Figma does not support drag and drop from plugin UI, so plugin approximates drop location from mouse events, which is not precise.
 
-## License
+Because of that icon might be dropped few pixels off target. To maximize chances of dropping icon to correct location, zoom in to correct frame or use "Import" button instead of drag and drop.
+
+
+## Paste SVG
+
+Paste SVG function can extract SVG from data URI (you can keep "url" part), such as
+```
+url("data:image/svg+xml,%3Csvg fill='none' height='128' viewBox='0 0 32 128' width='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-rule='evenodd' fill-rule='evenodd'%3E%3Cpath d='m12 12v8h8v-1h-3c0-2.2091-1.7909-4-4-4v-3zm1 4v3h3c0-1.6569-1.3431-3-3-3z' fill='%23000' fill-opacity='.8'/%3E%3Cpath d='m12 44v8h8v-1h-3c0-2.2091-1.7909-4-4-4v-3zm1 4v3h3c0-1.6569-1.3431-3-3-3z' fill='%23000' fill-opacity='.3'/%3E%3Cpath d='m12 76v8h8v-1h-3c0-2.2091-1.7909-4-4-4v-3zm1 4v3h3c0-1.6569-1.3431-3-3-3z' fill='%2318a0fb'/%3E%3Cpath d='m12 108v8h8v-1h-3c0-2.209-1.7909-4-4-4v-3zm1 4v3h3c0-1.657-1.3431-3-3-3z' fill='%23fff'/%3E%3C/g%3E%3C/svg%3E")
+```
+making it easy to paste background images from browser's developer tools.
+
+
+# Development version
+
+To install plug-in from repository you need to build it.
+
+First build plugin using `npm run build`, then open Figma, in menu select Plugins -> Development -> New Plugin. Click "Link existing plugin", navigate to manifest.json
+
+Build modes:
+* `npm run build` - build production code. Output is stored in "dist".
+* `npm run dev` - build development code. Output is stored in "dist". Change debug stuff in ui/plugin-ui.js (see conditional statements that check process.env.SEARCH_DEV).
+* `npm run watch` - same as "dev", but also watches files for changes and automatically rebuilds files.
+* `npm run start` - debug UI without Figma. Creates web server on http://localhost:8080/ and shows UI. Change UI configuration in ui/dev-ui.js
+* `npm run test` - test Icon Finder core.
+
+
+# License
 
 Iconify Icon Finder is dual-licensed under Apache 2.0 and GPL 2.0 license. You may select, at your option, one of the above-listed licenses.
 
