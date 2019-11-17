@@ -432,7 +432,7 @@ class Container extends Component {
 
             // Items that are currently used only to generate SVG
             height: height ? height : this.scaleDownIcon(iconData.height, iconData.width, attributes.rotate),
-            color: color === '' ? '#000000' : color,
+            color: color,
 
             // Target node and alignment
             node: this.options.node,
@@ -462,7 +462,12 @@ class Container extends Component {
         // Replace color, add colorless flag
         data.colorless = data.svg.indexOf('currentColor') !== -1;
         if (data.colorless) {
+            if (data.color === '') {
+                data.color = '#000000'
+            }
             data.svg = data.svg.replace(/currentColor/g, data.color);
+        } else {
+            data.color = '';
         }
 
         // Send message to UI

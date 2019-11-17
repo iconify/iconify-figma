@@ -29,6 +29,11 @@ function CodeContainer(props) {
         rotate: route.props.rotate ? parseInt(route.props.rotate) : 0,
     };
 
+    // Reset color for black icons
+    if (icon.color === '#000000') {
+        icon.color = '';
+    }
+
     return <div className="plugin-content plugin-content--page">
         <ParentBlock parents={[{
             onClick: event => {
