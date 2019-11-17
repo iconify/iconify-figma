@@ -50,6 +50,14 @@ class OptionsContainer extends Component {
                     value={options.compactLayout}
                     onChange={this._onChange.bind(this, 'compactLayout')}
                     text={lang.compactLayout}
+                    hint={lang.compactLayoutHint}
+                />
+                <ToggleOption
+                    id="ctrl_show_code"
+                    value={options.showCodePage}
+                    onChange={this._onChange.bind(this, 'showCodePage')}
+                    text={lang.showCodePage}
+                    hint={lang.showCodePageHint}
                 />
             </section>
             <section>

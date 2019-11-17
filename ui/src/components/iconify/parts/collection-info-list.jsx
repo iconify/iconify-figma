@@ -16,7 +16,7 @@
 
 import React from 'react';
 
-import IconifyBlock from '../parts/block';
+import PluginBlock from '../../parts/plugin-block';
 import Button from '../../parts/inputs/button';
 
 const phrases = require('../../../data/phrases');
@@ -111,10 +111,10 @@ function CollectionInfoList(props) {
         </div>);
     }
 
-    return <IconifyBlock type="collection-info">
+    return <PluginBlock type="collection-info">
         {title}
         {list}
-    </IconifyBlock>;
+    </PluginBlock>;
 }
 
 export default CollectionInfoList;

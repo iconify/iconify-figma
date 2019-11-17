@@ -16,7 +16,7 @@
 
 import React from 'react';
 
-import IconifyBlock from '../parts/block';
+import PluginBlock from '../../parts/plugin-block';
 import SearchForm from '../parts/search-form';
 
 function FilterBlock(props) {
@@ -27,9 +27,9 @@ function FilterBlock(props) {
         return null;
     }
 
-    return <IconifyBlock type="filter">
+    return <PluginBlock type="filter">
         <SearchForm {...props} />
-    </IconifyBlock>;
+    </PluginBlock>;
 }
 
 export default FilterBlock;

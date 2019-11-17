@@ -1,6 +1,7 @@
 "use strict";
 
 import { findParentNodes } from './node-functions';
+import { getSelectedNodeData } from './node-data';
 
 let pendingEvent = false;
 let lastList = null;
@@ -12,6 +13,22 @@ let lastList = null;
  * @param {object} env
  */
 function checkLayers(env) {
+	// Check if selected node is Iconify node
+	let data = getSelectedNodeData(env);
+	if (data) {
+		env.showingCode = true;
+		figma.ui.postMessage({
+			event: 'selected-node-data',
+			selectedNode: data,
+		});
+	} else if (env.showingCode) {
+		env.showingCode = false;
+		figma.ui.postMessage({
+			event: 'cancel-node-data',
+		});
+	}
+
+	// Find possible parent nodes
 	let selection = findParentNodes(env);
 
 	// Check for changes
@@ -24,7 +41,7 @@ function checkLayers(env) {
 	// Send new selection to UI
 	figma.ui.postMessage({
 		event: 'selected-nodes',
-		nodes: selection
+		nodes: selection,
 	});
 }
 

@@ -16,7 +16,7 @@
 
 import React, { Component } from 'react';
 
-import IconifyBlock from '../parts/block';
+import PluginBlock from '../../parts/plugin-block';
 import Filter from '../../parts/filter';
 
 const phrases = require('../../../data/phrases');
@@ -69,10 +69,10 @@ class FiltersBlock extends Component {
             }
         }
 
-        return <IconifyBlock type="filters" filtersType={[block.filtersType, hasActive ? 'active' : 'inactive']}>
+        return <PluginBlock type="filters" filtersType={[block.filtersType, hasActive ? 'active' : 'inactive']}>
             {title}
             {filters}
-        </IconifyBlock>;
+        </PluginBlock>;
     }
 
     /**

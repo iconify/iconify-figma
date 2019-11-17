@@ -16,13 +16,13 @@
 
 import React, { Component } from 'react';
 
-import IconifyBlock from '../parts/block';
+import ParentBlock from '../../parts/parent-block';
 import Icon from '../../parts/icon-decoration';
 
 const phrases = require('../../../data/phrases');
 const lang = phrases.parent;
 
-class ParentBlock extends Component {
+class IconifyParentBlock extends Component {
     render() {
         let props = this.props,
             name = props.block,
@@ -50,14 +50,11 @@ class ParentBlock extends Component {
                     title = lang.search.replace('{keyword}', parent.route.params.search);
             }
 
-            parents.unshift(<a
-                key={key}
-                href="#"
-                onClick={this._onClick.bind(this, parent)}
-            >
-                <Icon name="arrow-left" />
-                {title}
-            </a>);
+            parents.unshift({
+                key: key,
+                onClick: this._onClick.bind(this, parent),
+                title: title
+            });
             if (parent.blocks && parent.parent) {
                 renderParent(parent.parent);
             }
@@ -66,7 +63,7 @@ class ParentBlock extends Component {
         let parents = [];
         renderParent(block.parent);
 
-        return <IconifyBlock type="parent">{parents}</IconifyBlock>;
+        return <ParentBlock parents={parents} />;
     }
 
     /**
@@ -82,4 +79,4 @@ class ParentBlock extends Component {
     }
 }
 
-export default ParentBlock;
+export default IconifyParentBlock;

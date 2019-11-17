@@ -20,6 +20,8 @@
   small {
     display: block;
     color: $plugin-palette-color-black-muted;
+    padding-left: 4px;
+    padding-top: 4px;
     @include plugin-font-ui-pos('small', 'normal');
   }
 
@@ -33,6 +35,10 @@
 
     input {
       margin-right: 8px;
+    }
+
+    small {
+      padding-left: 20px;
     }
   }
 }

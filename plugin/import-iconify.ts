@@ -1,19 +1,7 @@
 "use strict";
 
 import moveSvg from './move-node';
-import { addToSelection, replaceSelection } from './node-functions';
-
-function convertColor(color) {
-	let result = '#';
-	['r', 'g', 'b'].forEach(prop => {
-		let value = Math.round(color[prop] * 255).toString(16);
-		if (value.length < 2) {
-			value = '0' + value;
-		}
-		result += value;
-	});
-	return result;
-}
+import { addToSelection, replaceSelection, convertColor } from './node-functions';
 
 function importIconify(env, props) {
 	// Create node from SVG
@@ -66,10 +54,9 @@ function importIconify(env, props) {
 						fill.visible &&
 						fill.type === 'SOLID' &&
 						fill.blendMode === 'NORMAL' &&
-						fill.opacity === 1 &&
 						convertColor(fill.color) === props.color
 					) {
-						match = 'fill';
+						match = 'fills'; // "fills", not "fill"
 					}
 				}
 
@@ -79,7 +66,6 @@ function importIconify(env, props) {
 						stroke.visible &&
 						stroke.type === 'SOLID' &&
 						stroke.blendMode === 'NORMAL' &&
-						stroke.opacity === 1 &&
 						convertColor(stroke.color) === props.color
 					) {
 						match = 'stroke';

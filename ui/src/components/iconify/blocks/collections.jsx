@@ -16,7 +16,7 @@
 
 import React, { Component } from 'react';
 import Notice from '../../parts/notice';
-import IconifyBlock from '../parts/block';
+import PluginBlock from '../../parts/plugin-block';
 
 import CollectionsListSection from '../../parts/collections-list-section';
 import CollectionsListItem from '../../parts/collections-list-item';
@@ -31,9 +31,9 @@ class CollectionsBlock extends Component {
             block = props.view.blocks[name];
 
         if (!block || block.empty()) {
-            return <IconifyBlock type="error">
+            return <PluginBlock type="error">
                 <Notice type="error">{lang.empty}</Notice>
-            </IconifyBlock>;
+            </PluginBlock>;
         }
 
         // Parse each category
@@ -69,7 +69,7 @@ class CollectionsBlock extends Component {
             }
         });
 
-        return <IconifyBlock type="collections">{sections}</IconifyBlock>;
+        return <PluginBlock type="collections">{sections}</PluginBlock>;
     }
 
     /**

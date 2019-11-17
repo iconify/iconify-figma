@@ -16,7 +16,7 @@
 
 import React, { Component } from 'react';
 
-import IconifyBlock from '../parts/block';
+import PluginBlock from '../../parts/plugin-block';
 import Icon from '../../parts/icon-decoration';
 
 const phrases = require('../../../data/phrases');
@@ -62,7 +62,7 @@ class PaginationBlock extends Component {
 
         }
 
-        return <IconifyBlock type="pagination">{pagination}</IconifyBlock>;
+        return <PluginBlock type="pagination">{pagination}</PluginBlock>;
     }
 
     /**

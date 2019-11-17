@@ -144,11 +144,23 @@ delay(counter => {
                     callback: sendMessage,
                 };
                 ui = new UI(document.getElementById('container'), params);
+
+                if (message.selectedNode) {
+                    ui.showCode(message.selectedNode);
+                }
                 break;
 
             case 'selected-nodes':
                 // Update list of possible parent nodes
                 ui.setSelectedNodes(message.nodes);
+                break;
+
+            case 'selected-node-data':
+                ui.showCode(message.selectedNode);
+                break;
+
+            case 'cancel-node-data':
+                ui.hideCode();
                 break;
 
             case 'error':

@@ -4,6 +4,7 @@ import updateSelection from './update-selection';
 import importSVG from './import-svg';
 import importIconify from './import-iconify';
 import { findParentNodes } from './node-functions';
+import { getSelectedNodeData } from './node-data';
 
 /**
  * UI dimensions
@@ -31,6 +32,7 @@ let env = {
 	debug: false,
 	compact: false,
 	lastParent: null,
+	showingCode: false,
 };
 
 /**
@@ -42,12 +44,20 @@ let showUI = config => {
 	// Mark as loaded
 	env.loaded = true;
 
-	// Tell UI to load
-	figma.ui.postMessage({
+	let params = <any>{
 		event: 'show',
 		config: config,
-		parentNodes: findParentNodes(env)
-	});
+		parentNodes: findParentNodes(env),
+	};
+
+	let nodeData = getSelectedNodeData(env);
+	if (nodeData) {
+		env.showingCode = true;
+		params.selectedNode = nodeData;
+	}
+
+	// Tell UI to load
+	figma.ui.postMessage(params);
 };
 
 /**

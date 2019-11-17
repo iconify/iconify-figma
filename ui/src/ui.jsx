@@ -72,8 +72,41 @@ class UI {
      * @param item
      */
     showCode(item) {
-        console.log('Showing code for icon:', item);
-        // @TODO change route to show item or to previous route if item is empty
+        let container = this.component;
+        if (!container) {
+            return;
+        }
+
+        if (!this.options.showCodePage) {
+            return;
+        }
+
+        // Add last page to route
+        if (container.route.page !== 'code') {
+            item.page = container.route.page;
+        } else {
+            item.page = container.route.code.page;
+        }
+
+        container.changePage('code', item);
+    }
+
+    /**
+     * Hide code page
+     */
+    hideCode() {
+        let container = this.component;
+        if (!container || container.route.page !== 'code') {
+            return;
+        }
+
+        // Change page to previous page
+        let newPage = 'iconify';
+        try {
+            newPage = container.route.code.page;
+        } catch (err) {
+        }
+        container.changePage(newPage === 'code' ? 'iconify' : newPage);
     }
 
     /**
@@ -222,6 +255,17 @@ class UI {
                 delete result.route[key];
             }
         });
+
+        // Change page if temporary page is current page
+        switch (result.route.page) {
+            case 'code':
+                try {
+                    result.route.page = container.route.code.page;
+                } catch (err) {
+                    result.route.page = 'iconify';
+                }
+                break;
+        }
 
         return stringify ? JSON.stringify(result) : result;
     }

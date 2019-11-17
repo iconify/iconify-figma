@@ -9,6 +9,7 @@ const iconifyPages = constants.pages;
 const globalOptions = {
     // Layout
     compactLayout: false,
+    showCodePage: false,
 
     // Icon customizations
     color: '',

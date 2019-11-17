@@ -16,7 +16,7 @@
 
 import React from 'react';
 
-function IconifyBlock(props) {
+function PluginBlock(props) {
     let className = 'plugin-block';
 
     if (props.type !== void 0) {
@@ -34,4 +34,4 @@ function IconifyBlock(props) {
     </div>;
 }
 
-export default IconifyBlock;
+export default PluginBlock;

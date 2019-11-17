@@ -17,6 +17,7 @@ class ToggleOption extends Component {
                 {props.text}
                 {props.children}
             </label>
+            {props.hint && <small className="plugin-option-hint">{props.hint}</small>}
         </div>;
     }
 

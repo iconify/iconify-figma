@@ -16,8 +16,7 @@
 
 import React, { Component } from 'react';
 
-import IconifyBlock from '../parts/block';
-import Icon from '../../parts/icon-decoration';
+import PluginBlock from '../../parts/plugin-block';
 import Header from '../../parts/icons-header';
 import Notice from '../../parts/notice';
 
@@ -82,10 +81,10 @@ class IconsHeader extends Component {
             headerProps.layoutTitle = lang.mode;
         }
 
-        return <IconifyBlock type="icons-header">
+        return <PluginBlock type="icons-header">
             {isError && <Notice type="error">{text}</Notice>}
             {!isError && <Header {...headerProps}>{text}</Header>}
-        </IconifyBlock>;
+        </PluginBlock>;
     }
 
     /**

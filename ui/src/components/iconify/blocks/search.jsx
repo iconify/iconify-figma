@@ -16,7 +16,7 @@
 
 import React from 'react';
 
-import IconifyBlock from '../parts/block';
+import PluginBlock from '../../parts/plugin-block';
 import SearchForm from '../parts/search-form';
 
 const phrases = require('../../../data/phrases');
@@ -47,10 +47,10 @@ function SearchBlock(props) {
         }
     }
 
-    return <IconifyBlock type="search">
+    return <PluginBlock type="search">
         {searchTitle !== null && <p>{searchTitle}</p>}
         <SearchForm {...props} />
-    </IconifyBlock>;
+    </PluginBlock>;
 }
 
 export default SearchBlock;

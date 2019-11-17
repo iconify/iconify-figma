@@ -248,5 +248,23 @@ function replaceSelection(env, node) {
 	figma.currentPage.selection = [node];
 }
 
+/**
+ * Convert fill or stroke color to hex
+ *
+ * @param {object} color
+ * @return {string}
+ */
+function convertColor(color) {
+	let result = '#';
+	['r', 'g', 'b'].forEach(prop => {
+		let value = Math.round(color[prop] * 255).toString(16);
+		if (value.length < 2) {
+			value = '0' + value;
+		}
+		result += value;
+	});
+	return result;
+}
+
 // Export functions
-export { isRootNode, findParentNode, findParentNodes, findParentNodeById, addToSelection, replaceSelection };
+export { isRootNode, findParentNode, findParentNodes, findParentNodeById, addToSelection, replaceSelection, convertColor };

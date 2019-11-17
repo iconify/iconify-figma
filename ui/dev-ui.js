@@ -96,16 +96,26 @@ let params = {
 
 var ui = new UI(document.getElementById('container'), params);
 
-// @TODO Test showCode()
+// Test showCode()
 /*
 setTimeout(function () {
     ui.showCode({
-        icon: 'fe:home',
-        color: 'red',
-        width: 24,
-        height: 24,
+        "name": "ic:twotone-folder-open",
+        "color": "#88aa33",
+        "props": {
+            "rotate": 0,
+            "vFlip": false,
+            "hFlip": false
+        },
+        "node": {
+            "name": "ic:twotone-folder-open",
+            "width": 120,
+            "height": 120,
+            "rotation": 0,
+            "color": "#88aa33"
+        }
     });
-}, 5000);
+}, 1000);
 */
 
 // Test notices

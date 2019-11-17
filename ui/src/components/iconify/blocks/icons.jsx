@@ -17,7 +17,7 @@
 import React, { Component } from 'react';
 import Iconify from '@iconify/iconify';
 
-import IconifyBlock from '../parts/block';
+import PluginBlock from '../../parts/plugin-block';
 import IconsContainer from '../../parts/icons-container';
 import Icon from '../parts/icon';
 import LongIcon from '../parts/icon-long';
@@ -79,11 +79,11 @@ class IconsBlock extends Component {
             />);
         });
 
-        return <IconifyBlock type="icons">
+        return <PluginBlock type="icons">
             <IconsContainer list={list}>
                 {icons}
             </IconsContainer>
-        </IconifyBlock>;
+        </PluginBlock>;
     }
 
     /**

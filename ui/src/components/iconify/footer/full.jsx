@@ -21,7 +21,7 @@ import Iconify from '@iconify/iconify';
 import FooterButtons from './buttons';
 import FooterContainer from './container';
 
-import IconifyBlock from '../parts/block';
+import PluginBlock from '../../parts/plugin-block';
 import Button from '../../parts/inputs/button';
 import CloseButton from '../../parts/inputs/close-button';
 
@@ -86,7 +86,7 @@ class FullFooter extends Component {
         }
 
         // Render sample
-        return <IconifyBlock type="footer">
+        return <PluginBlock type="footer">
             {this.renderIconName()}
             <FooterContainer>
                 <FooterSample
@@ -119,7 +119,7 @@ class FullFooter extends Component {
                 <Button type="primary" title={lang.submit} onClick={container.importIconifyIcon.bind(container)} />
                 <CloseButton container={container} />
             </FooterButtons>
-        </IconifyBlock>;
+        </PluginBlock>;
     }
 
     /**

@@ -29,6 +29,7 @@ import RecentContainer from './containers/recent';
 import PasteSVGContainer from './containers/paste';
 import GitHubContainer from './containers/github';
 import OptionsContainer from './containers/options';
+import CodeContainer from './containers/code';
 import FloatingNotices from './parts/floating-notices';
 
 const containers = {
@@ -37,6 +38,7 @@ const containers = {
     paste: PasteSVGContainer,
     github: GitHubContainer,
     options: OptionsContainer,
+    code: CodeContainer,
 };
 
 /**

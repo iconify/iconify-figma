@@ -16,18 +16,18 @@
 
 import React from 'react';
 
-import IconifyBlock from '../parts/block';
+import PluginBlock from '../../parts/plugin-block';
 import FooterButtons from './buttons';
 import CloseButton from '../../parts/inputs/close-button';
 
 function SimpleFooter(props) {
     let container = props.container;
 
-    return <IconifyBlock type="footer">
+    return <PluginBlock type="footer">
         <FooterButtons>
             <CloseButton container={container} />
         </FooterButtons>
-    </IconifyBlock>;
+    </PluginBlock>;
 }
 
 export default SimpleFooter;
