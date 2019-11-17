@@ -72,13 +72,47 @@
 
   .plugin-filter {
     margin: 3px 4px;
-    max-width: 60px;
+    padding: 4px 7px;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
 
-    @media (max-width: 600px) {
+  .plugin-icon-item {
+    &--filters {
+      &--2 .plugin-filter {
+        max-width: 80px;
+      }
+      &--3 .plugin-filter {
+        max-width: 70px;
+        margin: 3px 2px;
+      }
+      &--4 .plugin-filter {
+        max-width: 50px;
+        margin: 3px 2px;
+      }
+      &--5 .plugin-filter {
+        max-width: 48px;
+        margin: 3px 2px;
+        padding: 4px 5px;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .plugin-filter {
       margin: 3px 2px;
-      max-width: 42px;
+      padding: 4px 5px;
+      max-width: 72px;
+    }
+    .plugin-icon-item {
+      &--filters {
+        &--2 .plugin-filter {
+          max-width: 52px;
+        }
+        &--3 .plugin-filter, &--4 .plugin-filter, &--5 .plugin-filter {
+          max-width: 42px;
+        }
+      }
     }
   }
 

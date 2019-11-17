@@ -26,6 +26,9 @@ function ListIcon(props) {
     if (props.selected) {
         className += ' plugin-icon-item--selected';
     }
+    if (props.children instanceof Array) {
+        className += ' plugin-icon-item--filters--' + Math.min(5, props.children.length);
+    }
 
     let sample = null;
     if (!props.pending && props.svg) {
