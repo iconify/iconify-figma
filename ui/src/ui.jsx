@@ -100,11 +100,14 @@ class UI {
     hideCode() {
         let container = this.component;
         if (!container) {
-            if (container.route.page !== 'code') {
-                // Reset route and refresh menu
-                container.route.code = null;
-                container.update();
-            }
+            return;
+        }
+
+        // Code is not shown
+        if (container.route.page !== 'code') {
+            // Reset route and refresh menu
+            container.route.code = null;
+            container.update();
             return;
         }
 

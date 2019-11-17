@@ -54,8 +54,15 @@ class Navigation extends Component {
             activeClass = 'plugin-nav plugin-nav--selected',
             activeCodeClass = activeClass + ' plugin-nav--selected--code',
             showCode = false,
-            secondaryMenu;
+            secondaryMenu = null;
 
+        // Check if code tab should be visible
+        if (route.page === 'code' || route.code) {
+            showCode = true;
+            section = route.page === 'code' ? 'code' : section;
+        }
+
+        // Do not show secondary menu if code is active
         switch (section) {
             case 'menu':
                 secondaryMenu = this.renderOptions();
@@ -68,15 +75,6 @@ class Navigation extends Component {
             case 'github':
                 secondaryMenu = this.renderGitHub();
                 break;
-
-            default:
-                secondaryMenu = null;
-        }
-
-        // Check if code tab should be visible
-        if (!this.props.container.options.showCodePage && route.code) {
-            showCode = true;
-            // section = route.page === 'code' ? 'code' : section;
         }
 
         return <div className={'plugin-header' + (secondaryMenu ? ' plugin-header--with-menu' : ' plugin-header--no-menu')}>
