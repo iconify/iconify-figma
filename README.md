@@ -40,24 +40,31 @@ Browse or search icons, select any icon, click "Import" button or drag icon to F
 ## Screenshots
 
 Collections list:
+
 ![Iconify for Figma - browse collections](https://iconify.github.io/iconify-figma/screenshots/collections.png)
 
 Searching icons:
+
 ![Iconify for Figma - search results](https://iconify.github.io/iconify-figma/screenshots/search.png)
 
 Browsing Material Design icons:
+
 ![Iconify for Figma - browsing icons set](https://iconify.github.io/iconify-figma/screenshots/collection.png)
 
 Browsing IonIcons in compact mode:
+
 ![Iconify for Figma - compact mode](https://iconify.github.io/iconify-figma/screenshots/compact.png)
 
 Drag and drop:
+
 ![Iconify for Figma - drag and drop](https://iconify.github.io/iconify-figma/screenshots/drag-drop.png)
 
 Recent icons:
+
 ![Iconify for Figma - recent icons](https://iconify.github.io/iconify-figma/screenshots/recent.png)
 
 Paste SVG:
+
 ![Iconify for Figma - paste SVG](https://iconify.github.io/iconify-figma/screenshots/paste.png)
 
 
