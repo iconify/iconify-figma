@@ -52,7 +52,6 @@ class Navigation extends Component {
             section = this.state.section,
             inactiveClass = 'plugin-nav',
             activeClass = 'plugin-nav plugin-nav--selected',
-            activeCodeClass = activeClass + ' plugin-nav--selected--code',
             showCode = false,
             secondaryMenu = null;
 
@@ -82,7 +81,7 @@ class Navigation extends Component {
                 <div className="plugin-header-left">
                     <a className={(section === 'menu' ? activeClass : inactiveClass) + ' plugin-nav--icon'} href="#" onClick={this.onChangeSectionAndPage.bind(this, 'menu', 'options')} title={lang.menu}><Icon name="menu" /></a>
                     <a className={section === 'import' ? activeClass : inactiveClass} href="#" onClick={this.onChangeSectionAndPage.bind(this, 'import', 'iconify')}>{lang.import}</a>
-                    {showCode && <a className={route.page === 'code' ? activeCodeClass : inactiveClass} href="#" onClick={this.onChangePage.bind(this, route.page === 'code' ? route.code.page : 'code')}>{lang.code}</a>}
+                    {showCode && <a className={section === 'code' ? activeClass : inactiveClass} href="#" onClick={this.onChangePage.bind(this, route.page === 'code' ? route.code.page : 'code')}>{lang.code}</a>}
                 </div>
                 <div className="plugin-header-center">{error}</div>
                 <div className="plugin-header-right">

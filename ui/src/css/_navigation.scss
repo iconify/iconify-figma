@@ -95,11 +95,6 @@
         background: $plugin-palette-background-medium-black;
         color: $plugin-palette-color-white;
         font-weight: bold;
-        &--code {
-          &, &:hover, &:focus {
-            background: $plugin-palette-background-blue;
-          }
-        }
       }
     }
   }
