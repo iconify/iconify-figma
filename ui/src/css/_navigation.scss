@@ -55,10 +55,6 @@
     }
   }
 
-  .plugin-nav--selected {
-    pointer-events: none;
-  }
-
   a.plugin-nav--external {
     position: relative;
     padding-right: 20px;
@@ -94,11 +90,17 @@
         color: $plugin-palette-color-white;
         background: $plugin-palette-background-medium-black;
       }
-    }
-    .plugin-nav--selected {
-      background: $plugin-palette-background-medium-black;
-      color: $plugin-palette-color-white;
-      font-weight: bold;
+
+      &--selected {
+        background: $plugin-palette-background-medium-black;
+        color: $plugin-palette-color-white;
+        font-weight: bold;
+        &--code {
+          &, &:hover, &:focus {
+            background: $plugin-palette-background-blue;
+          }
+        }
+      }
     }
   }
 
