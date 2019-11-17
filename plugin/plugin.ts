@@ -13,11 +13,11 @@ import { findParentNodes } from './node-functions';
 const dimensions = {
 	full: {
 		width: 690,
-		height: 800,
+		height: 700,
 	},
 	compact: {
 		width: 514,
-		height: 600,
+		height: 500,
 	}
 };
 
