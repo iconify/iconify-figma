@@ -77,15 +77,18 @@ class UI {
             return;
         }
 
-        if (!this.options.showCodePage) {
-            return;
-        }
-
         // Add last page to route
         if (container.route.page !== 'code') {
             item.page = container.route.page;
         } else {
             item.page = container.route.code.page;
+        }
+
+        if (!this.options.showCodePage && container.route.page !== 'code') {
+            // Add menu item
+            container.route.code = item;
+            container.update();
+            return;
         }
 
         container.changePage('code', item);
@@ -96,7 +99,12 @@ class UI {
      */
     hideCode() {
         let container = this.component;
-        if (!container || container.route.page !== 'code') {
+        if (!container) {
+            if (container.route.page !== 'code') {
+                // Reset route and refresh menu
+                container.route.code = null;
+                container.update();
+            }
             return;
         }
 
@@ -106,6 +114,7 @@ class UI {
             newPage = container.route.code.page;
         } catch (err) {
         }
+        container.route.code = null;
         container.changePage(newPage === 'code' ? 'iconify' : newPage);
     }
 

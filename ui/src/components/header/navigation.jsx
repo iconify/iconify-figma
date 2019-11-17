@@ -52,6 +52,7 @@ class Navigation extends Component {
             section = this.state.section,
             inactiveClass = 'plugin-nav',
             activeClass = 'plugin-nav plugin-nav--selected',
+            showCode = false,
             secondaryMenu;
 
         switch (section) {
@@ -71,11 +72,18 @@ class Navigation extends Component {
                 secondaryMenu = null;
         }
 
+        // Check if code tab should be visible
+        if (!this.props.container.options.showCodePage && route.code) {
+            showCode = true;
+            section = route.page === 'code' ? 'code' : section;
+        }
+
         return <div className={'plugin-header' + (secondaryMenu ? ' plugin-header--with-menu' : ' plugin-header--no-menu')}>
             <div className="plugin-wrapper-header plugin-wrapper-header--primary">
                 <div className="plugin-header-left">
                     <a className={(section === 'menu' ? activeClass : inactiveClass) + ' plugin-nav--icon'} href="#" onClick={this.onChangeSectionAndPage.bind(this, 'menu', 'options')} title={lang.menu}><Icon name="menu" /></a>
                     <a className={section === 'import' ? activeClass : inactiveClass} href="#" onClick={this.onChangeSectionAndPage.bind(this, 'import', 'iconify')}>{lang.import}</a>
+                    {showCode && <a className={section === 'code' ? activeClass : inactiveClass} href="#" onClick={this.onChangePage.bind(this, 'code')}>{lang.code}</a>}
                 </div>
                 <div className="plugin-header-center">{error}</div>
                 <div className="plugin-header-right">
@@ -86,16 +94,13 @@ class Navigation extends Component {
         </div>;
     }
 
-    /**
+    /*
      * Render main sub-menu
      *
      * @return {*}
      */
     renderOptions() {
-        let route = this.props.route,
-            page = route.page,
-            inactiveClass = 'plugin-nav',
-            activeClass = 'plugin-nav plugin-nav--selected';
+        let inactiveClass = 'plugin-nav';
 
         return <div className="plugin-wrapper-header plugin-wrapper-header--secondary">
             <div className="plugin-header-left">
@@ -117,14 +122,13 @@ class Navigation extends Component {
      */
     renderImport() {
         let route = this.props.route,
-            page = route.page,
-            inactiveClass = 'plugin-nav',
-            activeClass = 'plugin-nav plugin-nav--selected';
+            page = route.page;
 
         return <div className="plugin-wrapper-header plugin-wrapper-header--secondary">
             <div className="plugin-header-left">
                 {this.renderPageLink('iconify', lang.importIconify)}
                 {this.renderPageLink('paste', lang.importSVG)}
+
                 {/*{this.renderPageLink('font', lang.importFont)}*/}
             </div>
             <div className="plugin-header-center" />
@@ -223,6 +227,19 @@ class Navigation extends Component {
 
         let container = this.props.container;
         if (container.hasContainer(page)) {
+
+            switch (page) {
+                case 'code':
+                    // Save current page for return link
+                    if (!container.route.code) {
+                        return;
+                    }
+                    if (container.route.page !== 'code') {
+                        container.route.code.page = container.route.page;
+                    }
+                    break;
+            }
+
             container.changePage(page);
         } else {
             this._triggerError();

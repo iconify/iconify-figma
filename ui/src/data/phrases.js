@@ -20,6 +20,7 @@ module.exports = {
         notavailable: 'This menu is not available yet.',
         menu: 'Menu',
         import: 'Import Icons',
+        code: 'Show Code',
         about: 'About / GitHub',
         options: 'Options',
         importOptions: 'Import',
@@ -147,7 +148,7 @@ module.exports = {
         aboutCollection: 'About {title}',
     },
     code: {
-        pageTitle: 'Code for "{name}":',
+        pageTitle: 'Code for selected layer:', // 'Code for "{name}":',
         pageExplain: 'Every icon you import with this plug-in can be used with Iconify SVG framework that works similar to icon fonts or with Iconify for React.',
         pageExplain2: 'No need to export SVG from Figma and insert SVG into document. Use code below to use selected icon in your projects.',
         pageExplain3: 'This page will open whenever you select icon exported with this plug-in in layers list and Iconify plug-in is open. You can disable this by disabling option "Show code page" in plug-in options (click 3 horizontal lines icon in header).',

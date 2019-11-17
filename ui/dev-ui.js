@@ -97,7 +97,6 @@ let params = {
 var ui = new UI(document.getElementById('container'), params);
 
 // Test showCode()
-/*
 setTimeout(function () {
     ui.showCode({
         "name": "ic:twotone-folder-open",
@@ -116,7 +115,6 @@ setTimeout(function () {
         }
     });
 }, 1000);
-*/
 
 // Test notices
 /*

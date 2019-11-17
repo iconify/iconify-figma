@@ -53,7 +53,7 @@ function CodeContainer(props) {
                 <ReactCodeBlock icon={icon} />
             </section>
 
-            <p>{lang.pageExplain3}</p>
+            {container.options.showCodePage && <p>{lang.pageExplain3}</p>}
         </PluginBlock>
     </div>
 }
