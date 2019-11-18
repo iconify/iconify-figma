@@ -7,6 +7,9 @@ import Iconify from '@iconify/iconify';
 import style from './src/css/style.scss';
 import UI from './src/ui';
 
+// Disable MutationObserver - plugin renders SVG, not placeholders
+Iconify.pauseObserving();
+
 // UI configuration
 const itemsPerPage = 55; // 5 rows x 11 icons. Also see plugin-ui.js
 let iconifyConfig = {

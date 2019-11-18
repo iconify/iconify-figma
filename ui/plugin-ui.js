@@ -10,6 +10,9 @@ import UI from './src/ui';
 // Items per page
 const itemsPerPage = 55; // 5 rows x 11 icons. Also see dev-ui.js
 
+// Disable MutationObserver - plugin renders SVG, not placeholders
+Iconify.pauseObserving();
+
 /**
  * Send message to plugin
  *
