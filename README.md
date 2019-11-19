@@ -99,6 +99,15 @@ Build modes:
 * `npm run test` - test Icon Finder core.
 
 
+# Custom builds
+
+To create custom build you need to change plug-in hash and name in manifest.json. This is enough for Figma to treat plug-in as separate plug-in, so it won't share configuration with Iconify plug-in.
+
+This plug-in can be limited to one collection, making it easy to create custom plug-ins for collections. To set collection, add parameter "prefix" in ui/plugin-ui.js and ui/dev-ui.js. Code is already there, you only need to uncomment it and set to correct values.
+
+You can disable any menu sections that you do not need in ui/src/components/header/navigation.jsx. Just comment out what you do not need. In About/GitHub menu please keep information about Iconify project and author. You can add your own information about your icon set as well.
+
+
 # License
 
 Iconify Icon Finder is dual-licensed under Apache 2.0 and GPL 2.0 license. You may select, at your option, one of the above-listed licenses.

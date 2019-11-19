@@ -114,7 +114,7 @@ delay(counter => {
             search: {
                 limit: itemsPerPage * 2,
             },
-        }
+        },
     };
 
     if (process.env.SEARCH_API) {
@@ -142,6 +142,7 @@ delay(counter => {
                     stored: message.config,
                     parentNodes: message.parentNodes,
                     callback: sendMessage,
+                    // prefix: 'mdi', // Uncomment this to limit plug-in to one collection
                 };
                 ui = new UI(document.getElementById('container'), params);
 
