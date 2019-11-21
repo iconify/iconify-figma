@@ -31,7 +31,7 @@ function isIconifyFrame(node) {
 	if (
 		node.parent && node.parent.type === 'PAGE' &&
 		(node.name.indexOf('-') !== -1 || node.name.indexOf(':') !== -1) &&
-		node.name.match(/^[a-z0-9]+[a-z0-9:-]+[a-z0-9]+$/) &&
+		node.name.match(/^(@[a-z0-9-]+\/)?[a-z0-9][a-z0-9-]*[:-][a-z0-9-]*[a-z0-9]+$/) &&
 		node.name.split(':').length < 3
 	) {
 		return true;
