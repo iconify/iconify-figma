@@ -132,7 +132,9 @@ delay(counter => {
         if (typeof message !== 'object' || !message.event) {
             return;
         }
-        console.log('Sent message to UI:', message);
+        if (process.env.SEARCH_DEV) {
+            console.log('Sent message to UI:', message);
+        }
 
         switch (message.event) {
             case 'show':
