@@ -83,12 +83,14 @@ function CollectionInfoList(props) {
     }
 
     // Palette
+    /*
     if (info.palette && props.showPalette !== false) {
         list.push(<dl key="palette">
             <dt>{lang.palette}</dt>
             <dd>{lang[info.palette === 'Colorless' ? 'colorless' : 'colorful']}</dd>
         </dl>);
     }
+    */
 
     if (props.showViewLink === true) {
         list.push(<div key="view">
