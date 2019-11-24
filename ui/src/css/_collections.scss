@@ -143,6 +143,8 @@
     text-align: center;
     background: $plugin-palette-background-colored-overlay;
     .iconify {
+      display: inline-block;
+      height: 24px;
       margin: 0 3px;
       vertical-align: -0.125em;
     }
