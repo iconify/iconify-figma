@@ -1,8 +1,9 @@
-// Figma Plugin API version 1, update 5
+// Figma Plugin API version 1, update 7
 
+declare global {
 // Global variable with Figma's plugin API.
-declare const figma: PluginAPI
-declare const __html__: string
+const figma: PluginAPI
+const __html__: string
 
 interface PluginAPI {
   readonly apiVersion: "1.0.0"
@@ -23,11 +24,11 @@ interface PluginAPI {
   readonly root: DocumentNode
   currentPage: PageNode
 
-  on(type: "selectionchange" | "currentpagechange" | "close", callback: () => void)
-  once(type: "selectionchange" | "currentpagechange" | "close", callback: () => void)
-  off(type: "selectionchange" | "currentpagechange" | "close", callback: () => void)
+  on(type: "selectionchange" | "currentpagechange" | "close", callback: () => void): void
+  once(type: "selectionchange" | "currentpagechange" | "close", callback: () => void): void
+  off(type: "selectionchange" | "currentpagechange" | "close", callback: () => void): void
 
-  readonly mixed: symbol
+  readonly mixed: unique symbol
 
   createRectangle(): RectangleNode
   createLine(): LineNode
@@ -95,7 +96,6 @@ interface ShowUIOptions {
   visible?: boolean,
   width?: number,
   height?: number,
-  position?: 'default' | 'last' | 'auto' // PROPOSED API ONLY
 }
 
 interface UIPostMessageOptions {
@@ -116,15 +116,15 @@ interface UIAPI {
 
   postMessage(pluginMessage: any, options?: UIPostMessageOptions): void
   onmessage: MessageEventHandler | undefined
-  on(type: "message", callback: MessageEventHandler)
-  once(type: "message", callback: MessageEventHandler)
-  off(type: "message", callback: MessageEventHandler)
+  on(type: "message", callback: MessageEventHandler): void
+  once(type: "message", callback: MessageEventHandler): void
+  off(type: "message", callback: MessageEventHandler): void
 }
 
 interface ViewportAPI {
   center: { x: number, y: number }
   zoom: number
-  scrollAndZoomIntoView(nodes: ReadonlyArray<BaseNode>)
+  scrollAndZoomIntoView(nodes: ReadonlyArray<BaseNode>): void
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -270,30 +270,30 @@ interface GridLayoutGrid {
 type LayoutGrid = RowsColsLayoutGrid | GridLayoutGrid
 
 interface ExportSettingsConstraints {
-  type: "SCALE" | "WIDTH" | "HEIGHT"
-  value: number
+  readonly type: "SCALE" | "WIDTH" | "HEIGHT"
+  readonly value: number
 }
 
 interface ExportSettingsImage {
-  format: "JPG" | "PNG"
-  contentsOnly?: boolean    // defaults to true
-  suffix?: string
-  constraint?: ExportSettingsConstraints
+  readonly format: "JPG" | "PNG"
+  readonly contentsOnly?: boolean    // defaults to true
+  readonly suffix?: string
+  readonly constraint?: ExportSettingsConstraints
 }
 
 interface ExportSettingsSVG {
-  format: "SVG"
-  contentsOnly?: boolean    // defaults to true
-  suffix?: string
-  svgOutlineText?: boolean  // defaults to true
-  svgIdAttribute?: boolean  // defaults to false
-  svgSimplifyStroke?: boolean // defaults to true
+  readonly format: "SVG"
+  readonly contentsOnly?: boolean    // defaults to true
+  readonly suffix?: string
+  readonly svgOutlineText?: boolean  // defaults to true
+  readonly svgIdAttribute?: boolean  // defaults to false
+  readonly svgSimplifyStroke?: boolean // defaults to true
 }
 
 interface ExportSettingsPDF {
-  format: "PDF"
-  contentsOnly?: boolean    // defaults to true
-  suffix?: string
+  readonly format: "PDF"
+  readonly contentsOnly?: boolean    // defaults to true
+  readonly suffix?: string
 }
 
 type ExportSettings = ExportSettingsImage | ExportSettingsSVG | ExportSettingsPDF
@@ -371,6 +371,54 @@ interface Font {
   fontName: FontName
 }
 
+type Reaction = { action: Action, trigger: Trigger }
+
+type Action =
+  { readonly type: "BACK" | "CLOSE" } |
+  { readonly type: "URL", url: string } |
+  { readonly type: "NODE",
+    readonly destinationId: string | null,
+    readonly navigation: Navigation,
+    readonly transition: Transition | null,
+    readonly preserveScrollPosition: boolean,
+
+    // Only present if navigation == "OVERLAY" and the destination uses
+    // overlay position type "RELATIVE"
+    readonly overlayRelativePosition?: Vector,
+  }
+
+interface SimpleTransition {
+  readonly type: "DISSOLVE" | "SMART_ANIMATE"
+  readonly easing: Easing
+  readonly duration: number
+}
+
+interface DirectionalTransition {
+  readonly type: "MOVE_IN" | "MOVE_OUT" | "PUSH" | "SLIDE_IN" | "SLIDE_OUT"
+  readonly direction: "LEFT" | "RIGHT" | "TOP" | "BOTTOM"
+  readonly matchLayers: boolean
+
+  readonly easing: Easing
+  readonly duration: number
+}
+
+export type Transition = SimpleTransition | DirectionalTransition
+
+type Trigger =
+  { readonly type: "ON_CLICK" | "ON_HOVER" | "ON_PRESS" | "ON_DRAG" } |
+  { readonly type: "AFTER_TIMEOUT", readonly timeout: number } |
+  { readonly type: "MOUSE_ENTER" | "MOUSE_LEAVE" | "MOUSE_UP" | "MOUSE_DOWN",
+    readonly delay: number,
+  }
+
+type Navigation = "NAVIGATE" | "SWAP" | "OVERLAY"
+
+interface Easing {
+  readonly type: "EASE_IN" | "EASE_OUT" | "EASE_IN_AND_OUT" | "LINEAR"
+}
+
+type OverflowDirection = "NONE" | "HORIZONTAL" | "VERTICAL" | "BOTH"
+
 ////////////////////////////////////////////////////////////////////////////////
 // Mixins
 
@@ -439,6 +487,9 @@ interface FrameMixin {
   guides: ReadonlyArray<Guide>
   gridStyleId: string
   backgroundStyleId: string
+
+  overflowDirection: OverflowDirection // PROPOSED API ONLY
+  numberOfFixedChildren: number // PROPOSED API ONLY
 }
 
 type StrokeCap = "NONE" | "ROUND" | "SQUARE" | "ARROW_LINES" | "ARROW_EQUILATERAL"
@@ -446,19 +497,19 @@ type StrokeJoin = "MITER" | "BEVEL" | "ROUND"
 type HandleMirroring = "NONE" | "ANGLE" | "ANGLE_AND_LENGTH"
 
 interface GeometryMixin {
-  fills: ReadonlyArray<Paint> | symbol
+  fills: ReadonlyArray<Paint> | PluginAPI['mixed']
   strokes: ReadonlyArray<Paint>
   strokeWeight: number
   strokeAlign: "CENTER" | "INSIDE" | "OUTSIDE"
-  strokeCap: StrokeCap | symbol
-  strokeJoin: StrokeJoin | symbol
+  strokeCap: StrokeCap | PluginAPI['mixed']
+  strokeJoin: StrokeJoin | PluginAPI['mixed']
   dashPattern: ReadonlyArray<number>
-  fillStyleId: string | symbol
+  fillStyleId: string | PluginAPI['mixed']
   strokeStyleId: string
 }
 
 interface CornerMixin {
-  cornerRadius: number | symbol
+  cornerRadius: number | PluginAPI['mixed']
   cornerSmoothing: number
 }
 
@@ -467,13 +518,17 @@ interface ExportMixin {
   exportAsync(settings?: ExportSettings): Promise<Uint8Array> // Defaults to PNG format
 }
 
+interface ReactionMixin {
+  readonly reactions: ReadonlyArray<Reaction> // PROPOSED API ONLY
+}
+
 interface DefaultShapeMixin extends
-  BaseNodeMixin, SceneNodeMixin,
+  BaseNodeMixin, SceneNodeMixin, ReactionMixin,
   BlendMixin, GeometryMixin, LayoutMixin, ExportMixin {
 }
 
 interface DefaultContainerMixin extends
-  BaseNodeMixin, SceneNodeMixin,
+  BaseNodeMixin, SceneNodeMixin, ReactionMixin,
   ChildrenMixin, FrameMixin,
   BlendMixin, ConstraintMixin, LayoutMixin, ExportMixin {
 }
@@ -501,6 +556,8 @@ interface PageNode extends BaseNodeMixin, ChildrenMixin, ExportMixin {
   selection: ReadonlyArray<SceneNode>
 
   backgrounds: ReadonlyArray<Paint>
+
+  readonly prototypeStartNode: FrameNode | ComponentNode | InstanceNode | null // PROPOSED API ONLY
 }
 
 interface FrameNode extends DefaultContainerMixin {
@@ -551,7 +608,7 @@ interface VectorNode extends DefaultShapeMixin, ConstraintMixin, CornerMixin {
   clone(): VectorNode
   vectorNetwork: VectorNetwork
   vectorPaths: VectorPaths
-  handleMirroring: HandleMirroring | symbol
+  handleMirroring: HandleMirroring | PluginAPI['mixed']
 }
 
 interface TextNode extends DefaultShapeMixin, ConstraintMixin {
@@ -566,31 +623,31 @@ interface TextNode extends DefaultShapeMixin, ConstraintMixin {
   paragraphSpacing: number
   autoRename: boolean
 
-  textStyleId: string | symbol
-  fontSize: number | symbol
-  fontName: FontName | symbol
-  textCase: TextCase | symbol
-  textDecoration: TextDecoration | symbol
-  letterSpacing: LetterSpacing | symbol
-  lineHeight: LineHeight | symbol
+  textStyleId: string | PluginAPI['mixed']
+  fontSize: number | PluginAPI['mixed']
+  fontName: FontName | PluginAPI['mixed']
+  textCase: TextCase | PluginAPI['mixed']
+  textDecoration: TextDecoration | PluginAPI['mixed']
+  letterSpacing: LetterSpacing | PluginAPI['mixed']
+  lineHeight: LineHeight | PluginAPI['mixed']
 
-  getRangeFontSize(start: number, end: number): number | symbol
+  getRangeFontSize(start: number, end: number): number | PluginAPI['mixed']
   setRangeFontSize(start: number, end: number, value: number): void
-  getRangeFontName(start: number, end: number): FontName | symbol
+  getRangeFontName(start: number, end: number): FontName | PluginAPI['mixed']
   setRangeFontName(start: number, end: number, value: FontName): void
-  getRangeTextCase(start: number, end: number): TextCase | symbol
+  getRangeTextCase(start: number, end: number): TextCase | PluginAPI['mixed']
   setRangeTextCase(start: number, end: number, value: TextCase): void
-  getRangeTextDecoration(start: number, end: number): TextDecoration | symbol
+  getRangeTextDecoration(start: number, end: number): TextDecoration | PluginAPI['mixed']
   setRangeTextDecoration(start: number, end: number, value: TextDecoration): void
-  getRangeLetterSpacing(start: number, end: number): LetterSpacing | symbol
+  getRangeLetterSpacing(start: number, end: number): LetterSpacing | PluginAPI['mixed']
   setRangeLetterSpacing(start: number, end: number, value: LetterSpacing): void
-  getRangeLineHeight(start: number, end: number): LineHeight | symbol
+  getRangeLineHeight(start: number, end: number): LineHeight | PluginAPI['mixed']
   setRangeLineHeight(start: number, end: number, value: LineHeight): void
-  getRangeFills(start: number, end: number): Paint[] | symbol
+  getRangeFills(start: number, end: number): Paint[] | PluginAPI['mixed']
   setRangeFills(start: number, end: number, value: Paint[]): void
-  getRangeTextStyleId(start: number, end: number): string | symbol
+  getRangeTextStyleId(start: number, end: number): string | PluginAPI['mixed']
   setRangeTextStyleId(start: number, end: number, value: string): void
-  getRangeFillStyleId(start: number, end: number): string | symbol
+  getRangeFillStyleId(start: number, end: number): string | PluginAPI['mixed']
   setRangeFillStyleId(start: number, end: number, value: string): void
 }
 
@@ -700,3 +757,6 @@ interface Image {
   readonly hash: string
   getBytesAsync(): Promise<Uint8Array>
 }
+} // declare global
+
+export {}
