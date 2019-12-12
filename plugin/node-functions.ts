@@ -1,6 +1,18 @@
 "use strict";
 
 /**
+ * Node information sent to UI
+ */
+interface ParentNodeItem {
+	id: string,
+	type: string,
+	name: string,
+	parents: Array<ParentNodeItem>,
+	level: number,
+	layoutMode?: string,
+};
+
+/**
  * Check if node is root node
  *
  * @param node
@@ -141,7 +153,7 @@ function _findParentNodes(env, callback) {
  *
  * @param {object} env
  */
-function findParentNodes(env) {
+function findParentNodes(env): Array<ParentNodeItem> {
 	let nodes = {};
 
 	_findParentNodes(env, node => {
@@ -153,13 +165,18 @@ function findParentNodes(env) {
 		}
 
 		// Return item
-		let item = {
+		let item: ParentNodeItem = {
 			id: id,
 			type: node.type,
 			name: node.name,
 			parents: [],
 			level: 0
 		};
+
+		// Check for auto-layout
+		if (node.type === 'FRAME') {
+			item.layoutMode = node.layoutMode;
+		}
 
 		// Count depth
 		let test = node;

@@ -41,12 +41,24 @@ class FooterNodeOptions extends Component {
 
         // Add components for all nodes
         const add = (node, level) => {
-            items.push(this.renderNode(node, level, hasSelection ? node.id === selectedId : node.default));
+            let selected = hasSelection ? node.id === selectedId : node.default;
 
-            // Check for node type. Cannot show alignment on page node yet
-            if (node.id === selectedId) {
-                if (node.type === 'PAGE') {
-                    showAlign = false;
+            items.push(this.renderNode(node, level, selected));
+
+            // Check for node type
+            if (selected) {
+                switch (node.type) {
+                    case 'PAGE':
+                        // Cannot show alignment on page node yet
+                        showAlign = false;
+                        break;
+
+                    case 'FRAME':
+                        // Frame uses auto-layout, alignment box is irrelevant
+                        // if (node.layoutMode === 'HORIZONTAL' || node.layoutMode === 'VERTICAL') {
+                        //     showAlign = false;
+                        // }
+                        break;
                 }
             }
 

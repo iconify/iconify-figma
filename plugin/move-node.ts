@@ -159,6 +159,53 @@ function moveNode(env, node, props) {
 		parent = findParentNode(env, void 0);
 	}
 
+	// Align in auto-layout frame
+	if (parent && parent.type === 'FRAME' && (parent.layoutMode === 'HORIZONTAL' || parent.layoutMode === 'VERTICAL')) {
+		if (node.parent === parent) {
+			// Move to page first
+			figma.currentPage.insertChild(0, node);
+		}
+
+		let align = 'first';
+		switch (parent.layoutMode) {
+			case 'HORIZONTAL':
+				if (props.x === 'center') {
+					align = 'center';
+				}
+				if (props.x === 'right') {
+					align = 'last';
+				}
+				break;
+
+			case 'VERTICAL':
+				if (props.y === 'middle') {
+					align = 'center';
+				}
+				if (props.y === 'bottom') {
+					align = 'last';
+				}
+				break;
+		}
+
+		let index = 0;
+		switch (align) {
+			case 'first':
+				index = 0;
+				break;
+
+			case 'center':
+				index = Math.floor((parent.children.length + 1) / 2);
+				break;
+
+			case 'last':
+				index = parent.children.length;
+		}
+
+		index = Math.max(0, Math.min(index, parent.children.length));
+		parent.insertChild(index, node);
+		return;
+	}
+	
 	// Move icon to selected group
 	if (parent && parent.type !== 'PAGE') {
 		// Icon alignment
