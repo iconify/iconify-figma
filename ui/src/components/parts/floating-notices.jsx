@@ -14,8 +14,8 @@ function FloatingNotices(props) {
             key={time}
             type={notice.type}
             className={'plugin-notice--floating plugin-notice--' + notice.expiration}
-            onClick={event => {
-                event.preventDefault();
+            onMouseOver={event => {
+                // event.preventDefault();
                 props.onDelete(time);
             }}
         >{notice.message}</Notice>);
