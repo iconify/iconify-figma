@@ -1,0 +1,16 @@
+::-webkit-scrollbar {
+  width: 10px;
+  height: 12px;
+  background: $plugin-palette-background-white;
+}
+
+::-webkit-scrollbar-track {
+  border: solid 3px transparent;
+  box-shadow: inset 0 0 10px 10px transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border: solid 3px transparent;
+  border-radius: 6px;
+  box-shadow: inset 0 0 8px 8px $plugin-palette-color-black-muted;
+}
