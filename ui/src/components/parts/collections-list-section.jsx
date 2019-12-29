@@ -12,21 +12,23 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
 function CollectionsListSection(props) {
-    if (!props.children) {
-        return null;
-    }
+	if (!props.children) {
+		return null;
+	}
 
-    return <div className="plugin-collections-section">
-        {props.title && <div className="plugin-collections-section-title">{props.title}</div>}
-        <div className="plugin-collections-section-items">
-            {props.children}
-        </div>
-    </div>
+	return (
+		<div className="plugin-collections-section">
+			{props.title && (
+				<div className="plugin-collections-section-title">{props.title}</div>
+			)}
+			<div className="plugin-collections-section-items">{props.children}</div>
+		</div>
+	);
 }
 
 export default CollectionsListSection;

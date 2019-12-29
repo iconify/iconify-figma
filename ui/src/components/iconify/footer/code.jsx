@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React, { Component } from 'react';
 
@@ -26,44 +26,49 @@ const phrases = require('../../../data/phrases');
 const lang = phrases.code;
 
 class FooterCode extends Component {
-    render() {
-        let props = this.props,
-            section = props.app.footerCodeSection,
-            app = props.app,
-            transformations = props.transformations;
+	render() {
+		let props = this.props,
+			section = props.app.footerCodeSection,
+			app = props.app,
+			transformations = props.transformations;
 
-        // Generate object for code blocks
-        let icon = {
-            icon: app.options.icon,
-            hasColor: props.hasColor,
-            color: transformations.color,
-            height: transformations.height,
-            hFlip: transformations.hFlip,
-            vFlip: transformations.vFlip,
-            rotate: transformations.rotate,
-        };
+		// Generate object for code blocks
+		let icon = {
+			icon: app.options.icon,
+			hasColor: props.hasColor,
+			color: transformations.color,
+			height: transformations.height,
+			hFlip: transformations.hFlip,
+			vFlip: transformations.vFlip,
+			rotate: transformations.rotate,
+		};
 
-        return <FooterBlock type="code" title={lang.code}>
-            <Disclosure active={section} onToggle={this._onChangeSection.bind(this)}>
-                <DisclosureItem key="html" title={lang.htmlTitle}>
-                    <HTMLCodeBlock icon={icon} footer={true}/>
-                </DisclosureItem>
-                <DisclosureItem key="react" title={lang.reactTitle}>
-                    <ReactCodeBlock icon={icon} footer={true}/>
-                </DisclosureItem>
-            </Disclosure>
-        </FooterBlock>;
-    }
+		return (
+			<FooterBlock type="code" title={lang.code}>
+				<Disclosure
+					active={section}
+					onToggle={this._onChangeSection.bind(this)}
+				>
+					<DisclosureItem key="html" title={lang.htmlTitle}>
+						<HTMLCodeBlock icon={icon} footer={true} />
+					</DisclosureItem>
+					<DisclosureItem key="react" title={lang.reactTitle}>
+						<ReactCodeBlock icon={icon} footer={true} />
+					</DisclosureItem>
+				</Disclosure>
+			</FooterBlock>
+		);
+	}
 
-    /**
-     * Remember current section selection
-     *
-     * @param section
-     * @private
-     */
-    _onChangeSection(section) {
-        this.props.app.footerCodeSection = section;
-    }
+	/**
+	 * Remember current section selection
+	 *
+	 * @param section
+	 * @private
+	 */
+	_onChangeSection(section) {
+		this.props.app.footerCodeSection = section;
+	}
 }
 
 export default FooterCode;

@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
@@ -22,7 +22,13 @@ const phrases = require('../../../data/phrases');
 const lang = phrases.errors;
 
 function SearchError(props) {
-    return <Notice type="error">{lang.noIconsFound}<br />{lang.noIconsFoundTip}</Notice>;
+	return (
+		<Notice type="error">
+			{lang.noIconsFound}
+			<br />
+			{lang.noIconsFoundTip}
+		</Notice>
+	);
 }
 
 export default SearchError;

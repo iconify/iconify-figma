@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React, { Component } from 'react';
 
@@ -23,65 +23,104 @@ const phrases = require('../../../data/phrases');
 const lang = phrases.pagination;
 
 class PaginationBlock extends Component {
-    render() {
-        let props = this.props,
-            name = props.block,
-            block = props.view.blocks[name];
+	render() {
+		let props = this.props,
+			name = props.block,
+			block = props.view.blocks[name];
 
-        if (!block || block.empty()) {
-            return null;
-        }
+		if (!block || block.empty()) {
+			return null;
+		}
 
-        let pages = block.pagination(),
-            pagination = [],
-            prev = -1;
+		let pages = block.pagination(),
+			pagination = [],
+			prev = -1;
 
-        // First page
-        if (block.page > 0) {
-            pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--arrow plugin-pagination-page--prev" onClick={this._onClick.bind(this, block.page - 1)} key="prev" title={lang.prev}><Icon name="arrow-left" /></a>);
-        }
+		// First page
+		if (block.page > 0) {
+			pagination.push(
+				<a
+					href="#"
+					className="plugin-pagination-page plugin-pagination-page--arrow plugin-pagination-page--prev"
+					onClick={this._onClick.bind(this, block.page - 1)}
+					key="prev"
+					title={lang.prev}
+				>
+					<Icon name="arrow-left" />
+				</a>
+			);
+		}
 
-        // Add all pages
-        pages.forEach(page => {
-            if (page > (prev + 1)) {
-                pagination.push(<span key={'dots' + page}>...</span>);
-            }
+		// Add all pages
+		pages.forEach(page => {
+			if (page > prev + 1) {
+				pagination.push(<span key={'dots' + page}>...</span>);
+			}
 
-            if (page === 'more') {
-                pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--more" onClick={this._onClick.bind(this, 'more')} key="more">{lang.more}</a>);
-                return;
-            }
+			if (page === 'more') {
+				pagination.push(
+					<a
+						href="#"
+						className="plugin-pagination-page plugin-pagination-page--more"
+						onClick={this._onClick.bind(this, 'more')}
+						key="more"
+					>
+						{lang.more}
+					</a>
+				);
+				return;
+			}
 
-            pagination.push(<a href="#" className={'plugin-pagination-page' + (block.page === page ? ' plugin-pagination-page--selected' : '')} onClick={this._onClick.bind(this, page)} key={page}>{page + 1}</a>);
-            prev = page;
-        });
+			pagination.push(
+				<a
+					href="#"
+					className={
+						'plugin-pagination-page' +
+						(block.page === page ? ' plugin-pagination-page--selected' : '')
+					}
+					onClick={this._onClick.bind(this, page)}
+					key={page}
+				>
+					{page + 1}
+				</a>
+			);
+			prev = page;
+		});
 
-        // Next page
-        if (block.page !== prev) {
-            pagination.push(<a href="#" className="plugin-pagination-page plugin-pagination-page--arrow plugin-pagination-page--next" onClick={this._onClick.bind(this, block.page + 1)} key="next" title={lang.next}><Icon name="arrow-right" /></a>);
+		// Next page
+		if (block.page !== prev) {
+			pagination.push(
+				<a
+					href="#"
+					className="plugin-pagination-page plugin-pagination-page--arrow plugin-pagination-page--next"
+					onClick={this._onClick.bind(this, block.page + 1)}
+					key="next"
+					title={lang.next}
+				>
+					<Icon name="arrow-right" />
+				</a>
+			);
+		}
 
-        }
+		return <PluginBlock type="pagination">{pagination}</PluginBlock>;
+	}
 
-        return <PluginBlock type="pagination">{pagination}</PluginBlock>;
-    }
+	/**
+	 * Set page
+	 *
+	 * @param {*} page
+	 * @param {*} event
+	 * @private
+	 */
+	_onClick(page, event) {
+		event.preventDefault();
 
-    /**
-     * Set page
-     *
-     * @param {*} page
-     * @param {*} event
-     * @private
-     */
-    _onClick(page, event) {
-        event.preventDefault();
+		let props = this.props,
+			name = props.block,
+			block = props.view.blocks[name];
 
-        let props = this.props,
-            name = props.block,
-            block = props.view.blocks[name];
-
-        block.action(page);
-    }
+		block.action(page);
+	}
 }
-
 
 export default PaginationBlock;

@@ -12,16 +12,15 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
 function IconsContainer(props) {
-    let className = 'plugin-icons-list plugin-icons-list--' + (props.list ? 'list' : 'grid');
+	let className =
+		'plugin-icons-list plugin-icons-list--' + (props.list ? 'list' : 'grid');
 
-    return <div className={className}>
-        {props.children}
-    </div>;
+	return <div className={className}>{props.children}</div>;
 }
 
 export default IconsContainer;

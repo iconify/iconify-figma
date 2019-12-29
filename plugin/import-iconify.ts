@@ -1,7 +1,11 @@
-"use strict";
+'use strict';
 
 import moveSvg from './move-node';
-import { addToSelection, replaceSelection, convertColor } from './node-functions';
+import {
+	addToSelection,
+	replaceSelection,
+	convertColor,
+} from './node-functions';
 
 function importIconify(env, props) {
 	// Create node from SVG
@@ -15,11 +19,15 @@ function importIconify(env, props) {
 
 	// Mark node as SVG import and store data
 	node.setSharedPluginData('iconify', 'source', 'iconify');
-	node.setSharedPluginData('iconify', 'props', JSON.stringify({
-		name: props.name,
-		color: props.colorless ? props.color : void 0,
-		props: props.props,
-	}));
+	node.setSharedPluginData(
+		'iconify',
+		'props',
+		JSON.stringify({
+			name: props.name,
+			color: props.colorless ? props.color : void 0,
+			props: props.props,
+		})
+	);
 
 	// Rename node
 	node.name = props.name;
@@ -41,7 +49,11 @@ function importIconify(env, props) {
 	}
 
 	// Find node with matching color
-	if (props.colorless && typeof props.color === 'string' && props.color.length === 7) {
+	if (
+		props.colorless &&
+		typeof props.color === 'string' &&
+		props.color.length === 7
+	) {
 		function scanColor(node) {
 			if (node.type === 'FRAME' || node.type === 'GROUP') {
 				node.children.forEach(scanColor);
@@ -84,7 +96,9 @@ function importIconify(env, props) {
 	// Send notice
 	figma.ui.postMessage({
 		event: 'success',
-		message: 'Icon "' + props.name + '" was imported to ' + node.parent.type.toLowerCase() + ' "' + node.parent.name + '"',
+		message: `Icon "${
+			props.name
+		}" was imported to ${node.parent.type.toLowerCase()} "${node.parent.name}"`,
 	});
 }
 

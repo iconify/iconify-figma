@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React, { Component } from 'react';
 
@@ -23,60 +23,63 @@ const phrases = require('../../../data/phrases');
 const lang = phrases.parent;
 
 class IconifyParentBlock extends Component {
-    render() {
-        let props = this.props,
-            name = props.block,
-            block = props.view.blocks[name];
+	render() {
+		let props = this.props,
+			name = props.block,
+			block = props.view.blocks[name];
 
-        if (!block || block.empty()) {
-            return null;
-        }
+		if (!block || block.empty()) {
+			return null;
+		}
 
-        let renderParent = parent => {
-            let key = JSON.stringify(parent.getRoute()),
-                title = lang.generic;
+		let renderParent = parent => {
+			let key = JSON.stringify(parent.getRoute()),
+				title = lang.generic;
 
-            switch (parent.type) {
-                case 'collections':
-                    title = lang.collections;
-                    break;
+			switch (parent.type) {
+				case 'collections':
+					title = lang.collections;
+					break;
 
-                case 'collection':
-                    let info = props.app.collection(parent.prefix);
-                    title = lang.collection.replace('{title}', info ? info.title : parent.prefix);
-                    break;
+				case 'collection':
+					let info = props.app.collection(parent.prefix);
+					title = lang.collection.replace(
+						'{title}',
+						info ? info.title : parent.prefix
+					);
+					break;
 
-                case 'search':
-                    title = lang.search.replace('{keyword}', parent.route.params.search);
-            }
+				case 'search':
+					title = lang.search.replace('{keyword}', parent.route.params.search);
+			}
 
-            parents.unshift({
-                key: key,
-                onClick: this._onClick.bind(this, parent),
-                title: title
-            });
-            if (parent.blocks && parent.parent) {
-                renderParent(parent.parent);
-            }
-        };
+			parents.unshift({
+				key: key,
+				onClick: this._onClick.bind(this, parent),
+				title: title,
+			});
+			if (parent.blocks && parent.parent) {
+				renderParent(parent.parent);
+			}
+		};
 
-        let parents = [];
-        renderParent(block.parent);
+		let parents = [];
+		renderParent(block.parent);
 
-        return <ParentBlock parents={parents} />;
-    }
+		return <ParentBlock parents={parents} />;
+	}
 
-    /**
-     * Parent link clicked
-     *
-     * @param view
-     * @param event
-     * @private
-     */
-    _onClick(view, event) {
-        event.preventDefault();
-        this.props.view.action('parent', view);
-    }
+	/**
+	 * Parent link clicked
+	 *
+	 * @param view
+	 * @param event
+	 * @private
+	 */
+	_onClick(view, event) {
+		event.preventDefault();
+		this.props.view.action('parent', view);
+	}
 }
 
 export default IconifyParentBlock;

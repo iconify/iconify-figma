@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -17,15 +17,18 @@ const itemsPerPage = 55; // 5 rows x 11 icons. Also see dev-ui.js
  * @param {object} [data]
  */
 function sendMessage(event, data) {
-    if (process.env.SEARCH_DEV) {
-        console.log('Message from UI', event, data);
-    }
-    parent.postMessage({
-        pluginMessage: {
-            event: event,
-            data: data
-        }
-    }, '*');
+	if (process.env.SEARCH_DEV) {
+		console.log('Message from UI', event, data);
+	}
+	parent.postMessage(
+		{
+			pluginMessage: {
+				event: event,
+				data: data,
+			},
+		},
+		'*'
+	);
 }
 
 /**
@@ -34,10 +37,10 @@ function sendMessage(event, data) {
  * @param {string} uri
  */
 function loadScript(uri) {
-    let script = document.createElement('script');
-    script.setAttribute('async', true);
-    script.setAttribute('src', uri);
-    document.head.appendChild(script);
+	let script = document.createElement('script');
+	script.setAttribute('async', true);
+	script.setAttribute('src', uri);
+	document.head.appendChild(script);
 }
 
 /**
@@ -47,135 +50,145 @@ function loadScript(uri) {
  * @param {function} done
  */
 function delay(test, done) {
-    let counter = 0,
-        timer, result;
+	let counter = 0,
+		timer,
+		result;
 
-    function nextTick() {
-        result = test();
+	function nextTick() {
+		result = test();
 
-        if (result) {
-            // Success
-            window.clearInterval(timer);
-            done();
-            return;
-        }
+		if (result) {
+			// Success
+			window.clearInterval(timer);
+			done();
+			return;
+		}
 
-        if (result === null) {
-            // Stop execution
-            window.clearInterval(timer);
-            return;
-        }
+		if (result === null) {
+			// Stop execution
+			window.clearInterval(timer);
+			return;
+		}
 
-        // Test failed
-        counter ++;
-        if (counter === 10 || counter === 25) {
-            // It takes too long. Reduce timeout
-            window.clearInterval(timer);
-            timer = window.setInterval(nextTick, counter === 10 ? 250 : 1000);
-        }
-    }
+		// Test failed
+		counter++;
+		if (counter === 10 || counter === 25) {
+			// It takes too long. Reduce timeout
+			window.clearInterval(timer);
+			timer = window.setInterval(nextTick, counter === 10 ? 250 : 1000);
+		}
+	}
 
-    // Do first test immediately
-    result = test(counter);
-    if (result) {
-        done();
-        return;
-    }
-    if (result === null) {
-        return;
-    }
+	// Do first test immediately
+	result = test(counter);
+	if (result) {
+		done();
+		return;
+	}
+	if (result === null) {
+		return;
+	}
 
-    // Create timer
-    timer = window.setInterval(nextTick, 100);
+	// Create timer
+	timer = window.setInterval(nextTick, 100);
 }
 
 // Show notice that plug-in is in development mode, not ready for publishing
 if (process.env.SEARCH_DEV) {
-    console.log('Running plug-in in development mode!');
+	console.log('Running plug-in in development mode!');
 }
 
 // Disable Iconify storage
 Iconify.setConfig('localStorage', false);
 Iconify.setConfig('sessionStorage', false);
 if (process.env.ICONIFY_API) {
-    // Use local API for development. See config.common.js
-    Iconify.setConfig('defaultAPI', process.env.ICONIFY_API_VALUE);
+	// Use local API for development. See config.common.js
+	Iconify.setConfig('defaultAPI', process.env.ICONIFY_API_VALUE);
 }
 
 // Load samples
 loadScript('https://code.iconify.design/samples.js');
-delay(counter => {
-    // Do not delay for more than 1 second
-    return counter > 10 || Iconify.iconExists('mdi:account-check')
-}, () => {
-    let iconifyConfig = {
-        config: {
-            itemsPerPage: itemsPerPage,
-            search: {
-                limit: itemsPerPage * 2,
-            },
-        },
-    };
+delay(
+	counter => {
+		// Do not delay for more than 1 second
+		return counter > 10 || Iconify.iconExists('mdi:account-check');
+	},
+	() => {
+		let iconifyConfig = {
+			config: {
+				itemsPerPage: itemsPerPage,
+				search: {
+					limit: itemsPerPage * 2,
+				},
+			},
+		};
 
-    if (process.env.SEARCH_API) {
-        // Use local API for development. See config.common.js
-        iconifyConfig.config.API = {
-            URI: process.env.SEARCH_API_VALUE
-        };
-    }
+		if (process.env.SEARCH_API) {
+			// Use local API for development. See config.common.js
+			iconifyConfig.config.API = {
+				URI: process.env.SEARCH_API_VALUE,
+			};
+		}
 
-    // UI instance
-    let ui = null;
-    window.onmessage = event => {
-        let message = event.data.pluginMessage;
+		// UI instance
+		let ui = null;
+		window.onmessage = event => {
+			let message = event.data.pluginMessage;
 
-        if (typeof message !== 'object' || !message.event) {
-            return;
-        }
-        if (process.env.SEARCH_DEV) {
-            console.log('Sent message to UI:', message);
-        }
+			if (typeof message !== 'object' || !message.event) {
+				return;
+			}
+			if (process.env.SEARCH_DEV) {
+				console.log('Sent message to UI:', message);
+			}
 
-        switch (message.event) {
-            case 'show':
-                // Show UI
-                let params = {
-                    iconify: iconifyConfig,
-                    stored: message.config,
-                    parentNodes: message.parentNodes,
-                    callback: sendMessage,
-                    // prefix: 'mdi', // Uncomment this to limit plug-in to one collection
-                };
-                ui = new UI(document.getElementById('container'), params);
+			switch (message.event) {
+				case 'show':
+					// Show UI
+					let params = {
+						iconify: iconifyConfig,
+						stored: message.config,
+						parentNodes: message.parentNodes,
+						callback: sendMessage,
+						// prefix: 'mdi', // Uncomment this to limit plug-in to one collection
+					};
+					ui = new UI(document.getElementById('container'), params);
 
-                if (message.selectedNode) {
-                    ui.showCode(message.selectedNode);
-                }
-                break;
+					if (message.selectedNode) {
+						ui.showCode(message.selectedNode);
+					}
+					break;
 
-            case 'selected-nodes':
-                // Update list of possible parent nodes
-                ui.setSelectedNodes(message.nodes);
-                break;
+				case 'selected-nodes':
+					// Update list of possible parent nodes
+					ui.setSelectedNodes(message.nodes);
+					break;
 
-            case 'selected-node-data':
-                ui.showCode(message.selectedNode);
-                break;
+				case 'selected-node-data':
+					ui.showCode(message.selectedNode);
+					break;
 
-            case 'cancel-node-data':
-                ui.hideCode();
-                break;
+				case 'cancel-node-data':
+					ui.hideCode();
+					break;
 
-            case 'error':
-            case 'notice':
-            case 'success':
-                ui.addNotice(message.message, Object.assign({
-                    type: message.event
-                }, message));
-                break;
-        }
-    };
+				case 'error':
+				case 'notice':
+				case 'success':
+					ui.addNotice(
+						message.message,
+						Object.assign(
+							{
+								type: message.event,
+							},
+							message
+						)
+					);
+					break;
+			}
+		};
 
-    // Notify plugin that UI has finished loading
-    sendMessage('loaded', process.env.SEARCH_DEV);
-});
+		// Notify plugin that UI has finished loading
+		sendMessage('loaded', process.env.SEARCH_DEV);
+	}
+);

@@ -12,36 +12,40 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
 const maxIndex = 11;
 
 function Filter(props) {
-    let className = 'plugin-filter';
+	let className = 'plugin-filter';
 
-    if (props.disabled) {
-        className += ' plugin-filter--disabled';
-    }
+	if (props.disabled) {
+		className += ' plugin-filter--disabled';
+	}
 
-    if (props.selected) {
-        className += ' plugin-filter--selected';
-    } else if (props.unselected) {
-        // Other filter in block is selected
-        className += ' plugin-filter--unselected';
-    }
+	if (props.selected) {
+		className += ' plugin-filter--selected';
+	} else if (props.unselected) {
+		// Other filter in block is selected
+		className += ' plugin-filter--unselected';
+	}
 
-    if (props.index) {
-        className += ' plugin-filter--' + (props.index % maxIndex);
-    }
+	if (props.index) {
+		className += ' plugin-filter--' + (props.index % maxIndex);
+	}
 
-    return <a
-        href={props.href ? props.href : '#'}
-        onClick={props.onClick ? props.onClick : void 0}
-        className={className}
-        title={props.title}
-    >{props.title}</a>
+	return (
+		<a
+			href={props.href ? props.href : '#'}
+			onClick={props.onClick ? props.onClick : void 0}
+			className={className}
+			title={props.title}
+		>
+			{props.title}
+		</a>
+	);
 }
 
 export default Filter;

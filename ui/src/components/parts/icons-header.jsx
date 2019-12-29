@@ -12,27 +12,37 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
 import Icon from './icon-decoration';
 
 function IconsHeader(props) {
-    let modesToggle = null;
-    if (props.layout !== void 0) {
-        modesToggle = <div className="plugin-icons-list-header-modes">
-            <a href="#" onClick={(event) => {
-                event.preventDefault();
-                props.onLayoutChange(props.layout);
-            }} title={props.layoutTitle}><Icon name={'layout-' + props.layout} /></a>
-        </div>;
-    }
+	let modesToggle = null;
+	if (props.layout !== void 0) {
+		modesToggle = (
+			<div className="plugin-icons-list-header-modes">
+				<a
+					href="#"
+					onClick={event => {
+						event.preventDefault();
+						props.onLayoutChange(props.layout);
+					}}
+					title={props.layoutTitle}
+				>
+					<Icon name={'layout-' + props.layout} />
+				</a>
+			</div>
+		);
+	}
 
-    return <div className="plugin-icons-list-header">
-        <div className="plugin-icons-list-header-text">{props.children}</div>
-        {modesToggle}
-    </div>;
+	return (
+		<div className="plugin-icons-list-header">
+			<div className="plugin-icons-list-header-text">{props.children}</div>
+			{modesToggle}
+		</div>
+	);
 }
 
 export default IconsHeader;

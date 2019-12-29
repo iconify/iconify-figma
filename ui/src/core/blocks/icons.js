@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 const base = require('./base');
 
@@ -23,7 +23,7 @@ const base = require('./base');
  * @return {boolean}
  */
 function empty(block) {
-    return block.icons.length < 1;
+	return block.icons.length < 1;
 }
 
 /**
@@ -35,22 +35,22 @@ function empty(block) {
  * @return {Object|block}
  */
 module.exports = (instance, view, params) => {
-    let icons = params.icons === void 0 ? [] : params.icons;
+	let icons = params.icons === void 0 ? [] : params.icons;
 
-    let block = base({
-        app: instance,
-        view: view,
+	let block = base({
+		app: instance,
+		view: view,
 
-        // Required stuff
-        type: 'icons',
-        keys: ['icons'],
+		// Required stuff
+		type: 'icons',
+		keys: ['icons'],
 
-        // Data
-        icons: icons,
+		// Data
+		icons: icons,
 
-        // Functions
-        empty: () => empty(block)
-    });
+		// Functions
+		empty: () => empty(block),
+	});
 
-    return block;
+	return block;
 };

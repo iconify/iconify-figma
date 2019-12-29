@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
@@ -25,14 +25,16 @@ import Notice from '../../parts/notice';
 const phrases = require('../../../data/phrases');
 
 function LoadingView(props) {
-    return <ViewContainer type="loading">
-        {props.view && <SearchBlock {...props} block="search" />}
-        {props.view && <ParentBlock {...props} block="parent" />}
+	return (
+		<ViewContainer type="loading">
+			{props.view && <SearchBlock {...props} block="search" />}
+			{props.view && <ParentBlock {...props} block="parent" />}
 
-        <Notice>{phrases.loading}</Notice>
+			<Notice>{phrases.loading}</Notice>
 
-        {/*<Footer {...props} />*/}
-    </ViewContainer>;
+			{/*<Footer {...props} />*/}
+		</ViewContainer>
+	);
 }
 
 export default LoadingView;

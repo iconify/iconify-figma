@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 const collectionHelpers = require('./collection');
 const iconObject = require('../objects/icon');
@@ -30,32 +30,35 @@ collections: object
  */
 
 let functions = {
-    /**
-     * Convert search results from API data
-     *
-     * @param {object} source
-     * @return {{total: number, limit: number, start: number, icons: Array, collections: object}}
-     */
-    convert: source => {
-        let result = Object.create(null);
+	/**
+	 * Convert search results from API data
+	 *
+	 * @param {object} source
+	 * @return {{total: number, limit: number, start: number, icons: Array, collections: object}}
+	 */
+	convert: source => {
+		let result = Object.create(null);
 
-        ['total', 'limit', 'start'].forEach(key => {
-            result[key] = source[key];
-        });
+		['total', 'limit', 'start'].forEach(key => {
+			result[key] = source[key];
+		});
 
-        // Convert icons
-        result.icons = source.icons.map(icon => iconObject(icon));
+		// Convert icons
+		result.icons = source.icons.map(icon => iconObject(icon));
 
-        // Convert collections
-        if (source.collections) {
-            result.collections = Object.create(null);
-            Object.keys(source.collections).forEach(prefix => {
-                result.collections[prefix] = collectionHelpers.convertInfo(source.collections[prefix], prefix);
-            });
-        }
+		// Convert collections
+		if (source.collections) {
+			result.collections = Object.create(null);
+			Object.keys(source.collections).forEach(prefix => {
+				result.collections[prefix] = collectionHelpers.convertInfo(
+					source.collections[prefix],
+					prefix
+				);
+			});
+		}
 
-        return result;
-    }
+		return result;
+	},
 };
 
 module.exports = functions;

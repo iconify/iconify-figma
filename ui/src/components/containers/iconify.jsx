@@ -12,12 +12,11 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 import Component from './iconify-base';
 
-class IconifyContainer extends Component {
-}
+class IconifyContainer extends Component {}
 
 export default IconifyContainer;

@@ -12,40 +12,48 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 const functions = {
-    /**
-     * Get wrapper class name
-     *
-     * @param {object} props
-     * @param {string} name Block name
-     * @return {string}
-     */
-    wrapperClass: (props, name) => 'plugin-wrapper plugin-wrapper--' + name,
+	/**
+	 * Get wrapper class name
+	 *
+	 * @param {object} props
+	 * @param {string} name Block name
+	 * @return {string}
+	 */
+	wrapperClass: (props, name) => 'plugin-wrapper plugin-wrapper--' + name,
 
-    /**
-     * Get wrapper class name for icons block
-     *
-     * @param {object} props
-     * @return {string}
-     */
-    iconsWrapperClass: props => {
-        let list = props.app.options.list;
+	/**
+	 * Get wrapper class name for icons block
+	 *
+	 * @param {object} props
+	 * @return {string}
+	 */
+	iconsWrapperClass: props => {
+		let list = props.app.options.list;
 
-        return 'plugin-wrapper plugin-wrapper--icons plugin-wrapper--icons--' + (list ? 'list' : 'grid') + (props.view.blocks.pagination.length ? '' : ' plugin-wrapper--icons--empty');
-    },
+		return (
+			'plugin-wrapper plugin-wrapper--icons plugin-wrapper--icons--' +
+			(list ? 'list' : 'grid') +
+			(props.view.blocks.pagination.length
+				? ''
+				: ' plugin-wrapper--icons--empty')
+		);
+	},
 
-    /**
-     * Get key for icons block. Change it for each page to reset scrollbar position
-     *
-     * @param {object} props
-     * @return {string}
-     */
-    iconsBlockKey: props => {
-        let pagination = props.view.blocks.pagination;
-        return pagination.length ? 'icons-' + pagination.page + '-' + pagination.length : 'icons';
-    },
+	/**
+	 * Get key for icons block. Change it for each page to reset scrollbar position
+	 *
+	 * @param {object} props
+	 * @return {string}
+	 */
+	iconsBlockKey: props => {
+		let pagination = props.view.blocks.pagination;
+		return pagination.length
+			? 'icons-' + pagination.page + '-' + pagination.length
+			: 'icons';
+	},
 };
 
 export default functions;

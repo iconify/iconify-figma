@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
@@ -27,18 +27,22 @@ import CollectionsBlock from '../blocks/collections';
 import FigmaFooter from '../footer/footer';
 
 function CollectionsView(props) {
-    let blocks = props.blocks;
+	let blocks = props.blocks;
 
-    return <ViewContainer type="collections">
-        <ParentBlock {...props} block="parent" />
-        <SearchBlock {...props} block="search" />
-        {!blocks.categories.empty() && !blocks.filter.empty() && <div className={helpers.wrapperClass(props, 'collections-header')}>
-            <FiltersBlock {...props} block="categories" />
-            <FilterBlock {...props} block="filter" />
-        </div>}
-        <CollectionsBlock {...props} block="collections" />
-        {/*<FigmaFooter {...props} />*/}
-    </ViewContainer>;
+	return (
+		<ViewContainer type="collections">
+			<ParentBlock {...props} block="parent" />
+			<SearchBlock {...props} block="search" />
+			{!blocks.categories.empty() && !blocks.filter.empty() && (
+				<div className={helpers.wrapperClass(props, 'collections-header')}>
+					<FiltersBlock {...props} block="categories" />
+					<FilterBlock {...props} block="filter" />
+				</div>
+			)}
+			<CollectionsBlock {...props} block="collections" />
+			{/*<FigmaFooter {...props} />*/}
+		</ViewContainer>
+	);
 }
 
 export default CollectionsView;

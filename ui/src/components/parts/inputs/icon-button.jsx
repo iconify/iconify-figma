@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
@@ -21,19 +21,23 @@ import Icon from '../icon-decoration';
 const modifiers = ['disabled', 'active', 'invalid'];
 
 function IconButton(props) {
-    let className = 'plugin-icon-button';
-    modifiers.forEach(key => {
-        if (props[key]) {
-            className += ' plugin-icon-button--' + key;
-        }
-    });
+	let className = 'plugin-icon-button';
+	modifiers.forEach(key => {
+		if (props[key]) {
+			className += ' plugin-icon-button--' + key;
+		}
+	});
 
-    return <a
-        className={className}
-        href={props.href ? props.href : '#'}
-        onClick={props.onClick}
-        title={props.title}
-    ><Icon name={props.icon} /></a>;
+	return (
+		<a
+			className={className}
+			href={props.href ? props.href : '#'}
+			onClick={props.onClick}
+			title={props.title}
+		>
+			<Icon name={props.icon} />
+		</a>
+	);
 }
 
 export default IconButton;

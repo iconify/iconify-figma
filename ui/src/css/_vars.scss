@@ -20,15 +20,14 @@ $plugin-font-lineheight: 16px; //For 11px, 12px type
 $plugin-font-lineheight-large: 24px; //13px, 14px, 16px
 
 //letterspacing
-$plugin-font-letterspacing-pos-small: .005em;
-$plugin-font-letterspacing-neg-small: .01em;
+$plugin-font-letterspacing-pos-small: 0.005em;
+$plugin-font-letterspacing-neg-small: 0.01em;
 $plugin-font-letterspacing-pos-medium: 0;
-$plugin-font-letterspacing-neg-medium: .005em;
-$plugin-font-letterspacing-pos-large: -.0025em;
-$plugin-font-letterspacing-neg-large: .0025em;
-$plugin-font-letterspacing-pos-xlarge: -.001em;
-$plugin-font-letterspacing-neg-xlarge: -.001em;
-
+$plugin-font-letterspacing-neg-medium: 0.005em;
+$plugin-font-letterspacing-pos-large: -0.0025em;
+$plugin-font-letterspacing-neg-large: 0.0025em;
+$plugin-font-letterspacing-pos-xlarge: -0.001em;
+$plugin-font-letterspacing-neg-xlarge: -0.001em;
 
 // Colors
 $plugin-palette-blue: #18a0fb;
@@ -37,8 +36,13 @@ $plugin-palette-red: #f24822;
 
 // Content on white background
 $plugin-palette-color-black: #000; // Content color
-$plugin-palette-color-black-dimmed: rgba(0, 0, 0, .8); // Slightly dimmed content color
-$plugin-palette-color-black-muted: rgba(0, 0, 0, .3); // Muted content color
+$plugin-palette-color-black-dimmed: rgba(
+	0,
+	0,
+	0,
+	0.8
+); // Slightly dimmed content color
+$plugin-palette-color-black-muted: rgba(0, 0, 0, 0.3); // Muted content color
 $plugin-palette-color-link: $plugin-palette-blue;
 $plugin-palette-color-link-hover: $plugin-palette-darker-blue;
 $plugin-palette-color-red: #f24822; // Error text on white background
@@ -54,10 +58,9 @@ $plugin-palette-background-hover: #ececec; // Button hover background
 $plugin-palette-background-selected: #edf5fa; // Selected content background
 $plugin-palette-background-selected-borderless: #dbebf7; // Selected content background
 
-
 // White on colored background
 $plugin-palette-color-white: #fff; // Content on colored background
-$plugin-palette-color-white-muted: rgba(255, 255, 255, .4); // Muted white text
+$plugin-palette-color-white-muted: rgba(255, 255, 255, 0.4); // Muted white text
 $plugin-palette-background-medium-black: #333; // Menu background
 $plugin-palette-background-almost-black: #222; // Two level menu background, notice
 $plugin-palette-background-full-black: #000; // Full black background
@@ -69,21 +72,38 @@ $plugin-palette-background-green: #00ad64; // Error message background
 
 // Rotation backgrounds
 $plugin-palette-background-rotation-blue: $plugin-palette-darker-blue; // Blue background in rotation
-$plugin-palette-background-colored-overlay: rgba(255, 255, 255, .1); // Slightly modified blue background, used for samples in collections list
+$plugin-palette-background-colored-overlay: rgba(
+	255,
+	255,
+	255,
+	0.1
+); // Slightly modified blue background, used for samples in collections list
 $plugin-palette-background-rotation: (
-  // $plugin-palette-background-rotation-blue, // blue, used as default without rotation
-  #6F53FE, // purple
-  #588542, // desaturated green
-  #C600C6, // pink,
-  #009E9E, // cyan
-  #824E00, // brown
-  #C6006B, // dark red
-  #6786AB, // desaturated blue
-  #00AD64, // green,
-  #275CC6, // blue 2
-  #CA8706, // orange
+	// $plugin-palette-background-rotation-blue, // blue, used as default without rotation
+		#6f53fe,
+	// purple
+		#588542,
+	// desaturated green
+		#c600c6,
+	// pink,
+		#009e9e,
+	// cyan
+		#824e00,
+	// brown
+		#c6006b,
+	// dark red
+		#6786ab,
+	// desaturated blue
+		#00ad64,
+	// green,
+		#275cc6,
+	// blue 2
+		#ca8706,
+	// orange
 );
-$plugin-palette-background-rotation-total: length($plugin-palette-background-rotation);
+$plugin-palette-background-rotation-total: length(
+	$plugin-palette-background-rotation
+);
 
 // Border radius
 $plugin-border-radius-small: 2px;
@@ -97,7 +117,8 @@ $plugin-simple-focus-shadow: 0 0 0 1px $plugin-palette-border-blue;
 // Alignment
 $plugin-align-box-size: 61px;
 $plugin-align-input-width: 120px;
-$plugin-align-block-width: $plugin-align-box-size + 2px + 8px + $plugin-align-input-width;
+$plugin-align-block-width: $plugin-align-box-size + 2px + 8px +
+	$plugin-align-input-width;
 
 // Collections list
 $plugin-collection-border-width: 1px; // Collection border

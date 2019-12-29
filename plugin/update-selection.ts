@@ -1,11 +1,10 @@
-"use strict";
+'use strict';
 
 import { findParentNodes } from './node-functions';
 import { getSelectedNodeData } from './node-data';
 
 let pendingEvent = false;
 let lastList = null;
-
 
 /**
  * Check layers, send list of new possible parent layers to UI

@@ -12,50 +12,67 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
 import Draggable from './draggable';
 
 function ListIcon(props) {
-    let className = 'plugin-icon-item';
-    if (props.loading) {
-        className += ' plugin-icon-item--pending';
-    }
-    if (props.selected) {
-        className += ' plugin-icon-item--selected';
-    }
-    if (props.children instanceof Array) {
-        className += ' plugin-icon-item--filters--' + Math.min(5, props.children.length);
-    }
+	let className = 'plugin-icon-item';
+	if (props.loading) {
+		className += ' plugin-icon-item--pending';
+	}
+	if (props.selected) {
+		className += ' plugin-icon-item--selected';
+	}
+	if (props.children instanceof Array) {
+		className +=
+			' plugin-icon-item--filters--' + Math.min(5, props.children.length);
+	}
 
-    let sample = null;
-    if (!props.pending && props.svg) {
-        let linkProps = {
-            className: 'plugin-icon-item-svg',
-            href: props.href ? props.href : '#',
-            title: props.tooltip,
-            onClick: props.onClick
-        };
+	let sample = null;
+	if (!props.pending && props.svg) {
+		let linkProps = {
+			className: 'plugin-icon-item-svg',
+			href: props.href ? props.href : '#',
+			title: props.tooltip,
+			onClick: props.onClick,
+		};
 
-        if (props.onDrag) {
-            linkProps.children = <Draggable onDrag={props.onDrag} dangerouslySetInnerHTML={{__html: props.svg}} />;
-        } else {
-            linkProps.dangerouslySetInnerHTML = {__html: props.svg};
-        }
+		if (props.onDrag) {
+			linkProps.children = (
+				<Draggable
+					onDrag={props.onDrag}
+					dangerouslySetInnerHTML={{ __html: props.svg }}
+				/>
+			);
+		} else {
+			linkProps.dangerouslySetInnerHTML = { __html: props.svg };
+		}
 
-        sample = <a {...linkProps}/>;
-    }
+		sample = <a {...linkProps} />;
+	}
 
-    return <div className={className}>
-        {sample}
-        <div className="plugin-icon-item-data">
-            <a className="plugin-icon-item-title" href={props.href ? props.href : '#'} title={props.tooltip} onClick={props.onClick}>{props.title}</a>
-            {props.size && <span className="plugin-icon-item-size">{props.size}</span>}
-            {props.children}
-        </div>
-    </div>;
+	return (
+		<div className={className}>
+			{sample}
+			<div className="plugin-icon-item-data">
+				<a
+					className="plugin-icon-item-title"
+					href={props.href ? props.href : '#'}
+					title={props.tooltip}
+					onClick={props.onClick}
+				>
+					{props.title}
+				</a>
+				{props.size && (
+					<span className="plugin-icon-item-size">{props.size}</span>
+				)}
+				{props.children}
+			</div>
+		</div>
+	);
 }
 
 export default ListIcon;

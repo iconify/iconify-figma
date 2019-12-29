@@ -1,66 +1,68 @@
-
 .plugin-icons-list--grid {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 2px;
-  box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 2px;
+	box-sizing: border-box;
 
-  .plugin-icon-item {
-    margin: 3px;
-    width: $plugin-icon-grid-size + 2px;
-    height: $plugin-icon-grid-size + 2px;
-    box-sizing: content-box;
+	.plugin-icon-item {
+		margin: 3px;
+		width: $plugin-icon-grid-size + 2px;
+		height: $plugin-icon-grid-size + 2px;
+		box-sizing: content-box;
 
-    a {
-      display: block;
-      font-size: $plugin-icon-grid-size;
-      width: 1em;
-      height: 1em;
-      border: 1px solid transparent;
-      cursor: pointer;
-      color: $plugin-palette-color-black-dimmed;
-      text-decoration: none;
+		a {
+			display: block;
+			font-size: $plugin-icon-grid-size;
+			width: 1em;
+			height: 1em;
+			border: 1px solid transparent;
+			cursor: pointer;
+			color: $plugin-palette-color-black-dimmed;
+			text-decoration: none;
 
-      &:hover, &:active {
-        background: $plugin-palette-background-white;
-        border-color: $plugin-palette-border-blue;
-        color: $plugin-palette-color-link-hover;
-      }
+			&:hover,
+			&:active {
+				background: $plugin-palette-background-white;
+				border-color: $plugin-palette-border-blue;
+				color: $plugin-palette-color-link-hover;
+			}
 
-      &:active, &:focus {
-        box-shadow: 0 0 0 1px $plugin-palette-border-blue;
-        outline: none;
-      }
-    }
+			&:active,
+			&:focus {
+				box-shadow: 0 0 0 1px $plugin-palette-border-blue;
+				outline: none;
+			}
+		}
 
-    @media (max-width: 600px) {
-      width: $plugin-icon-grid-compact-size + 2px;
-      height: $plugin-icon-grid-compact-size + 2px;
-      a {
-        font-size: $plugin-icon-grid-compact-size;
-      }
-    }
-  }
+		@media (max-width: 600px) {
+			width: $plugin-icon-grid-compact-size + 2px;
+			height: $plugin-icon-grid-compact-size + 2px;
+			a {
+				font-size: $plugin-icon-grid-compact-size;
+			}
+		}
+	}
 
-  .plugin-icon-item--selected {
-    a {
-      background: $plugin-palette-background-selected-borderless;
-      border-color: $plugin-palette-background-selected-borderless;
-      color: $plugin-palette-color-black;
+	.plugin-icon-item--selected {
+		a {
+			background: $plugin-palette-background-selected-borderless;
+			border-color: $plugin-palette-background-selected-borderless;
+			color: $plugin-palette-color-black;
 
-      &:hover, &:active {
-        background: $plugin-palette-background-selected;
-        border-color: $plugin-palette-border-blue;
-        color: $plugin-palette-color-link-hover;
-      }
-    }
-  }
+			&:hover,
+			&:active {
+				background: $plugin-palette-background-selected;
+				border-color: $plugin-palette-border-blue;
+				color: $plugin-palette-color-link-hover;
+			}
+		}
+	}
 
-  .plugin-icon-item--pending {
-    a {
-      //background: $plugin-palette-background-darker-white;
-      //border-color: $plugin-palette-border-grey;
-      //color: $plugin-palette-color-black-muted;
-    }
-  }
+	.plugin-icon-item--pending {
+		a {
+			//background: $plugin-palette-background-darker-white;
+			//border-color: $plugin-palette-border-grey;
+			//color: $plugin-palette-color-black-muted;
+		}
+	}
 }

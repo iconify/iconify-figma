@@ -12,55 +12,55 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 const baseAPI = require('../src/core/api/base');
 
 module.exports = instance => {
-    let api = baseAPI(instance);
+	let api = baseAPI(instance);
 
-    api.log = [];
+	api.log = [];
 
-    api.setFakeData = (query, params, result, delay) => {
-        if (typeof delay !== 'number') {
-            delay = 1;
-        }
+	api.setFakeData = (query, params, result, delay) => {
+		if (typeof delay !== 'number') {
+			delay = 1;
+		}
 
-        let config = api._app.get('config'),
-            uri = config.get('API.URI') + query;
+		let config = api._app.get('config'),
+			uri = config.get('API.URI') + query;
 
-        if (params.version === void 0) {
-            uri = api._appendToURI(uri, 'version', api._version);
-        }
-        Object.keys(params).forEach(param => {
-            uri = api._appendToURI(uri, param, params[param]);
-        });
+		if (params.version === void 0) {
+			uri = api._appendToURI(uri, 'version', api._version);
+		}
+		Object.keys(params).forEach(param => {
+			uri = api._appendToURI(uri, param, params[param]);
+		});
 
-        if (api._fakeData === void 0) {
-            api._fakeData = {};
-        }
-        api._fakeData[uri] = {
-            result: result,
-            delay: delay
-        };
-    };
+		if (api._fakeData === void 0) {
+			api._fakeData = {};
+		}
+		api._fakeData[uri] = {
+			result: result,
+			delay: delay,
+		};
+	};
 
-    api._get = (uri, callback) => {
-        api.log.push(uri);
+	api._get = (uri, callback) => {
+		api.log.push(uri);
 
-        if (api._fakeData === void 0 || api._fakeData[uri] === void 0) {
-            return;
-        }
+		if (api._fakeData === void 0 || api._fakeData[uri] === void 0) {
+			return;
+		}
 
-        let data = api._fakeData[uri];
-        if (!data.delay) {
-            callback(data.result);
-        } else {
-            setTimeout(() => {
-                callback(data.result);
-            }, data.delay);
-        }
-    };
+		let data = api._fakeData[uri];
+		if (!data.delay) {
+			callback(data.result);
+		} else {
+			setTimeout(() => {
+				callback(data.result);
+			}, data.delay);
+		}
+	};
 
-    return api;
+	return api;
 };

@@ -12,14 +12,14 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 import Button from './button';
 
 function CloseButton(props) {
-    return null;
-    // return <Button type="secondary" title="Close Plugin" onClick={props.container.closePlugin.bind(props.container)} />
+	return null;
+	// return <Button type="secondary" title="Close Plugin" onClick={props.container.closePlugin.bind(props.container)} />
 }
 
 export default CloseButton;

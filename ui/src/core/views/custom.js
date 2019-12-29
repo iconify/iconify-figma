@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 const base = require('./base');
 const route = require('../objects/route');
@@ -26,160 +26,178 @@ const paginationBlock = require('../blocks/pagination');
 const searches = ['name', 'chars', 'aliases'];
 
 module.exports = (instance, params, parent) => {
-    let view = base({
-        _app: instance,
-        type: 'custom'
-    }, params, parent);
+	let view = base(
+		{
+			_app: instance,
+			type: 'custom',
+		},
+		params,
+		parent
+	);
 
-    // Add icon functions
-    view = iconFunctions(view);
+	// Add icon functions
+	view = iconFunctions(view);
 
-    /**
-     * Get items without applying pagination
-     *
-     * @return {Array} Array of items
-     */
-    view.renderWithoutPage = () => {
-        if (view.loading) {
-            return [];
-        }
+	/**
+	 * Get items without applying pagination
+	 *
+	 * @return {Array} Array of items
+	 */
+	view.renderWithoutPage = () => {
+		if (view.loading) {
+			return [];
+		}
 
-        let icons = view._data.icons.slice(0);
+		let icons = view._data.icons.slice(0);
 
-        // Search
-        icons = view.searchIcons(icons, ['prefix']);
+		// Search
+		icons = view.searchIcons(icons, ['prefix']);
 
-        return icons;
-    };
+		return icons;
+	};
 
-    /**
-     * Apply action
-     *
-     * @param {string} key Action key
-     * @param {*} value Action value, type is specific to action
-     * @param {*} [optional] Optional parameter
-     * @return {object|null} View to display, might be different than current view. Null on error
-     */
-    view.action = (key, value, optional) => {
-        if (view.isBasicAction(key)) {
-            return view.basicAction(key, value, optional);
-        }
-        if (view.isIconsAction(key)) {
-            return view.iconsAction(key, value, optional);
-        }
+	/**
+	 * Apply action
+	 *
+	 * @param {string} key Action key
+	 * @param {*} value Action value, type is specific to action
+	 * @param {*} [optional] Optional parameter
+	 * @return {object|null} View to display, might be different than current view. Null on error
+	 */
+	view.action = (key, value, optional) => {
+		if (view.isBasicAction(key)) {
+			return view.basicAction(key, value, optional);
+		}
+		if (view.isIconsAction(key)) {
+			return view.iconsAction(key, value, optional);
+		}
 
-        switch (key) {
-            case 'delete':
-                if (!view._params.canDelete) {
-                    break;
-                }
+		switch (key) {
+			case 'delete':
+				if (!view._params.canDelete) {
+					break;
+				}
 
-                let icon = iconObject(value);
+				let icon = iconObject(value);
 
-                // Remove icon from list
-                view._data.icons = view._data.icons.filter(item => item.prefix !== icon.prefix || item.name !== icon.name);
-                if (view._data.icons.length !== view.total) {
-                    // Update counters
-                    view.total = view._data.icons.length;
-                    view.empty = view.total < 1;
+				// Remove icon from list
+				view._data.icons = view._data.icons.filter(
+					item => item.prefix !== icon.prefix || item.name !== icon.name
+				);
+				if (view._data.icons.length !== view.total) {
+					// Update counters
+					view.total = view._data.icons.length;
+					view.empty = view.total < 1;
 
-                    let events = instance.get('events');
+					let events = instance.get('events');
 
-                    // Fire event to notify that icon was deleted
-                    events.fire('delete-' + view.customType, icon);
+					// Fire event to notify that icon was deleted
+					events.fire('delete-' + view.customType, icon);
 
-                    // Fire event to store updated list (alternative to delete- event)
-                    events.fire('update-' + view.customType, view._data.icons.slice(0));
+					// Fire event to store updated list (alternative to delete- event)
+					events.fire('update-' + view.customType, view._data.icons.slice(0));
 
-                    // Update view
-                    view._triggerViewUpdated();
-                }
-                break;
-        }
+					// Update view
+					view._triggerViewUpdated();
+				}
+				break;
+		}
 
-        return view;
-    };
+		return view;
+	};
 
-    /*
+	/*
         Convert route parameters to parameters
      */
-    if (view._params.routeParams) {
-        ['customType', 'canDelete', 'search', 'page'].forEach(attr => {
-            view._params[attr] = view._params.routeParams[attr];
-        });
-        delete view._params.routeParams;
-    }
+	if (view._params.routeParams) {
+		['customType', 'canDelete', 'search', 'page'].forEach(attr => {
+			view._params[attr] = view._params.routeParams[attr];
+		});
+		delete view._params.routeParams;
+	}
 
-    // Copy customType for public access
-    view.customType = view._params.customType;
-    view.canDelete = view._params.canDelete === true;
+	// Copy customType for public access
+	view.customType = view._params.customType;
+	view.canDelete = view._params.canDelete === true;
 
-    /*
+	/*
         Create route
      */
-    let routeParams = {
-        customType: view.customType,
-        search: typeof view._params.search === 'string' ? view._params.search : (parent && parent.route && parent.route.params.search ? parent.route.params.search : ''),
-        page: typeof view._params.page === 'number' ? view._params.page : 0,
-        canDelete: view.canDelete,
-    };
-    let routeDefaults = {
-        search: '',
-        page: 0,
-        canDelete: false,
-    };
-    view.route = route('custom', routeParams, routeDefaults);
+	let routeParams = {
+		customType: view.customType,
+		search:
+			typeof view._params.search === 'string'
+				? view._params.search
+				: parent && parent.route && parent.route.params.search
+				? parent.route.params.search
+				: '',
+		page: typeof view._params.page === 'number' ? view._params.page : 0,
+		canDelete: view.canDelete,
+	};
+	let routeDefaults = {
+		search: '',
+		page: 0,
+		canDelete: false,
+	};
+	view.route = route('custom', routeParams, routeDefaults);
 
-    /*
+	/*
         Add blocks
      */
-    let hasDoubleSearch = false;
-    if (view.parent) { // && view.parent.type === 'search') {
-        hasDoubleSearch = true;
-        view.blocks.globalSearch = searchBlock(instance, view, {
-            name: 'globalSearch',
-            keyword: view.parent.route.params.search,
-            showTitle: true
-        });
-    }
+	let hasDoubleSearch = false;
+	if (view.parent) {
+		// && view.parent.type === 'search') {
+		hasDoubleSearch = true;
+		view.blocks.globalSearch = searchBlock(instance, view, {
+			name: 'globalSearch',
+			keyword: view.parent.route.params.search,
+			showTitle: true,
+		});
+	}
 
-    view.blocks.search = searchBlock(instance, view, {
-        keyword: view.route.params.search,
-        prefix: view.prefix,
-        showTitle: hasDoubleSearch
-    });
+	view.blocks.search = searchBlock(instance, view, {
+		keyword: view.route.params.search,
+		prefix: view.prefix,
+		showTitle: hasDoubleSearch,
+	});
 
-    view.blocks.icons = iconsBlock(instance, view, {});
-    view.blocks.pagination = paginationBlock(instance, view, {});
+	view.blocks.icons = iconsBlock(instance, view, {});
+	view.blocks.pagination = paginationBlock(instance, view, {});
 
-    /*
+	/*
         Load data
      */
-    view.sync = () => {
-        let events = instance.get('events');
+	view.sync = () => {
+		let events = instance.get('events');
 
-        // Fire load-{customType} event with callback as parameter
-        events.fire('load-' + view.customType, data => {
-            if (!(data instanceof Array)) {
-                return;
-            }
+		// Fire load-{customType} event with callback as parameter
+		events.fire(
+			'load-' + view.customType,
+			data => {
+				if (!(data instanceof Array)) {
+					return;
+				}
 
-            view.loading = false;
+				view.loading = false;
 
-            // Set data as icons array
-            view._data = {
-                icons: data.map(icon => iconObject(icon)).filter(icon => icon !== null)
-            };
+				// Set data as icons array
+				view._data = {
+					icons: data
+						.map(icon => iconObject(icon))
+						.filter(icon => icon !== null),
+				};
 
-            // Empty
-            view.total = view._data.icons.length;
-            view.empty = view.total < 1;
+				// Empty
+				view.total = view._data.icons.length;
+				view.empty = view.total < 1;
 
-            // Notify that view has been loaded
-            view._triggerViewLoaded();
-        }, true);
-    };
-    view.sync();
+				// Notify that view has been loaded
+				view._triggerViewLoaded();
+			},
+			true
+		);
+	};
+	view.sync();
 
-    return view;
+	return view;
 };

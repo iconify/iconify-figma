@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
@@ -23,34 +23,39 @@ const phrases = require('../../../data/phrases');
 const lang = phrases.search;
 
 function SearchBlock(props) {
-    let app = props.app,
-        view = props.view,
-        name = props.block,
-        block = props.view.blocks[name],
-        searchTitle = null;
+	let app = props.app,
+		view = props.view,
+		name = props.block,
+		block = props.view.blocks[name],
+		searchTitle = null;
 
-    if (!block || block.empty()) {
-        return null;
-    }
+	if (!block || block.empty()) {
+		return null;
+	}
 
-    if (block.showTitle && name !== 'globalSearch') {
-        if (view.type === 'collection' && name === 'search') {
-            let prefix = view.prefix,
-                info = app.collection(prefix),
-                collectionTitle = info ? info.title : prefix;
+	if (block.showTitle && name !== 'globalSearch') {
+		if (view.type === 'collection' && name === 'search') {
+			let prefix = view.prefix,
+				info = app.collection(prefix),
+				collectionTitle = info ? info.title : prefix;
 
-            searchTitle = lang.namedTitle.replace('{name}', collectionTitle);
-        } else if (view.type === 'custom' && lang[view.customType + 'Title'] !== void 0) {
-            searchTitle = lang[view.customType + 'Title'];
-        } else {
-            searchTitle = lang.title;
-        }
-    }
+			searchTitle = lang.namedTitle.replace('{name}', collectionTitle);
+		} else if (
+			view.type === 'custom' &&
+			lang[view.customType + 'Title'] !== void 0
+		) {
+			searchTitle = lang[view.customType + 'Title'];
+		} else {
+			searchTitle = lang.title;
+		}
+	}
 
-    return <PluginBlock type="search">
-        {searchTitle !== null && <p>{searchTitle}</p>}
-        <SearchForm {...props} />
-    </PluginBlock>;
+	return (
+		<PluginBlock type="search">
+			{searchTitle !== null && <p>{searchTitle}</p>}
+			<SearchForm {...props} />
+		</PluginBlock>
+	);
 }
 
 export default SearchBlock;

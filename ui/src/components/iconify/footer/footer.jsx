@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React, { Component } from 'react';
 import Iconify from '@iconify/iconify';
@@ -21,71 +21,71 @@ import SimpleFooter from './simple';
 import FullFooter from './full';
 
 class Footer extends Component {
-    constructor(props) {
-        super(props);
+	constructor(props) {
+		super(props);
 
-        this.state = {
-            counter: 0
-        };
-    }
+		this.state = {
+			counter: 0,
+		};
+	}
 
-    /**
-     * Render component
-     *
-     * @return {*}
-     */
-    render() {
-        let app = this.props.app,
-            iconName = app.options.iconName;
+	/**
+	 * Render component
+	 *
+	 * @return {*}
+	 */
+	render() {
+		let app = this.props.app,
+			iconName = app.options.iconName;
 
-        // No icon selected - render SimpleFooter
-        if (iconName === null) {
-            return <SimpleFooter {...this.props} />;
-        }
+		// No icon selected - render SimpleFooter
+		if (iconName === null) {
+			return <SimpleFooter {...this.props} />;
+		}
 
-        // Check if icon has been loaded
-        if (!Iconify.iconExists(iconName)) {
-            Iconify.preloadImages([iconName]);
-            if (!this._listener) {
-                this._listener = this._onIconsLoaded.bind(this);
-                document.addEventListener('IconifyAddedIcons', this._listener, true);
-            }
-            return <SimpleFooter {...this.props} />;
-        }
+		// Check if icon has been loaded
+		if (!Iconify.iconExists(iconName)) {
+			Iconify.preloadImages([iconName]);
+			if (!this._listener) {
+				this._listener = this._onIconsLoaded.bind(this);
+				document.addEventListener('IconifyAddedIcons', this._listener, true);
+			}
+			return <SimpleFooter {...this.props} />;
+		}
 
-        // Loaded
-        return <FullFooter {...this.props} iconName={iconName} />;
-    }
+		// Loaded
+		return <FullFooter {...this.props} iconName={iconName} />;
+	}
 
-    /**
-     * Unsubscribe
-     */
-    componentWillUnmount() {
-        if (this._listener) {
-            document.removeEventListener('IconifyAddedIcons', this._listener);
-            this._listener = null;
-        }
-    }
+	/**
+	 * Unsubscribe
+	 */
+	componentWillUnmount() {
+		if (this._listener) {
+			document.removeEventListener('IconifyAddedIcons', this._listener);
+			this._listener = null;
+		}
+	}
 
-    /**
-     * New icons have been loaded. Re-render
-     *
-     * @private
-     */
-    _onIconsLoaded() {
-        if (this._listener && !this._pendingUpdate) {
-            // No more than 1 update per cycle
-            this._pendingUpdate = true;
-            setTimeout(() => {
-                if (this._listener) {
-                    this._pendingUpdate = false;
-                    this.setState({
-                        counter: this.state.counter + 1
-                    });
-                }
-            });
-        }
-    }
+	/**
+	 * New icons have been loaded. Re-render
+	 *
+	 * @private
+	 */
+	_onIconsLoaded() {
+		if (this._listener && !this._pendingUpdate) {
+			// No more than 1 update per cycle
+			this._pendingUpdate = true;
+			setTimeout(() => {
+				if (this._listener) {
+					this._pendingUpdate = false;
+					this.setState({
+						counter: this.state.counter + 1,
+					});
+				}
+			});
+		}
+	}
 }
 
 export default Footer;

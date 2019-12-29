@@ -1,38 +1,38 @@
 // Figma plug-in wrapper
 .plugin-wrapper {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 .plugin-wrapper-content {
-  background: $plugin-palette-background-white;
-  padding: 0 8px 8px;
+	background: $plugin-palette-background-white;
+	padding: 0 8px 8px;
 }
 
 // Content container
 .plugin-content {
-  @include plugin-font-ui-pos('medium', 'normal');
-  padding: 16px;
+	@include plugin-font-ui-pos('medium', 'normal');
+	padding: 16px;
 }
 
 // Footer
 .plugin-footer {
-  text-align: right;
-  clear: both;
-  margin-top: 16px;
+	text-align: right;
+	clear: both;
+	margin-top: 16px;
 }
 
 // Floating notice
 .plugin-floating-notice {
-  position: fixed;
-  left: 16px;
-  right: 16px;
-  bottom: 0;
-  z-index: 3;
-  opacity: .9;
-  transition: opacity .2s ease;
-  &:hover {
-    opacity: 1;
-  }
+	position: fixed;
+	left: 16px;
+	right: 16px;
+	bottom: 0;
+	z-index: 3;
+	opacity: 0.9;
+	transition: opacity 0.2s ease;
+	&:hover {
+		opacity: 1;
+	}
 }

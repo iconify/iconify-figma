@@ -1,44 +1,44 @@
 .plugin-option {
-  margin: 16px 0;
-  display: flex;
-  width: 100%;
+	margin: 16px 0;
+	display: flex;
+	width: 100%;
 
-  dt {
-    display: block;
-    margin: 0;
-    padding: 8px 16px 8px 0;
-    text-align: right;
-    width: 30%;
-    box-sizing: border-box;
-  }
-  dd {
-    display: block;
-    width: 70%;
-    margin: 0;
-  }
+	dt {
+		display: block;
+		margin: 0;
+		padding: 8px 16px 8px 0;
+		text-align: right;
+		width: 30%;
+		box-sizing: border-box;
+	}
+	dd {
+		display: block;
+		width: 70%;
+		margin: 0;
+	}
 
-  small {
-    display: block;
-    color: $plugin-palette-color-black-muted;
-    padding-left: 4px;
-    padding-top: 4px;
-    @include plugin-font-ui-pos('small', 'normal');
-  }
+	small {
+		display: block;
+		color: $plugin-palette-color-black-muted;
+		padding-left: 4px;
+		padding-top: 4px;
+		@include plugin-font-ui-pos('small', 'normal');
+	}
 
-  & + & {
-  }
+	& + & {
+	}
 
-  &--toggle {
-    display: block;
-    padding-left: 30%;
-    box-sizing: border-box;
+	&--toggle {
+		display: block;
+		padding-left: 30%;
+		box-sizing: border-box;
 
-    input {
-      margin-right: 8px;
-    }
+		input {
+			margin-right: 8px;
+		}
 
-    small {
-      padding-left: 20px;
-    }
-  }
+		small {
+			padding-left: 20px;
+		}
+	}
 }

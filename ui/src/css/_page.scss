@@ -1,131 +1,130 @@
 // Wrappers for custom pages
 .plugin-wrapper--github {
-  background: $plugin-palette-background-darker-white-borderless;
-  .plugin-content--page {
-    section {
-      background: $plugin-palette-background-white;
-      border: 1px solid $plugin-palette-border-grey;
-      padding: 16px 16px 8px;
-    }
-  }
+	background: $plugin-palette-background-darker-white-borderless;
+	.plugin-content--page {
+		section {
+			background: $plugin-palette-background-white;
+			border: 1px solid $plugin-palette-border-grey;
+			padding: 16px 16px 8px;
+		}
+	}
 }
 
 .plugin-wrapper--paste {
-  .plugin-content {
-    textarea {
-      height: 300px;
-    }
-  }
+	.plugin-content {
+		textarea {
+			height: 300px;
+		}
+	}
 }
 
 // Custom page
 .plugin-content--page {
-  h1 {
-    @include plugin-font-ui-pos('xxlarge', 'bold');
-    margin: 0 0 8px;
-    padding: 0;
-  }
+	h1 {
+		@include plugin-font-ui-pos('xxlarge', 'bold');
+		margin: 0 0 8px;
+		padding: 0;
+	}
 
-  h2 {
-    @include plugin-font-ui-pos('xlarge', 'bold');
-    margin: 16px 0 8px;
-    padding: 0;
-  }
+	h2 {
+		@include plugin-font-ui-pos('xlarge', 'bold');
+		margin: 16px 0 8px;
+		padding: 0;
+	}
 
-  section {
-    margin: 0 0 16px;
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
+	section {
+		margin: 0 0 16px;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
 
-  p {
-    @include plugin-font-ui-pos('medium', 'normal');
-    margin: 0 0 8px;
+	p {
+		@include plugin-font-ui-pos('medium', 'normal');
+		margin: 0 0 8px;
 
-    &.plugin-hint {
-      color: $plugin-palette-color-black-dimmed;
-      @include plugin-font-ui-pos('small', 'normal');
-    }
-  }
+		&.plugin-hint {
+			color: $plugin-palette-color-black-dimmed;
+			@include plugin-font-ui-pos('small', 'normal');
+		}
+	}
 
-  .code {
-    margin-bottom: 12px;
-  }
+	.code {
+		margin-bottom: 12px;
+	}
 
-  > ul {
-    li {
-      margin: 0 0 8px;
-      padding: 0;
-    }
-  }
+	> ul {
+		li {
+			margin: 0 0 8px;
+			padding: 0;
+		}
+	}
 
-  a {
-    color: $plugin-palette-color-link;
-    text-decoration: none;
-    &:hover {
-      color: $plugin-palette-color-link-hover;
-    }
-  }
+	a {
+		color: $plugin-palette-color-link;
+		text-decoration: none;
+		&:hover {
+			color: $plugin-palette-color-link-hover;
+		}
+	}
 }
-
 
 // Paste SVG
 .plugin-paste-notices {
-  white-space: nowrap;
-  margin: 8px 0;
-  .plugin-paste-notice {
-    margin: 4px 0;
-    padding: 0;
-  }
-  .plugin-paste-notice--error {
-    color: $plugin-palette-border-red;
-  }
+	white-space: nowrap;
+	margin: 8px 0;
+	.plugin-paste-notice {
+		margin: 4px 0;
+		padding: 0;
+	}
+	.plugin-paste-notice--error {
+		color: $plugin-palette-border-red;
+	}
 }
 
 .plugin-paste-sample {
-  margin: 16px 0;
-  img {
-    border: 1px solid $plugin-palette-border-blue;
-    margin: 8px 0;
-    max-width: 128px;
-    max-height: 128px;
-  }
+	margin: 16px 0;
+	img {
+		border: 1px solid $plugin-palette-border-blue;
+		margin: 8px 0;
+		max-width: 128px;
+		max-height: 128px;
+	}
 }
 
 .plugin-paste-comment {
-  @include plugin-font-ui-pos('small', 'normal');
-  color: $plugin-palette-color-black-dimmed;
-  margin-top: -8px;
+	@include plugin-font-ui-pos('small', 'normal');
+	color: $plugin-palette-color-black-dimmed;
+	margin-top: -8px;
 }
 
 // Options
 .plugin-wrapper--options {
-  section {
-    border-bottom: 1px solid $plugin-palette-border-grey;
-    &:last-child {
-      border-bottom-width: 0;
-    }
-  }
+	section {
+		border-bottom: 1px solid $plugin-palette-border-grey;
+		&:last-child {
+			border-bottom-width: 0;
+		}
+	}
 }
 
 // Code
 .plugin-wrapper--code {
-  p.plugin-hint {
-    font: inherit;
-    color: $plugin-palette-color-black-muted;
-  }
-  .plugin-code-sample {
-    margin: 8px 0;
-  }
-  h1 {
-    margin-top: 16px;
-  }
-  section {
-    padding-bottom: 16px;
-    border-bottom: 1px solid $plugin-palette-border-grey;
-    &:last-child {
-      border-bottom-width: 0;
-    }
-  }
+	p.plugin-hint {
+		font: inherit;
+		color: $plugin-palette-color-black-muted;
+	}
+	.plugin-code-sample {
+		margin: 8px 0;
+	}
+	h1 {
+		margin-top: 16px;
+	}
+	section {
+		padding-bottom: 16px;
+		border-bottom: 1px solid $plugin-palette-border-grey;
+		&:last-child {
+			border-bottom-width: 0;
+		}
+	}
 }

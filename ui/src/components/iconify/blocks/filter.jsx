@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
@@ -20,16 +20,18 @@ import PluginBlock from '../../parts/plugin-block';
 import SearchForm from '../parts/search-form';
 
 function FilterBlock(props) {
-    let name = props.block,
-        block = props.view.blocks[name];
+	let name = props.block,
+		block = props.view.blocks[name];
 
-    if (!block || block.empty()) {
-        return null;
-    }
+	if (!block || block.empty()) {
+		return null;
+	}
 
-    return <PluginBlock type="filter">
-        <SearchForm {...props} />
-    </PluginBlock>;
+	return (
+		<PluginBlock type="filter">
+			<SearchForm {...props} />
+		</PluginBlock>
+	);
 }
 
 export default FilterBlock;

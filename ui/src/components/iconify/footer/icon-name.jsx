@@ -12,15 +12,25 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
 function FooterIconName(props) {
-    return <div className="plugin-footer-icon-name">
-        {props.sample && <span className={'plugin-footer-icon-small-sample plugin-footer-grid--' + props.sampleHeight} dangerouslySetInnerHTML={{__html: props.sample}} />}
-        {props.text}
-    </div>
+	return (
+		<div className="plugin-footer-icon-name">
+			{props.sample && (
+				<span
+					className={
+						'plugin-footer-icon-small-sample plugin-footer-grid--' +
+						props.sampleHeight
+					}
+					dangerouslySetInnerHTML={{ __html: props.sample }}
+				/>
+			)}
+			{props.text}
+		</div>
+	);
 }
 
 export default FooterIconName;

@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
@@ -24,24 +24,36 @@ const phrases = require('../../../data/phrases');
 const lang = phrases.footer;
 
 function FooterCollection(props) {
-    let app = props.app,
-        icon = app.options.icon,
-        prefix = icon && icon.prefix !== '' ? icon.prefix : null;
+	let app = props.app,
+		icon = app.options.icon,
+		prefix = icon && icon.prefix !== '' ? icon.prefix : null;
 
-    if (prefix === null) {
-        return null;
-    }
+	if (prefix === null) {
+		return null;
+	}
 
-    let info = app.collection(prefix);
-    if (!info) {
-        return null;
-    }
+	let info = app.collection(prefix);
+	if (!info) {
+		return null;
+	}
 
-    return <Disclosure active={app.expandCollectionInfo ? 'info' : ''}>
-        <DisclosureItem key="info" title={lang.aboutCollection.replace('{title}', info.title)} onToggle={() => app.expandCollectionInfo = !app.expandCollectionInfo}>
-            <CollectionInfo {...props} prefix={prefix} showTitle={false} showPalette={false} showViewLink={true} />
-        </DisclosureItem>
-    </Disclosure>;
+	return (
+		<Disclosure active={app.expandCollectionInfo ? 'info' : ''}>
+			<DisclosureItem
+				key="info"
+				title={lang.aboutCollection.replace('{title}', info.title)}
+				onToggle={() => (app.expandCollectionInfo = !app.expandCollectionInfo)}
+			>
+				<CollectionInfo
+					{...props}
+					prefix={prefix}
+					showTitle={false}
+					showPalette={false}
+					showViewLink={true}
+				/>
+			</DisclosureItem>
+		</Disclosure>
+	);
 }
 
 export default FooterCollection;

@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 let baseAPI = require('./base');
 
@@ -23,56 +23,56 @@ let baseAPI = require('./base');
  * @return {number}
  */
 function hash(str) {
-    let total = 0,
-        i;
+	let total = 0,
+		i;
 
-    for (i = str.length - 1; i >= 0; i--) {
-        total += str.charCodeAt(i);
-    }
+	for (i = str.length - 1; i >= 0; i--) {
+		total += str.charCodeAt(i);
+	}
 
-    return total % 999;
+	return total % 999;
 }
 
 module.exports = instance => {
-    let api = baseAPI(instance);
+	let api = baseAPI(instance);
 
-    /**
-     * Send request
-     *
-     * @param {string} uri
-     * @param {function} callback
-     * @private
-     */
-    api._get = (uri, callback) => {
-        if (window.IconifySearch === void 0) {
-            window.IconifySearch = {};
-        }
+	/**
+	 * Send request
+	 *
+	 * @param {string} uri
+	 * @param {function} callback
+	 * @private
+	 */
+	api._get = (uri, callback) => {
+		if (window.IconifySearch === void 0) {
+			window.IconifySearch = {};
+		}
 
-        let obj = window.IconifySearch,
-            counter = hash(uri),
-            func;
+		let obj = window.IconifySearch,
+			counter = hash(uri),
+			func;
 
-        while (true) {
-            func = 'cb' + counter;
-            if (obj[func] === void 0) {
-                break;
-            }
-            counter ++;
-        }
+		while (true) {
+			func = 'cb' + counter;
+			if (obj[func] === void 0) {
+				break;
+			}
+			counter++;
+		}
 
-        uri = api._appendToURI(uri, 'callback', 'IconifySearch.' + func);
+		uri = api._appendToURI(uri, 'callback', 'IconifySearch.' + func);
 
-        obj[func] = function(data) {
-            delete obj[func];
-            callback(data);
-        };
+		obj[func] = function(data) {
+			delete obj[func];
+			callback(data);
+		};
 
-        // Create script
-        let script = document.createElement('script');
-        script.setAttribute('async', true);
-        script.setAttribute('src', uri);
-        document.head.appendChild(script);
-    };
+		// Create script
+		let script = document.createElement('script');
+		script.setAttribute('async', true);
+		script.setAttribute('src', uri);
+		document.head.appendChild(script);
+	};
 
-    return api;
+	return api;
 };

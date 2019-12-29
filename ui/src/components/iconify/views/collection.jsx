@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
@@ -29,22 +29,28 @@ import CollectionInfo from '../parts/collection-info';
 import FigmaFooter from '../footer/footer';
 
 function CollectionView(props) {
-    return <ViewContainer type="collection">
-        <SearchBlock {...props} block="globalSearch" />
-        <ParentBlock {...props} block="parent" />
-        <FiltersBlock {...props} block="collections" />
-        <CollectionInfo {...props} />
-        <SearchBlock {...props} block="search" />
-        <FiltersBlock {...props} block="tags" />
-        <FiltersBlock {...props} block="themePrefixes" />
-        <FiltersBlock {...props} block="themeSuffixes" />
-        <div className={helpers.iconsWrapperClass(props)}>
-            <IconsHeader {...props} />
-            <IconsBlock {...props} block="icons" key={helpers.iconsBlockKey(props)} />
-            <PaginationBlock {...props} block="pagination" />
-        </div>
-        <FigmaFooter {...props} />
-    </ViewContainer>;
+	return (
+		<ViewContainer type="collection">
+			<SearchBlock {...props} block="globalSearch" />
+			<ParentBlock {...props} block="parent" />
+			<FiltersBlock {...props} block="collections" />
+			<CollectionInfo {...props} />
+			<SearchBlock {...props} block="search" />
+			<FiltersBlock {...props} block="tags" />
+			<FiltersBlock {...props} block="themePrefixes" />
+			<FiltersBlock {...props} block="themeSuffixes" />
+			<div className={helpers.iconsWrapperClass(props)}>
+				<IconsHeader {...props} />
+				<IconsBlock
+					{...props}
+					block="icons"
+					key={helpers.iconsBlockKey(props)}
+				/>
+				<PaginationBlock {...props} block="pagination" />
+			</div>
+			<FigmaFooter {...props} />
+		</ViewContainer>
+	);
 }
 
 export default CollectionView;

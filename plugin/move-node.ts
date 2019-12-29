@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import { findParentNode, findParentNodeById } from './node-functions';
 
@@ -52,11 +52,13 @@ function findFrameAt(env, x, y, ignoreNodes) {
 				}
 				if (testCoordinates(node, offsetX, offsetY)) {
 					result = scanChildren(node, offsetX + node.x, offsetY + node.y);
-					return result === null ? {
-						node: node,
-						offsetX: offsetX + node.x,
-						offsetY: offsetY + node.y,
-					} : result;
+					return result === null
+						? {
+								node: node,
+								offsetX: offsetX + node.x,
+								offsetY: offsetY + node.y,
+						  }
+						: result;
 				}
 				break;
 
@@ -66,11 +68,13 @@ function findFrameAt(env, x, y, ignoreNodes) {
 				}
 				if (testCoordinates(node, offsetX, offsetY)) {
 					result = scanChildren(node, offsetX, offsetY);
-					return result === null ? {
-						node: node,
-						offsetX: offsetX,
-						offsetY: offsetY,
-					} : result;
+					return result === null
+						? {
+								node: node,
+								offsetX: offsetX,
+								offsetY: offsetY,
+						  }
+						: result;
 				}
 				break;
 		}
@@ -123,7 +127,12 @@ function dropNode(env, node, props) {
 
 	// Look for frame
 	if (props.dropToFrame) {
-		let frame = findFrameAt(env, node.x + node.width / 2, node.y + node.height / 2, [node.id]);
+		let frame = findFrameAt(
+			env,
+			node.x + node.width / 2,
+			node.y + node.height / 2,
+			[node.id]
+		);
 		if (frame !== null) {
 			node.x -= frame.offsetX;
 			node.y -= frame.offsetY;
@@ -160,7 +169,11 @@ function moveNode(env, node, props) {
 	}
 
 	// Align in auto-layout frame
-	if (parent && parent.type === 'FRAME' && (parent.layoutMode === 'HORIZONTAL' || parent.layoutMode === 'VERTICAL')) {
+	if (
+		parent &&
+		parent.type === 'FRAME' &&
+		(parent.layoutMode === 'HORIZONTAL' || parent.layoutMode === 'VERTICAL')
+	) {
 		if (node.parent === parent) {
 			// Move to page first
 			figma.currentPage.insertChild(0, node);
@@ -205,7 +218,7 @@ function moveNode(env, node, props) {
 		parent.insertChild(index, node);
 		return;
 	}
-	
+
 	// Move icon to selected group
 	if (parent && parent.type !== 'PAGE') {
 		// Icon alignment
@@ -221,7 +234,7 @@ function moveNode(env, node, props) {
 			// Parent dimensions
 			box = {
 				width: parent ? parent.width : 0,
-				height: parent ? parent.height : 0
+				height: parent ? parent.height : 0,
 			};
 
 		// Coordinates are relative to frame

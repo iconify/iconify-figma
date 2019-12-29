@@ -1,16 +1,16 @@
-"use strict";
+'use strict';
 
 /**
  * Node information sent to UI
  */
 interface ParentNodeItem {
-	id: string,
-	type: string,
-	name: string,
-	parents: Array<ParentNodeItem>,
-	level: number,
-	layoutMode?: string,
-};
+	id: string;
+	type: string;
+	name: string;
+	parents: Array<ParentNodeItem>;
+	level: number;
+	layoutMode?: string;
+}
 
 /**
  * Check if node is root node
@@ -19,7 +19,9 @@ interface ParentNodeItem {
  * @return {boolean}
  */
 function isRootNode(node) {
-	return !node || !node.type || node.type === 'PAGE' || node.type === 'DOCUMENT';
+	return (
+		!node || !node.type || node.type === 'PAGE' || node.type === 'DOCUMENT'
+	);
 }
 
 /**
@@ -41,9 +43,12 @@ function isIconifyFrame(node) {
 	// Check for imported icon from old Iconify plugin
 	// Frame without parent frame
 	if (
-		node.parent && node.parent.type === 'PAGE' &&
+		node.parent &&
+		node.parent.type === 'PAGE' &&
 		(node.name.indexOf('-') !== -1 || node.name.indexOf(':') !== -1) &&
-		node.name.match(/^(@[a-z0-9-]+\/)?[a-z0-9][a-z0-9-]*[:-][a-z0-9-]*[a-z0-9]+$/) &&
+		node.name.match(
+			/^(@[a-z0-9-]+\/)?[a-z0-9][a-z0-9-]*[:-][a-z0-9-]*[a-z0-9]+$/
+		) &&
 		node.name.split(':').length < 3
 	) {
 		return true;
@@ -170,7 +175,7 @@ function findParentNodes(env): Array<ParentNodeItem> {
 			type: node.type,
 			name: node.name,
 			parents: [],
-			level: 0
+			level: 0,
 		};
 
 		// Check for auto-layout
@@ -183,7 +188,7 @@ function findParentNodes(env): Array<ParentNodeItem> {
 
 		while (!isRootNode(test)) {
 			test = test.parent;
-			item.level ++;
+			item.level++;
 			item.parents.push(test.id);
 		}
 
@@ -233,8 +238,7 @@ function findParentNodeById(env, id) {
 			nodes[nodeId] = true;
 			return true;
 		});
-	} catch (err) {
-	}
+	} catch (err) {}
 
 	return found;
 }
@@ -284,4 +288,12 @@ function convertColor(color) {
 }
 
 // Export functions
-export { isRootNode, findParentNode, findParentNodes, findParentNodeById, addToSelection, replaceSelection, convertColor };
+export {
+	isRootNode,
+	findParentNode,
+	findParentNodes,
+	findParentNodeById,
+	addToSelection,
+	replaceSelection,
+	convertColor,
+};

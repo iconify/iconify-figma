@@ -12,26 +12,27 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
 function PluginBlock(props) {
-    let className = 'plugin-block';
+	let className = 'plugin-block';
 
-    if (props.type !== void 0) {
-        let blockType = props.type;
-        className += ' plugin-block--' + blockType;
-        if (props[blockType + 'Type'] !== void 0) {
-            (props[blockType + 'Type'] instanceof Array ? props[blockType + 'Type'] : [props[blockType + 'Type']]).forEach(value => {
-                className += ' plugin-block--' + blockType + '--' + value;
-            });
-        }
-    }
+	if (props.type !== void 0) {
+		let blockType = props.type;
+		className += ' plugin-block--' + blockType;
+		if (props[blockType + 'Type'] !== void 0) {
+			(props[blockType + 'Type'] instanceof Array
+				? props[blockType + 'Type']
+				: [props[blockType + 'Type']]
+			).forEach(value => {
+				className += ' plugin-block--' + blockType + '--' + value;
+			});
+		}
+	}
 
-    return <div className={className}>
-        {props.children}
-    </div>;
+	return <div className={className}>{props.children}</div>;
 }
 
 export default PluginBlock;

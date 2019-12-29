@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React, { Component } from 'react';
 
@@ -24,84 +24,103 @@ const phrases = require('../../../data/phrases');
 const lang = phrases.icons;
 
 class IconsHeader extends Component {
-    render() {
-        let props = this.props,
-            view = props.view,
-            options = props.app.options,
-            pagination = view.blocks.pagination,
-            isError = pagination.length === 0,
-            text;
+	render() {
+		let props = this.props,
+			view = props.view,
+			options = props.app.options,
+			pagination = view.blocks.pagination,
+			isError = pagination.length === 0,
+			text;
 
-        // Generate text
-        switch (view.type) {
-            case 'search':
-                if (lang.headerSearch[pagination.length] !== void 0) {
-                    text = lang.headerSearch[pagination.length];
-                } else {
-                    text = (pagination.more ? lang.headerSearch.more : lang.headerSearch.full);
-                    if (!pagination.more && pagination.length === props.config.search.fullLimit) {
-                        text = lang.headerSearch.max;
-                    }
-                }
-                break;
+		// Generate text
+		switch (view.type) {
+			case 'search':
+				if (lang.headerSearch[pagination.length] !== void 0) {
+					text = lang.headerSearch[pagination.length];
+				} else {
+					text = pagination.more
+						? lang.headerSearch.more
+						: lang.headerSearch.full;
+					if (
+						!pagination.more &&
+						pagination.length === props.config.search.fullLimit
+					) {
+						text = lang.headerSearch.max;
+					}
+				}
+				break;
 
-            default:
-                if (view.type === 'collection' || view.type === 'custom') {
-                    if (!pagination.length && view.route.params.search.length && lang.headerEmptyFilter !== void 0) {
-                        text = lang.headerEmptyFilter;
-                        break;
-                    }
-                }
+			default:
+				if (view.type === 'collection' || view.type === 'custom') {
+					if (
+						!pagination.length &&
+						view.route.params.search.length &&
+						lang.headerEmptyFilter !== void 0
+					) {
+						text = lang.headerEmptyFilter;
+						break;
+					}
+				}
 
-                if (view.type === 'custom') {
-                    if (lang.headerCustom[view.customType + pagination.length] !== void 0) {
-                        text = lang.headerCustom[view.customType + pagination.length];
-                        break;
-                    }
-                }
+				if (view.type === 'custom') {
+					if (
+						lang.headerCustom[view.customType + pagination.length] !== void 0
+					) {
+						text = lang.headerCustom[view.customType + pagination.length];
+						break;
+					}
+				}
 
-                if (lang.headerCount[pagination.length] !== void 0) {
-                    text = lang.headerCount[pagination.length];
-                    break;
-                }
+				if (lang.headerCount[pagination.length] !== void 0) {
+					text = lang.headerCount[pagination.length];
+					break;
+				}
 
-                text = lang.headerCount.default;
-        }
-        text = text
-            .replace('{count}', pagination.length)
-            .replace('{start}', pagination.page * pagination.perPage)
-            .replace('{end}', Math.min((pagination.page + 1) * pagination.perPage, pagination.length) - 1);
+				text = lang.headerCount.default;
+		}
+		text = text
+			.replace('{count}', pagination.length)
+			.replace('{start}', pagination.page * pagination.perPage)
+			.replace(
+				'{end}',
+				Math.min(
+					(pagination.page + 1) * pagination.perPage,
+					pagination.length
+				) - 1
+			);
 
-        // Check mode
-        let headerProps = {};
-        if (!options.forceList) {
-            let newMode = options.list ? 'grid' : 'list';
-            headerProps.layout = newMode;
-            headerProps.onLayoutChange = this._onModeChange.bind(this);
-            headerProps.layoutTitle = lang.mode;
-        }
+		// Check mode
+		let headerProps = {};
+		if (!options.forceList) {
+			let newMode = options.list ? 'grid' : 'list';
+			headerProps.layout = newMode;
+			headerProps.onLayoutChange = this._onModeChange.bind(this);
+			headerProps.layoutTitle = lang.mode;
+		}
 
-        return <PluginBlock type="icons-header">
-            {isError && <Notice type="error">{text}</Notice>}
-            {!isError && <Header {...headerProps}>{text}</Header>}
-        </PluginBlock>;
-    }
+		return (
+			<PluginBlock type="icons-header">
+				{isError && <Notice type="error">{text}</Notice>}
+				{!isError && <Header {...headerProps}>{text}</Header>}
+			</PluginBlock>
+		);
+	}
 
-    /**
-     * Change display mode
-     *
-     * @private
-     */
-    _onModeChange() {
-        let options = this.props.app.options;
+	/**
+	 * Change display mode
+	 *
+	 * @private
+	 */
+	_onModeChange() {
+		let options = this.props.app.options;
 
-        if (options.forceList) {
-            return;
-        }
+		if (options.forceList) {
+			return;
+		}
 
-        options.list = !options.list;
-        options.triggerChange();
-    }
+		options.list = !options.list;
+		options.triggerChange();
+	}
 }
 
 export default IconsHeader;

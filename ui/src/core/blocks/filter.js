@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 const base = require('./base');
 
@@ -22,7 +22,7 @@ const base = require('./base');
  * @return {boolean}
  */
 function empty() {
-    return false;
+	return false;
 }
 
 /**
@@ -34,20 +34,20 @@ function empty() {
  * @return {Object|block}
  */
 module.exports = (instance, view, params) => {
-    let block = base({
-        app: instance,
-        view: view,
+	let block = base({
+		app: instance,
+		view: view,
 
-        // Required stuff
-        type: 'filter',
-        keys: ['keyword'],
+		// Required stuff
+		type: 'filter',
+		keys: ['keyword'],
 
-        // Data
-        keyword: typeof params.keyword === 'string' ? params.keyword : ''
-    });
+		// Data
+		keyword: typeof params.keyword === 'string' ? params.keyword : '',
+	});
 
-    // Check if block is empty
-    block.empty = empty;
+	// Check if block is empty
+	block.empty = empty;
 
-    return block;
+	return block;
 };

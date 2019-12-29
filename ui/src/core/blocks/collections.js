@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 const base = require('./base');
 
@@ -23,7 +23,7 @@ const base = require('./base');
  * @return {boolean}
  */
 function empty(block) {
-    return Object.keys(block.collections).length < 1;
+	return Object.keys(block.collections).length < 1;
 }
 
 /**
@@ -33,7 +33,7 @@ function empty(block) {
  * @return {Array}
  */
 function getCategories(collections) {
-    return Object.keys(collections);
+	return Object.keys(collections);
 }
 
 /**
@@ -45,25 +45,29 @@ function getCategories(collections) {
  * @return {Object|block}
  */
 module.exports = (instance, view, params) => {
-    let collections = params.collections === void 0 ? Object.create(null) : params.collections;
+	let collections =
+		params.collections === void 0 ? Object.create(null) : params.collections;
 
-    let block = base({
-        app: instance,
-        view: view,
+	let block = base({
+		app: instance,
+		view: view,
 
-        // Required stuff
-        type: 'collections',
-        keys: ['collections', 'showCategories'],
+		// Required stuff
+		type: 'collections',
+		keys: ['collections', 'showCategories'],
 
-        // Data
-        collections: collections,
-        showCategories: typeof params.showCategories === 'boolean' ? params.showCategories : getCategories(collections).length > 1,
+		// Data
+		collections: collections,
+		showCategories:
+			typeof params.showCategories === 'boolean'
+				? params.showCategories
+				: getCategories(collections).length > 1,
 
-        // Functions
-        empty: () => empty(block),
-        hasCategories: () => getCategories(block.collections).length > 1,
-        categories: () => getCategories(block.collections)
-    });
+		// Functions
+		empty: () => empty(block),
+		hasCategories: () => getCategories(block.collections).length > 1,
+		categories: () => getCategories(block.collections),
+	});
 
-    return block;
+	return block;
 };

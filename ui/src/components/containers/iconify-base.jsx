@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React, { Component } from 'react';
 import Iconify from '@iconify/iconify';
@@ -26,171 +26,179 @@ import SearchView from '../iconify/views/search';
 import RecentView from '../iconify/views/recent';
 
 const views = {
-    collections: CollectionsView,
-    collection: CollectionView,
-    search: SearchView,
-    recent: RecentView,
+	collections: CollectionsView,
+	collection: CollectionView,
+	search: SearchView,
+	recent: RecentView,
 };
 
 class IconifyBaseContainer extends Component {
-    constructor(props) {
-        super(props);
+	constructor(props) {
+		super(props);
 
-        this.state = {
+		this.state = {};
+	}
 
-        };
-    }
+	/**
+	 * Get content component to display
+	 *
+	 * @return {Component}
+	 * @private
+	 */
+	_getContentComponent() {
+		let props = this.props,
+			container = props.container,
+			view = container.iconifyView;
 
-    /**
-     * Get content component to display
-     *
-     * @return {Component}
-     * @private
-     */
-    _getContentComponent() {
-        let props = this.props,
-            container = props.container,
-            view = container.iconifyView;
+		if (view && !view.loading) {
+			if (views[view.type] !== void 0) {
+				return views[view.type];
+			} else if (view.type === 'custom' && views[view.customType] !== void 0) {
+				return views[view.customType];
+			}
+		}
 
-        if (view && !view.loading) {
-            if (views[view.type] !== void 0) {
-                return views[view.type];
-            } else if (view.type === 'custom' && views[view.customType] !== void 0) {
-                return views[view.customType];
-            }
-        }
+		return LoadingView;
+	}
 
-        return LoadingView;
-    }
+	/**
+	 * Render component
+	 *
+	 * @return {*}
+	 */
+	render() {
+		let props = this.props,
+			container = props.container,
+			app = container.iconify,
+			view = container.iconifyView,
+			blocks = view ? view.render() : null;
 
-    /**
-     * Render component
-     *
-     * @return {*}
-     */
-    render() {
-        let props = this.props,
-            container = props.container,
-            app = container.iconify,
-            view = container.iconifyView,
-            blocks = view ? view.render(): null;
+		// Set key to make sure content is being refreshed
+		let key = 'empty';
+		if (view) {
+			switch (view.type) {
+				case 'collection':
+					key = 'collection-' + view.prefix;
+					break;
 
-        // Set key to make sure content is being refreshed
-        let key = 'empty';
-        if (view) {
-            switch (view.type) {
-                case 'collection':
-                    key = 'collection-' + view.prefix;
-                    break;
+				case 'search':
+					key = 'search-' + view.route.params.search;
+					break;
 
-                case 'search':
-                    key = 'search-' + view.route.params.search;
-                    break;
+				case 'custom':
+					key = 'custom-' + view.customType;
+					break;
 
-                case 'custom':
-                    key = 'custom-' + view.customType;
-                    break;
+				default:
+					key = view.type;
+			}
+		}
 
-                default:
-                    key = view.type;
-            }
-        }
+		let Component = this._getContentComponent();
 
-        let Component = this._getContentComponent();
+		return (
+			<Component
+				key={key}
+				container={this}
+				app={app}
+				view={view}
+				blocks={blocks}
+				/* expand storage for easy access */
+				config={app.get('config').data}
+				onSelectIcon={this._onSelectIcon.bind(this)}
+			/>
+		);
+	}
 
-        return <Component
-            key={key}
-            container={this}
-            app={app}
-            view={view}
-            blocks={blocks}
-            /* expand storage for easy access */
-            config={app.get('config').data}
-            onSelectIcon={this._onSelectIcon.bind(this)}
-        />;
-    }
+	/**
+	 * Select icon
+	 *
+	 * @param {string} value
+	 * @private
+	 */
+	_onSelectIcon(value) {
+		let options = this.props.container.options;
+		options.icon = value;
+		options.triggerChange();
+	}
 
-    /**
-     * Select icon
-     *
-     * @param {string} value
-     * @private
-     */
-    _onSelectIcon(value) {
-        let options = this.props.container.options;
-        options.icon = value;
-        options.triggerChange();
-    }
+	/**
+	 * Close plugin
+	 *
+	 * @param [event]
+	 */
+	closePlugin(event) {
+		this.props.container.closePlugin(event);
+	}
 
-    /**
-     * Close plugin
-     *
-     * @param [event]
-     */
-    closePlugin(event) {
-        this.props.container.closePlugin(event);
-    }
+	/**
+	 * Change current page
+	 *
+	 * @param page
+	 * @param route
+	 */
+	changePage(page, route) {
+		this.props.container.changePage(page, route);
+	}
 
-    /**
-     * Change current page
-     *
-     * @param page
-     * @param route
-     */
-    changePage(page, route) {
-        this.props.container.changePage(page, route);
-    }
+	/**
+	 * Import currently selected Iconify icon
+	 *
+	 * @param [event]
+	 * @param [options]
+	 */
+	importIconifyIcon(event, options) {
+		this.props.container.importIconifyIcon(event, options);
+	}
 
-    /**
-     * Import currently selected Iconify icon
-     *
-     * @param [event]
-     * @param [options]
-     */
-    importIconifyIcon(event, options) {
-        this.props.container.importIconifyIcon(event, options);
-    }
+	/**
+	 * Drop icon
+	 *
+	 * @param {object} props
+	 * @param {object} coords
+	 */
+	dropIconifyIcon(props, coords) {
+		let container = this.props.container;
 
-    /**
-     * Drop icon
-     *
-     * @param {object} props
-     * @param {object} coords
-     */
-    dropIconifyIcon(props, coords) {
-        let container = this.props.container;
+		let options = Object.assign(
+			{
+				node: 'drag',
+			},
+			coords,
+			props.isSample
+				? {}
+				: container.options.customizeDrop
+				? {
+						iconName: props.iconName,
+						dropToFrame: container.options.dropToFrame,
+				  }
+				: {
+						iconName: props.iconName,
+						dropToFrame: container.options.dropToFrame,
+						props: {
+							rotate: 0,
+							hFlip: false,
+							vFlip: false,
+						},
+						color: '',
+						height: '',
+				  }
+		);
 
-        let options = Object.assign({
-            node: 'drag'
-        }, coords, props.isSample ? {} : (container.options.customizeDrop ? {
-            iconName: props.iconName,
-            dropToFrame: container.options.dropToFrame,
-        } : {
-            iconName: props.iconName,
-            dropToFrame: container.options.dropToFrame,
-            props: {
-                rotate: 0,
-                hFlip: false,
-                vFlip: false,
-            },
-            color: '',
-            height: '',
-        }));
+		container.importIconifyIcon(null, options);
+	}
 
-        container.importIconifyIcon(null, options);
-    }
-
-    /**
-     * Scale down icon
-     *
-     * @param {number} height
-     * @param {number} [width]
-     * @param {number} [rotate]
-     * @return {number}
-     */
-    scaleDownIcon(height, width, rotate) {
-        return this.props.container.scaleDownIcon(height, width, rotate);
-    }
+	/**
+	 * Scale down icon
+	 *
+	 * @param {number} height
+	 * @param {number} [width]
+	 * @param {number} [rotate]
+	 * @return {number}
+	 */
+	scaleDownIcon(height, width, rotate) {
+		return this.props.container.scaleDownIcon(height, width, rotate);
+	}
 }
 
 export default IconifyBaseContainer;

@@ -1,42 +1,42 @@
 .plugin-align {
-  display: block;
-  width: $plugin-align-block-width;
+	display: block;
+	width: $plugin-align-block-width;
 
-  &:after {
-    content: '';
-    display: table;
-    clear: both;
-  }
+	&:after {
+		content: '';
+		display: table;
+		clear: both;
+	}
 }
 
 .plugin-align-box {
-  float: left;
-  width: $plugin-align-box-size;
-  height: $plugin-align-box-size;
-  border: 1px solid $plugin-palette-border-grey;
-  border-radius: $plugin-border-radius-small;
-  box-sizing: content-box;
+	float: left;
+	width: $plugin-align-box-size;
+	height: $plugin-align-box-size;
+	border: 1px solid $plugin-palette-border-grey;
+	border-radius: $plugin-border-radius-small;
+	box-sizing: content-box;
 
-  a {
-    display: block;
-    width: $plugin-align-box-size;
-    height: $plugin-align-box-size;
-    outline: none;
-    text-decoration: none;
-  }
+	a {
+		display: block;
+		width: $plugin-align-box-size;
+		height: $plugin-align-box-size;
+		outline: none;
+		text-decoration: none;
+	}
 
-  .plugin-box-icon--grid {
-    stroke: $plugin-palette-border-grey;
-    fill: none;
-  }
-  .plugin-box-icon--selected {
-    fill: $plugin-palette-blue;
-  }
-  .plugin-box-icon--unselected {
-    fill: $plugin-palette-color-black;
-  }
+	.plugin-box-icon--grid {
+		stroke: $plugin-palette-border-grey;
+		fill: none;
+	}
+	.plugin-box-icon--selected {
+		fill: $plugin-palette-blue;
+	}
+	.plugin-box-icon--unselected {
+		fill: $plugin-palette-color-black;
+	}
 }
 
 .plugin-align-select {
-  margin-left: $plugin-align-box-size + 8px;
+	margin-left: $plugin-align-box-size + 8px;
 }

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import { convertColor } from './node-functions';
 
@@ -23,7 +23,8 @@ function getColorFromChildren(node) {
 				break;
 
 			case 'stroke':
-				item = child.stroke && child.stroke.length === 1 ? child.stroke[0] : null;
+				item =
+					child.stroke && child.stroke.length === 1 ? child.stroke[0] : null;
 				break;
 
 			default:
@@ -86,7 +87,7 @@ function getSelectedNodeData(env) {
 		name: node.name,
 		width: node.width,
 		height: node.height,
-		rotation: node.rotation
+		rotation: node.rotation,
 	};
 
 	if (props.color !== void 0) {

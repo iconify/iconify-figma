@@ -12,20 +12,24 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
-const filters = [{
-    route: 'tag', // entry in view.route
-    icon: 'tags', // entry in icon object
-    key: 'tags' // filter type, block name
-}, {
-    route: 'themePrefix',
-    icon: 'themePrefix',
-    key: 'themePrefixes'
-}, {
-    route: 'themeSuffix',
-    icon: 'themeSuffix',
-    key: 'themeSuffixes'
-}];
+const filters = [
+	{
+		route: 'tag', // entry in view.route
+		icon: 'tags', // entry in icon object
+		key: 'tags', // filter type, block name
+	},
+	{
+		route: 'themePrefix',
+		icon: 'themePrefix',
+		key: 'themePrefixes',
+	},
+	{
+		route: 'themeSuffix',
+		icon: 'themeSuffix',
+		key: 'themeSuffixes',
+	},
+];
 
 module.exports = filters;

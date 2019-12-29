@@ -12,24 +12,31 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
 function Button(props) {
-    let {type, ...params} = props,
-        className = 'plugin-button';
+	let { type, ...params } = props,
+		className = 'plugin-button';
 
-    switch (type) {
-        case 'primary':
-            className += ' plugin-button--primary';
-            break;
+	switch (type) {
+		case 'primary':
+			className += ' plugin-button--primary';
+			break;
 
-        default:
-            className += ' plugin-button--secondary';
-    }
+		default:
+			className += ' plugin-button--secondary';
+	}
 
-    return <input className={className} {...params} type="button" value={props.title} />;
+	return (
+		<input
+			className={className}
+			{...params}
+			type="button"
+			value={props.title}
+		/>
+	);
 }
 
 export default Button;

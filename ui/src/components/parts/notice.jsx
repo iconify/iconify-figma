@@ -12,23 +12,23 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
 function Notice(props) {
-    let { children, type, ...attribs } = props;
+	let { children, type, ...attribs } = props;
 
-    // Resolve className
-    if (typeof attribs.className !== 'string') {
-        attribs.className = '';
-    }
-    attribs.className += ' plugin-notice';
-    if (type !== void 0) {
-        attribs.className += ' plugin-notice--' + props.type;
-    }
+	// Resolve className
+	if (typeof attribs.className !== 'string') {
+		attribs.className = '';
+	}
+	attribs.className += ' plugin-notice';
+	if (type !== void 0) {
+		attribs.className += ' plugin-notice--' + props.type;
+	}
 
-    return <div {...attribs}>{children}</div>;
+	return <div {...attribs}>{children}</div>;
 }
 
 export default Notice;

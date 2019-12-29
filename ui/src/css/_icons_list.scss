@@ -1,177 +1,181 @@
 .plugin-icons-list--list {
-  max-height: 446px;
-  overflow-y: auto;
+	max-height: 446px;
+	overflow-y: auto;
 
-  .plugin-icon-item {
-    box-sizing: border-box;
-    position: relative;
-    min-height: 40px;
-    padding: 4px;
-    padding-left: 48px;
-    border: 1px solid transparent;
-    border-top-color: $plugin-palette-border-grey;
-    border-bottom-width: 0;
-    color: $plugin-palette-color-black;
-  }
+	.plugin-icon-item {
+		box-sizing: border-box;
+		position: relative;
+		min-height: 40px;
+		padding: 4px;
+		padding-left: 48px;
+		border: 1px solid transparent;
+		border-top-color: $plugin-palette-border-grey;
+		border-bottom-width: 0;
+		color: $plugin-palette-color-black;
+	}
 
-  .plugin-icon-item:last-child {
-    border-bottom-width: 1px;
-  }
+	.plugin-icon-item:last-child {
+		border-bottom-width: 1px;
+	}
 
-  .plugin-icon-item-svg {
-    display: block;
-    position: absolute;
-    left: 4px;
-    top: 50%;
-    width: 1em;
-    height: 1em;
-    font-size: 32px;
-    margin: -0.5em 0 0;
-    text-decoration: none;
-    color: inherit;
-    &:hover {
-      color: $plugin-palette-color-link-hover;
-    }
-    &:focus {
-      outline: none;
-      box-shadow: $plugin-simple-focus-shadow;
-    }
-  }
+	.plugin-icon-item-svg {
+		display: block;
+		position: absolute;
+		left: 4px;
+		top: 50%;
+		width: 1em;
+		height: 1em;
+		font-size: 32px;
+		margin: -0.5em 0 0;
+		text-decoration: none;
+		color: inherit;
+		&:hover {
+			color: $plugin-palette-color-link-hover;
+		}
+		&:focus {
+			outline: none;
+			box-shadow: $plugin-simple-focus-shadow;
+		}
+	}
 
-  .plugin-icon-item-data {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-  }
+	.plugin-icon-item-data {
+		display: flex;
+		width: 100%;
+		flex-wrap: wrap;
+	}
 
-  .plugin-icon-item-title, .plugin-icon-item-size {
-    @include plugin-font-ui-pos('medium', 'normal');
+	.plugin-icon-item-title,
+	.plugin-icon-item-size {
+		@include plugin-font-ui-pos('medium', 'normal');
 
-    display: block;
-    line-height: 24px;
-    margin: 4px;
-    white-space: nowrap;
-  }
+		display: block;
+		line-height: 24px;
+		margin: 4px;
+		white-space: nowrap;
+	}
 
-  .plugin-icon-item-title {
-    @include plugin-font-ui-pos('xlarge', 'normal');
+	.plugin-icon-item-title {
+		@include plugin-font-ui-pos('xlarge', 'normal');
 
-    text-decoration: none;
-    margin-left: 0;
-    flex-grow: 1;
-    color: $plugin-palette-color-black;
+		text-decoration: none;
+		margin-left: 0;
+		flex-grow: 1;
+		color: $plugin-palette-color-black;
 
-    &:hover {
-      color: $plugin-palette-color-link-hover;
-    }
-    &:focus {
-      outline: none;
-      color: $plugin-palette-color-link-hover;
-    }
-  }
+		&:hover {
+			color: $plugin-palette-color-link-hover;
+		}
+		&:focus {
+			outline: none;
+			color: $plugin-palette-color-link-hover;
+		}
+	}
 
-  .plugin-filter {
-    margin: 3px 4px;
-    padding: 4px 7px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+	.plugin-filter {
+		margin: 3px 4px;
+		padding: 4px 7px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 
-  .plugin-icon-item {
-    &--filters {
-      &--2 .plugin-filter {
-        max-width: 80px;
-      }
-      &--3 .plugin-filter {
-        max-width: 70px;
-        margin: 3px 2px;
-      }
-      &--4 .plugin-filter {
-        max-width: 50px;
-        margin: 3px 2px;
-      }
-      &--5 .plugin-filter {
-        max-width: 48px;
-        margin: 3px 2px;
-        padding: 4px 5px;
-      }
-    }
-  }
+	.plugin-icon-item {
+		&--filters {
+			&--2 .plugin-filter {
+				max-width: 80px;
+			}
+			&--3 .plugin-filter {
+				max-width: 70px;
+				margin: 3px 2px;
+			}
+			&--4 .plugin-filter {
+				max-width: 50px;
+				margin: 3px 2px;
+			}
+			&--5 .plugin-filter {
+				max-width: 48px;
+				margin: 3px 2px;
+				padding: 4px 5px;
+			}
+		}
+	}
 
-  @media (max-width: 600px) {
-    .plugin-filter {
-      margin: 3px 2px;
-      padding: 4px 5px;
-      max-width: 72px;
-    }
-    .plugin-icon-item {
-      &--filters {
-        &--2 .plugin-filter {
-          max-width: 52px;
-        }
-        &--3 .plugin-filter, &--4 .plugin-filter, &--5 .plugin-filter {
-          max-width: 42px;
-        }
-      }
-    }
-  }
+	@media (max-width: 600px) {
+		.plugin-filter {
+			margin: 3px 2px;
+			padding: 4px 5px;
+			max-width: 72px;
+		}
+		.plugin-icon-item {
+			&--filters {
+				&--2 .plugin-filter {
+					max-width: 52px;
+				}
+				&--3 .plugin-filter,
+				&--4 .plugin-filter,
+				&--5 .plugin-filter {
+					max-width: 42px;
+				}
+			}
+		}
+	}
 
-  .plugin-icon-item-size {
-    color: $plugin-palette-color-black-muted;
-  }
+	.plugin-icon-item-size {
+		color: $plugin-palette-color-black-muted;
+	}
 
-  .plugin-icon-item-delete {
-    color: $plugin-palette-color-black;
-    border-radius: $plugin-border-radius-small;
-    &:hover {
-      background-color: $plugin-palette-background-hover;
-    }
-    &:active, &:focus {
-      box-shadow: $plugin-button-active-shadow;
-      outline: none;
-    }
-  }
+	.plugin-icon-item-delete {
+		color: $plugin-palette-color-black;
+		border-radius: $plugin-border-radius-small;
+		&:hover {
+			background-color: $plugin-palette-background-hover;
+		}
+		&:active,
+		&:focus {
+			box-shadow: $plugin-button-active-shadow;
+			outline: none;
+		}
+	}
 
-  .plugin-icon-item {
-    &:hover {
-      background: $plugin-palette-background-white;
-      border-color: $plugin-palette-border-blue !important;
-      color: $plugin-palette-color-link-hover;
-      + .plugin-icon-item {
-        border-top-color: $plugin-palette-border-blue !important;
-      }
-    }
-  }
+	.plugin-icon-item {
+		&:hover {
+			background: $plugin-palette-background-white;
+			border-color: $plugin-palette-border-blue !important;
+			color: $plugin-palette-color-link-hover;
+			+ .plugin-icon-item {
+				border-top-color: $plugin-palette-border-blue !important;
+			}
+		}
+	}
 
-  .plugin-icon-item--selected {
-    background: $plugin-palette-background-selected-borderless;
-    border-color: $plugin-palette-background-selected-borderless;
-    color: $plugin-palette-color-black;
+	.plugin-icon-item--selected {
+		background: $plugin-palette-background-selected-borderless;
+		border-color: $plugin-palette-background-selected-borderless;
+		color: $plugin-palette-color-black;
 
-    + .plugin-icon-item {
-      border-top-color: $plugin-palette-background-selected-borderless;
-    }
+		+ .plugin-icon-item {
+			border-top-color: $plugin-palette-background-selected-borderless;
+		}
 
-    &:hover {
-      background: $plugin-palette-background-selected;
-      border-color: $plugin-palette-border-blue;
-      color: $plugin-palette-color-link-hover;
-      + .plugin-icon-item {
-        border-top-color: $plugin-palette-border-blue;
-      }
-    }
+		&:hover {
+			background: $plugin-palette-background-selected;
+			border-color: $plugin-palette-border-blue;
+			color: $plugin-palette-color-link-hover;
+			+ .plugin-icon-item {
+				border-top-color: $plugin-palette-border-blue;
+			}
+		}
 
-    .plugin-icon-item-delete {
-      &:hover {
-        background-color: $plugin-palette-background-selected-borderless;
-      }
-    }
-  }
+		.plugin-icon-item-delete {
+			&:hover {
+				background-color: $plugin-palette-background-selected-borderless;
+			}
+		}
+	}
 
-  .plugin-icon-item--pending {
-    color: $plugin-palette-color-black-muted;
-    .plugin-icon-item-title {
-      color: inherit;
-    }
-  }
+	.plugin-icon-item--pending {
+		color: $plugin-palette-color-black-muted;
+		.plugin-icon-item-title {
+			color: inherit;
+		}
+	}
 }

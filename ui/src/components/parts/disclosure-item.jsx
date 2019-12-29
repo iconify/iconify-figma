@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
@@ -22,17 +22,22 @@ const activeClass = 'plugin-disclosure-item plugin-disclosure-item--expanded';
 const inactiveClass = 'plugin-disclosure-item';
 
 function DisclosureItem(props) {
-    let labelProps = {
-        className: 'plugin-disclosure-label'
-    };
-    if (typeof props.onToggle === 'function') {
-        labelProps.onClick = props.onToggle;
-    }
+	let labelProps = {
+		className: 'plugin-disclosure-label',
+	};
+	if (typeof props.onToggle === 'function') {
+		labelProps.onClick = props.onToggle;
+	}
 
-    return <li className={props.open ? activeClass : inactiveClass}>
-        <div {...labelProps}><Icon name="chevron-right" />{props.title}</div>
-        <div className="plugin-disclosure-content">{props.children}</div>
-    </li>;
+	return (
+		<li className={props.open ? activeClass : inactiveClass}>
+			<div {...labelProps}>
+				<Icon name="chevron-right" />
+				{props.title}
+			</div>
+			<div className="plugin-disclosure-content">{props.children}</div>
+		</li>
+	);
 }
 
 export default DisclosureItem;

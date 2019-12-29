@@ -12,123 +12,122 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 (() => {
-    const Search = require('../src/core/search');
+	const Search = require('../src/core/search');
 
-    const chai = require('chai'),
-        expect = chai.expect,
-        should = chai.should();
+	const chai = require('chai'),
+		expect = chai.expect,
+		should = chai.should();
 
-    describe('Testing events', () => {
-        let nsCounter = 0;
+	describe('Testing events', () => {
+		let nsCounter = 0;
 
-        it('basic event', done => {
-            let instance = Search.init({
-                    namespace: __filename + (nsCounter ++)
-                }),
-                events = instance.get('events'),
-                delay = false;
+		it('basic event', done => {
+			let instance = Search.init({
+					namespace: __filename + nsCounter++,
+				}),
+				events = instance.get('events'),
+				delay = false;
 
-            // Subscribe to event
-            events.subscribe('foo', () => {
-                expect(delay).to.be.equal(false);
-                done();
-            });
+			// Subscribe to event
+			events.subscribe('foo', () => {
+				expect(delay).to.be.equal(false);
+				done();
+			});
 
-            setTimeout(() => {
-                // Fail is tick has passed
-                delay = true;
-            });
+			setTimeout(() => {
+				// Fail is tick has passed
+				delay = true;
+			});
 
-            // Execute event
-            events.fire('foo');
-        });
+			// Execute event
+			events.fire('foo');
+		});
 
-        it('delayed event', done => {
-            let instance = Search.init({
-                    namespace: __filename + (nsCounter ++)
-                }),
-                events = instance.get('events'),
-                delay = false;
+		it('delayed event', done => {
+			let instance = Search.init({
+					namespace: __filename + nsCounter++,
+				}),
+				events = instance.get('events'),
+				delay = false;
 
-            // Subscribe to event
-            events.subscribe('foo', () => {
-                expect(delay).to.be.equal(true);
-                done();
-            });
+			// Subscribe to event
+			events.subscribe('foo', () => {
+				expect(delay).to.be.equal(true);
+				done();
+			});
 
-            setTimeout(() => {
-                // Success is tick has passed
-                delay = true;
-            });
+			setTimeout(() => {
+				// Success is tick has passed
+				delay = true;
+			});
 
-            // Execute event
-            events.fire('foo', null, true);
-        });
+			// Execute event
+			events.fire('foo', null, true);
+		});
 
-        it('multiple listeners', () => {
-            let instance = Search.init({
-                    namespace: __filename + (nsCounter ++)
-                }),
-                events = instance.get('events'),
-                counters = {
-                    first: 0,
-                    second: 0
-                };
+		it('multiple listeners', () => {
+			let instance = Search.init({
+					namespace: __filename + nsCounter++,
+				}),
+				events = instance.get('events'),
+				counters = {
+					first: 0,
+					second: 0,
+				};
 
-            // Subscribe to event
-            events.subscribe('foo', () => {
-                counters.first ++;
-            });
-            events.subscribe('foo', () => {
-                counters.second ++;
-            });
-            expect(events.hasListeners('foo')).to.be.equal(true);
+			// Subscribe to event
+			events.subscribe('foo', () => {
+				counters.first++;
+			});
+			events.subscribe('foo', () => {
+				counters.second++;
+			});
+			expect(events.hasListeners('foo')).to.be.equal(true);
 
-            // Execute event
-            events.fire('foo');
+			// Execute event
+			events.fire('foo');
 
-            expect(counters).to.be.eql({
-                first: 1,
-                second: 1
-            });
-        });
+			expect(counters).to.be.eql({
+				first: 1,
+				second: 1,
+			});
+		});
 
-        it('unsubscribe from event', done => {
-            let instance = Search.init({
-                    namespace: __filename + (nsCounter ++)
-                }),
-                events = instance.get('events'),
-                callback = () => {
-                    done('This should not have happened!');
-                },
-                callback2 = () => {
-                    done();
-                };
+		it('unsubscribe from event', done => {
+			let instance = Search.init({
+					namespace: __filename + nsCounter++,
+				}),
+				events = instance.get('events'),
+				callback = () => {
+					done('This should not have happened!');
+				},
+				callback2 = () => {
+					done();
+				};
 
-            // Subscribe to event
-            events.subscribe('foo', callback);
-            events.subscribe('foo', callback, 'key2');
-            events.subscribe('bar', callback2.bind(this, 2));
+			// Subscribe to event
+			events.subscribe('foo', callback);
+			events.subscribe('foo', callback, 'key2');
+			events.subscribe('bar', callback2.bind(this, 2));
 
-            // Unsubscribe by function
-            events.unsubscribe('foo', callback);
-            expect(events.hasListeners('foo')).to.be.equal(true);
+			// Unsubscribe by function
+			events.unsubscribe('foo', callback);
+			expect(events.hasListeners('foo')).to.be.equal(true);
 
-            // Unsubscribe by key
-            events.unsubscribe('foo', 'key2');
-            expect(events.hasListeners('foo')).to.be.equal(false);
+			// Unsubscribe by key
+			events.unsubscribe('foo', 'key2');
+			expect(events.hasListeners('foo')).to.be.equal(false);
 
-            // Unsubscribe
-            events.unsubscribe('bar', callback2.bind(this, 10)); // different function because of bind()
-            expect(events.hasListeners('bar')).to.be.equal(true);
+			// Unsubscribe
+			events.unsubscribe('bar', callback2.bind(this, 10)); // different function because of bind()
+			expect(events.hasListeners('bar')).to.be.equal(true);
 
-            // Execute events
-            events.fire('foo'); // nothing to fire
-            events.fire('bar'); // callback2 should be fired once
-        });
-
-    });
+			// Execute events
+			events.fire('foo'); // nothing to fire
+			events.fire('bar'); // callback2 should be fired once
+		});
+	});
 })();

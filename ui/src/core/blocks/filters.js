@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 const base = require('./base');
 
@@ -23,7 +23,7 @@ const base = require('./base');
  * @return {boolean}
  */
 function empty(block) {
-    return Object.keys(block.filters).length < 2;
+	return Object.keys(block.filters).length < 2;
 }
 
 /**
@@ -34,32 +34,32 @@ function empty(block) {
  * @param {boolean} [setValue]
  */
 function toggle(block, key, setValue) {
-    if (typeof setValue === 'boolean') {
-        let isSet = block.active.indexOf(key) !== -1;
-        if (isSet === setValue) {
-            return isSet;
-        }
-    }
+	if (typeof setValue === 'boolean') {
+		let isSet = block.active.indexOf(key) !== -1;
+		if (isSet === setValue) {
+			return isSet;
+		}
+	}
 
-    // Unset filter
-    if (block.active.indexOf(key) !== -1) {
-        block.active = block.active.filter(item => item !== key);
-        return false;
-    }
+	// Unset filter
+	if (block.active.indexOf(key) !== -1) {
+		block.active = block.active.filter(item => item !== key);
+		return false;
+	}
 
-    // Change filter
-    if (!block.multiple) {
-        block.active = [key];
-        return true;
-    }
+	// Change filter
+	if (!block.multiple) {
+		block.active = [key];
+		return true;
+	}
 
-    // Add filter
-    block.active.push(key);
-    if (block.active.length === Object.keys(block.filters).length) {
-        block.active = [];
-        return false;
-    }
-    return true;
+	// Add filter
+	block.active.push(key);
+	if (block.active.length === Object.keys(block.filters).length) {
+		block.active = [];
+		return false;
+	}
+	return true;
 }
 
 /**
@@ -69,19 +69,19 @@ function toggle(block, key, setValue) {
  * @return {object}
  */
 function setFilters(filters) {
-    if (typeof filters !== 'object') {
-        return Object.create(null);
-    }
+	if (typeof filters !== 'object') {
+		return Object.create(null);
+	}
 
-    if (filters instanceof Array) {
-        let result = Object.create(null);
-        filters.forEach(key => {
-            result[key] = key;
-        });
-        return result;
-    }
+	if (filters instanceof Array) {
+		let result = Object.create(null);
+		filters.forEach(key => {
+			result[key] = key;
+		});
+		return result;
+	}
 
-    return filters;
+	return filters;
 }
 
 /**
@@ -91,18 +91,22 @@ function setFilters(filters) {
  * @param value
  */
 function setActive(block, value) {
-    if (typeof value === 'string') {
-        value = value.split(',');
-    } else if (!(value instanceof Array)) {
-        value = [];
-    }
+	if (typeof value === 'string') {
+		value = value.split(',');
+	} else if (!(value instanceof Array)) {
+		value = [];
+	}
 
-    if (value.length) {
-        let keys = Object.keys(block.filters);
-        value = value.filter(item => keys.indexOf(item) !== -1);
-    }
+	if (value.length) {
+		let keys = Object.keys(block.filters);
+		value = value.filter(item => keys.indexOf(item) !== -1);
+	}
 
-    block.active = block.multiple ? value : (value.length > 1 ? [value.shift()] : value);
+	block.active = block.multiple
+		? value
+		: value.length > 1
+		? [value.shift()]
+		: value;
 }
 
 /**
@@ -112,7 +116,7 @@ function setActive(block, value) {
  * @return {string|null}
  */
 function getActive(block) {
-    return block.active.length ? block.active.join(',') : null;
+	return block.active.length ? block.active.join(',') : null;
 }
 
 /**
@@ -122,13 +126,13 @@ function getActive(block) {
  * @param key
  */
 function disable(block, key) {
-    if (!(block.disabled instanceof Array)) {
-        block.disabled = [key];
-        return;
-    }
-    if (block.disabled.indexOf(key) === -1) {
-        block.disabled.push(key);
-    }
+	if (!(block.disabled instanceof Array)) {
+		block.disabled = [key];
+		return;
+	}
+	if (block.disabled.indexOf(key) === -1) {
+		block.disabled.push(key);
+	}
 }
 
 /**
@@ -140,42 +144,46 @@ function disable(block, key) {
  * @return {Object|block}
  */
 module.exports = (instance, view, params) => {
-    let filtersType = typeof params.filtersType === 'string' ? params.filtersType : '';
+	let filtersType =
+		typeof params.filtersType === 'string' ? params.filtersType : '';
 
-    let block = base({
-        app: instance,
-        view: view,
+	let block = base({
+		app: instance,
+		view: view,
 
-        // Required stuff
-        type: 'filters',
-        keys: ['filtersType', 'filters', 'active', 'multiple', 'index'],
-        name: filtersType,
+		// Required stuff
+		type: 'filters',
+		keys: ['filtersType', 'filters', 'active', 'multiple', 'index'],
+		name: filtersType,
 
-        // Data
-        filtersType: filtersType,
-        filters: setFilters(params.filters),
-        active: params.active instanceof Array ? params.active.slice(0) : [],
-        multiple: params.multiple === true,
-        index: typeof params.index === 'number' ? params.index : 0,
-        disabled: typeof params.disabled === 'object' && params.disabled instanceof Array ? params.disabled.slice(0) : [],
+		// Data
+		filtersType: filtersType,
+		filters: setFilters(params.filters),
+		active: params.active instanceof Array ? params.active.slice(0) : [],
+		multiple: params.multiple === true,
+		index: typeof params.index === 'number' ? params.index : 0,
+		disabled:
+			typeof params.disabled === 'object' && params.disabled instanceof Array
+				? params.disabled.slice(0)
+				: [],
 
-        // Functions
-        empty: () => empty(block),
-        setFilters: filters => {
-            block.filters = setFilters(filters);
-        },
-        toggle: key => toggle(block, key),
-        select: key => toggle(block, key, true),
-        deselect: key => toggle(block, key, false),
-        getActive: () => getActive(block),
-        enableAll: () => block.disabled = [],
-        disable: key => disable(block, key)
-    });
+		// Functions
+		empty: () => empty(block),
+		setFilters: filters => {
+			block.filters = setFilters(filters);
+		},
+		toggle: key => toggle(block, key),
+		select: key => toggle(block, key, true),
+		deselect: key => toggle(block, key, false),
+		getActive: () => getActive(block),
+		enableAll: () => (block.disabled = []),
+		disable: key => disable(block, key),
+	});
 
-    if (params.setActive !== void 0) {
-        // Set active filter from parameter
-        setActive(block, params.setActive);
-    }
+	if (params.setActive !== void 0) {
+		// Set active filter from parameter
+		setActive(block, params.setActive);
+	}
 
-    return block;
+	return block;
 };

@@ -1,136 +1,141 @@
 // Based on figma-plugin-ds
 
 .plugin-input-wrapper {
-  position: relative;
-  width: 100%;
-  height: 32px;
-  margin: 1px 0;
+	position: relative;
+	width: 100%;
+	height: 32px;
+	margin: 1px 0;
 
-  &--color {
-    max-width: 120px;
-  }
+	&--color {
+		max-width: 120px;
+	}
 }
 
 .plugin-input {
-  @include plugin-font-ui-pos('small', 'normal');
+	@include plugin-font-ui-pos('small', 'normal');
 
-  box-sizing: border-box;
-  position: relative;
-  width: 100%;
-  height: 30px;
-  margin: 0;
-  padding: 8px 7px;
+	box-sizing: border-box;
+	position: relative;
+	width: 100%;
+	height: 30px;
+	margin: 0;
+	padding: 8px 7px;
 
-  color: $plugin-palette-color-black-dimmed;
-  border: 1px solid transparent;
-  border-radius: $plugin-border-radius-small;
-  outline: none;
-  box-shadow: none;
-  background-color: $plugin-palette-background-white;
+	color: $plugin-palette-color-black-dimmed;
+	border: 1px solid transparent;
+	border-radius: $plugin-border-radius-small;
+	outline: none;
+	box-shadow: none;
+	background-color: $plugin-palette-background-white;
 
-  textarea#{&} {
-    display: block;
-    width: 100%;
-    height: 80px;
-    margin: 0 0 8px;
-    padding: 4px;
-  }
+	textarea#{&} {
+		display: block;
+		width: 100%;
+		height: 80px;
+		margin: 0 0 8px;
+		padding: 4px;
+	}
 
-  &--with-reset, &--select {
-    padding-right: 30px;
-  }
+	&--with-reset,
+	&--select {
+		padding-right: 30px;
+	}
 
-  &--select {
-    cursor: pointer;
-  }
+	&--select {
+		cursor: pointer;
+	}
 
-  &--with-icon {
-    padding-left: 24px;
-    /*
+	&--with-icon {
+		padding-left: 24px;
+		/*
     // old code for bigger icon, reuse if needed
     &--something {
       padding-left: 30px;
     }
     */
-    &--color {
-      padding-left: 28px;
-    }
-  }
+		&--color {
+			padding-left: 28px;
+		}
+	}
 
-  &::selection {
-    color: $plugin-palette-color-black;
-    background-color: $plugin-palette-background-selected-borderless;
-  }
+	&::selection {
+		color: $plugin-palette-color-black;
+		background-color: $plugin-palette-background-selected-borderless;
+	}
 
-  &::placeholder {
-    color: $plugin-palette-color-black-muted;
-  }
+	&::placeholder {
+		color: $plugin-palette-color-black-muted;
+	}
 
-  // Placeholder
-  &:not(:disabled):not(:hover):placeholder-shown {
-    border-color: transparent;
-    border-bottom-color: $plugin-palette-border-darker-grey;
-    box-shadow: none;
-  }
+	// Placeholder
+	&:not(:disabled):not(:hover):placeholder-shown {
+		border-color: transparent;
+		border-bottom-color: $plugin-palette-border-darker-grey;
+		box-shadow: none;
+	}
 
-  // Custom styles for normal state. Overwrite placeholder selector if needed
-  &--underlined {
-    border-color: transparent;
-    border-bottom-color: $plugin-palette-border-darker-grey;
-    box-shadow: none;
-  }
+	// Custom styles for normal state. Overwrite placeholder selector if needed
+	&--underlined {
+		border-color: transparent;
+		border-bottom-color: $plugin-palette-border-darker-grey;
+		box-shadow: none;
+	}
 
-  &--outlined {
-    &, &:not(:disabled):not(:hover):placeholder-shown {
-      border-color: $plugin-palette-border-darker-grey;
-      box-shadow: none;
-    }
-  }
+	&--outlined {
+		&,
+		&:not(:disabled):not(:hover):placeholder-shown {
+			border-color: $plugin-palette-border-darker-grey;
+			box-shadow: none;
+		}
+	}
 
-  // Additional classes
-  &--invalid {
-    &, &:not(:disabled):not(:hover):placeholder-shown {
-      border-color: $plugin-palette-border-red;
-      box-shadow: 0 0 0 1px $plugin-palette-border-red inset;
-    }
-  }
+	// Additional classes
+	&--invalid {
+		&,
+		&:not(:disabled):not(:hover):placeholder-shown {
+			border-color: $plugin-palette-border-red;
+			box-shadow: 0 0 0 1px $plugin-palette-border-red inset;
+		}
+	}
 
-  // Hover
-  &:hover {
-    color: $plugin-palette-color-black-dimmed;
-    border-color: $plugin-palette-border-darker-grey;
-    box-shadow: none;
-  }
+	// Hover
+	&:hover {
+		color: $plugin-palette-color-black-dimmed;
+		border-color: $plugin-palette-border-darker-grey;
+		box-shadow: none;
+	}
 
-  // Focus and active
-  &:active, &:focus {
-    &, &:not(:disabled):placeholder-shown {
-      color: $plugin-palette-color-black;
-      border-color: $plugin-palette-border-blue;
-      box-shadow: 0 0 0 1px $plugin-palette-border-blue inset;
-    }
-  }
+	// Focus and active
+	&:active,
+	&:focus {
+		&,
+		&:not(:disabled):placeholder-shown {
+			color: $plugin-palette-color-black;
+			border-color: $plugin-palette-border-blue;
+			box-shadow: 0 0 0 1px $plugin-palette-border-blue inset;
+		}
+	}
 
-  &-wrapper--select--focused & {
-    color: $plugin-palette-color-black;
-    border-color: $plugin-palette-border-blue;
-    box-shadow: 0 0 0 1px $plugin-palette-border-blue inset;
-  }
+	&-wrapper--select--focused & {
+		color: $plugin-palette-color-black;
+		border-color: $plugin-palette-border-blue;
+		box-shadow: 0 0 0 1px $plugin-palette-border-blue inset;
+	}
 
-  // Icon before input
-  &-icon {
-    position: absolute;
-    color: $plugin-palette-color-black-muted;
-    top: 0;
-    text-align: center;
-    pointer-events: none;
+	// Icon before input
+	&-icon {
+		position: absolute;
+		color: $plugin-palette-color-black-muted;
+		top: 0;
+		text-align: center;
+		pointer-events: none;
 
-    // 12px icons
-    width: 20px;
-    left: 4px;
-    padding-top: (30px - 12px) / 2;
+		// 12px icons
+		width: 20px;
+		left: 4px;
+		padding-top: (30px - 12px) / 2;
 
-    /*
+		/*
     // old code for bigger icon, reuse if needed
     &--something {
       left: 0;
@@ -138,91 +143,91 @@
       width: 30px;
     }
     */
-  }
+	}
 
-  // Reset after input and dropdown for select
-  &-reset, &-dropdown {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 30px;
-    padding-top: (30px - 12px) / 2;
-    text-align: center;
-    color: inherit;
-    cursor: pointer;
-    opacity: .5;
-    &:hover {
-      opacity: 1;
-    }
-  }
+	// Reset after input and dropdown for select
+	&-reset,
+	&-dropdown {
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		width: 30px;
+		padding-top: (30px - 12px) / 2;
+		text-align: center;
+		color: inherit;
+		cursor: pointer;
+		opacity: 0.5;
+		&:hover {
+			opacity: 1;
+		}
+	}
 
-  // Dropdown
-  &-dropdown {
-    pointer-events: none;
-    padding-top: 8px;
-  }
-  &-wrapper:hover &-dropdown {
-    opacity: 1;
-  }
+	// Dropdown
+	&-dropdown {
+		pointer-events: none;
+		padding-top: 8px;
+	}
+	&-wrapper:hover &-dropdown {
+		opacity: 1;
+	}
 
-  // Color picker
-  &-color-sample {
-    position: absolute;
-    left: 7px;
-    top: 50%;
-    margin-top: -8px;
-    height: 16px;
-    width: 16px;
-  }
+	// Color picker
+	&-color-sample {
+		position: absolute;
+		left: 7px;
+		top: 50%;
+		margin-top: -8px;
+		height: 16px;
+		width: 16px;
+	}
 }
 
 // Select
 .plugin-select-container {
-  position: relative;
+	position: relative;
 }
 
 .plugin-select-options {
-  position: absolute;
-  z-index: 2;
-  left: 0;
-  right: 0;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  list-style-type: none;
-  margin: 0;
-  padding: 8px 0;
-  border-radius: $plugin-border-radius-small;
-  background: $plugin-palette-background-almost-black;
-  box-shadow: 0 0 0 1px $plugin-palette-background-full-black inset,
-    0 5px 17px rgba(0, 0, 0, .2),
-    0 2px 7px rgba(0, 0, 0, .15);
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	right: 0;
+	top: 0;
+	display: flex;
+	flex-direction: column;
+	list-style-type: none;
+	margin: 0;
+	padding: 8px 0;
+	border-radius: $plugin-border-radius-small;
+	background: $plugin-palette-background-almost-black;
+	box-shadow: 0 0 0 1px $plugin-palette-background-full-black inset,
+		0 5px 17px rgba(0, 0, 0, 0.2), 0 2px 7px rgba(0, 0, 0, 0.15);
 }
 
 .plugin-select-option {
-  display: block;
-  white-space: normal;
-  //white-space: nowrap;
-  //overflow: hidden;
-  //text-overflow: ellipsis;
-  cursor: pointer;
-  color: $plugin-palette-color-white;
-  text-decoration: none;
-  margin: 0;
-  padding: 4px 8px 4px 32px;
-  position: relative;
+	display: block;
+	white-space: normal;
+	//white-space: nowrap;
+	//overflow: hidden;
+	//text-overflow: ellipsis;
+	cursor: pointer;
+	color: $plugin-palette-color-white;
+	text-decoration: none;
+	margin: 0;
+	padding: 4px 8px 4px 32px;
+	position: relative;
 
-  @include plugin-font-ui-neg('medium', 'normal');
+	@include plugin-font-ui-neg('medium', 'normal');
 
-  &--hover {
-    background: $plugin-palette-background-blue;
-  }
+	&--hover {
+		background: $plugin-palette-background-blue;
+	}
 
-  .plugin-icon--check {
-    position: absolute;
-    left: 8px;
-    top: 50%;
-    margin-top: -8px;
-  }
+	.plugin-icon--check {
+		position: absolute;
+		left: 8px;
+		top: 50%;
+		margin-top: -8px;
+	}
 }

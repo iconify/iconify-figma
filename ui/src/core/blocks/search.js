@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 const base = require('./base');
 
@@ -22,7 +22,7 @@ const base = require('./base');
  * @return {boolean}
  */
 function empty() {
-    return false;
+	return false;
 }
 
 /**
@@ -34,35 +34,35 @@ function empty() {
  * @return {Object|block}
  */
 module.exports = (instance, view, params) => {
-    let keyword = typeof params.keyword === 'string' ? params.keyword : '';
+	let keyword = typeof params.keyword === 'string' ? params.keyword : '';
 
-    let block = base({
-        app: instance,
-        view: view,
+	let block = base({
+		app: instance,
+		view: view,
 
-        // Required stuff
-        type: 'search',
-        keys: ['keyword', 'value', 'prefix'],
-        name: typeof params.name === 'string' ? params.name : null,
+		// Required stuff
+		type: 'search',
+		keys: ['keyword', 'value', 'prefix'],
+		name: typeof params.name === 'string' ? params.name : null,
 
-        // Data
-        keyword: keyword,
-        value: typeof params.value === 'string' ? params.value : keyword,
-        prefix: typeof params.prefix === 'string' ? params.prefix : '',
-        showTitle: params.showTitle === true,
+		// Data
+		keyword: keyword,
+		value: typeof params.value === 'string' ? params.value : keyword,
+		prefix: typeof params.prefix === 'string' ? params.prefix : '',
+		showTitle: params.showTitle === true,
 
-        /**
-         * Set keyword
-         *
-         * @param {string} value
-         */
-        setKeyword: value => {
-            block.keyword = block.value = value;
-        }
-    });
+		/**
+		 * Set keyword
+		 *
+		 * @param {string} value
+		 */
+		setKeyword: value => {
+			block.keyword = block.value = value;
+		},
+	});
 
-    // Check if block is empty
-    block.empty = empty;
+	// Check if block is empty
+	block.empty = empty;
 
-    return block;
+	return block;
 };

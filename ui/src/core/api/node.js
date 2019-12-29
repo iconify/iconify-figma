@@ -12,30 +12,34 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 const request = require('request');
 const baseAPI = require('./base');
 
 module.exports = instance => {
-    let api = baseAPI(instance);
+	let api = baseAPI(instance);
 
-    api._get = (uri, callback) => {
-        request({
-            uri: uri,
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.1 Safari/605.1.15'
-            }
-        }, (error, res, data) => {
-            if (error !== null) {
-                console.error(error);
-                callback(null);
-                return;
-            }
+	api._get = (uri, callback) => {
+		request(
+			{
+				uri: uri,
+				headers: {
+					'User-Agent':
+						'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.1 Safari/605.1.15',
+				},
+			},
+			(error, res, data) => {
+				if (error !== null) {
+					console.error(error);
+					callback(null);
+					return;
+				}
 
-            callback(data);
-        });
-    };
+				callback(data);
+			}
+		);
+	};
 
-    return api;
+	return api;
 };

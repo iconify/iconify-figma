@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React, { Component } from 'react';
 import Notice from '../../parts/notice';
@@ -25,69 +25,80 @@ const phrases = require('../../../data/phrases');
 const lang = phrases.collections;
 
 class CollectionsBlock extends Component {
-    render() {
-        let props = this.props,
-            name = props.block,
-            block = props.view.blocks[name];
+	render() {
+		let props = this.props,
+			name = props.block,
+			block = props.view.blocks[name];
 
-        if (!block || block.empty()) {
-            return <PluginBlock type="error">
-                <Notice type="error">{lang.empty}</Notice>
-            </PluginBlock>;
-        }
+		if (!block || block.empty()) {
+			return (
+				<PluginBlock type="error">
+					<Notice type="error">{lang.empty}</Notice>
+				</PluginBlock>
+			);
+		}
 
-        // Parse each category
-        let sections = [],
-            link = props.config.links.collection;
+		// Parse each category
+		let sections = [],
+			link = props.config.links.collection;
 
-        Object.keys(block.collections).forEach(title => {
-            let collections = block.collections[title],
-                items = [];
+		Object.keys(block.collections).forEach(title => {
+			let collections = block.collections[title],
+				items = [];
 
-            // Parse all items
-            Object.keys(collections).forEach(prefix => {
-                let item = collections[prefix];
-                items.push(<CollectionsListItem
-                    key={prefix}
-                    index={item.index}
-                    prefix={prefix}
-                    title={item.title}
-                    onClick={this._onClick.bind(this, prefix)}
-                    href={link.replace('{prefix}', prefix)}
-                    info={item.author && item.author.name ? lang.by + item.author.name : ''}
-                    total={item.total}
-                    height={item.height}
-                    displayHeight={item.displayHeight}
-                    samples={item.samples}
-                />);
-            });
+			// Parse all items
+			Object.keys(collections).forEach(prefix => {
+				let item = collections[prefix];
+				items.push(
+					<CollectionsListItem
+						key={prefix}
+						index={item.index}
+						prefix={prefix}
+						title={item.title}
+						onClick={this._onClick.bind(this, prefix)}
+						href={link.replace('{prefix}', prefix)}
+						info={
+							item.author && item.author.name ? lang.by + item.author.name : ''
+						}
+						total={item.total}
+						height={item.height}
+						displayHeight={item.displayHeight}
+						samples={item.samples}
+					/>
+				);
+			});
 
-            if (items.length) {
-                sections.push(<CollectionsListSection key={title} title={block.showCategories ? title : null}>
-                    {items}
-                </CollectionsListSection>);
-            }
-        });
+			if (items.length) {
+				sections.push(
+					<CollectionsListSection
+						key={title}
+						title={block.showCategories ? title : null}
+					>
+						{items}
+					</CollectionsListSection>
+				);
+			}
+		});
 
-        return <PluginBlock type="collections">{sections}</PluginBlock>;
-    }
+		return <PluginBlock type="collections">{sections}</PluginBlock>;
+	}
 
-    /**
-     * Collection has been clicked
-     *
-     * @param {string} prefix
-     * @param {Event} event
-     * @private
-     */
-    _onClick(prefix, event) {
-        event.preventDefault();
+	/**
+	 * Collection has been clicked
+	 *
+	 * @param {string} prefix
+	 * @param {Event} event
+	 * @private
+	 */
+	_onClick(prefix, event) {
+		event.preventDefault();
 
-        let props = this.props,
-            name = props.block,
-            block = props.view.blocks[name];
+		let props = this.props,
+			name = props.block,
+			block = props.view.blocks[name];
 
-        block.action(prefix);
-    }
+		block.action(prefix);
+	}
 }
 
 export default CollectionsBlock;

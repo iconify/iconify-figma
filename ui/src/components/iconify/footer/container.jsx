@@ -12,14 +12,12 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
 function FooterContainer(props) {
-    return <div className="plugin-footer-icon-container">
-        {props.children}
-    </div>;
+	return <div className="plugin-footer-icon-container">{props.children}</div>;
 }
 
 export default FooterContainer;

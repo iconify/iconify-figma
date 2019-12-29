@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
@@ -21,13 +21,15 @@ import FooterButtons from './buttons';
 import CloseButton from '../../parts/inputs/close-button';
 
 function SimpleFooter(props) {
-    let container = props.container;
+	let container = props.container;
 
-    return <PluginBlock type="footer">
-        <FooterButtons>
-            <CloseButton container={container} />
-        </FooterButtons>
-    </PluginBlock>;
+	return (
+		<PluginBlock type="footer">
+			<FooterButtons>
+				<CloseButton container={container} />
+			</FooterButtons>
+		</PluginBlock>
+	);
 }
 
 export default SimpleFooter;

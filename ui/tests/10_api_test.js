@@ -12,95 +12,108 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 (() => {
-    const Search = require('../src/core/search');
-    const FakeAPI = require('./fake_api');
+	const Search = require('../src/core/search');
+	const FakeAPI = require('./fake_api');
 
-    const chai = require('chai'),
-        expect = chai.expect,
-        should = chai.should();
+	const chai = require('chai'),
+		expect = chai.expect,
+		should = chai.should();
 
-    describe('Testing API', () => {
-        let nsCounter = 0;
+	describe('Testing API', () => {
+		let nsCounter = 0;
 
-        function customSearch(params) {
-            if (params.namespace === void 0) {
-                params.namespace = __filename + (nsCounter ++)
-            }
-            let search = Search.init(params);
-            search._data.api = FakeAPI(search);
-            return search;
-        }
+		function customSearch(params) {
+			if (params.namespace === void 0) {
+				params.namespace = __filename + nsCounter++;
+			}
+			let search = Search.init(params);
+			search._data.api = FakeAPI(search);
+			return search;
+		}
 
-        it('node.js API', done => {
-            let instance = Search.init({}),
-                api = instance.get('api');
+		it('node.js API', done => {
+			let instance = Search.init({}),
+				api = instance.get('api');
 
-            api.load('search', {
-                query: 'home',
-                prefix: 'fa'
-            }, result => {
-                expect(result).to.not.be.equal(null);
-                expect(result.icons).to.be.eql(['fa:home']);
-                done();
-            });
-        });
+			api.load(
+				'search',
+				{
+					query: 'home',
+					prefix: 'fa',
+				},
+				result => {
+					expect(result).to.not.be.equal(null);
+					expect(result.icons).to.be.eql(['fa:home']);
+					done();
+				}
+			);
+		});
 
-        it('fake API, loading on next tick', done => {
-            let instance = customSearch({}),
-                api = instance.get('api');
+		it('fake API, loading on next tick', done => {
+			let instance = customSearch({}),
+				api = instance.get('api');
 
-            api.setFakeData('foo', {}, {
-                foo: 'bar',
-                bar: 2
-            });
+			api.setFakeData(
+				'foo',
+				{},
+				{
+					foo: 'bar',
+					bar: 2,
+				}
+			);
 
-            api.load('foo', {}, result => {
-                expect(result).to.be.eql({
-                    foo: 'bar',
-                    bar: 2
-                });
-                done();
-            });
-        });
+			api.load('foo', {}, result => {
+				expect(result).to.be.eql({
+					foo: 'bar',
+					bar: 2,
+				});
+				done();
+			});
+		});
 
-        it('fake API, loading instantly', done => {
-            let instance = customSearch({}),
-                api = instance.get('api');
+		it('fake API, loading instantly', done => {
+			let instance = customSearch({}),
+				api = instance.get('api');
 
-            api.setFakeData('foo', {bar: 1}, {
-                foo: 'bar',
-                bar: 3
-            }, 0);
+			api.setFakeData(
+				'foo',
+				{ bar: 1 },
+				{
+					foo: 'bar',
+					bar: 3,
+				},
+				0
+			);
 
-            api.load('foo', {bar: 1}, result => {
-                expect(result).to.be.eql({
-                    foo: 'bar',
-                    bar: 3
-                });
-                done();
-            });
-        });
+			api.load('foo', { bar: 1 }, result => {
+				expect(result).to.be.eql({
+					foo: 'bar',
+					bar: 3,
+				});
+				done();
+			});
+		});
 
-        it('fake API, never loading', function(done) {
-            let timeout = 500;
-            this.timeout(timeout + 100);
-            setTimeout(done, timeout);
+		it('fake API, never loading', function(done) {
+			let timeout = 500;
+			this.timeout(timeout + 100);
+			setTimeout(done, timeout);
 
-            let instance = customSearch({
-                    config: {
-                        API: {
-                            retry: 100
-                        }
-                    }
-                }),
-                api = instance.get('api');
+			let instance = customSearch({
+					config: {
+						API: {
+							retry: 100,
+						},
+					},
+				}),
+				api = instance.get('api');
 
-            api.load('foo', {}, result => {
-                done(new Error('Expected timeout'));
-            });
-        });
-    });
+			api.load('foo', {}, result => {
+				done(new Error('Expected timeout'));
+			});
+		});
+	});
 })();

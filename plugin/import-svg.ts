@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import moveSvg from './move-node';
 import { addToSelection, replaceSelection } from './node-functions';
@@ -35,7 +35,9 @@ function importSVG(env, props) {
 	// Send notice
 	figma.ui.postMessage({
 		event: 'success',
-		message: 'SVG was imported to ' + node.parent.type.toLowerCase() + ' "' + node.parent.name + '"',
+		message: `SVG was imported to ${node.parent.type.toLowerCase()} "${
+			node.parent.name
+		}"`,
 	});
 }
 

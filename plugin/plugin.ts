@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import updateSelection from './update-selection';
 import importSVG from './import-svg';
@@ -19,7 +19,7 @@ const dimensions = {
 	compact: {
 		width: 514,
 		height: 500,
-	}
+	},
 };
 
 /**
@@ -91,10 +91,12 @@ let startPlugin = config => {
 				break;
 
 			case 'store':
-				figma.clientStorage.setAsync('config', msg.data).then(() => {
-				}).catch(err => {
-					console.error(err);
-				});
+				figma.clientStorage
+					.setAsync('config', msg.data)
+					.then(() => {})
+					.catch(err => {
+						console.error(err);
+					});
 
 				// Check for compactLayout changes
 				if (msg.data.options) {
@@ -125,8 +127,11 @@ let startPlugin = config => {
 };
 
 // Load configuration before starting plugin
-figma.clientStorage.getAsync('config').then(config => {
-	startPlugin(config);
-}).catch(err => {
-	startPlugin(void 0);
-});
+figma.clientStorage
+	.getAsync('config')
+	.then(config => {
+		startPlugin(config);
+	})
+	.catch(err => {
+		startPlugin(void 0);
+	});

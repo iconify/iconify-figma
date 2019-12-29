@@ -12,20 +12,18 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
 function ViewContainer(props) {
-    let className = 'plugin-content';
+	let className = 'plugin-content';
 
-    if (props.type !== void 0) {
-        className += ' plugin-content--' + props.type;
-    }
+	if (props.type !== void 0) {
+		className += ' plugin-content--' + props.type;
+	}
 
-    return <div className={className}>
-        {props.children}
-    </div>;
+	return <div className={className}>{props.children}</div>;
 }
 
 export default ViewContainer;

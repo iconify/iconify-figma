@@ -12,15 +12,19 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
 function FooterBlock(props) {
-    return <div className={'plugin-footer-block plugin-footer-block--' + props.type}>
-        {props.title && <p className="plugin-footer-block-title">{props.title}</p>}
-        {props.children}
-    </div>;
+	return (
+		<div className={'plugin-footer-block plugin-footer-block--' + props.type}>
+			{props.title && (
+				<p className="plugin-footer-block-title">{props.title}</p>
+			)}
+			{props.children}
+		</div>
+	);
 }
 
 export default FooterBlock;

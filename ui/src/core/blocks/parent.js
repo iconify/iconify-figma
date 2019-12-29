@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 const base = require('./base');
 
@@ -23,7 +23,7 @@ const base = require('./base');
  * @return {boolean}
  */
 function empty(block) {
-    return block.parent === null;
+	return block.parent === null;
 }
 
 /**
@@ -35,20 +35,20 @@ function empty(block) {
  * @return {Object|block}
  */
 module.exports = (instance, view, params) => {
-    let block = base({
-        app: instance,
-        view: view,
+	let block = base({
+		app: instance,
+		view: view,
 
-        // Required stuff
-        type: 'parent',
-        keys: ['parent'],
+		// Required stuff
+		type: 'parent',
+		keys: ['parent'],
 
-        // Parent view
-        parent: params.parent === void 0 ? null : params.parent,
+		// Parent view
+		parent: params.parent === void 0 ? null : params.parent,
 
-        // Functions
-        empty: () => empty(block)
-    });
+		// Functions
+		empty: () => empty(block),
+	});
 
-    return block;
+	return block;
 };

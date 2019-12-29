@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React, { Component } from 'react';
 
@@ -30,104 +30,109 @@ const lang = phrases.options;
  * @param {string} name
  */
 function makeOptions(name) {
-    let results = {};
-    constants[name].forEach(key => {
-        results[key] = phrases[name] && phrases[name][key] !== void 0 ? phrases[name][key] : key.slice(0, 1).toUpperCase() + key.slice(1)
-    });
-    return results;
+	let results = {};
+	constants[name].forEach(key => {
+		results[key] =
+			phrases[name] && phrases[name][key] !== void 0
+				? phrases[name][key]
+				: key.slice(0, 1).toUpperCase() + key.slice(1);
+	});
+	return results;
 }
 
 class OptionsContainer extends Component {
-    render() {
-        let props = this.props,
-            options = props.container.options;
+	render() {
+		let props = this.props,
+			options = props.container.options;
 
-        return <div className="plugin-content plugin-content--page">
-            <section>
-                <h1>{lang.layout}</h1>
-                <ToggleOption
-                    id="ctrl_compact_layout"
-                    value={options.compactLayout}
-                    onChange={this._onChange.bind(this, 'compactLayout')}
-                    text={lang.compactLayout}
-                    hint={lang.compactLayoutHint}
-                />
-                <ToggleOption
-                    id="ctrl_show_code"
-                    value={options.showCodePage}
-                    onChange={this._onChange.bind(this, 'showCodePage')}
-                    text={lang.showCodePage}
-                    hint={lang.showCodePageHint}
-                />
-            </section>
-            <section>
-                <h1>{lang.dragDrop}</h1>
-                <p className="plugin-hint">{lang.dragDropHint}</p>
-                <ToggleOption
-                    id="ctrl_customize_drop"
-                    value={options.customizeDrop}
-                    onChange={this._onChange.bind(this, 'customizeDrop')}
-                    text={lang.customizeDrop}
-                />
-                <ToggleOption
-                    id="ctrl_drop_to_frame"
-                    value={options.dropToFrame}
-                    onChange={this._onChange.bind(this, 'dropToFrame')}
-                    text={lang.dropFrame}
-                />
-            </section>
-            <section>
-                <h1>{lang.import}</h1>
-                <SelectOption
-                    text={lang.selectNodes}
-                    value={options.selectNodes}
-                    options={makeOptions('selectNodes')}
-                    placeholder={options.getDefaultValue('selectNodes')}
-                    onChange={this._onChange.bind(this, 'selectNodes')}
-                    hint={lang.selectNodesHint}
-                />
-            </section>
-            <section>
-                <h1>{lang.storage}</h1>
-                <InputOption
-                    text={lang.storageLimit}
-                    value={options.storageLimit}
-                    placeholder={options.getDefaultValue('storageLimit')}
-                    onChange={this._onChange.bind(this, 'storageLimit')}
-                    hint={lang.storageLimitHint}
-                />
-            </section>
-        </div>;
-    }
+		return (
+			<div className="plugin-content plugin-content--page">
+				<section>
+					<h1>{lang.layout}</h1>
+					<ToggleOption
+						id="ctrl_compact_layout"
+						value={options.compactLayout}
+						onChange={this._onChange.bind(this, 'compactLayout')}
+						text={lang.compactLayout}
+						hint={lang.compactLayoutHint}
+					/>
+					<ToggleOption
+						id="ctrl_show_code"
+						value={options.showCodePage}
+						onChange={this._onChange.bind(this, 'showCodePage')}
+						text={lang.showCodePage}
+						hint={lang.showCodePageHint}
+					/>
+				</section>
+				<section>
+					<h1>{lang.dragDrop}</h1>
+					<p className="plugin-hint">{lang.dragDropHint}</p>
+					<ToggleOption
+						id="ctrl_customize_drop"
+						value={options.customizeDrop}
+						onChange={this._onChange.bind(this, 'customizeDrop')}
+						text={lang.customizeDrop}
+					/>
+					<ToggleOption
+						id="ctrl_drop_to_frame"
+						value={options.dropToFrame}
+						onChange={this._onChange.bind(this, 'dropToFrame')}
+						text={lang.dropFrame}
+					/>
+				</section>
+				<section>
+					<h1>{lang.import}</h1>
+					<SelectOption
+						text={lang.selectNodes}
+						value={options.selectNodes}
+						options={makeOptions('selectNodes')}
+						placeholder={options.getDefaultValue('selectNodes')}
+						onChange={this._onChange.bind(this, 'selectNodes')}
+						hint={lang.selectNodesHint}
+					/>
+				</section>
+				<section>
+					<h1>{lang.storage}</h1>
+					<InputOption
+						text={lang.storageLimit}
+						value={options.storageLimit}
+						placeholder={options.getDefaultValue('storageLimit')}
+						onChange={this._onChange.bind(this, 'storageLimit')}
+						hint={lang.storageLimitHint}
+					/>
+				</section>
+			</div>
+		);
+	}
 
-    /**
-     * Option was changed
-     *
-     * @param {string} name
-     * @param {*} value
-     * @private
-     */
-    _onChange(name, value) {
-        let container = this.props.container,
-            defaultValue = container.options.getDefaultValue(name);
+	/**
+	 * Option was changed
+	 *
+	 * @param {string} name
+	 * @param {*} value
+	 * @private
+	 */
+	_onChange(name, value) {
+		let container = this.props.container,
+			defaultValue = container.options.getDefaultValue(name);
 
-        if (typeof value !== typeof defaultValue) {
-            switch (typeof defaultValue) {
-                case 'number':
-                    value = value === '' ? defaultValue : parseInt(value);
-                    if (isNaN(value)) {
-                        return;
-                    }
-                    break;
+		if (typeof value !== typeof defaultValue) {
+			switch (typeof defaultValue) {
+				case 'number':
+					value = value === '' ? defaultValue : parseInt(value);
+					if (isNaN(value)) {
+						return;
+					}
+					break;
 
-                default:
-                    return;
-            }
-        }
+				default:
+					return;
+			}
+		}
 
-        container.options[name] = value;
-        container.update();
-    }
+		container.options[name] = value;
+		container.update();
+	}
 }
 
 export default OptionsContainer;

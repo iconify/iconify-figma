@@ -1,62 +1,63 @@
 .plugin-layer {
-  max-width: 100%;
+	max-width: 100%;
 
-  > a {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    width: 100%;
-    padding-left: 8px;
-    line-height: $plugin-layer-height;
-    text-decoration: none;
-    color: inherit;
-    box-sizing: border-box;
+	> a {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		width: 100%;
+		padding-left: 8px;
+		line-height: $plugin-layer-height;
+		text-decoration: none;
+		color: inherit;
+		box-sizing: border-box;
+	}
 
-  }
+	// Focus layout for tab clicking
+	& > a:not(:hover):focus,
+	& > a:not(:hover):focus &-icon {
+		outline: none;
+		color: $plugin-palette-color-link-hover;
+	}
 
-  // Focus layout for tab clicking
-  & > a:not(:hover):focus, & > a:not(:hover):focus &-icon {
-    outline: none;
-    color: $plugin-palette-color-link-hover;
-  }
+	// Levels
+	&--0 {
+		font-weight: bold;
+	}
+	@for $level from 1 through 5 {
+		&--#{$level} > a {
+			padding-left: $plugin-layer-padding * $level;
+		}
+	}
 
-  // Levels
-  &--0 {
-    font-weight: bold;
-  }
-  @for $level from 1 through 5 {
-    &--#{$level} > a {
-      padding-left: $plugin-layer-padding * $level;
-    }
-  }
+	color: $plugin-palette-color-black;
+	&--selected > a {
+		background: $plugin-palette-background-selected-borderless;
+	}
 
-  color: $plugin-palette-color-black;
-  &--selected > a {
-    background: $plugin-palette-background-selected-borderless;
-  }
-
-  &:hover > a {
-    box-shadow: 0 0 0 1px $plugin-palette-border-blue inset;
-  }
+	&:hover > a {
+		box-shadow: 0 0 0 1px $plugin-palette-border-blue inset;
+	}
 }
 
-.plugin-layer-toggle, .plugin-layer-icon {
-  display: block;
-  float: left;
-  width: $plugin-layer-icon-width;
-  height: $plugin-layer-height;
-  line-height: $plugin-layer-height;
-  color: $plugin-palette-color-black-muted;
+.plugin-layer-toggle,
+.plugin-layer-icon {
+	display: block;
+	float: left;
+	width: $plugin-layer-icon-width;
+	height: $plugin-layer-height;
+	line-height: $plugin-layer-height;
+	color: $plugin-palette-color-black-muted;
 
-  &--none {
-    pointer-events: none;
-  }
+	&--none {
+		pointer-events: none;
+	}
 }
 
 .plugin-layer-title {
-  flex-grow: 1;
-  padding: 0 8px;
-  overflow: hidden;
-  line-height: $plugin-layer-height;
-  height: $plugin-layer-height;
+	flex-grow: 1;
+	padding: 0 8px;
+	overflow: hidden;
+	line-height: $plugin-layer-height;
+	height: $plugin-layer-height;
 }

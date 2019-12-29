@@ -12,37 +12,41 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 import Draggable from '../../parts/draggable';
 
 function FooterSample(props) {
-    let style = {};
-    if (props.sampleHeight) {
-        style = {
-            fontSize: props.sampleHeight + 'px'
-        };
-    }
+	let style = {};
+	if (props.sampleHeight) {
+		style = {
+			fontSize: props.sampleHeight + 'px',
+		};
+	}
 
-    //  offsetY={-200}
-    return <div>
-        <Draggable onDrag={props.onSampleDrag}>
-            <div className="plugin-footer-icon-sample" dangerouslySetInnerHTML={{__html: props.svg}} style={style} />
-        </Draggable>
-        {
-            props.width && props.height &&
-            <div className="plugin-footer-icon-size">
-                {props.width}<span>x</span>{props.height}
-            </div>
-        }
-        {
-            props.width && props.height && props.customHeight &&
-            <div className="plugin-footer-icon-size">
-                ({props.customHeight})
-            </div>
-        }
-    </div>;
+	//  offsetY={-200}
+	return (
+		<div>
+			<Draggable onDrag={props.onSampleDrag}>
+				<div
+					className="plugin-footer-icon-sample"
+					dangerouslySetInnerHTML={{ __html: props.svg }}
+					style={style}
+				/>
+			</Draggable>
+			{props.width && props.height && (
+				<div className="plugin-footer-icon-size">
+					{props.width}
+					<span>x</span>
+					{props.height}
+				</div>
+			)}
+			{props.width && props.height && props.customHeight && (
+				<div className="plugin-footer-icon-size">({props.customHeight})</div>
+			)}
+		</div>
+	);
 }
 
 export default FooterSample;

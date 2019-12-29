@@ -1,67 +1,69 @@
 .plugin-block--pagination {
-  margin: 8px 0;
-  padding: 0 32px;
-  text-align: center;
-  position: relative;
+	margin: 8px 0;
+	padding: 0 32px;
+	text-align: center;
+	position: relative;
 
-  span, a {
-    display: inline-block;
-    @include plugin-font-ui-pos('medium', 'normal');
-    padding: 6px 8px;
-    box-sizing: border-box;
-    height: $plugin-font-lineheight + 12px;
-  }
+	span,
+	a {
+		display: inline-block;
+		@include plugin-font-ui-pos('medium', 'normal');
+		padding: 6px 8px;
+		box-sizing: border-box;
+		height: $plugin-font-lineheight + 12px;
+	}
 
-  span {
-    color: $plugin-palette-color-black-muted;
-    pointer-events: none;
-  }
+	span {
+		color: $plugin-palette-color-black-muted;
+		pointer-events: none;
+	}
 
-  .plugin-pagination-page {
-    margin: 2px;
-    min-width: 24px;
-    text-align: center;
-    border-radius: $plugin-border-radius-small;
-    text-decoration: none;
-    color: $plugin-palette-color-black;
+	.plugin-pagination-page {
+		margin: 2px;
+		min-width: 24px;
+		text-align: center;
+		border-radius: $plugin-border-radius-small;
+		text-decoration: none;
+		color: $plugin-palette-color-black;
 
-    &:hover {
-      background-color: $plugin-palette-background-hover;
-    }
+		&:hover {
+			background-color: $plugin-palette-background-hover;
+		}
 
-    &:focus {
-      outline: none;
-    }
-    &:active, &:not(:hover):focus {
-      box-shadow: $plugin-button-active-shadow;
-    }
-  }
+		&:focus {
+			outline: none;
+		}
+		&:active,
+		&:not(:hover):focus {
+			box-shadow: $plugin-button-active-shadow;
+		}
+	}
 
-  .plugin-pagination-page--more {
-    padding: 6px;
-  }
+	.plugin-pagination-page--more {
+		padding: 6px;
+	}
 
-  .plugin-pagination-page--selected {
-    background: $plugin-palette-background-selected-borderless;
-    color: $plugin-palette-color-black;
-    box-shadow: none !important;
-    pointer-events: none;
-  }
+	.plugin-pagination-page--selected {
+		background: $plugin-palette-background-selected-borderless;
+		color: $plugin-palette-color-black;
+		box-shadow: none !important;
+		pointer-events: none;
+	}
 
-  .plugin-pagination-page--arrow {
-    position: absolute;
-    top: 50%;
-    margin-top: -14px;
-    svg {
-      margin: 4px 0;
-    }
-  }
-  .plugin-pagination-page--prev {
-    left: 0;
-    margin-left: 0;
-  }
-  .plugin-pagination-page--next {
-    right: 0;
-    margin-right: 0;
-  }
+	.plugin-pagination-page--arrow {
+		position: absolute;
+		top: 50%;
+		margin-top: -14px;
+		svg {
+			margin: 4px 0;
+		}
+	}
+	.plugin-pagination-page--prev {
+		left: 0;
+		margin-left: 0;
+	}
+	.plugin-pagination-page--next {
+		right: 0;
+		margin-right: 0;
+	}
 }

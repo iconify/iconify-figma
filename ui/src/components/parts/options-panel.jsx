@@ -12,27 +12,29 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
 const modifiers = ['dimmed', 'active', 'invalid'];
 
 function OptionsPanel(props) {
-    let className = 'options-panel';
-    if (props.type) {
-        className += ' options-panel--' + props.type;
-    }
-    modifiers.forEach(key => {
-        if (props[key]) {
-            className += ' options-panel--' + key;
-        }
-    });
+	let className = 'options-panel';
+	if (props.type) {
+		className += ' options-panel--' + props.type;
+	}
+	modifiers.forEach(key => {
+		if (props[key]) {
+			className += ' options-panel--' + key;
+		}
+	});
 
-    return <div className={className}>
-        {props.title && <div className="options-panel-title">{props.title}</div>}
-        {props.children}
-    </div>;
+	return (
+		<div className={className}>
+			{props.title && <div className="options-panel-title">{props.title}</div>}
+			{props.children}
+		</div>
+	);
 }
 
 export default OptionsPanel;

@@ -12,38 +12,45 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 
 import Draggable from './draggable';
 
 function GridIcon(props) {
-    let className = 'plugin-icon-item';
-    if (props.loading) {
-        className += ' plugin-icon-item--pending';
-    }
-    if (props.selected) {
-        className += ' plugin-icon-item--selected';
-    }
+	let className = 'plugin-icon-item';
+	if (props.loading) {
+		className += ' plugin-icon-item--pending';
+	}
+	if (props.selected) {
+		className += ' plugin-icon-item--selected';
+	}
 
-    let linkProps = {
-        className: 'plugin-icon-item-svg',
-        href: props.href ? props.href : '#',
-        title: props.tooltip,
-        onClick: props.onClick
-    };
-    if (!props.loading && props.svg) {
-        if (props.onDrag) {
-            linkProps.children = <Draggable onDrag={props.onDrag} dangerouslySetInnerHTML={{__html: props.svg}} />;
-        } else {
-            linkProps.dangerouslySetInnerHTML = {__html: props.svg};
-        }
-    }
+	let linkProps = {
+		className: 'plugin-icon-item-svg',
+		href: props.href ? props.href : '#',
+		title: props.tooltip,
+		onClick: props.onClick,
+	};
+	if (!props.loading && props.svg) {
+		if (props.onDrag) {
+			linkProps.children = (
+				<Draggable
+					onDrag={props.onDrag}
+					dangerouslySetInnerHTML={{ __html: props.svg }}
+				/>
+			);
+		} else {
+			linkProps.dangerouslySetInnerHTML = { __html: props.svg };
+		}
+	}
 
-    return <div className={className}>
-        <a {...linkProps} />
-    </div>;
+	return (
+		<div className={className}>
+			<a {...linkProps} />
+		</div>
+	);
 }
 
 export default GridIcon;

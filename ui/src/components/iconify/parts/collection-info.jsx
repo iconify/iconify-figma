@@ -12,20 +12,20 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React from 'react';
 import CollectionInfoList from './collection-info-list';
 
 function CollectionInfo(props) {
-    let view = props.view,
-        prefix = view.prefix;
+	let view = props.view,
+		prefix = view.prefix;
 
-    if (!prefix) {
-        return null;
-    }
+	if (!prefix) {
+		return null;
+	}
 
-    return <CollectionInfoList {...props} prefix={prefix} showTitle={true} />
+	return <CollectionInfoList {...props} prefix={prefix} showTitle={true} />;
 }
 
 export default CollectionInfo;

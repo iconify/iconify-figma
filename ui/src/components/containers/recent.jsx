@@ -12,7 +12,7 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 import React, { Component } from 'react';
 
@@ -21,17 +21,17 @@ import RecentView from '../iconify/views/recent';
 import LoadingView from '../iconify/views/loading';
 
 class RecentIconsContainer extends BaseComponent {
-    _getContentComponent() {
-        let props = this.props,
-            container = props.container,
-            view = container.iconifyView;
+	_getContentComponent() {
+		let props = this.props,
+			container = props.container,
+			view = container.iconifyView;
 
-        if (view && !view.loading) {
-            return RecentView;
-        }
+		if (view && !view.loading) {
+			return RecentView;
+		}
 
-        return LoadingView;
-    }
+		return LoadingView;
+	}
 }
 
 export default RecentIconsContainer;

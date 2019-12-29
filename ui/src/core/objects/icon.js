@@ -12,23 +12,27 @@
  * @license Apache 2.0
  * @license GPL 2.0
  */
-"use strict";
+'use strict';
 
 /**
  * List of optional properties that could be referenced by both string or array and have multiple properties
  *
  * @type {*[]}
  */
-const extraArrays = [{
-    str: 'tag',
-    arr: 'tags'
-}, {
-    str: 'alias',
-    arr: 'aliases'
-}, {
-    str: 'char',
-    arr: 'chars'
-}];
+const extraArrays = [
+	{
+		str: 'tag',
+		arr: 'tags',
+	},
+	{
+		str: 'alias',
+		arr: 'aliases',
+	},
+	{
+		str: 'char',
+		arr: 'chars',
+	},
+];
 
 /**
  * List of optional properties that are strings
@@ -51,27 +55,27 @@ const uniqueArrays = ['tags', 'aliases', 'chars'];
  * @return {object}
  */
 function splitIconName(name) {
-    let parts = name.split(':');
-    if (parts.length === 2) {
-        return {
-            prefix: parts[0],
-            name: parts[1]
-        };
-    }
+	let parts = name.split(':');
+	if (parts.length === 2) {
+		return {
+			prefix: parts[0],
+			name: parts[1],
+		};
+	}
 
-    parts = name.split('-');
-    if (parts.length > 1) {
-        return {
-            prefix: parts.shift(),
-            name: parts.join('-')
-        };
-    }
+	parts = name.split('-');
+	if (parts.length > 1) {
+		return {
+			prefix: parts.shift(),
+			name: parts.join('-'),
+		};
+	}
 
-    // invalid entry?
-    return {
-        prefix: '',
-        name: name
-    };
+	// invalid entry?
+	return {
+		prefix: '',
+		name: name,
+	};
 }
 
 /**
@@ -81,58 +85,61 @@ function splitIconName(name) {
  * @return {null|{prefix: string, name: string, tags: Array, themePrefix: string, themeSuffix: string, aliases: Array, chars: Array}}
  */
 module.exports = params => {
-    let icon = {
-        prefix: '',
-        name: ''
-    };
+	let icon = {
+		prefix: '',
+		name: '',
+	};
 
-    if (typeof params === 'string') {
-        // Icon as name
-        let name = splitIconName(params);
-        icon.prefix = name.prefix;
-        icon.name = name.name;
-        return icon;
-    }
+	if (typeof params === 'string') {
+		// Icon as name
+		let name = splitIconName(params);
+		icon.prefix = name.prefix;
+		icon.name = name.name;
+		return icon;
+	}
 
-    // Not object or missing required 'name'
-    if (typeof params !== 'object' || params.name === void 0) {
-        return null;
-    }
+	// Not object or missing required 'name'
+	if (typeof params !== 'object' || params.name === void 0) {
+		return null;
+	}
 
-    if (params.prefix === void 0) {
-        // Get icon name from name
-        let name = splitIconName(params.name);
-        icon.prefix = name.prefix;
-        icon.name = name.name;
-    } else {
-        icon.prefix = params.prefix;
-        icon.name = params.name;
-    }
+	if (params.prefix === void 0) {
+		// Get icon name from name
+		let name = splitIconName(params.name);
+		icon.prefix = name.prefix;
+		icon.name = name.name;
+	} else {
+		icon.prefix = params.prefix;
+		icon.name = params.name;
+	}
 
-    // Add extra parameters that could be array or string
-    extraArrays.forEach(attr => {
-        if (typeof params[attr.arr] === 'string') {
-            icon[attr.arr] = [params[attr.arr]];
-        } else if (params[attr.arr] instanceof Array) {
-            icon[attr.arr] = params[attr.arr].slice(0);
-        } else if (typeof params[attr.str] === 'string') {
-            icon[attr.arr] = [params[attr.str]];
-        }
-    });
+	// Add extra parameters that could be array or string
+	extraArrays.forEach(attr => {
+		if (typeof params[attr.arr] === 'string') {
+			icon[attr.arr] = [params[attr.arr]];
+		} else if (params[attr.arr] instanceof Array) {
+			icon[attr.arr] = params[attr.arr].slice(0);
+		} else if (typeof params[attr.str] === 'string') {
+			icon[attr.arr] = [params[attr.str]];
+		}
+	});
 
-    // Add extra string parameters
-    extraStrings.forEach(attr => {
-        if (typeof params[attr] === 'string') {
-            icon[attr] = params[attr];
-        }
-    });
+	// Add extra string parameters
+	extraStrings.forEach(attr => {
+		if (typeof params[attr] === 'string') {
+			icon[attr] = params[attr];
+		}
+	});
 
-    // Check that array values are unique and not empty
-    uniqueArrays.forEach(attr => {
-        if (icon[attr] instanceof Array && icon[attr].length > 0) {
-            icon[attr] = icon[attr].filter((value, index, self) => value.length > 0 && self.indexOf(value) === index);
-        }
-    });
+	// Check that array values are unique and not empty
+	uniqueArrays.forEach(attr => {
+		if (icon[attr] instanceof Array && icon[attr].length > 0) {
+			icon[attr] = icon[attr].filter(
+				(value, index, self) =>
+					value.length > 0 && self.indexOf(value) === index
+			);
+		}
+	});
 
-    return icon;
+	return icon;
 };
