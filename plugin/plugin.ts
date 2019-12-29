@@ -67,8 +67,15 @@ let showUI = config => {
  */
 let startPlugin = config => {
 	// Check config
-	if (config && config.options && config.options.compactLayout) {
-		env.compact = true;
+	if (config && config.options) {
+		if (config.options.compactLayout && config.options.forceCompactLayout) {
+			// compactLayout was enabled by force, not by choice.
+			// Disable it, plug-in will re-enable it if needed
+			delete config.options.compactLayout;
+		}
+		if (config.options.compactLayout) {
+			env.compact = true;
+		}
 	}
 
 	// Show UI

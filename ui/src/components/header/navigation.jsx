@@ -39,8 +39,13 @@ class Navigation extends Component {
 				break;
 		}
 
+		this.onResetRoutes = this.onResetRoutes.bind(this);
+		this.onFocus = this.onFocus.bind(this);
+		this.onBlur = this.onBlur.bind(this);
+
 		this.state = {
 			time: 0,
+			focused: 0,
 			error: false,
 			section: section,
 		};
@@ -50,6 +55,7 @@ class Navigation extends Component {
 		let error = this.state.error ? <span>{lang.notavailable}</span> : null,
 			route = this.props.route,
 			section = this.state.section,
+			focused = this.state.focused > 0,
 			inactiveClass = 'plugin-nav',
 			activeClass = 'plugin-nav plugin-nav--selected',
 			showCode = false,
@@ -82,7 +88,8 @@ class Navigation extends Component {
 					'plugin-header' +
 					(secondaryMenu
 						? ' plugin-header--with-menu'
-						: ' plugin-header--no-menu')
+						: ' plugin-header--no-menu') +
+					(focused ? ' plugin-header--focused' : '')
 				}
 			>
 				<div className="plugin-wrapper-header plugin-wrapper-header--primary">
@@ -98,6 +105,8 @@ class Navigation extends Component {
 								'menu',
 								'options'
 							)}
+							onFocus={this.onFocus}
+							onBlur={this.onBlur}
 							title={lang.menu}
 						>
 							<Icon name="menu" />
@@ -110,6 +119,8 @@ class Navigation extends Component {
 								'import',
 								'iconify'
 							)}
+							onFocus={this.onFocus}
+							onBlur={this.onBlur}
 						>
 							{lang.import}
 						</a>
@@ -121,6 +132,8 @@ class Navigation extends Component {
 									this,
 									route.page === 'code' ? route.code.page : 'code'
 								)}
+								onFocus={this.onFocus}
+								onBlur={this.onBlur}
 							>
 								{lang.code}
 							</a>
@@ -136,6 +149,8 @@ class Navigation extends Component {
 								'github',
 								'github'
 							)}
+							onFocus={this.onFocus}
+							onBlur={this.onBlur}
 						>
 							{lang.about}
 						</a>
@@ -166,7 +181,9 @@ class Navigation extends Component {
 					<a
 						className={inactiveClass}
 						href="#"
-						onClick={this.onResetRoutes.bind(this)}
+						onClick={this.onResetRoutes}
+						onFocus={this.onFocus}
+						onBlur={this.onBlur}
 					>
 						{lang.reset}
 					</a>
@@ -246,6 +263,8 @@ class Navigation extends Component {
 				className={className}
 				href="#"
 				onClick={this.onChangePage.bind(this, page)}
+				onFocus={this.onFocus}
+				onBlur={this.onBlur}
 			>
 				{text}
 			</a>
@@ -377,6 +396,18 @@ class Navigation extends Component {
 		this.setState({
 			error: true,
 			time: time,
+		});
+	}
+
+	onFocus() {
+		this.setState({
+			focused: this.state.focused + 1,
+		});
+	}
+
+	onBlur() {
+		this.setState({
+			focused: Math.max(this.state.focused - 1, 0),
 		});
 	}
 }

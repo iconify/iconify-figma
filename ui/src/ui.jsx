@@ -47,6 +47,12 @@ class UI {
 
 		// Set options
 		this.options = new Options(params.options);
+		if (this.options.forceCompact()) {
+			// Send message to plug-in with latest config
+			setTimeout(() => {
+				this.storeState();
+			});
+		}
 
 		// Expand selected nodes list
 		params.selectedNodes = params.parentNodes

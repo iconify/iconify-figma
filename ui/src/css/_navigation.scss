@@ -131,7 +131,8 @@
 			margin-top: -36px;
 			transition: margin-top 0.2s ease;
 		}
-		&:hover .plugin-wrapper-header--secondary {
+		&:hover .plugin-wrapper-header--secondary,
+		&.plugin-header--focused .plugin-wrapper-header--secondary {
 			margin-top: 0;
 		}
 	}
