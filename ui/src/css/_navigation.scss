@@ -132,7 +132,8 @@
 			transition: margin-top 0.2s ease;
 		}
 		&:hover .plugin-wrapper-header--secondary,
-		&.plugin-header--focused .plugin-wrapper-header--secondary {
+		&.plugin-header--focused .plugin-wrapper-header--secondary,
+		&:focus-within .plugin-wrapper-header--secondary {
 			margin-top: 0;
 		}
 	}
