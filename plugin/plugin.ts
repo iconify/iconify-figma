@@ -112,7 +112,7 @@ let startPlugin = config => {
 						dimensions.height.min,
 						Math.min(
 							dimensions.height.max,
-							msg.data.height - dimensions.height.diff
+							Math.round(msg.data.height) - dimensions.height.diff
 						)
 					);
 					if (env.height !== newHeight) {
