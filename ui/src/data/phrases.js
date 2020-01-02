@@ -202,8 +202,8 @@ module.exports = {
 	},
 	options: {
 		layout: 'Layout options',
-		compactLayout: 'Enable compact layout.',
-		compactLayoutHint: 'Smaller plug-in window for small laptops.',
+		compactWidth: 'Enable compact width.',
+		compactWidthHint: 'Smaller plug-in window for small laptops.',
 		showCodePage: 'Show code page.',
 		showCodePageHint:
 			'If this option is enabled, when you select layer that was imported from this plug-in, plug-in will show code for that icon.',

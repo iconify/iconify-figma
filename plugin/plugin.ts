@@ -12,13 +12,15 @@ import { getSelectedNodeData } from './node-data';
  * @type {object}
  */
 const dimensions = {
-	full: {
-		width: 690,
-		height: 700,
+	width: {
+		full: 690,
+		compact: 514,
 	},
-	compact: {
-		width: 514,
-		height: 500,
+	height: {
+		min: 500,
+		default: 720, // same as max
+		diff: 90, // difference with window.outerHeight
+		max: 720,
 	},
 };
 
@@ -33,6 +35,7 @@ let env = {
 	compact: false,
 	lastParent: null,
 	showingCode: false,
+	height: dimensions.height.default,
 };
 
 /**
@@ -67,19 +70,15 @@ let showUI = config => {
  */
 let startPlugin = config => {
 	// Check config
-	if (config && config.options) {
-		if (config.options.compactLayout && config.options.forceCompactLayout) {
-			// compactLayout was enabled by force, not by choice.
-			// Disable it, plug-in will re-enable it if needed
-			delete config.options.compactLayout;
-		}
-		if (config.options.compactLayout) {
-			env.compact = true;
-		}
+	if (config && config.options && config.options.compactWidth) {
+		env.compact = true;
 	}
 
 	// Show UI
-	figma.showUI(__html__, dimensions[env.compact ? 'compact' : 'full']);
+	figma.showUI(__html__, {
+		width: dimensions.width[env.compact ? 'compact' : 'full'],
+		height: env.height,
+	});
 
 	/**
 	 * Handle messages
@@ -105,16 +104,41 @@ let startPlugin = config => {
 						console.error(err);
 					});
 
-				// Check for compactLayout changes
-				if (msg.data.options) {
-					let compactLayout = !!msg.data.options.compactLayout;
-					if (compactLayout !== env.compact) {
-						// Toggle compact layout
-						env.compact = compactLayout;
-						let size = dimensions[compactLayout ? 'compact' : 'full'];
-						figma.ui.resize(size.width, size.height);
+				let resize = false;
+
+				// Check for height changes
+				if (msg.data.height) {
+					const newHeight = Math.max(
+						dimensions.height.min,
+						Math.min(
+							dimensions.height.max,
+							msg.data.height - dimensions.height.diff
+						)
+					);
+					if (env.height !== newHeight) {
+						env.height = newHeight;
+						resize = true;
 					}
 				}
+
+				// Check for compactWidth changes
+				if (msg.data.options) {
+					let compactWidth = !!msg.data.options.compactWidth;
+					if (compactWidth !== env.compact) {
+						// Toggle compact layout
+						env.compact = compactWidth;
+						resize = true;
+					}
+				}
+
+				// Resize UI
+				if (resize) {
+					figma.ui.resize(
+						dimensions.width[env.compact ? 'compact' : 'full'],
+						env.height
+					);
+				}
+
 				break;
 
 			case 'import-svg':

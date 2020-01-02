@@ -47,12 +47,6 @@ class UI {
 
 		// Set options
 		this.options = new Options(params.options);
-		if (this.options.forceCompact()) {
-			// Send message to plug-in with latest config
-			setTimeout(() => {
-				this.storeState();
-			});
-		}
 
 		// Expand selected nodes list
 		params.selectedNodes = params.parentNodes
@@ -64,6 +58,11 @@ class UI {
 
 		// Create UI
 		ReactDOM.render(<Container ui={this} version={version} />, this.container);
+
+		// Store state on next tick
+		setTimeout(() => {
+			this.storeState();
+		});
 	}
 
 	/**
@@ -274,6 +273,10 @@ class UI {
 			options: container.options.state,
 			storage: this.localStorage,
 		};
+
+		if (typeof window.outerHeight === 'number') {
+			params.height = window.outerHeight;
+		}
 
 		// Deep copy object
 		let result = JSON.parse(JSON.stringify(params));

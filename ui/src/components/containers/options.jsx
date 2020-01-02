@@ -45,29 +45,25 @@ class OptionsContainer extends Component {
 		let props = this.props,
 			options = props.container.options;
 
-		let showCompact = !options.forceCompact();
-
 		return (
 			<div className="plugin-content plugin-content--page">
-				{showCompact && (
-					<section>
-						<h1>{lang.layout}</h1>
-						<ToggleOption
-							id="ctrl_compact_layout"
-							value={options.compactLayout}
-							onChange={this._onChange.bind(this, 'compactLayout')}
-							text={lang.compactLayout}
-							hint={lang.compactLayoutHint}
-						/>
-						<ToggleOption
-							id="ctrl_show_code"
-							value={options.showCodePage}
-							onChange={this._onChange.bind(this, 'showCodePage')}
-							text={lang.showCodePage}
-							hint={lang.showCodePageHint}
-						/>
-					</section>
-				)}
+				<section>
+					<h1>{lang.layout}</h1>
+					<ToggleOption
+						id="ctrl_compact_width"
+						value={options.compactWidth}
+						onChange={this._onChange.bind(this, 'compactWidth')}
+						text={lang.compactWidth}
+						hint={lang.compactWidthHint}
+					/>
+					<ToggleOption
+						id="ctrl_show_code"
+						value={options.showCodePage}
+						onChange={this._onChange.bind(this, 'showCodePage')}
+						text={lang.showCodePage}
+						hint={lang.showCodePageHint}
+					/>
+				</section>
 				<section>
 					<h1>{lang.dragDrop}</h1>
 					<p className="plugin-hint">{lang.dragDropHint}</p>

@@ -5,14 +5,10 @@ const iconObject = require('../core/objects/icon');
 const constants = require('./const');
 const iconifyPages = constants.pages;
 
-// Force compact layout if window height is too small
-const forceCompact = !!(window.outerHeight && window.outerHeight < 800);
-
 // Global options shared between all pages
 const globalOptions = {
 	// Layout
-	forceCompactLayout: false,
-	compactLayout: false,
+	compactWidth: false,
 	showCodePage: false,
 
 	// Icon customizations
@@ -140,12 +136,6 @@ class Options {
 	 * @param {*} value
 	 */
 	setGlobalOption(name, value) {
-		if (name === 'compactLayout' && forceCompact) {
-			value = true;
-		}
-		if (name === 'forceCompactLayout') {
-			value = forceCompact;
-		}
 		if (value === void 0) {
 			// Reset to default
 			value = globalOptions[name];
@@ -377,13 +367,6 @@ class Options {
 		if (typeof this.onChange === 'function') {
 			this.onChange();
 		}
-	}
-
-	/**
-	 * Check if compact layout is forced
-	 */
-	forceCompact() {
-		return forceCompact;
 	}
 }
 
