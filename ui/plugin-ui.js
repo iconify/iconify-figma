@@ -155,7 +155,7 @@ delay(
 					ui = new UI(document.getElementById('container'), params);
 
 					if (message.selectedNode) {
-						ui.showCode(message.selectedNode);
+						ui.showCode(message.selectedNode, message.command === 'code');
 					}
 					break;
 

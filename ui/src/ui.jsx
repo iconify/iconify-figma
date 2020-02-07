@@ -77,8 +77,9 @@ class UI {
 	 * Show code for icon
 	 *
 	 * @param item
+	 * @param force
 	 */
-	showCode(item) {
+	showCode(item, force = false) {
 		let container = this.component;
 		if (!container) {
 			return;
@@ -94,8 +95,10 @@ class UI {
 		if (!this.options.showCodePage && container.route.page !== 'code') {
 			// Add menu item
 			container.route.code = item;
-			container.update();
-			return;
+			if (!force) {
+				container.update();
+				return;
+			}
 		}
 
 		container.changePage('code', item);

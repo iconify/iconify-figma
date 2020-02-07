@@ -51,6 +51,7 @@ let showUI = config => {
 		event: 'show',
 		config: config,
 		parentNodes: findParentNodes(env),
+		command: figma.command,
 	};
 
 	let nodeData = getSelectedNodeData(env);

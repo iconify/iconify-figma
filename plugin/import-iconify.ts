@@ -28,6 +28,7 @@ function importIconify(env, props) {
 			props: props.props,
 		})
 	);
+	node.setRelaunchData({ code: 'How to use icon with Iconify' });
 
 	// Rename node
 	node.name = props.name;
