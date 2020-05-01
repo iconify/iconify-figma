@@ -189,6 +189,13 @@ module.exports = {
 		vueCode5Start: 'For more details see ',
 		vueCode5Link: 'Iconify for Vue repository',
 		vueCode5End: '.',
+		svelteTitle: 'Svelte component',
+		svelteCode1: '1. Install components:',
+		svelteCode2: '2. Import icon component and icon data:',
+		svelteCode3: '3. Use it in your code:',
+		svelteCode4Start: 'For more details see ',
+		svelteCode4Link: 'Iconify for Svelte repository',
+		svelteCode4End: '.',
 		return: {
 			default: 'Return to previous page',
 			iconify: 'Return to Iconify page',

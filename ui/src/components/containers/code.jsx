@@ -7,6 +7,7 @@ import ParentBlock from '../parts/parent-block';
 import HTMLCodeBlock from '../parts/code/html';
 import ReactCodeBlock from '../parts/code/react';
 import VueCodeBlock from '../parts/code/vue';
+import SvelteCodeBlock from '../parts/code/svelte';
 
 const phrases = require('../../data/phrases');
 const iconObject = require('../../core/objects/icon');
@@ -70,6 +71,11 @@ function CodeContainer(props) {
 				<section>
 					<h2>{lang.vueTitle}</h2>
 					<VueCodeBlock icon={icon} />
+				</section>
+
+				<section>
+					<h2>{lang.svelteTitle}</h2>
+					<SvelteCodeBlock icon={icon} />
 				</section>
 
 				{container.options.showCodePage && <p>{lang.pageExplain3}</p>}

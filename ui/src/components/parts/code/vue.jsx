@@ -57,9 +57,9 @@ function VueCodeBlock(props) {
 			'\t\treturn {\n' +
 			'\t\t\ticons: {\n' +
 			'\t\t\t\t' +
-			camelCase(icon.icon.name) +
+			varName +
 			// ': ' +
-			// camelCase(icon.icon.name) +
+			// varName +
 			',\n' +
 			'\t\t\t},\n' +
 			'\t\t};\n' +
@@ -70,7 +70,7 @@ function VueCodeBlock(props) {
 			'\t<IconifyIcon :icon="icons.' +
 			varName +
 			'"' +
-			attribs.join(' ') +
+			attribs.join('') +
 			' />\n' +
 			'</template>';
 

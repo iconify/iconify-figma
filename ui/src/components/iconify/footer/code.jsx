@@ -22,6 +22,7 @@ import DisclosureItem from '../../parts/disclosure-item';
 import HTMLCodeBlock from '../../parts/code/html';
 import ReactCodeBlock from '../../parts/code/react';
 import VueCodeBlock from '../../parts/code/vue';
+import SvelteCodeBlock from '../../parts/code/svelte';
 
 const phrases = require('../../../data/phrases');
 const lang = phrases.code;
@@ -58,6 +59,9 @@ class FooterCode extends Component {
 					</DisclosureItem>
 					<DisclosureItem key="vue" title={lang.vueTitle}>
 						<VueCodeBlock icon={icon} footer={true} />
+					</DisclosureItem>
+					<DisclosureItem key="svelte" title={lang.svelteTitle}>
+						<SvelteCodeBlock icon={icon} footer={true} />
 					</DisclosureItem>
 				</Disclosure>
 			</FooterBlock>
