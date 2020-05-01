@@ -8,7 +8,7 @@ const lang = phrases.code;
 function camelCase(iconName) {
 	let name = '';
 	let parts = iconName.split('-');
-	parts.forEach(function(part, index) {
+	parts.forEach(function (part, index) {
 		name += index ? part.slice(0, 1).toUpperCase() + part.slice(1) : part;
 	});
 	if (name.charCodeAt(0) < 97 || name.charCodeAt(0) > 122) {
@@ -79,7 +79,10 @@ function ReactCodeBlock(props) {
 			{lang.reactCode3}
 			<div className="plugin-code-sample">{reactUsage}</div>
 			{lang.reactCode4Start}
-			<a href="https://github.com/iconify/iconify-react" target="_blank">
+			<a
+				href="https://github.com/iconify/iconify/tree/master/packages/react"
+				target="_blank"
+			>
 				{lang.reactCode4Link}
 			</a>
 			{lang.reactCode4End}
