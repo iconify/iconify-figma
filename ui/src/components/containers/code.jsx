@@ -6,6 +6,7 @@ import PluginBlock from '../parts/plugin-block';
 import ParentBlock from '../parts/parent-block';
 import HTMLCodeBlock from '../parts/code/html';
 import ReactCodeBlock from '../parts/code/react';
+import VueCodeBlock from '../parts/code/vue';
 
 const phrases = require('../../data/phrases');
 const iconObject = require('../../core/objects/icon');
@@ -42,7 +43,7 @@ function CodeContainer(props) {
 			<ParentBlock
 				parents={[
 					{
-						onClick: event => {
+						onClick: (event) => {
 							event.preventDefault();
 							container.changePage(prevPage);
 						},
@@ -64,6 +65,11 @@ function CodeContainer(props) {
 				<section>
 					<h2>{lang.reactTitle}</h2>
 					<ReactCodeBlock icon={icon} />
+				</section>
+
+				<section>
+					<h2>{lang.vueTitle}</h2>
+					<VueCodeBlock icon={icon} />
 				</section>
 
 				{container.options.showCodePage && <p>{lang.pageExplain3}</p>}

@@ -1,25 +1,10 @@
 'use strict';
 
 import React from 'react';
+import { camelCase } from './misc';
 
 const phrases = require('../../../data/phrases');
 const lang = phrases.code;
-
-function camelCase(iconName) {
-	let name = '';
-	let parts = iconName.split('-');
-	parts.forEach(function (part, index) {
-		name += index ? part.slice(0, 1).toUpperCase() + part.slice(1) : part;
-	});
-	if (name.charCodeAt(0) < 97 || name.charCodeAt(0) > 122) {
-		// Not a-z - add "icon" at start
-		name = 'icon' + name.slice(0, 1).toUpperCase() + name.slice(1);
-	} else if (parts.length < 2) {
-		// Add "Icon" to avoid reserved keywords
-		name += 'Icon';
-	}
-	return name;
-}
 
 function ReactCodeBlock(props) {
 	let icon = props.icon;
@@ -55,8 +40,8 @@ function ReactCodeBlock(props) {
 			'npm install --save-dev @iconify/react @iconify/icons-' +
 			icon.icon.prefix,
 		varName = camelCase(icon.icon.name),
-		reactImport1 = "import { Icon, InlineIcon } from '@iconify/react';\n",
-		reactImport2 =
+		reactImport =
+			"import { Icon, InlineIcon } from '@iconify/react';\n" +
 			'import ' +
 			varName +
 			" from '@iconify/icons-" +
@@ -71,11 +56,7 @@ function ReactCodeBlock(props) {
 			{lang.reactCode1}
 			<div className="plugin-code-sample">{reactInstall}</div>
 			{lang.reactCode2}
-			<div className="plugin-code-sample">
-				{reactImport1}
-				<br />
-				{reactImport2}
-			</div>
+			<div className="plugin-code-sample">{reactImport}</div>
 			{lang.reactCode3}
 			<div className="plugin-code-sample">{reactUsage}</div>
 			{lang.reactCode4Start}

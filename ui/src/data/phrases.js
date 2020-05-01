@@ -36,6 +36,8 @@ module.exports = {
 		support: 'Support',
 		iconifyRepo: 'Iconify for HTML',
 		reactRepo: 'Iconify for React',
+		vueRepo: 'Iconify for Vue',
+		svelteRepo: 'Iconify for Svelte',
 	},
 	errors: {
 		noIconsFound: 'No icons found.',
@@ -157,7 +159,7 @@ module.exports = {
 	code: {
 		pageTitle: 'Code for selected layer:', // 'Code for "{name}":',
 		pageExplain:
-			'Every icon you import with this plug-in can be used with Iconify SVG framework that works similar to icon fonts or with Iconify for React.',
+			'Every icon you import with this plug-in can be used with Iconify SVG framework that works similar to icon fonts or with Iconify components for React, Vue and Svelte.',
 		pageExplain2:
 			'No need to export SVG from Figma and insert SVG into document. Use code below to use selected icon in your projects.',
 		pageExplain3:
@@ -179,6 +181,14 @@ module.exports = {
 		reactCode4Start: 'For more details see ',
 		reactCode4Link: 'Iconify for React repository',
 		reactCode4End: '.',
+		vueTitle: 'Vue component',
+		vueCode1: '1. Install components:',
+		vueCode2: '2. Import icon component and icon data:',
+		vueCode3: '3. Add icon and component to your component:',
+		vueCode4: '4. Use it in your code:',
+		vueCode5Start: 'For more details see ',
+		vueCode5Link: 'Iconify for Vue repository',
+		vueCode5End: '.',
 		return: {
 			default: 'Return to previous page',
 			iconify: 'Return to Iconify page',
