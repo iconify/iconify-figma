@@ -41,9 +41,9 @@ function GitHubContainer(props) {
 				<p>
 					Iconify is not just a plug-in for Figma, it is a much bigger project.
 					Every icon you can import in this plug-in can be used in HTML with
-					Iconify SVG framework or with Iconify for React. Icons are always up
-					to date, automatically updated when icon sets are updated by their
-					authors.
+					Iconify SVG framework or with Iconify components for React, Vue and
+					Svelte. Icons are always up to date, automatically updated when icon
+					sets are updated by their authors.
 				</p>
 				<p>
 					Iconify project goal is to make easy to use modern platform for
@@ -81,7 +81,7 @@ function GitHubContainer(props) {
 						section below.
 					</li>
 					<li>
-						React / Angular / Vue components. For people who prefer to bundle
+						React, Vue and Svelte components. For people who prefer to bundle
 						everything instead of relying on API, there are various components.
 						This is alternative to SVG framework, completely independent from
 						API.
@@ -94,7 +94,7 @@ function GitHubContainer(props) {
 						after update.
 					</li>
 					<li>
-						Icon finder (in development, built with React). Icon finder
+						Icon finder (in development, built with Svelte). Icon finder
 						component makes it easy to integrate icon search into third party
 						software. It is currently in development, code for it is being
 						tested on this Figma plug-in. Older version of icon finder is used
