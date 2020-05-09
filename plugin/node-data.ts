@@ -64,7 +64,11 @@ function getSelectedNodeData(env) {
 	}
 
 	let node = figma.currentPage.selection[0];
-	if (node.type !== 'FRAME') {
+	if (
+		node.type !== 'FRAME' &&
+		node.type !== 'COMPONENT' &&
+		node.type !== 'INSTANCE'
+	) {
 		return null;
 	}
 
