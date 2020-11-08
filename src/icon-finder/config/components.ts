@@ -19,12 +19,12 @@ export const showCollectionInfoBlock = true;
 /**
  * Can shorten icon name in footer?
  */
-export const canShortenIconName = true;
+export const canShortenIconName = false;
 
 /**
  * Show title for properties block?
  */
-export const showPropsTitle = false;
+export const showPropsTitle = true;
 
 /**
  * List of properties to customise
@@ -69,12 +69,27 @@ export const iconSampleSize = {
 export const showButtons = true;
 
 export const footerButtons: Record<string, FooterButton> = {
-	submit: {
+	// Import
+	import: {
 		type: 'primary',
 		display: 'icons', // Show only when icon(s) have been selected
+		text: (params) =>
+			params.icons.length > 1 ? 'Import Icons' : 'Import Icon',
 	},
-	cancel: {
+	// Import as component(s)
+	component: {
 		type: 'secondary',
+		display: 'icons',
+		text: (params) =>
+			params.icons.length > 1
+				? 'Import as Components'
+				: 'Import as Component',
+	},
+	// Import as variants (import as components, then combine them)
+	variants: {
+		type: 'secondary',
+		display: 'many-icons',
+		text: 'Import as Variants',
 	},
 };
 

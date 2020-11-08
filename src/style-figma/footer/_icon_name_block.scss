@@ -3,7 +3,7 @@
 	margin: 0 0 8px;
 	padding: 0;
 
-	@include plugin-font-ui-pos('small', 'normal');
+	@include plugin-font-ui-pos('medium', 'normal');
 	line-height: 26px;
 
 	color: $plugin-palette-color-black-dimmed;
