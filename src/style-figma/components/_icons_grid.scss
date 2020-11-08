@@ -56,8 +56,8 @@
 				right: -1px;
 				top: -1px;
 				font-size: 12px;
-				border: 1px solid $plugin-palette-border-darker-grey;
-				background-color: inherit;
+				border: 1px solid $plugin-palette-border-blue;
+				background: $plugin-palette-background-white;
 				box-shadow: inherit;
 			}
 		}
@@ -96,6 +96,7 @@
 
 				svg + svg {
 					border-color: $plugin-palette-border-blue;
+					background: $plugin-palette-background-selected-borderless;
 				}
 
 				&:hover,
