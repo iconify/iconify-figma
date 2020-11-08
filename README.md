@@ -1,3 +1,9 @@
+This is a development version!
+
+Unlike version 2 that was built with React, this version is built with Svelte. Plug-in is based on [Iconify Icon Finder](https://github.com/iconify/icon-finder). Using shared code base with other icon pickers makes it easier to maintain plug-in.
+
+Currently, this plug-in does not work. UI is working, you can see it by building plug-in (run `npm run build`) and opening demo/index.html in browser. If you want a working version, use plug-in from master branch of this repository.
+
 # Iconify plug-in for Figma
 
 Import Material Design Icons, FontAwesome, Jam Icons, EmojiOne, Twitter Emoji and many other icons (more than 60 icon sets containing over 50,000 icons) to Figma document as vector shapes.
