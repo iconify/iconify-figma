@@ -1,0 +1,115 @@
+// Icons list in footer, multiple icons are selected
+.iif-footer-options-block--icons {
+	margin: 0 0 16px;
+}
+
+.iif-footer-icons {
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	// margin: 0 0 16px;
+	color: $plugin-palette-color-black-dimmed;
+
+	li {
+		margin: 0;
+		padding: 0;
+		display: block;
+		position: relative;
+	}
+
+	// "Remove" icon
+	.iif-footer-icons-reset {
+		display: none;
+		position: absolute;
+		font-size: 12px;
+		right: -6px;
+		top: -6px;
+		color: inherit;
+		border: 1px solid transparent;
+		box-shadow: inherit;
+
+		svg {
+			display: block;
+		}
+	}
+
+	span.iif-footer-icons-reset {
+		background: inherit;
+	}
+
+	a.iif-footer-icons-reset {
+		cursor: pointer;
+		text-decoration: none;
+		background: $plugin-palette-background-white;
+		border-color: transparent;
+
+		&:hover,
+		&:active {
+			color: $plugin-palette-color-link-hover;
+		}
+
+		&:focus {
+			outline: none;
+			box-shadow: none;
+		}
+
+		&:focus:not(:hover) {
+			color: $plugin-palette-color-link;
+			border-color: $plugin-palette-color-link;
+			box-shadow: $plugin-simple-focus-shadow;
+		}
+	}
+
+	// Show reset button if block is visible and reset is separate
+	&:hover,
+	&:focus-within {
+		a.iif-footer-icons-reset {
+			display: block;
+		}
+	}
+
+	// Link
+	a:first-child {
+		display: block;
+		height: 1em;
+		color: inherit;
+		font-size: $plugin-icon-grid-size;
+		margin: 3px;
+		border: 1px solid transparent;
+		cursor: pointer;
+		text-decoration: none;
+
+		&:hover,
+		&:active {
+			color: $plugin-palette-color-link-hover;
+			background: $plugin-palette-background-white;
+			border-color: $plugin-palette-border-blue;
+
+			.iif-footer-icons-reset,
+			+ .iif-footer-icons-reset {
+				display: block;
+				color: $plugin-palette-color-link-hover;
+			}
+		}
+
+		&:focus {
+			outline: none;
+			box-shadow: none;
+		}
+
+		&:focus:not(:hover) {
+			box-shadow: $plugin-simple-focus-shadow;
+			border-color: $plugin-palette-border-blue;
+
+			.iif-footer-icons-reset {
+				display: block;
+				border-color: $plugin-palette-border-blue;
+			}
+		}
+
+		@media (max-width: 600px) {
+			font-size: $plugin-icon-grid-compact-size;
+		}
+	}
+}

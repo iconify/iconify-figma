@@ -29,5 +29,5 @@ export const defaultComponentsConfig: Required<ComponentsConfig> = {
 	codeTab: '',
 
 	// Can select multiple icons
-	multiSelect: false,
+	multiSelect: true,
 };

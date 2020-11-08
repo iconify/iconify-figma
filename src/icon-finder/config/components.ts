@@ -9,7 +9,7 @@ export const canAddProviders = false;
 /**
  * Automatically focus search
  */
-export const canFocusSearch = false;
+export const canFocusSearch = true;
 
 /**
  * Show collection information block (author, license, etc...) when browsing collection
@@ -82,4 +82,4 @@ export const footerButtons: Record<string, FooterButton> = {
  * Sample code
  */
 // To disable code block, also change link for CodeBlock to Empty.svelte in ./components.ts (it will remove component from bundle)
-export const showCode = false;
+export const showCode = true;

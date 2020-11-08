@@ -145,8 +145,8 @@ export const icons: Record<string, string | null> = {
 	'parent': customIconsPrefix + ':parent',
 	'grid': customIconsPrefix + ':grid',
 	'list': customIconsPrefix + ':list',
-	'check-list': 'line-md:check-list-3-solid',
-	'check-list-checked': 'line-md:check-list-3-twotone',
+	'check-list': customIconsPrefix + ':confirm',
+	'check-list-checked': customIconsPrefix + ':reset',
 	'error-loading': customIconsPrefix + ':error-loading',
 	'icon-width': customIconsPrefix + ':icon-width',
 	'icon-height': customIconsPrefix + ':icon-height',
@@ -162,10 +162,10 @@ export const icons: Record<string, string | null> = {
 	'link': customIconsPrefix + ':link',
 	'clipboard': customIconsPrefix + ':clipboard',
 	'confirm': customIconsPrefix + ':confirm',
-	'docs': customIconsPrefix + ':focs',
+	'docs': customIconsPrefix + ':docs',
 	'mode-block': customIconsPrefix + ':mode-block',
 	'mode-inline': customIconsPrefix + ':mode-inline',
-	'selecting-selected': 'line-md:confirm',
+	'selecting-selected': customIconsPrefix + ':confirm',
 	'selecting-unselected': customIconsPrefix + ':empty',
 };
 

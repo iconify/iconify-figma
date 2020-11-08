@@ -10,6 +10,7 @@
 	margin: 0 0 8px;
 	display: flex;
 	width: 100%;
+	position: relative;
 }
 
 .iif-icons-header-text {
@@ -18,13 +19,23 @@
 }
 
 .iif-icons-header-modes {
-	width: 16px;
 	height: 16px;
-	position: relative;
+	position: absolute;
 	box-sizing: border-box;
+	top: -4px;
+	right: -4px;
 	button {
-		position: absolute;
-		top: -4px;
-		right: -4px;
+		float: left;
+		padding: 6px;
+
+		svg {
+			font-size: 12px;
+			width: 1em;
+			height: 1em;
+		}
+
+		+ button {
+			margin-left: 4px;
+		}
 	}
 }

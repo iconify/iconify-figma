@@ -3,6 +3,10 @@
 	border-top-width: 0;
 	background: $plugin-palette-background-white;
 
+	&.iif-icons--selecting {
+		border-style: dashed;
+	}
+
 	ul {
 		display: block;
 		margin: 0;
@@ -28,7 +32,16 @@
 			border-bottom-width: 1px;
 		}
 	}
+}
 
+.iif-icons--selecting {
+	.iif-icon-list {
+		border-style: dashed;
+	}
+}
+
+.iif-icons--list {
+	// Sample icon
 	.iif-icon-sample a {
 		display: block;
 		position: absolute;
@@ -51,8 +64,42 @@
 		svg {
 			display: block;
 		}
+
+		// Selection (when multiple icons can be selected)
+		svg + svg {
+			position: absolute;
+			right: -2px;
+			top: -2px;
+			font-size: 12px;
+			line-height: 1em;
+			width: 1em;
+			height: 1em;
+			border: 1px solid $plugin-palette-border-grey;
+			background: $plugin-palette-background-white;
+			&:hover,
+			&:focus {
+				border-color: $plugin-palette-border-blue;
+			}
+		}
 	}
 
+	// States for checkbox
+	&:hover {
+		.iif-icon-sample a {
+			svg + svg {
+				color: $plugin-palette-color-link-hover;
+			}
+		}
+	}
+	&:focus-within {
+		.iif-icon-sample a {
+			svg + svg {
+				border-color: $plugin-palette-border-blue;
+			}
+		}
+	}
+
+	// Data
 	.iif-icon-data {
 		display: flex;
 		width: 100%;
@@ -165,6 +212,13 @@
 		background: $plugin-palette-background-selected-borderless;
 		border-color: $plugin-palette-background-selected-borderless;
 		color: $plugin-palette-color-black;
+
+		.iif-icon-sample a {
+			svg + svg {
+				background: $plugin-palette-background-selected-borderless;
+				border-color: $plugin-palette-border-blue;
+			}
+		}
 
 		+ .iif-icon-list {
 			border-top-color: $plugin-palette-background-selected-borderless;

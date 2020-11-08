@@ -2,6 +2,10 @@
 	border: 1px solid $plugin-palette-border-grey;
 	background: $plugin-palette-background-white;
 
+	&.iif-icons--selecting {
+		border-style: dashed;
+	}
+
 	ul {
 		display: flex;
 		flex-wrap: wrap;
@@ -19,6 +23,13 @@
 		height: $plugin-icon-grid-size + 2px;
 		box-sizing: content-box;
 
+		svg {
+			display: block;
+			+ svg {
+				display: none;
+			}
+		}
+
 		a {
 			display: block;
 			font-size: $plugin-icon-grid-size;
@@ -28,22 +39,52 @@
 			cursor: pointer;
 			color: $plugin-palette-color-black-dimmed;
 			text-decoration: none;
+		}
+	}
+}
 
+.iif-icons--selecting {
+	.iif-icon-grid {
+		a {
+			border-style: dashed;
+			border-color: $plugin-palette-border-darker-grey;
+			position: relative;
+
+			svg + svg {
+				display: block;
+				position: absolute;
+				right: -1px;
+				top: -1px;
+				font-size: 12px;
+				border: 1px solid $plugin-palette-border-darker-grey;
+				background-color: inherit;
+				box-shadow: inherit;
+			}
+		}
+	}
+}
+
+.iif-icons--grid {
+	.iif-icon-grid {
+		a {
 			&:hover,
 			&:active {
 				background: $plugin-palette-background-white;
 				border-color: $plugin-palette-border-blue;
 				color: $plugin-palette-color-link-hover;
+				svg + svg {
+					border-color: $plugin-palette-border-blue;
+				}
 			}
 
 			&:active,
 			&:focus {
-				box-shadow: 0 0 0 1px $plugin-palette-border-blue;
+				box-shadow: $plugin-simple-focus-shadow;
 				outline: none;
-			}
-
-			svg {
-				display: block;
+				border-style: solid;
+				svg + svg {
+					border-color: $plugin-palette-border-blue;
+				}
 			}
 		}
 
@@ -52,6 +93,10 @@
 				background: $plugin-palette-background-selected-borderless;
 				border-color: $plugin-palette-background-selected-borderless;
 				color: $plugin-palette-color-black;
+
+				svg + svg {
+					border-color: $plugin-palette-border-blue;
+				}
 
 				&:hover,
 				&:active {
