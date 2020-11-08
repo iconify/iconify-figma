@@ -1,8 +1,8 @@
 /**
  * Footer component
  */
-// Full footer
-import Footer from '../components/footer/Full.svelte';
+// Figma footer (based on Full.svelte)
+import Footer from '../components/footer/Figma.svelte';
 
 // Similar to full, but selected icon (or icons list) is above footer, making it look nicer with small width
 // Also when multiple icons are selected, it allows selecting icon from selected icons and shows code/customisations for it

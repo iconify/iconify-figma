@@ -9,7 +9,7 @@
 	width: 100%;
 	> div:first-child {
 		font-size: 160px;
-		margin: 0;
+		margin: 8px 0;
 	}
 	> div:last-child {
 		flex-grow: 1;
@@ -19,7 +19,7 @@
 	@media (max-width: 600px) {
 		display: block;
 		> div:first-child {
-			margin: 8px auto;
+			margin: 16px auto 8px;
 			text-align: center;
 			svg {
 				margin-left: auto;
@@ -36,12 +36,25 @@
 		svg {
 			display: block;
 			margin: 1px;
+			background: $plugin-palette-background-darker-white;
+			box-shadow: 0 0 0 1px $plugin-palette-border-grey;
 		}
 		&:hover {
 			svg {
 				color: $plugin-palette-color-link-hover;
 				background: $plugin-palette-background-darker-white;
-				box-shadow: 0 0 0 1px $plugin-palette-border-darker-grey;
+				box-shadow: 0 0 0 1px $plugin-palette-border-blue;
+			}
+		}
+
+		p {
+			@include plugin-font-ui-pos('small', 'normal');
+			text-align: center;
+			margin: 4px;
+			color: $plugin-palette-color-black-dimmed;
+			white-space: nowrap;
+			span {
+				color: $plugin-palette-color-black-muted;
 			}
 		}
 	}

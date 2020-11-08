@@ -7,9 +7,9 @@
 /**
  * Icon name in footer
  */
-import IconName from '../components/footer/parts/name/Simple.svelte';
+// import IconName from '../components/footer/parts/name/Simple.svelte';
 // import IconName from '../components/footer/parts/name/SimpleEditable.svelte';
-// import IconName from '../components/footer/parts/name/Block.svelte';
+import IconName from '../components/footer/parts/name/Block.svelte';
 export { IconName };
 
 /**

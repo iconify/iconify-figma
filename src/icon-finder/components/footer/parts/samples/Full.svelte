@@ -184,4 +184,8 @@
 	class="iif-footer-sample iif-footer-sample--block iif-footer-sample--loaded"
 	{style}>
 	<UIIcon icon={data.name} {props} />
+	<p>{data.data.width} <span>x</span> {data.data.height}</p>
+	{#if customisations.height}
+		<p><span>(</span>{customisations.height}<span>)</span></p>
+	{/if}
 </div>

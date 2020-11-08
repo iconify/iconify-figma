@@ -36,7 +36,7 @@ export const showCustomisatons = true;
 export const customiseColor = true;
 
 // Size
-export const customiseWidth = true;
+export const customiseWidth = false;
 export const customiseHeight = true;
 
 // Rotation
