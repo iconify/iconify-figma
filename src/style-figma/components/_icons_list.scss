@@ -68,13 +68,13 @@
 		// Selection (when multiple icons can be selected)
 		svg + svg {
 			position: absolute;
-			right: -2px;
+			left: -2px;
 			top: -2px;
 			font-size: 12px;
 			line-height: 1em;
 			width: 1em;
 			height: 1em;
-			border: 1px solid $plugin-palette-border-grey;
+			border: 1px solid $plugin-palette-border-blue;
 			background: $plugin-palette-background-white;
 			&:hover,
 			&:focus {

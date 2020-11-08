@@ -7,6 +7,15 @@
 	box-sizing: border-box;
 }
 
+.iif-block--search--global,
+.iif-footer-icon-name {
+	.iif-input-reset {
+		// Do not show reset button unless input is active in:
+		// global search, editing icon name in footer
+		display: none;
+	}
+}
+
 .iif-input {
 	@include plugin-font-ui-pos('small', 'normal');
 

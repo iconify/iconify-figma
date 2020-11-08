@@ -186,7 +186,7 @@
 	// Palette rotation
 	@for $i from 1 to $plugin-palette-background-rotation-total + 1 {
 		&--#{$i} {
-			.iif-collection-text a {
+			.iif-collection-text > a {
 				color: nth($plugin-palette-background-rotation, $i);
 			}
 			.iif-collection-data {
