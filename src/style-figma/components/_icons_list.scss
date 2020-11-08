@@ -1,0 +1,188 @@
+.iif-icons--list {
+	border: 1px solid $plugin-palette-border-grey;
+	border-top-width: 0;
+	background: $plugin-palette-background-white;
+
+	ul {
+		display: block;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		max-height: 446px;
+		overflow-y: auto;
+	}
+
+	.iif-icon-list {
+		box-sizing: border-box;
+		position: relative;
+		min-height: 40px;
+		list-style: none;
+		margin: 0;
+		padding: 4px;
+		padding-left: 48px;
+		border: 1px solid transparent;
+		border-top-color: $plugin-palette-border-grey;
+		border-bottom-width: 0;
+		color: $plugin-palette-color-black;
+		&:last-child {
+			border-bottom-width: 1px;
+		}
+	}
+
+	.iif-icon-sample a {
+		display: block;
+		position: absolute;
+		left: 4px;
+		top: 50%;
+		width: 1em;
+		height: 1em;
+		font-size: 32px;
+		margin: -0.5em 0 0;
+		text-decoration: none;
+		color: inherit;
+		&:hover {
+			color: $plugin-palette-color-link-hover;
+		}
+		&:focus {
+			outline: none;
+			box-shadow: $plugin-simple-focus-shadow;
+		}
+
+		svg {
+			display: block;
+		}
+	}
+
+	.iif-icon-data {
+		display: flex;
+		width: 100%;
+		flex-wrap: wrap;
+	}
+
+	.iif-icon-name,
+	.iif-icon-size {
+		@include plugin-font-ui-pos('medium', 'normal');
+
+		display: block;
+		line-height: 24px;
+		margin: 4px;
+		white-space: nowrap;
+	}
+
+	.iif-icon-name {
+		@include plugin-font-ui-pos('xlarge', 'normal');
+
+		text-decoration: none;
+		margin-left: 0;
+		flex-grow: 1;
+		color: $plugin-palette-color-black;
+
+		&:hover {
+			color: $plugin-palette-color-link-hover;
+		}
+		&:focus {
+			outline: none;
+			color: $plugin-palette-color-link-hover;
+		}
+	}
+
+	.iif-icon-size {
+		color: $plugin-palette-color-black-muted;
+	}
+
+	.iif-filter {
+		margin: 3px 4px;
+		padding: 4px 7px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.iif-icon-data--filters {
+		&--2 .iif-filter {
+			max-width: 80px;
+		}
+		&--3 .iif-filter {
+			max-width: 70px;
+			margin: 3px 2px;
+		}
+		&--4 .iif-filter {
+			max-width: 50px;
+			margin: 3px 2px;
+		}
+		&--5 .iif-filter {
+			max-width: 48px;
+			margin: 3px 2px;
+			padding: 4px 5px;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.iif-filter {
+			margin: 3px 2px;
+			padding: 4px 5px;
+			max-width: 72px;
+		}
+		.iif-icon-data--filters {
+			&--2 .iif-filter {
+				max-width: 52px;
+			}
+			&--3 .iif-filter,
+			&--4 .iif-filter,
+			&--5 .iif-filter {
+				max-width: 42px;
+			}
+		}
+	}
+
+	// Delete button
+	.iif-icon-delete {
+		color: $plugin-palette-color-black;
+		border-radius: $plugin-border-radius-small;
+		&:hover {
+			background-color: $plugin-palette-background-hover;
+		}
+		&:active,
+		&:focus {
+			box-shadow: $plugin-button-active-shadow;
+			outline: none;
+		}
+	}
+
+	// Hover
+	.iif-icon-list {
+		&:hover {
+			background: $plugin-palette-background-white;
+			border-color: $plugin-palette-border-blue !important;
+			color: $plugin-palette-color-link-hover;
+			+ .iif-icon-list {
+				border-top-color: $plugin-palette-border-blue !important;
+			}
+		}
+	}
+
+	// Selected
+	.iif-icon-list--selected {
+		background: $plugin-palette-background-selected-borderless;
+		border-color: $plugin-palette-background-selected-borderless;
+		color: $plugin-palette-color-black;
+
+		+ .iif-icon-list {
+			border-top-color: $plugin-palette-background-selected-borderless;
+		}
+
+		&:hover {
+			background: $plugin-palette-background-selected;
+			border-color: $plugin-palette-border-blue;
+			color: $plugin-palette-color-link-hover;
+			+ .iif-icon-list {
+				border-top-color: $plugin-palette-border-blue;
+			}
+		}
+
+		.iif-icon-delete {
+			&:hover {
+				background-color: $plugin-palette-background-selected-borderless;
+			}
+		}
+	}
+}

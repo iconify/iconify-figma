@@ -1,0 +1,114 @@
+.iif-footer-icon-name--simple {
+	display: block;
+	margin: 0 0 8px;
+	padding: 0;
+
+	dl {
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+	dt {
+		@include plugin-font-ui-pos('small', 'normal');
+		color: $plugin-palette-color-black-dimmed;
+		display: block;
+		float: left;
+		width: 200px - 8px;
+		text-align: right;
+		margin: 0;
+		padding: 7px 8px 7px 0;
+		box-sizing: border-box;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	dd {
+		display: block;
+		margin-left: 200px;
+		padding: 0;
+		position: relative;
+	}
+
+	// For modern browsers
+	@supports (display: flex) {
+		dl {
+			display: flex;
+			flex-wrap: wrap;
+			width: 100%;
+		}
+
+		dt {
+			float: none;
+			width: auto;
+			max-width: 200px;
+		}
+		dd {
+			flex-grow: 1;
+			margin-left: 8px;
+		}
+	}
+
+	// Icon
+	dd > svg {
+		// From .iif-input-icon
+		position: absolute;
+		left: 0;
+		top: 50%;
+		font-size: 32px;
+		margin-top: -0.5em;
+		width: 1em;
+		height: 1em;
+	}
+
+	&:hover dd > svg,
+	&:focus-within dd > svg {
+		color: $plugin-palette-color-link-hover;
+		background: $plugin-palette-background-darker-white;
+		box-shadow: 0 0 0 1px $plugin-palette-border-darker-grey;
+	}
+
+	.iif-input-wrapper {
+		margin-left: 40px;
+		width: auto;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.iif-footer-icon-name-input {
+		// From .iif-input
+		@include plugin-font-ui-pos('small', 'normal');
+
+		position: relative;
+		height: 30px;
+		margin: 1px 0 1px 40px;
+		padding: 0;
+
+		color: $plugin-palette-color-black-dimmed;
+		border: 1px solid transparent;
+		border-radius: $plugin-border-radius-small;
+		background-color: $plugin-palette-background-white;
+
+		// Border
+		border-bottom-color: $plugin-palette-border-darker-grey;
+
+		// Text
+		span {
+			// From .iif-input input
+			position: absolute;
+			box-sizing: border-box;
+			width: 100%;
+			left: 0;
+			right: 0;
+			top: 50%;
+
+			line-height: 1em;
+			margin: -0.5em 0 0;
+			padding: 0 32px 0 8px;
+
+			&::selection {
+				color: $plugin-palette-color-black;
+				background-color: $plugin-palette-background-selected-borderless;
+			}
+		}
+	}
+}

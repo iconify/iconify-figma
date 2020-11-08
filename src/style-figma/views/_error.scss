@@ -1,0 +1,71 @@
+.iif-block--error {
+	@include plugin-font-ui-neg('xlarge', 'normal');
+
+	position: relative;
+	margin: 16px 0;
+	padding: 8px 16px;
+
+	color: $plugin-palette-color-white;
+	background: $plugin-palette-background-red;
+	border-radius: $plugin-border-radius-med;
+	box-shadow: 0 5px 17px rgba(0, 0, 0, 0.2), 0 2px 7px rgba(0, 0, 0, 0.15);
+
+	p {
+		margin: 0;
+		padding: 0;
+	}
+
+	a {
+		@include plugin-font-ui-neg('medium', 'normal');
+
+		color: inherit;
+		text-decoration: underline;
+		&:hover,
+		&:focus {
+			text-decoration: underline;
+			outline: none;
+		}
+	}
+
+	&--loading {
+		background: $plugin-palette-background-almost-black;
+		animation-name: plugin-loading-notice;
+		animation-duration: 2s;
+		animation-fill-mode: forwards;
+
+		svg {
+			animation: plugin-spinner-icon 1s linear infinite;
+		}
+	}
+
+	svg {
+		position: absolute;
+		left: 16px;
+		top: 50%;
+		font-size: 16px;
+		line-height: 1em;
+		margin-top: -8px;
+	}
+	svg + p {
+		margin-left: 32px;
+	}
+}
+
+@keyframes plugin-loading-notice {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes plugin-spinner-icon {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}

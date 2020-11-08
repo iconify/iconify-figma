@@ -1,0 +1,26 @@
+.iif-block--add-form {
+	margin: 16px 0;
+	// padding: 8px;
+	// border: 1px solid $plugin-palette-border-grey;
+	// background: $plugin-palette-background-darker-white;
+}
+.iif-block--add-form-title {
+}
+.iif-block--add-form-form {
+	margin: 8px 0;
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+
+	.iif-input-wrapper {
+		width: 100%;
+	}
+}
+.iif-block--add-form-status {
+	margin: 8px 0 0;
+}
+.iif-block--add-form-invalid {
+	margin: 8px 0 0;
+	color: $plugin-palette-color-black-dimmed;
+	@include plugin-font-ui-pos('small', 'normal');
+}

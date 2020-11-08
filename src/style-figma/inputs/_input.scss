@@ -1,0 +1,164 @@
+.iif-input-wrapper {
+	position: relative;
+	// width: 100%;
+	height: 32px;
+	margin: 1px 0;
+	white-space: nowrap;
+	box-sizing: border-box;
+}
+
+.iif-input {
+	@include plugin-font-ui-pos('small', 'normal');
+
+	box-sizing: border-box;
+	position: relative;
+	width: 100%;
+	min-width: 180px;
+	height: 30px;
+	margin: 0;
+	padding: 0;
+
+	color: $plugin-palette-color-black-dimmed;
+	border: 1px solid transparent;
+	border-bottom-color: $plugin-palette-border-darker-grey;
+	border-radius: $plugin-border-radius-small;
+	outline: none;
+	box-shadow: none;
+	background-color: $plugin-palette-background-white;
+
+	&--number {
+		min-width: 100px;
+	}
+	&--color {
+		min-width: 140px;
+	}
+
+	// Without placeholder
+
+	// With placeholder
+	// &--with-placeholder {
+	// 	border-color: transparent;
+	// 	border-bottom-color: $plugin-palette-border-darker-grey;
+	// 	box-shadow: none;
+	// }
+
+	// Hover
+	&:hover {
+		color: $plugin-palette-color-black-dimmed;
+		border-color: $plugin-palette-border-darker-grey;
+		box-shadow: none;
+	}
+
+	// Focus
+	&:focus-within {
+		color: $plugin-palette-color-black;
+		border-color: $plugin-palette-border-blue;
+		box-shadow: 0 0 0 1px $plugin-palette-border-blue inset;
+	}
+
+	.iif-input-icon {
+		position: absolute;
+		left: (28px - $plugin-input-icon-size) / 2;
+		top: (28px - $plugin-input-icon-size) / 2;
+		pointer-events: none;
+		opacity: 0.5;
+		svg {
+			display: block;
+			font-size: $plugin-input-icon-size;
+			width: 1em;
+		}
+	}
+
+	.iif-input-placeholder {
+		position: absolute;
+		left: 8px;
+		// right: 32px;
+		right: 8px;
+		top: 4px;
+		height: 20px;
+		line-height: 20px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: $plugin-palette-color-black-muted;
+		pointer-events: none;
+
+		// For older browsers
+		/*
+		&:hover {
+			display: none;
+		}
+		*/
+	}
+
+	.iif-input-reset {
+		position: absolute;
+		right: 2px;
+		top: 2px;
+		width: 24px;
+		height: 24px;
+		text-align: center;
+		text-decoration: none;
+		color: inherit;
+		opacity: 0.5;
+		&:hover {
+			opacity: 1;
+		}
+		&:focus {
+			opacity: 1;
+			outline: none;
+		}
+		&:focus:not(:hover) {
+			box-shadow: 0 0 0 1px $plugin-palette-border-blue inset;
+		}
+		svg {
+			display: block;
+			font-size: $plugin-input-icon-size;
+			width: 1em;
+			margin: (24px - $plugin-input-icon-size) / 2;
+			padding: 0;
+		}
+	}
+
+	input {
+		position: absolute;
+		box-sizing: border-box;
+		width: 100%;
+		left: 0;
+		right: 0;
+		top: 4px;
+		height: 20px;
+		margin: 0;
+		padding: 0 32px 0 8px;
+		background: none;
+		border: none;
+		box-shadow: none;
+		outline: none;
+		&::selection {
+			color: $plugin-palette-color-black;
+			background-color: $plugin-palette-background-selected-borderless;
+		}
+
+		// For older browsers
+		&:focus + .iif-input-placeholder {
+			display: none;
+		}
+	}
+	&--with-icon {
+		input {
+			padding-left: $plugin-input-icon-padding + 8px;
+		}
+		.iif-input-placeholder {
+			padding-left: $plugin-input-icon-padding;
+		}
+	}
+
+	// Focused state
+	/*
+	&:focus-within {
+		.iif-input-placeholder {
+			display: none;
+		}
+	}
+	*/
+}

@@ -1,0 +1,60 @@
+.iif-block--collection-info {
+	margin: 8px 0;
+
+	.iif-collection-info-title {
+		@include plugin-font-ui-pos('xlarge', 'bold');
+		margin: 8px 0;
+	}
+
+	dl {
+		display: flex;
+		margin: 4px 0;
+		padding: 0;
+		@include plugin-font-ui-pos('small', 'normal');
+	}
+	dt,
+	dd {
+		display: block;
+		text-align: left;
+	}
+	dt {
+		color: $plugin-palette-color-black-dimmed;
+		width: 160px;
+		padding-right: 8px;
+	}
+	dd {
+		color: $plugin-palette-color-black;
+		flex-grow: 1;
+	}
+
+	a {
+		color: $plugin-palette-color-link;
+		text-decoration: none;
+		&:hover {
+			color: $plugin-palette-color-link-hover;
+			text-decoration: none;
+		}
+		&:focus {
+			text-decoration: underline;
+			outline: none;
+		}
+	}
+
+	// Button
+	.plugin-disclosure & > div {
+		margin-left: -24px;
+		.plugin-button {
+			margin-left: 0;
+		}
+	}
+
+	// Hide search title below collection info
+	+ .plugin-block--search {
+		p {
+			display: none;
+		}
+		.plugin-search-form {
+			margin-top: 8px;
+		}
+	}
+}

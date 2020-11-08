@@ -8,7 +8,7 @@ module.exports = {
 		// Main script
 		script: 'src/icon-finder/index.ts',
 		// Stylesheet
-		style: 'src/style-iconify/style.scss',
+		style: 'src/style-figma/style.scss',
 	},
 
 	// Output names

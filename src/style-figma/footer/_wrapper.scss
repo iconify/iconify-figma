@@ -1,0 +1,69 @@
+.iif-block--footer {
+	// Footer is not in content wrapper, so it must have same padding as content
+	padding: 0 16px 16px;
+}
+
+// Full footer
+.iif-footer-full {
+	display: flex;
+	width: 100%;
+	> div:first-child {
+		font-size: 160px;
+		margin: 0;
+	}
+	> div:last-child {
+		flex-grow: 1;
+		margin: 0 0 0 16px;
+	}
+
+	@media (max-width: 600px) {
+		display: block;
+		> div:first-child {
+			margin: 8px auto;
+			text-align: center;
+		}
+		> div:last-child {
+			margin: 8px 0;
+		}
+	}
+
+	// Sample in block mode
+	.iif-footer-sample--block {
+		svg {
+			display: block;
+			margin: 1px;
+		}
+		&:hover {
+			svg {
+				color: $plugin-palette-color-link-hover;
+				background: $plugin-palette-background-darker-white;
+				box-shadow: 0 0 0 1px $plugin-palette-border-darker-grey;
+			}
+		}
+	}
+
+	// Sample in inline mode
+	.iif-footer-sample--inline {
+		p {
+			@include plugin-font-ui-pos('small', 'normal');
+			margin: 0;
+			padding: 0 4px;
+			color: $plugin-palette-color-black-dimmed;
+			border: 1px dotted $plugin-palette-border-grey;
+			border-radius: $plugin-border-radius-small;
+			min-width: 160px;
+			&:hover {
+				color: $plugin-palette-color-link-hover;
+				background: $plugin-palette-background-darker-white;
+				border-color: $plugin-palette-border-darker-grey;
+			}
+		}
+	}
+}
+
+.iif-footer-buttons {
+	text-align: right;
+	button:last-child {
+		margin-right: 0;
+	}
+}

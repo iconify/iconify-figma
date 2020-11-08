@@ -1,0 +1,42 @@
+// Collections header
+.iif-collections-header {
+	display: flex;
+	width: 100%;
+
+	.iif-block--filters {
+		flex-grow: 1;
+		padding-top: 4px;
+	}
+
+	.iif-block--filter {
+		padding-left: 8px;
+		&:first-child {
+			// No categories
+			padding-left: 0;
+		}
+	}
+	.iif-block--filter {
+		margin: 8px 0 0;
+		.iif-input {
+			width: 180px;
+		}
+	}
+
+	@media (max-width: 600px) {
+		display: block;
+
+		.iif-block--filters {
+			float: left;
+		}
+
+		.iif-block--filter {
+			float: right;
+		}
+
+		&:after {
+			content: '';
+			display: table;
+			clear: both;
+		}
+	}
+}

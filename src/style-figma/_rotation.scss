@@ -1,0 +1,25 @@
+// Color rotation, using palette() mixin
+// Number of list elements should match 'maxIndex + 1' from ../icon-finder/config/theme.ts,
+// so if you change this list, also change 'maxIndex' value to number of elements - 1.
+$rotation: (
+	// purple
+	#6f53fe,
+	// desaturated green
+	#588542,
+	// pink
+	#c600c6,
+	// cyan
+	#009e9e,
+	// brown
+	#824e00,
+	// dark red
+	#c6006b,
+	// desaturated blue
+	#6786ab,
+	// green
+	#00ad64,
+	// blue 2
+	#275cc6,
+	// orange
+	#ca8706
+);

@@ -1,0 +1,233 @@
+.iif-collections-list-category {
+	margin: 8px 0 0;
+}
+
+.iif-collections-list-title {
+	@include plugin-font-ui-pos('xlarge', 'bold');
+	margin: 0 0 8px;
+}
+
+.iif-collections-list-items {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-column-gap: 16px;
+	grid-row-gap: 16px;
+	margin: 0 0 16px;
+	padding: 0;
+
+	@media (max-width: 600px) {
+		display: block;
+	}
+}
+
+.iif-collection {
+	list-style: none;
+	margin: 0;
+	padding: 8px 12px 8px ($plugin-collection-stats-width + 8px);
+	background: $plugin-palette-background-darker-white-borderless;
+	position: relative;
+
+	&--clickable {
+		cursor: pointer;
+	}
+
+	@media (max-width: 600px) {
+		margin-bottom: 16px;
+	}
+}
+
+// Text block
+.iif-collection-text {
+	text-align: right;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	// Title
+	> span,
+	> a {
+		display: block;
+		margin: 0;
+		padding: 0;
+		@include plugin-font-ui-pos('xlarge', 'normal');
+		line-height: 28px;
+	}
+
+	> span {
+		color: $plugin-palette-color-black-dimmed;
+	}
+
+	a {
+		text-decoration: none;
+		color: $plugin-palette-background-rotation-blue;
+
+		&:focus {
+			outline: none;
+		}
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	// Comment
+	> small {
+		@include plugin-font-ui-pos('medium', 'normal');
+		float: right;
+		margin: 0;
+		padding: 0;
+		line-height: 24px;
+		height: 24px;
+		color: $plugin-palette-color-black-muted;
+		max-width: $plugin-collection-min-width - 10px;
+		a {
+			color: inherit;
+		}
+	}
+}
+
+// Stats block
+.iif-collection-data {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: $plugin-collection-stats-width;
+	color: $plugin-palette-color-white;
+	background: $plugin-palette-background-rotation-blue;
+	border-right: $plugin-collection-border-width solid transparent;
+
+	.iif-collection-samples {
+		box-sizing: content-box;
+		margin-right: -2px;
+		padding: 6px 4px;
+		height: 24px;
+		white-space: nowrap;
+		overflow: hidden;
+		font-size: 16px;
+		line-height: 24px;
+		text-align: center;
+		background: $plugin-palette-background-colored-overlay;
+
+		.iconify {
+			display: inline-block;
+			height: 24px;
+			margin: 0 3px;
+			vertical-align: -0.125em;
+		}
+	}
+
+	.iif-collection-samples--18 {
+		font-size: 18px;
+		.iconify {
+			margin: 0 2px;
+		}
+	}
+
+	.iif-collection-samples--20 {
+		font-size: 20px;
+		.iconify {
+			margin: 0 2px;
+		}
+	}
+
+	.iif-collection-samples--21 {
+		font-size: 21px;
+		.iconify {
+			margin: 0 1px;
+			vertical-align: -2px;
+		}
+	}
+
+	.iif-collection-samples--24 {
+		font-size: 24px;
+		.iconify {
+			margin: 0;
+			vertical-align: -4px;
+		}
+	}
+
+	.iif-collection-samples--25 {
+		font-size: 25px;
+		margin-bottom: -1px;
+		.iconify {
+			margin: 0 0 0 -1px;
+			vertical-align: -4px;
+		}
+	}
+
+	.iif-collection-total {
+		position: absolute;
+		left: 6px;
+		bottom: 4px;
+		height: 24px;
+		svg {
+			font-size: 24px;
+			line-height: 24px;
+			transform: rotate(360deg);
+		}
+	}
+
+	.iif-collection-height {
+		position: absolute;
+		right: 6px;
+		bottom: 4px;
+		height: 24px;
+		svg {
+			font-size: 24px;
+			line-height: 24px;
+			transform: rotate(360deg);
+		}
+	}
+}
+
+// Item in collections list
+.iif-collection {
+	// Palette rotation
+	@for $i from 1 to $plugin-palette-background-rotation-total + 1 {
+		&--#{$i} {
+			.iif-collection-text a {
+				color: nth($plugin-palette-background-rotation, $i);
+			}
+			.iif-collection-data {
+				background: nth($plugin-palette-background-rotation, $i);
+			}
+		}
+	}
+
+	// Hover
+	&:hover,
+	&:focus-within {
+		background: $plugin-palette-background-white;
+		box-shadow: 0 0 0 $plugin-collection-border-width
+			$plugin-palette-border-blue inset;
+
+		.iif-collection-text {
+			> a,
+			> span {
+				color: $plugin-palette-color-link-hover;
+			}
+		}
+
+		.iif-collection-data {
+			background: transparent;
+			color: $plugin-palette-color-black-dimmed;
+			border-right-color: $plugin-palette-border-blue;
+			&:hover {
+				color: $plugin-palette-color-link-hover;
+			}
+
+			.iif-collection-samples {
+				background-color: transparent;
+			}
+		}
+	}
+
+	&--clickable:hover {
+		.iif-collection-text {
+			> a:hover {
+				text-decoration: none;
+			}
+		}
+	}
+}

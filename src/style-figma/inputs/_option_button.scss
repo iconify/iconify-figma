@@ -1,0 +1,76 @@
+.iif-option-button {
+	cursor: pointer;
+	white-space: nowrap;
+	display: inline-block;
+	position: relative;
+
+	height: 32px;
+	margin: 0;
+	padding: 6px 8px;
+
+	@include plugin-font-ui-neg('small', 'medium');
+	line-height: 16px;
+
+	color: $plugin-palette-color-white;
+	background-color: $plugin-palette-background-blue;
+	border: 2px solid $plugin-palette-background-blue;
+	border-radius: $plugin-border-radius-small;
+	outline: none;
+
+	&--with-icon {
+		span {
+			opacity: 0.8;
+		}
+	}
+
+	&--checked {
+		span {
+			opacity: 1;
+		}
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&:focus:not(:hover) {
+		border: 2px solid $plugin-palette-background-darker-blue;
+	}
+
+	&--unchecked {
+		color: $plugin-palette-color-black;
+		background-color: transparent;
+		border-color: transparent;
+
+		&:hover {
+			background-color: $plugin-palette-background-hover;
+		}
+		&:focus:not(:hover) {
+			border-color: $plugin-palette-border-blue;
+		}
+	}
+
+	// Without icon
+	&--with-icon {
+		padding-left: 8px + $plugin-input-icon-size + 6px;
+	}
+	&--without-text {
+		padding-right: 2px;
+		span {
+			display: none;
+		}
+	}
+
+	svg {
+		position: absolute;
+		left: 8px;
+		top: 50%;
+		font-size: $plugin-input-icon-size;
+		line-height: 1em;
+		margin-top: -0.5em;
+	}
+
+	& + & {
+		margin-left: 8px;
+	}
+}

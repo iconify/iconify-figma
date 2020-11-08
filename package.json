@@ -1,7 +1,8 @@
 {
-	"name": "@iconify/search-base-svelte",
+	"name": "@iconify/figma",
 	"private": true,
-	"description": "Iconify Search, Svelte base (rename this)",
+	"version": "3.0.0",
+	"description": "Iconify for Figma",
 	"author": "Vjacheslav Trushkin (Iconify OÜ)",
 	"license": "(Apache-2.0 OR GPL-2.0)",
 	"scripts": {
@@ -10,9 +11,9 @@
 		"watch:script": "rollup -c rollup.config.js --watch",
 		"build:style": "node build/style"
 	},
-	"bugs": "https://github.com/iconify/icon-finder/issues",
-	"homepage": "https://github.com/iconify/icon-finder",
-	"repository": "github:iconify/icon-finder#base-svelte",
+	"bugs": "https://github.com/iconify/iconify-figma/issues",
+	"homepage": "https://github.com/iconify/iconify-figma",
+	"repository": "github:iconify/iconify-figma",
 	"devDependencies": {
 		"@iconify/search-core": "^1.0.0-beta.2",
 		"@iconify/types": "^1.0.6",

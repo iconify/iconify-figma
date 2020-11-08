@@ -1,0 +1,11 @@
+.iif-content-error {
+	@include plugin-font-ui-neg('xlarge', 'normal');
+
+	margin: 16px 0;
+	padding: 8px 16px;
+
+	color: $plugin-palette-color-white;
+	background: $plugin-palette-background-red;
+	border-radius: $plugin-border-radius-med;
+	box-shadow: 0 5px 17px rgba(0, 0, 0, 0.2), 0 2px 7px rgba(0, 0, 0, 0.15);
+}

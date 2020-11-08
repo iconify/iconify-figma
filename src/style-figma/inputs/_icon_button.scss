@@ -1,0 +1,31 @@
+.iif-icon-button {
+	width: 24px;
+	height: 24px;
+	margin: 0;
+	padding: (24px - $plugin-input-icon-size) / 2;
+
+	color: $plugin-palette-color-black;
+	background: transparent;
+
+	line-height: $plugin-input-icon-size;
+	border-width: 0;
+	border-radius: $plugin-border-radius-small;
+	box-sizing: border-box;
+	cursor: pointer;
+
+	&:hover {
+		background-color: $plugin-palette-background-hover;
+	}
+	&:focus {
+		outline: none;
+	}
+	&:active,
+	&:not(:hover):focus {
+		box-shadow: $plugin-button-active-shadow;
+	}
+
+	svg {
+		display: block;
+		font-size: $plugin-input-icon-size;
+	}
+}

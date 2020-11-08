@@ -1,0 +1,12 @@
+// Figma plug-in wrapper
+.iif-wrapper {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.iif-content {
+	background: $plugin-palette-background-white;
+	@include plugin-font-ui-pos('medium', 'normal');
+	padding: 16px;
+}

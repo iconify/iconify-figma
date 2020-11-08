@@ -1,0 +1,47 @@
+.iif-code {
+	@include plugin-font-ui-pos('medium', 'normal');
+	margin-bottom: 16px;
+
+	&-heading {
+		@include plugin-font-ui-pos('large', 'bold');
+		margin-bottom: 8px;
+	}
+
+	&-docs {
+		position: relative;
+		padding: 0 ($plugin-input-icon-size + 2px);
+		a {
+			text-decoration: none;
+			color: $plugin-palette-color-link;
+			.iconify {
+				display: none;
+			}
+			&:hover {
+				text-decoration: none;
+				color: $plugin-palette-color-link-hover;
+			}
+		}
+		.iconify {
+			font-size: $plugin-input-icon-size;
+			position: absolute;
+			left: 0;
+			top: 50%;
+			margin-top: (0 - $plugin-input-icon-size / 2);
+		}
+		> .iconify {
+			color: $plugin-palette-color-black-muted;
+		}
+
+		// Swap icons on hover
+		/*
+		&:hover {
+			a .iconify {
+				display: inline-block;
+			}
+			> .iconify {
+				display: none;
+			}
+        }
+        */
+	}
+}

@@ -1,0 +1,30 @@
+.iif-block--icons {
+	margin: 8px 0 0;
+	padding: 8px;
+	border: 1px solid $plugin-palette-border-grey;
+	background: $plugin-palette-background-darker-white;
+}
+
+// Icons header
+.iif-icons-header {
+	margin: 0 0 8px;
+	display: flex;
+	width: 100%;
+}
+
+.iif-icons-header-text {
+	flex-grow: 1;
+	text-align: left;
+}
+
+.iif-icons-header-modes {
+	width: 16px;
+	height: 16px;
+	position: relative;
+	box-sizing: border-box;
+	button {
+		position: absolute;
+		top: -4px;
+		right: -4px;
+	}
+}
