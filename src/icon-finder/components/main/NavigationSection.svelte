@@ -4,16 +4,17 @@
 		PluginUINavigationSection,
 	} from '../../../common/navigation';
 	import { phrases } from '../../config/phrases';
+	import type { NavigateCallback } from '../../figma/navigation';
 	import UIIcon from '../misc/Icon.svelte';
 
 	// Item to render
 	export let section: PluginUINavigationSection;
 
 	// Currently active item
-	export let selected: PluginUINavigation;
+	export let currentPage: PluginUINavigation;
 
 	// onChange event
-	export let change: (item: PluginUINavigation) => void;
+	export let navigate: NavigateCallback;
 
 	// TypeScript check
 	function assertNever(v: never) {
@@ -34,7 +35,7 @@
 	$: {
 		className =
 			baseClass +
-			(selected.section === section
+			(currentPage.section === section
 				? ' ' + baseClass + '--selected'
 				: '') +
 			(icon === '' ? '' : ' ' + baseClass + '--icon');
@@ -44,21 +45,21 @@
 	function onClick() {
 		switch (section) {
 			case 'menu':
-				change({
+				navigate({
 					section,
 					submenu: 'options',
 				});
 				break;
 
 			case 'import':
-				change({
+				navigate({
 					section,
 					submenu: 'iconify',
 				});
 				break;
 
 			case 'about':
-				change({
+				navigate({
 					section,
 					submenu: 'about',
 				});

@@ -11,3 +11,16 @@ const defaultValue: PluginUINavigation = {
 };
 
 export const navigation: Writable<PluginUINavigation> = writable(defaultValue);
+
+/**
+ * External links
+ */
+export const externalLinks: Record<string, string> = {
+	repo: 'https://github.com/iconify/iconify-figma',
+	support: 'https://github.com/iconify/iconify-figma/issues',
+};
+
+/**
+ * Type for "navigate" parameter for navigation
+ */
+export type NavigateCallback = (target: PluginUINavigation) => void;

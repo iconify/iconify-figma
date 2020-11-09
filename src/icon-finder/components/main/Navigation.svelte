@@ -3,24 +3,21 @@
 	import { get } from 'svelte/store';
 	import type { FullRoute } from '@iconify/search-core';
 	import type { PluginUINavigation } from '../../../common/navigation';
-	import { navigation } from '../../figma/navigation';
-	import type { WrappedRegistry } from '../../wrapper/registry';
+	import type { NavigateCallback } from '../../figma/navigation';
+	import { externalLinks } from '../../figma/navigation';
 	import { phrases } from '../../phrases/en';
 	import { iconLists } from '../../figma/icon-lists';
 	import Section from './NavigationSection.svelte';
 	import UIIcon from '../misc/Icon.svelte';
 
-	// Registry
-	// export let registry: WrappedRegistry;
-
 	// Route
 	export let route: FullRoute;
 
 	// Current section
-	let selected: PluginUINavigation = get(navigation);
-	const unsubscribeNavigation = navigation.subscribe((value) => {
-		selected = value;
-	});
+	export let currentPage: PluginUINavigation;
+
+	// Callback to change page
+	export let navigate: NavigateCallback;
 
 	// Recent icons
 	let hasRecent: boolean = checkRecentIcons(get(iconLists.recent));
@@ -30,9 +27,9 @@
 
 	function checkRecentIcons(value: string[]): boolean {
 		const hasRecent = value.length > 0;
-		if (!hasRecent && selected.submenu === 'recent') {
+		if (!hasRecent && currentPage.submenu === 'recent') {
 			// Switch from recent page
-			change({
+			navigate({
 				section: 'import',
 				submenu: 'iconify',
 			});
@@ -42,9 +39,9 @@
 
 	// Check route
 	$: {
-		if (route.type !== 'custom' && selected.submenu === 'recent') {
+		if (route.type !== 'custom' && currentPage.submenu === 'recent') {
 			// Navigate from recent icons
-			change({
+			navigate({
 				section: 'import',
 				submenu: 'iconify',
 			});
@@ -53,14 +50,8 @@
 
 	// Unsubscribe from stores
 	onDestroy(() => {
-		unsubscribeNavigation();
 		unsubscribeRecent();
 	});
-
-	// Change current page
-	function change(item: PluginUINavigation) {
-		navigation.set(item);
-	}
 
 	// TypeScript check
 	function assertNever(v: never) {
@@ -83,31 +74,24 @@
 	const baseClass = 'plugin-nav';
 	$: {
 		// Menu tree
-		const section = selected.section;
+		const section = currentPage.section;
 		function item(item: PluginUINavigation): ListItem {
 			const key = item.submenu;
-			const isSelected = key === selected.submenu;
+			const isSelected = key === currentPage.submenu;
 
 			// Check for link
 			let href = '# ';
 			let external = false;
-			switch (item.submenu) {
-				case 'repo':
-					href = 'https://github.com/iconify/iconify-figma';
-					external = true;
-					break;
-
-				case 'support':
-					href = 'https://github.com/iconify/iconify-figma/issues';
-					external = true;
-					break;
+			if (externalLinks[item.submenu] !== void 0) {
+				href = externalLinks[item.submenu];
+				external = true;
 			}
 
 			const onClick = external
 				? void 0
 				: (event: MouseEvent) => {
 						event.preventDefault();
-						change(item);
+						navigate(item);
 				  };
 
 			return {
@@ -192,12 +176,12 @@
 <div class="plugin-header plugin-header--with-menu">
 	<div class="plugin-wrapper-header plugin-wrapper-header--primary">
 		<div class="plugin-header-left">
-			<Section {selected} {change} section="menu" />
-			<Section {selected} {change} section="import" />
+			<Section {currentPage} {navigate} section="menu" />
+			<Section {currentPage} {navigate} section="import" />
 		</div>
 		<div class="plugin-header-center" />
 		<div class="plugin-header-right">
-			<Section {selected} {change} section="about" />
+			<Section {currentPage} {navigate} section="about" />
 		</div>
 	</div>
 
