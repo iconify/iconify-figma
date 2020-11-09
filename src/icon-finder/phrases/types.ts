@@ -1,3 +1,4 @@
+import type { PluginUINavigationSection } from '../../common/navigation';
 import type { IconsListMode } from '../components/types';
 import type { ComponentCodeOutput } from '../footer/code-samples';
 import type {
@@ -104,5 +105,9 @@ export interface UITranslation {
 			intro2: string;
 			head: string;
 		};
+	};
+	figma: {
+		menu: Record<PluginUINavigationSection, string>;
+		submenu: Record<string, string>;
 	};
 }

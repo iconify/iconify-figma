@@ -186,4 +186,14 @@ export const phrases: UITranslation = {
 			head: 'Make sure you import Iconify SVG framework:',
 		},
 	},
+	figma: {
+		menu: {
+			menu: 'Menu',
+			import: 'Import',
+			about: 'About',
+		},
+		submenu: {
+			svg: 'Paste SVG',
+		},
+	},
 };

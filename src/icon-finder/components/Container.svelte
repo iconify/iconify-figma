@@ -4,7 +4,7 @@
 	import type { WrappedRegistry } from '../wrapper/registry';
 	import type { IconCustomisations } from '../customisations/types';
 	import Wrapper from './main/Wrapper.svelte';
-	// import Navigation from './main/Navigation.svelte';
+	import Navigation from './main/Navigation.svelte';
 	import Content from './main/Content.svelte';
 	import Footer from './main/Footer.svelte';
 
@@ -26,7 +26,7 @@
 
 {#if hidden !== true}
 	<Wrapper>
-		<!-- <Navigation {registry} {route} /> -->
+		<Navigation {registry} {route} />
 		<Content
 			{registry}
 			{selection}

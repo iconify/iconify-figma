@@ -103,6 +103,16 @@ Iconify.addCollection({
 		'empty': {
 			body: '',
 		},
+		'menu': {
+			body:
+				'<path d="M16 13H2v1h14v-1zm0-5H2v1h14V8zm0-5H2v1h14V3z" fill-rule="nonzero" fill="currentColor" stroke="none" />',
+			width: 18,
+			height: 18,
+		},
+		'ext-link': {
+			body:
+				'<g fill="none" stroke="currentColor"><path d="M8.5 7v3.5h-7v-7H5" /><path stroke-linecap="square" d="M10 2L5 7M6.5 1.5h4V5" /></g>',
+		},
 	},
 	aliases: {
 		'left': {
@@ -167,6 +177,8 @@ export const icons: Record<string, string | null> = {
 	'mode-inline': customIconsPrefix + ':mode-inline',
 	'selecting-selected': customIconsPrefix + ':confirm',
 	'selecting-unselected': customIconsPrefix + ':empty',
+	'menu': customIconsPrefix + ':menu',
+	'ext-link': customIconsPrefix + ':ext-link',
 };
 
 /**
