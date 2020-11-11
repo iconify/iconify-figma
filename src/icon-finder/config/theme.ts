@@ -115,6 +115,10 @@ Iconify.addCollection({
 		},
 	},
 	aliases: {
+		'up': {
+			parent: 'down',
+			vFlip: true,
+		},
 		'left': {
 			parent: 'down',
 			rotate: 1,
@@ -149,6 +153,7 @@ Iconify.addCollection({
 export const icons: Record<string, string | null> = {
 	'reset': customIconsPrefix + ':reset',
 	'search': customIconsPrefix + ':search',
+	'up': customIconsPrefix + ':up',
 	'down': customIconsPrefix + ':down',
 	'left': customIconsPrefix + ':left',
 	'right': customIconsPrefix + ':right',

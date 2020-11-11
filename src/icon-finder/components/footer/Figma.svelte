@@ -12,6 +12,7 @@
 	import PropertiesContainer from './parts/Properties.svelte';
 	import Sample from './parts/samples/Full.svelte';
 	import IconsList from './parts/Icons.svelte';
+	import About from './parts/About.svelte';
 	import { IconName, CodeBlock } from '../../config/footer-components';
 
 	// Registry
@@ -59,6 +60,9 @@
 				<Sample {icon} {customisations} />
 			{/if}
 			<div class={icon ? 'iif-footer-full-content' : ''}>
+				{#if icon && (route.type !== 'collection' || icon.provider !== route.params.provider || icon.prefix !== route.params.prefix)}
+					<About {registry} {icon} />
+				{/if}
 				{#if showCustomisatons && hasIcons}
 					<PropertiesContainer {icons} {customise} {customisations} />
 				{/if}

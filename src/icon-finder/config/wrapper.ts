@@ -13,6 +13,9 @@ export interface ComponentsConfig {
 
 	// Can select multiple icons
 	multiSelect: boolean;
+
+	// Show icon set info
+	info: boolean;
 }
 
 /**
@@ -30,4 +33,7 @@ export const defaultComponentsConfig: Required<ComponentsConfig> = {
 
 	// Can select multiple icons
 	multiSelect: true,
+
+	// Show icon set info
+	info: false,
 };

@@ -10,6 +10,9 @@
 	// Block data
 	export let block: CollectionInfoBlock;
 
+	// Show title
+	export let title: boolean = true;
+
 	const text = phrases.collectionInfo;
 
 	// Split info into a separate object
@@ -21,7 +24,9 @@
 
 {#if info}
 	<Block type="collection-info" extra={name}>
-		<div class="iif-collection-info-title">{info.name}</div>
+		{#if title}
+			<div class="iif-collection-info-title">{info.name}</div>
+		{/if}
 		{#if info.author}
 			<dl>
 				<dt>{text.author}</dt>
