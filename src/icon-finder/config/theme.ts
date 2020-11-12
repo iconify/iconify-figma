@@ -88,6 +88,10 @@ Iconify.addCollection({
 			body:
 				'<path d="M3.176 4.824L5.06 6.706l3.764-3.765L10 4.118 5.059 9.059 2 6l1.176-1.176z" fill="currentColor"/>',
 		},
+		'confirm2': {
+			body:
+				'<path fill-rule="evenodd" clip-rule="evenodd" d="M3.176 7.824L5.06 9.706l3.764-3.765L10 7.118l-4.941 4.941L2 9l1.176-1.176zM3.176 1.824L5.06 3.706 8.824-.059 10 1.118 5.059 6.059 2 3l1.176-1.176z" fill="currentColor"/>',
+		},
 		'docs': {
 			body:
 				'<g fill="currentColor"><path d="M2 1h5.207L10 3.793V12H2V1zm1 1v9h6V4.207L6.793 2H3z"/><path d="M8 9H4V8h4v1zM8 7H4V6h4v1z"/></g>',
@@ -160,7 +164,7 @@ export const icons: Record<string, string | null> = {
 	'parent': customIconsPrefix + ':parent',
 	'grid': customIconsPrefix + ':grid',
 	'list': customIconsPrefix + ':list',
-	'check-list': customIconsPrefix + ':confirm',
+	'check-list': customIconsPrefix + ':confirm2',
 	'check-list-checked': customIconsPrefix + ':reset',
 	'error-loading': customIconsPrefix + ':error-loading',
 	'icon-width': customIconsPrefix + ':icon-width',
