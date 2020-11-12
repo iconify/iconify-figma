@@ -93,6 +93,7 @@
 				background: $plugin-palette-background-selected-borderless;
 				border-color: $plugin-palette-background-selected-borderless;
 				color: $plugin-palette-color-black;
+				cursor: grab;
 
 				svg + svg {
 					border-color: $plugin-palette-border-blue;

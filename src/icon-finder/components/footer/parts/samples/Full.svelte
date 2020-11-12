@@ -3,6 +3,7 @@
 	import type { IconifyIcon } from '@iconify/iconify';
 	import type { Icon } from '@iconify/search-core';
 	import { iconToString } from '@iconify/search-core';
+	import type { WrappedRegistry } from '../../../../wrapper/registry';
 	import type { IconCustomisations } from '../../../../customisations/types';
 	import { getDimensions } from '../../../../footer/icon-size';
 	import {
@@ -12,6 +13,9 @@
 		defaultHeight,
 	} from '../../../../config/components';
 	import UIIcon from '../../../misc/Icon.svelte';
+
+	// Registry
+	export let registry: WrappedRegistry;
 
 	// Icon name
 	export let icon: Icon;
@@ -178,12 +182,28 @@
 			props.height = size.height + '';
 		}
 	}
+
+	// onDrag event
+	function onDrag(start: boolean, event: MouseEvent) {
+		registry.ondrag(start, event, icon, true);
+	}
 </script>
 
 <div
 	class="iif-footer-sample iif-footer-sample--block iif-footer-sample--loaded"
 	{style}>
-	<UIIcon icon={data.name} {props} />
+	<a
+		href="# "
+		on:click|preventDefault={() => {}}
+		draggable={true}
+		on:dragstart={(event) => {
+			onDrag(true, event);
+		}}
+		on:dragend={(event) => {
+			onDrag(false, event);
+		}}>
+		<UIIcon icon={data.name} {props} />
+	</a>
 	<p>{data.data.width} <span>x</span> {data.data.height}</p>
 	{#if customisations.height}
 		<p><span>(</span>{customisations.height}<span>)</span></p>

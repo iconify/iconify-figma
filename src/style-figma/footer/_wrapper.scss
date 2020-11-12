@@ -35,15 +35,25 @@
 	.iif-footer-sample--block {
 		svg {
 			display: block;
-			margin: 1px;
 			background: $plugin-palette-background-darker-white;
 			box-shadow: 0 0 0 1px $plugin-palette-border-grey;
 		}
-		&:hover {
-			svg {
+		a {
+			display: block;
+			margin: 1px;
+			color: inherit;
+			cursor: grab;
+			text-decoration: none;
+
+			&:hover,
+			&:focus {
 				color: $plugin-palette-color-link-hover;
-				background: $plugin-palette-background-darker-white;
-				box-shadow: 0 0 0 1px $plugin-palette-border-blue;
+				outline: none;
+				text-decoration: none;
+				svg {
+					background: $plugin-palette-background-darker-white;
+					box-shadow: 0 0 0 1px $plugin-palette-border-blue;
+				}
 			}
 		}
 

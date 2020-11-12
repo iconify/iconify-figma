@@ -57,7 +57,7 @@
 		{/if}
 		<div class={icon ? 'iif-footer-full' : ''}>
 			{#if icon}
-				<Sample {icon} {customisations} />
+				<Sample {registry} {icon} {customisations} />
 			{/if}
 			<div class={icon ? 'iif-footer-full-content' : ''}>
 				{#if icon && (route.type !== 'collection' || icon.provider !== route.params.provider || icon.prefix !== route.params.prefix)}

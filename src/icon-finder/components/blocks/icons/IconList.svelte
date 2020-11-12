@@ -3,6 +3,7 @@
 	import type { Icon } from '@iconify/search-core';
 	import type { IconifyIcon } from '@iconify/types';
 	import { phrases } from '../../../config/phrases';
+	import type { IconDragEvent } from '../../../wrapper/registry';
 	import type { IconsListFilter } from '../../types';
 	import UIIcon from '../../misc/Icon.svelte';
 
@@ -39,6 +40,9 @@
 
 	// Callback (Router action)
 	export let onClick: (event: string, value: string | Icon) => void;
+
+	// onDrag
+	export let onDrag: IconDragEvent;
 
 	// Selecting multiple icons
 	export let isSelecting: boolean;
@@ -102,6 +106,13 @@
 			href={link}
 			target="_blank"
 			title={tooltip}
+			draggable={true}
+			on:dragstart={(event) => {
+				onDrag(true, event, icon, false);
+			}}
+			on:dragend={(event) => {
+				onDrag(false, event, icon, false);
+			}}
 			on:click|preventDefault={handleClick}>
 			{#if svg !== false}
 				{@html svg}

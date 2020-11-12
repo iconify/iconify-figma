@@ -214,9 +214,12 @@
 		color: $plugin-palette-color-black;
 
 		.iif-icon-sample a {
+			cursor: grab;
+
 			svg + svg {
 				background: $plugin-palette-background-selected-borderless;
 				border-color: $plugin-palette-border-blue;
+				cursor: pointer;
 			}
 		}
 

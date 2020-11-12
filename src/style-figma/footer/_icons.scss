@@ -18,6 +18,10 @@
 		position: relative;
 	}
 
+	svg {
+		cursor: grab;
+	}
+
 	// "Remove" icon
 	.iif-footer-icons-reset {
 		display: none;
@@ -31,6 +35,7 @@
 
 		svg {
 			display: block;
+			cursor: pointer;
 		}
 	}
 
@@ -58,6 +63,7 @@
 			color: $plugin-palette-color-link;
 			border-color: $plugin-palette-color-link;
 			box-shadow: $plugin-simple-focus-shadow;
+			background: $plugin-palette-background-white;
 		}
 	}
 
@@ -105,6 +111,7 @@
 			.iif-footer-icons-reset {
 				display: block;
 				border-color: $plugin-palette-border-blue;
+				background: $plugin-palette-background-white;
 			}
 		}
 

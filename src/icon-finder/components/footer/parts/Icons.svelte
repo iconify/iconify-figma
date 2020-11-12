@@ -117,6 +117,9 @@
 			selected: false,
 		});
 	}
+
+	// Drag
+	const onDrag = registry.ondrag;
 </script>
 
 <Block type="icons">
@@ -125,6 +128,13 @@
 			<li>
 				<a
 					href="# "
+					draggable={true}
+					on:dragstart={(event) => {
+						onDrag(true, event, item.icon, true);
+					}}
+					on:dragend={(event) => {
+						onDrag(false, event, item.icon, true);
+					}}
 					on:click|preventDefault={() => {
 						onClick(true, item.icon);
 					}}

@@ -1,6 +1,7 @@
 <script lang="typescript">
 	import Iconify from '@iconify/iconify';
 	import type { Icon } from '@iconify/search-core';
+	import type { IconDragEvent } from '../../../wrapper/registry';
 	import UIIcon from '../../misc/Icon.svelte';
 
 	// Icon name
@@ -26,6 +27,9 @@
 
 	// Callback (Router action)
 	export let onClick: (event: string, value: string | Icon) => void;
+
+	// onDrag
+	export let onDrag: IconDragEvent;
 
 	// Selecting multiple icons
 	export let isSelecting: boolean;
@@ -76,6 +80,13 @@
 		href={link}
 		target="_blank"
 		title={tooltip}
+		draggable={true}
+		on:dragstart={(event) => {
+			onDrag(true, event, icon, false);
+		}}
+		on:dragend={(event) => {
+			onDrag(false, event, icon, false);
+		}}
 		on:click|preventDefault={handleClick}>
 		{#if svg !== false}
 			{@html svg}

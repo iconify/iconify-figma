@@ -153,6 +153,9 @@ export class Wrapper {
 				});
 			}
 		}
+
+		// Add onDrag callback
+		registry.setCustom('ondrag', this._onDrag.bind(this));
 	}
 
 	/**
@@ -622,5 +625,17 @@ export class Wrapper {
 		this._setCustomisations(
 			mergeCustomisations(defaultCustomisations, customisations)
 		);
+	}
+
+	/**
+	 * Drag event
+	 */
+	_onDrag(
+		start: boolean,
+		event: MouseEvent,
+		icon: Icon | string,
+		customise: boolean
+	) {
+		console.log(`Dragging (${start ? 'start' : 'end'}):`, icon);
 	}
 }

@@ -40,6 +40,9 @@
 	// Selecting multiple icons
 	export let isSelecting: boolean;
 
+	// onDrag event
+	const onDrag = registry.ondrag;
+
 	// Base class name
 	const baseClass = 'iif-icons';
 
@@ -295,9 +298,9 @@
 	<ul>
 		{#each parsedIcons as item, i (item.name)}
 			{#if isList}
-				<IconList {...item} {onClick} {isSelecting} />
+				<IconList {onDrag} {...item} {onClick} {isSelecting} />
 			{:else}
-				<IconGrid {...item} {onClick} {isSelecting} />
+				<IconGrid {onDrag} {...item} {onClick} {isSelecting} />
 			{/if}
 		{/each}
 	</ul>
