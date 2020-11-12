@@ -1,7 +1,7 @@
 <script lang="typescript">
 	import Iconify from '@iconify/iconify';
 	import type { Icon } from '@iconify/search-core';
-	import type { IconDragEvent } from '../../../wrapper/registry';
+	import type { IconDragEvent } from '../../../wrapper/drag';
 	import UIIcon from '../../misc/Icon.svelte';
 
 	// Icon name

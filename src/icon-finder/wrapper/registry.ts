@@ -1,7 +1,8 @@
-import type { Icon, Registry } from '@iconify/search-core';
+import type { Registry } from '@iconify/search-core';
 import type { FullIconFinderConfig } from '@iconify/search-core/lib/data/config';
 import type { UIEvent } from '../events/types';
 import type { ComponentsConfig } from '../config/wrapper';
+import type { IconDragEvent } from './drag';
 
 /**
  * Add UI to config
@@ -9,16 +10,6 @@ import type { ComponentsConfig } from '../config/wrapper';
 export interface WrappedFullIconFinderConfig extends FullIconFinderConfig {
 	components: Required<ComponentsConfig>;
 }
-
-/**
- * onDrag events
- */
-export type IconDragEvent = (
-	start: boolean,
-	event: MouseEvent,
-	icon: Icon | string,
-	customise: boolean
-) => void;
 
 /**
  * Add custom properties to registry

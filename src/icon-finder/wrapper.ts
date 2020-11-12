@@ -8,6 +8,7 @@ import {
 	IconFinderCore,
 	setComponentsConfig,
 	objectToRoute,
+	iconToString,
 } from '@iconify/search-core';
 import type {
 	Icon,
@@ -46,6 +47,7 @@ import {
 	selectionToArray,
 } from './wrapper/icons';
 import { addCustomAPIProviders } from './config/api';
+import type { WrapperDragStartData } from './wrapper/drag';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-unused-vars-experimental, @typescript-eslint/no-empty-function
 function assertNever(s: never) {}
@@ -81,6 +83,9 @@ export class Wrapper {
 
 	// Container component, added on first render
 	protected _container: SvelteComponent | null = null;
+
+	// Drag/drop data
+	protected _dragging: WrapperDragStartData | null = null;
 
 	/**
 	 * Constructor
@@ -636,6 +641,59 @@ export class Wrapper {
 		icon: Icon | string,
 		customise: boolean
 	) {
-		console.log(`Dragging (${start ? 'start' : 'end'}):`, icon);
+		if (typeof icon !== 'string') {
+			icon = iconToString(icon);
+		}
+
+		// Start dragging
+		if (start) {
+			try {
+				const rect = (event.target as Element).getBoundingClientRect();
+				this._dragging = {
+					icon,
+					customise,
+					rect: {
+						x: event.clientX - rect.x,
+						y: event.clientY - rect.y,
+					},
+					min: {
+						x: event.screenX - event.clientX,
+						y: event.screenY - event.clientY,
+					},
+					max: {
+						x: event.screenX - event.clientX + window.innerWidth,
+						y: event.screenY - event.clientY + window.innerHeight,
+					},
+				};
+			} catch (err) {}
+			return;
+		}
+
+		// End dragging
+		if (!this._dragging) {
+			return;
+		}
+
+		// Copy, reset and validate data
+		const data = this._dragging;
+		this._dragging = null;
+
+		if (data.icon !== icon) {
+			this._dragging = null;
+			return;
+		}
+
+		// Check if mouse event is inside plugin window
+		if (
+			event.screenX > data.min.x &&
+			event.screenX < data.max.x &&
+			event.screenY > data.min.y &&
+			event.screenY < data.max.y
+		) {
+			// console.log('Dropped inside window');
+			return;
+		}
+
+		console.log(`TODO: import ${icon}...`);
 	}
 }

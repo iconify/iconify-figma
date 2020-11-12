@@ -3,7 +3,7 @@
 	import type { Icon } from '@iconify/search-core';
 	import type { IconifyIcon } from '@iconify/types';
 	import { phrases } from '../../../config/phrases';
-	import type { IconDragEvent } from '../../../wrapper/registry';
+	import type { IconDragEvent } from '../../../wrapper/drag';
 	import type { IconsListFilter } from '../../types';
 	import UIIcon from '../../misc/Icon.svelte';
 
