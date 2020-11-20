@@ -162,6 +162,7 @@ export const icons: Record<string, string | null> = {
 	'left': customIconsPrefix + ':left',
 	'right': customIconsPrefix + ':right',
 	'parent': customIconsPrefix + ':parent',
+	'expand': customIconsPrefix + ':right',
 	'grid': customIconsPrefix + ':grid',
 	'list': customIconsPrefix + ':list',
 	'check-list': customIconsPrefix + ':confirm2',

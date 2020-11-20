@@ -16,6 +16,7 @@ export interface WrappedFullIconFinderConfig extends FullIconFinderConfig {
  */
 export interface WrappedRegistry extends Registry {
 	callback: (event: UIEvent) => void;
+	link: (event: MouseEvent) => void;
 	config: WrappedFullIconFinderConfig;
 	ondrag: IconDragEvent;
 }

@@ -14,8 +14,12 @@ export interface ComponentsConfig {
 	// Can select multiple icons
 	multiSelect: boolean;
 
-	// Show icon set info
-	info: boolean;
+	// Default status for footer blocks that can be toggled
+	// Works only if canToggleFooterBlocks is enabled in ./components.ts
+	// Remove config entry to disable toggle for one specific block
+	propsVisible: boolean;
+
+	infoVisible: boolean;
 }
 
 /**
@@ -32,8 +36,10 @@ export const defaultComponentsConfig: Required<ComponentsConfig> = {
 	codeTab: '',
 
 	// Can select multiple icons
-	multiSelect: true,
+	multiSelect: false,
 
-	// Show icon set info
-	info: false,
+	// Toggle footer blocks
+	propsVisible: true,
+
+	infoVisible: false,
 };
