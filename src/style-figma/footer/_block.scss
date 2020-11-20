@@ -1,27 +1,10 @@
 .iif-footer-block {
-	margin-bottom: 16px;
+	margin: 8px 0;
 
 	&:after {
 		content: ' ';
 		display: table;
 		clear: both;
-	}
-
-	// Link used in various custom blocks
-	a {
-		color: inherit;
-		text-decoration: none;
-
-		&:hover,
-		&:focus {
-			text-decoration: underline;
-			color: $plugin-palette-color-link-hover;
-		}
-
-		&:focus {
-			outline: none;
-			box-shadow: none;
-		}
 	}
 }
 
@@ -79,13 +62,6 @@
 			text-decoration: underline;
 			box-shadow: $plugin-simple-focus-shadow;
 		}
-	}
-}
-
-// Info block
-.iif-footer-block--about {
-	.iif-block--info {
-		margin-bottom: 16px;
 	}
 }
 
