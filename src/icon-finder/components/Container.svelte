@@ -1,5 +1,5 @@
 <script lang="typescript">
-	import { onDestroy } from 'svelte';
+	import { setContext, onDestroy } from 'svelte';
 	import { get } from 'svelte/store';
 	import type { FullRoute, ViewBlocks } from '@iconify/search-core';
 	import type { PluginUINavigation } from '../../common/navigation';
@@ -26,6 +26,9 @@
 	export let error: string;
 	export let route: FullRoute;
 	export let blocks: ViewBlocks | null;
+
+	// Set context
+	setContext('registry', registry);
 
 	// Manage navigation
 	let currentPage: PluginUINavigation = get(navigation);
@@ -61,20 +64,8 @@
 	<Wrapper>
 		<Navigation {route} {currentPage} {navigate} />
 		{#if showIconFinder}
-			<Content
-				{registry}
-				{selection}
-				{selectionLength}
-				{viewChanged}
-				{error}
-				{route}
-				{blocks} />
-			<Footer
-				{registry}
-				{selection}
-				{selectionLength}
-				{route}
-				{customisations} />
+			<Content {selection} {viewChanged} {error} {route} {blocks} />
+			<Footer {selection} {selectionLength} {route} {customisations} />
 		{/if}
 	</Wrapper>
 {/if}

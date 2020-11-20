@@ -1,4 +1,5 @@
 <script lang="typescript">
+	import { getContext } from 'svelte';
 	import Iconify from '@iconify/iconify';
 	import type { IconifyIcon } from '@iconify/iconify';
 	import type { Icon } from '@iconify/search-core';
@@ -14,14 +15,14 @@
 	} from '../../../../config/components';
 	import UIIcon from '../../../misc/Icon.svelte';
 
-	// Registry
-	export let registry: WrappedRegistry;
-
 	// Icon name
 	export let icon: Icon;
 
 	// Current customisations
 	export let customisations: IconCustomisations;
+
+	// Registry
+	const registry = getContext('registry') as WrappedRegistry;
 
 	const divisions = [2.5, 3, 3.5];
 
