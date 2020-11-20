@@ -30,8 +30,6 @@ export const showFooterBlockTitles = true;
 
 /**
  * Toggle footer blocks?
- *
- * Requires: showFooterBlockTitles === true
  */
 export const canToggleFooterBlocks = true;
 
