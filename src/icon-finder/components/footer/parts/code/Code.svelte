@@ -1,17 +1,19 @@
 <script lang="typescript">
 	import { getContext } from 'svelte';
 	import type { Icon } from '@iconify/search-core';
-	import { phrases } from '../../../../config/phrases';
-	import type { WrappedRegistry } from '../../../../wrapper/registry';
-	import type { IconCustomisations } from '../../../../customisations/types';
-	import type { AvailableLanguages } from '../../../../footer/code-tree';
-	import type { ProviderCodeData } from '../../../../footer/types';
-	import { capitalize } from '../../../../footer/capitalize';
-	import type { CodeOutput } from '../../../../footer/code-samples';
+	import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisations';
+	import type {
+		CodeSampleAPIConfig,
+		CodeSampleMode,
+	} from '@iconify/search-core/lib/code-samples/types';
+	import type { CodeOutput } from '@iconify/search-core/lib/code-samples/code';
 	import {
 		getIconCode,
 		codeOutputComponentKeys,
-	} from '../../../../footer/code-samples';
+	} from '@iconify/search-core/lib/code-samples/code';
+	import { capitalize } from '@iconify/search-core/lib/misc/capitalize';
+	import { phrases } from '../../../../config/phrases';
+	import type { WrappedRegistry } from '../../../../wrapper/registry';
 	import UIIcon from '../../../misc/Icon.svelte';
 	import SampleInput from './Sample.svelte';
 
@@ -22,10 +24,10 @@
 	export let customisations: IconCustomisations;
 
 	// API provider config
-	export let providerConfig: ProviderCodeData;
+	export let providerConfig: CodeSampleAPIConfig;
 
 	// Mode
-	export let mode: AvailableLanguages;
+	export let mode: CodeSampleMode;
 
 	// Registry
 	const registry = getContext('registry') as WrappedRegistry;

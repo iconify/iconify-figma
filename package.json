@@ -16,7 +16,7 @@
 	"repository": "github:iconify/iconify-figma",
 	"devDependencies": {
 		"@figma/plugin-typings": "^1.16.1",
-		"@iconify/search-core": "^1.0.0-beta.2",
+		"@iconify/search-core": "^1.0.0-beta.4",
 		"@iconify/types": "^1.0.6",
 		"@rollup/plugin-buble": "^0.21.3",
 		"@rollup/plugin-commonjs": "^15.1.0",
