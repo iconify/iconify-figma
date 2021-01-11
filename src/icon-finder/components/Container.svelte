@@ -5,7 +5,7 @@
 	import type { PluginUINavigation } from '../../common/navigation';
 	import type { SelectedIcons } from '../wrapper/icons';
 	import type { WrappedRegistry } from '../wrapper/registry';
-	import type { IconCustomisations } from '../customisations/types';
+	import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisations';
 	import { navigation, externalLinks } from '../figma/navigation';
 	import Wrapper from './main/Wrapper.svelte';
 	import Navigation from './main/Navigation.svelte';

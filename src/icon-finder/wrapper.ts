@@ -29,7 +29,6 @@ import {
 import type { IconFinderWrapperParams } from './wrapper/params';
 import type { IconFinderState } from './wrapper/state';
 import type { WrapperStatus } from './wrapper/status';
-import { Container } from './config/container';
 import type { IconFinderEvent } from './wrapper/events';
 import type {
 	UIEvent,
@@ -49,6 +48,9 @@ import {
 } from './wrapper/icons';
 import { addCustomAPIProviders } from './config/api';
 import type { WrapperDragStartData } from './wrapper/drag';
+
+// Change import to change container component
+import Container from './components/Container.svelte';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-unused-vars-experimental, @typescript-eslint/no-empty-function
 function assertNever(s: never) {}
