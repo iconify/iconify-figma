@@ -1,6 +1,6 @@
 <script lang="typescript">
 	import { getContext } from 'svelte';
-	import Iconify from '@iconify/iconify';
+	import { Iconify } from '@iconify/search-core/lib/iconify';
 	import type { IconifyIcon } from '@iconify/iconify';
 	import type { Icon } from '@iconify/search-core';
 	import { iconToString } from '@iconify/search-core';
@@ -92,7 +92,7 @@
 		const name = iconToString(icon);
 
 		// Get data
-		const iconData = Iconify.getIcon(name)!;
+		const iconData = Iconify.getIcon!(name)!;
 
 		// Check if icon is rotated (for width/height calculations)
 		const rotated = !!(

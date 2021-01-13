@@ -1,6 +1,6 @@
 <script lang="typescript">
 	import { getContext } from 'svelte';
-	import Iconify from '@iconify/iconify';
+	import { Iconify } from '@iconify/search-core/lib/iconify';
 	import {
 		iconToString,
 		cloneObject,
@@ -161,7 +161,7 @@
 		let updated = false;
 		(blocks as CollectionViewBlocks).icons.icons.forEach((icon) => {
 			const name = iconToString(icon);
-			const data = Iconify.getIcon(name);
+			const data = Iconify.getIcon ? Iconify.getIcon(name) : null;
 			const exists = data !== null;
 
 			// Icon name, used in list view and tooltip
@@ -241,11 +241,13 @@
 		});
 
 		// Load pending images
-		if (pending.length) {
-			if (abortLoader !== null) {
-				abortLoader();
+		if (Iconify.loadIcons) {
+			if (pending.length) {
+				if (abortLoader !== null) {
+					abortLoader();
+				}
+				abortLoader = Iconify.loadIcons(pending, loadingEvent);
 			}
-			abortLoader = Iconify.loadIcons(pending, loadingEvent);
 		}
 
 		// Overwrite parseIcons variable only if something was updated, triggering component re-render
