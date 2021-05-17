@@ -7,10 +7,10 @@
 	import type { WrappedRegistry } from '../wrapper/registry';
 	import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisations';
 	import { navigation, externalLinks } from '../figma/navigation';
-	import Wrapper from './main/Wrapper.svelte';
-	import Navigation from './main/Navigation.svelte';
-	import Content from './main/Content.svelte';
-	import Footer from './main/Footer.svelte';
+	import Wrapper from './Wrapper.svelte';
+	import Navigation from './figma/Navigation.svelte';
+	import Content from './content/Content.svelte';
+	import Footer from './content/Footer.svelte';
 
 	/**
 	 * Global exports
