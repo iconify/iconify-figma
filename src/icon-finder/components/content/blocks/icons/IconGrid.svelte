@@ -74,6 +74,6 @@
 				<UIIcon
 					icon={selected ? 'selecting-selected' : 'selecting-unselected'} />
 			{/if}
-		{/if}
+		{:else}<span class="iif-icon-loading">{icon.name}</span>{/if}
 	</a>
 </li>
