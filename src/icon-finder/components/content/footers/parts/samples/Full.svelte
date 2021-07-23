@@ -195,7 +195,8 @@
 </script>
 
 <div
-	class="iif-footer-sample iif-footer-sample--block iif-footer-sample--loaded"
+	class="iif-foote
+	r-sample iif-footer-sample--block iif-footer-sample--loaded"
 	{style}>
 	<a
 		href="# "
@@ -207,7 +208,9 @@
 		on:dragend={(event) => {
 			onDrag(false, event);
 		}}>
-		<IconComponent icon={icon.name} {...props} />
+		{#each [data] as icon (icon.name)}
+			<IconComponent icon={icon.name} {...props} />
+		{/each}
 	</a>
 	<p>{data.data.width} <span>x</span> {data.data.height}</p>
 	{#if customisations.height}
