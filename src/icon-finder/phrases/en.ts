@@ -148,6 +148,8 @@ export const phrases: UITranslation = {
 		blockHint: 'Icon is rendered as is, without custom vertical alignment.',
 	},
 	codeSamples: {
+		animatedNotice:
+			'Selected icon has SVG animations that Figma does not support. Icon might be imported incorrectly.',
 		copy: 'Copy to clipboard',
 		copied: 'Copied to clipboard.',
 		heading: 'Show "{name}" code for developers',

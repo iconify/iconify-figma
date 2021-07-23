@@ -2,6 +2,7 @@
 	import { getContext } from 'svelte';
 	import type { Icon, FullRoute } from '@iconify/search-core';
 	import { iconToString } from '@iconify/search-core';
+	import { getIcon } from '@iconify/svelte';
 	import type { WrappedRegistry } from '../../../../wrapper/registry';
 	import type {
 		FooterButton,
@@ -27,6 +28,36 @@
 	}
 	const baseClassName = 'iif-form-button';
 	const buttonPhrases = phrases.footerButtons;
+
+	// Selected icon state
+	interface SelectedIconData {
+		name: string;
+		animated: boolean;
+	}
+	let selectedIconData: SelectedIconData | null = null;
+	$: {
+		if (icons.length !== 1) {
+			selectedIconData = null;
+		} else {
+			const name = iconToString(icons[0]);
+			const data = getIcon(name);
+			if (data) {
+				// Check if icon has animations
+				const body = data.body;
+				const animated =
+					body.indexOf('<animate') !== -1 ||
+					body.indexOf('<set') !== -1 ||
+					body.indexOf('<discard') !== -1;
+
+				selectedIconData = {
+					name,
+					animated,
+				};
+			} else {
+				selectedIconData = null;
+			}
+		}
+	}
 
 	/**
 	 * Parameters for callback
@@ -134,6 +165,10 @@
 		});
 	}
 </script>
+
+{#if selectedIconData && selectedIconData.animated}
+	<p class="iif-footer-notice">{phrases.codeSamples.animatedNotice}</p>
+{/if}
 
 <div class="iif-footer-buttons">
 	{#each buttons as item, i (item.key)}

@@ -94,3 +94,10 @@
 		margin-right: 0;
 	}
 }
+
+.iif-footer-notice {
+	@include plugin-font-ui-pos('small', 'normal');
+	margin: 0 0 16px;
+	padding: 8px 12px;
+	background-color: $plugin-palette-background-notice;
+}

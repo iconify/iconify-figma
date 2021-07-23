@@ -95,6 +95,7 @@ export interface UITranslation {
 		blockHint: string;
 	};
 	codeSamples: {
+		animatedNotice: string;
 		copy: string;
 		copied: string;
 		heading: string;
