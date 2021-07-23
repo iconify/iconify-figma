@@ -1,6 +1,6 @@
 <script lang="typescript">
 	import { getContext } from 'svelte';
-	import IconComponent, { getIcon } from '@iconify/svelte';
+	import IconComponent from '@iconify/svelte';
 	import type { IconifyIcon } from '@iconify/svelte';
 	import type { Icon } from '@iconify/search-core';
 	import { iconToString } from '@iconify/search-core';
@@ -92,7 +92,7 @@
 		const name = iconToString(icon);
 
 		// Get data (both getIcon and icon data are available: check is done in footer)
-		const iconData = getIcon(name)!;
+		const iconData = Iconify.getIcon!(name)!;
 
 		// Check if icon is rotated (for width/height calculations)
 		const rotated = !!(
@@ -207,7 +207,7 @@
 		on:dragend={(event) => {
 			onDrag(false, event);
 		}}>
-		<IconComponent icon={data.name} {props} />
+		<IconComponent icon={icon.name} {...props} />
 	</a>
 	<p>{data.data.width} <span>x</span> {data.data.height}</p>
 	{#if customisations.height}
