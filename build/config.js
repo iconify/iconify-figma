@@ -1,3 +1,10 @@
+const fs = require('fs');
+const path = require('path');
+
+const manifest = JSON.parse(
+	fs.readFileSync(path.dirname(__dirname) + '/manifest.json', 'utf8')
+);
+
 /**
  * Build configuration
  */
@@ -11,7 +18,7 @@ module.exports = {
 		style: 'src/style-figma/style.scss',
 	},
 
-	// Output names
+	// Output names for temporary files
 	output: {
 		// Directory, relative to root directory, cannot be empty
 		dir: 'dist',
@@ -19,5 +26,13 @@ module.exports = {
 		script: 'icon-finder.js',
 		// Filename of stylesheet
 		style: 'style.css',
+	},
+
+	// Figma plugin
+	figma: {
+		script: 'src/figma/index.ts',
+		template: 'src/template/page.html',
+		main: manifest.main,
+		ui: manifest.ui,
 	},
 };

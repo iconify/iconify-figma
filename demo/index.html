@@ -34,6 +34,32 @@
 
 	<body>
 		<div id="container"></div>
-		<script src="../dist/icon-finder.js" async></script>
+		<script>
+			(() => {
+				// Fake sending messages from Figma to UI
+				function fakeMessage(pluginMessage) {
+					window.postMessage(
+						{
+							pluginMessage,
+						},
+						'*'
+					);
+				}
+
+				// Fake event listener from UI
+				window.mockFigmaMessage = (message) => {
+					console.log('Got message from UI:', message);
+					switch (message.type) {
+						case 'ui-loaded':
+							fakeMessage({
+								type: 'start-plugin',
+								ifConfig: {},
+							});
+							break;
+					}
+				};
+			})();
+		</script>
+		<script src="../dist/icon-finder.js"></script>
 	</body>
 </html>

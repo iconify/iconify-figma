@@ -6,7 +6,7 @@
 		"declaration": false,
 		"sourceMap": false,
 		"strict": true,
-		"types": ["svelte"],
+		"types": ["svelte", "plugin-typings"],
 		"typeRoots": ["./node_modules/@types", "./node_modules/@figma"],
 		"moduleResolution": "node",
 		"allowSyntheticDefaultImports": true,

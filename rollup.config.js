@@ -45,4 +45,23 @@ export default [
 		},
 		plugins: [terser()],
 	},
+	{
+		input: config.figma.script,
+		output: {
+			sourcemap: false,
+			format: 'iife',
+			file: config.figma.main,
+		},
+		plugins: [
+			resolve({
+				browser: true,
+				extensions: ['.ts', '.js'],
+			}),
+			typescript({
+				sourceMap: false,
+			}),
+			commonjs(),
+			terser(),
+		],
+	},
 ];

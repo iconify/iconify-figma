@@ -9,13 +9,14 @@
 		"build": "node build/all",
 		"build:script": "rollup -c rollup.config.js",
 		"watch:script": "rollup -c rollup.config.js --watch",
-		"build:style": "node build/style"
+		"build:style": "node build/style",
+		"build:figma": "node build/figma"
 	},
 	"bugs": "https://github.com/iconify/iconify-figma/issues",
 	"homepage": "https://github.com/iconify/iconify-figma",
 	"repository": "github:iconify/iconify-figma",
 	"devDependencies": {
-		"@figma/plugin-typings": "^1.23.0",
+		"@figma/plugin-typings": "^1.26.0",
 		"@iconify/search-core": "^1.0.0",
 		"@iconify/svelte": "^2.0.0-beta.1",
 		"@iconify/utils": "^1.0.3",

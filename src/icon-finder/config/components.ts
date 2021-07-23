@@ -96,6 +96,7 @@ export const footerButtons: Record<string, FooterButton> = {
 			params.icons.length > 1 ? 'Import Icons' : 'Import Icon',
 	},
 	// Import as component(s)
+	/*
 	component: {
 		type: 'secondary',
 		display: 'icons',
@@ -104,12 +105,15 @@ export const footerButtons: Record<string, FooterButton> = {
 				? 'Import as Components'
 				: 'Import as Component',
 	},
+	*/
 	// Import as variants (import as components, then combine them)
+	/*
 	variants: {
 		type: 'secondary',
 		display: 'many-icons',
 		text: 'Import as Variants',
 	},
+	*/
 };
 
 /**
