@@ -1,12 +1,17 @@
 import type { UIToFigmaMessage } from '../common/messages';
 import { loadConfig } from './data/config';
 import { pluginEnv } from './data/env';
+import { getTargetLayers, selectionChanged } from './data/layers';
 import { getUISize } from './data/layout';
 import { sendMessageToUI } from './send-message';
 
 (async () => {
 	// Startup
 	pluginEnv.config = await loadConfig();
+	pluginEnv.layersTree = getTargetLayers();
+
+	// Track selection
+	figma.on('selectionchange', selectionChanged);
 
 	// Show UI
 	figma.showUI(__html__, getUISize());
@@ -29,6 +34,7 @@ import { sendMessageToUI } from './send-message';
 				sendMessageToUI({
 					type: 'start-plugin',
 					ifConfig: pluginEnv.config.iconFinder,
+					pageLayer: pluginEnv.layersTree,
 				});
 				return;
 		}

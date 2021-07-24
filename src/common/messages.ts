@@ -1,34 +1,44 @@
 import type { IconFinderConfig, PartialRoute } from '@iconify/search-core';
 import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/customisations';
 import type { PluginIconFinderConfig } from './config';
+import type { SelectedPageLayer } from './layers';
 
 /**
- * Send message when plugin starts
+ * Messages sent from Figma to UI
  */
-interface FigmaToUIStartMessage {
+
+// Send message when plugin starts
+interface FigmaToUILayersMessage {
+	type: 'target-layers';
+	pageLayer: SelectedPageLayer;
+}
+
+interface FigmaToUIStartMessage
+	extends Partial<Omit<FigmaToUILayersMessage, 'type'>> {
 	type: 'start-plugin';
 	ifConfig: PluginIconFinderConfig;
 }
 
+// Combined type
+export type FigmaToUIMessage = FigmaToUIStartMessage | FigmaToUILayersMessage;
+
 /**
- * Parent window has been resized
+ * Messages sent from UI to Figma
  */
+
+// Parent window has been resized
 interface UIToFigmaResizeMessage {
 	type: 'resize';
 	height: number;
 }
 
-/**
- * Send message when UI has been loaded
- */
+// Send message when UI has been loaded
 interface UIToFigmaLoadedMessage
 	extends Partial<Omit<UIToFigmaResizeMessage, 'type'>> {
 	type: 'ui-loaded';
 }
 
-/**
- * Events from Icon Finder, applied to config
- */
+// Events from Icon Finder, applied to config
 interface UIToFigmaConfigMessage {
 	type: 'icon-finder-config';
 	config: IconFinderConfig;
@@ -44,11 +54,7 @@ interface UIToFigmaRouteMessage {
 	route: PartialRoute;
 }
 
-/**
- * Combined types
- */
-export type FigmaToUIMessage = FigmaToUIStartMessage;
-
+// Combined type
 export type UIToFigmaMessage =
 	| UIToFigmaLoadedMessage
 	| UIToFigmaResizeMessage

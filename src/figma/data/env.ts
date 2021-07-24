@@ -1,3 +1,4 @@
+import type { SelectedPageLayer } from '../../common/layers';
 import { emptyPluginConfig, PluginConfig } from './config';
 
 interface PluginEnv {
@@ -9,6 +10,9 @@ interface PluginEnv {
 
 	// Window height
 	windowHeight?: number;
+
+	// Selected layers, starting with page
+	layersTree?: SelectedPageLayer;
 }
 
 export const pluginEnv: PluginEnv = {
