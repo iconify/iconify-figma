@@ -152,7 +152,8 @@ export const phrases: UITranslation = {
 			'Selected icon has SVG animations that Figma does not support. Icon might be imported incorrectly.',
 		copy: 'Copy to clipboard',
 		copied: 'Copied to clipboard.',
-		heading: 'Show "{name}" code for developers',
+		headingHidden: 'Show code for "{name}" for developers',
+		heading: 'Code for "{name}" for developers',
 		childTabTitle: '{key} versions:',
 		childTabTitles: {
 			react: 'React component versions:',
