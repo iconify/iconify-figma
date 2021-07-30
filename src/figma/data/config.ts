@@ -1,4 +1,4 @@
-import type { PluginIconFinderConfig } from '../../common/config';
+import type { PluginIconFinderConfig } from '../../common/misc';
 import type { PluginUINavigation } from '../../common/navigation';
 import { convertLegacyConfig, LegacyPluginConfig } from './legacy-config';
 

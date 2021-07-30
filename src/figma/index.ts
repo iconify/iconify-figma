@@ -34,6 +34,7 @@ import { sendMessageToUI } from './send-message';
 				// UI has loaded - send message to start Icon Finder
 				sendMessageToUI({
 					type: 'start-plugin',
+					app: pluginEnv.app,
 					ifConfig: pluginEnv.config.iconFinder,
 					pageLayer: pluginEnv.layersTree,
 				});

@@ -1,6 +1,6 @@
 import type { IconFinderConfig, PartialRoute } from '@iconify/search-core';
 import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/customisations';
-import type { PluginIconFinderConfig } from './config';
+import type { PluginApp, PluginIconFinderConfig } from './misc';
 import type { ImportIcon } from './import';
 import type { SelectedPageLayer } from './layers';
 
@@ -17,6 +17,7 @@ interface FigmaToUILayersMessage {
 interface FigmaToUIStartMessage
 	extends Partial<Omit<FigmaToUILayersMessage, 'type'>> {
 	type: 'start-plugin';
+	app: PluginApp;
 	ifConfig: PluginIconFinderConfig;
 }
 
