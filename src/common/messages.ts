@@ -1,7 +1,7 @@
 import type { IconFinderConfig, PartialRoute } from '@iconify/search-core';
 import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/customisations';
 import type { PluginApp, PluginIconFinderConfig } from './misc';
-import type { ImportIcon } from './import';
+import type { ImportIconCommon, ImportIconItem } from './import';
 import type { SelectedPageLayer } from './layers';
 
 /**
@@ -58,7 +58,13 @@ interface UIToFigmaRouteMessage {
 
 export interface UIToFigmaImportIconMessage {
 	type: 'import-icon';
-	icons: ImportIcon[];
+	data: ImportIconCommon;
+	route?: PartialRoute; // Route to restore Icon Finder when replacing icon
+	icons: ImportIconItem[];
+}
+
+interface UIToFigmaCloseMessage {
+	type: 'close-plugin';
 }
 
 // Combined type
@@ -68,4 +74,5 @@ export type UIToFigmaMessage =
 	| UIToFigmaConfigMessage
 	| UIToFigmaCustomisationsMessage
 	| UIToFigmaRouteMessage
-	| UIToFigmaImportIconMessage;
+	| UIToFigmaImportIconMessage
+	| UIToFigmaCloseMessage;

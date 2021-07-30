@@ -1,5 +1,8 @@
-import type { ImportIcon } from '../../common/import';
+import type { PartialRoute } from '@iconify/search-core';
+import type { ImportIconCommon, ImportIconItem } from '../../common/import';
 import { filterViableParentNode, ViableParentFigmaNode } from '../data/layers';
+import type { ImportedIconSharedData } from '../data/node-data';
+import { figmaPhrases } from '../data/phrases';
 
 /**
  * Find selected node
@@ -23,10 +26,13 @@ function moveNode(node: FrameNode, parent: ViableParentFigmaNode) {
 /**
  * Import icon(s)
  */
-export function importIcons(icons: ImportIcon[]) {
+export function importIcons(
+	data: ImportIconCommon,
+	icons: ImportIconItem[],
+	route?: PartialRoute
+) {
 	// Find parent layer
-	const firstIcon = icons[0];
-	const parent = findParentLayer(firstIcon.layerId);
+	const parent = findParentLayer(data.layerId);
 
 	// Import all icons
 	icons.forEach((icon) => {
@@ -38,11 +44,18 @@ export function importIcons(icons: ImportIcon[]) {
 
 		// Set data
 		node.setSharedPluginData('iconify', 'source', 'iconify');
-		node.setSharedPluginData('iconify', 'props', JSON.stringify(icon.data));
-		node.setRelaunchData({ code: 'Icon code for developers' });
+
+		const propsData: ImportedIconSharedData = {
+			version: 2,
+			name: icon.name,
+			props: data.props,
+			route,
+		};
+		node.setSharedPluginData('iconify', 'props', JSON.stringify(propsData));
+		node.setRelaunchData(figmaPhrases.relaunch);
 
 		// Rename node
-		node.name = icon.data.name;
+		node.name = icon.name;
 
 		// Move it
 		moveNode(node, parent);

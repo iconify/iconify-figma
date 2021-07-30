@@ -4,7 +4,7 @@ import { iconToString } from '@iconify/search-core';
 import { renderHTML } from '@iconify/search-core/lib/code-samples/html';
 import { defaultCustomisations } from '@iconify/search-core/lib/misc/customisations';
 import { getIcon } from '@iconify/svelte';
-import type { ImportIcon } from '../../common/import';
+import type { ImportIconCommon, ImportIconItem } from '../../common/import';
 
 /**
  * Convert button message from Icon Finder to message to plugin
@@ -37,22 +37,28 @@ export function getIconImportMessage(
 				...size,
 				...props,
 			});
-			const result: ImportIcon = {
+			const result: ImportIconItem = {
 				svg,
-				data: {
-					name,
-					props,
-				},
+				name,
 			};
 			return result;
 		})
-		.filter((item) => item !== null) as ImportIcon[];
+		.filter((item) => item !== null) as ImportIconItem[];
 
-	// Return message if there is something to import
-	return icons.length > 0
-		? {
-				type: 'import-icon',
-				icons,
-		  }
-		: void 0;
+	if (!icons.length) {
+		return;
+	}
+
+	// Return data
+	const route = state.route;
+	const data: ImportIconCommon = {
+		props,
+	};
+
+	return {
+		type: 'import-icon',
+		data,
+		route,
+		icons,
+	};
 }

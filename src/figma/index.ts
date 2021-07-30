@@ -42,7 +42,12 @@ import { sendMessageToUI } from './send-message';
 
 			case 'import-icon':
 				// Import icon(s)
-				importIcons(event.icons);
+				importIcons(event.data, event.icons);
+				return;
+
+			case 'close-plugin':
+				// Close plugin
+				figma.closePlugin();
 				return;
 		}
 	};

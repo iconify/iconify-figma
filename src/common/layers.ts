@@ -8,11 +8,17 @@ export interface SelectedPageLayer {
 }
 
 /**
- * Base
+ * Common data
  */
-interface BaseLayer {
+interface CommonLayerData {
 	id: string;
 	name: string;
+}
+
+/**
+ * Base
+ */
+interface BaseLayer extends CommonLayerData {
 	children: PossibleTargetChildLayer[];
 }
 
@@ -49,3 +55,10 @@ export type PossibleTargetChildLayer =
 	| PossibleTargetFrameLayer
 	| PossibleTargetComponentLayer
 	| PossibleTargetComponentInstanceLayer;
+
+/**
+ * Layer with icon
+ */
+export interface ImportedIconLayer extends CommonLayerData {
+	type: 'frame' | 'component' | 'instance';
+}

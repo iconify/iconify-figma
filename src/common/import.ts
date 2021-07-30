@@ -1,25 +1,32 @@
 import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisations';
 
-interface ImportSVG {
-	svg: string;
+// Target for import
+interface ImportTarget {
+	// Layer
 	layerId?: string;
 }
 
 /**
  * Import icon from Iconify
  */
-export interface ImportIcon extends ImportSVG {
-	// Icon information
-	data: {
-		// Full name with prefix
-		name: string;
+// Common data for multiple icons
+export interface ImportIconCommon extends ImportTarget {
+	// Customisations
+	props: Partial<IconCustomisations>;
+}
 
-		// Customisations
-		props: Partial<IconCustomisations>;
-	};
+// Data for each imported icon
+export interface ImportIconItem {
+	// Full name with prefix
+	name: string;
+
+	// SVG
+	svg: string;
 }
 
 /**
  * Import custom SVG
  */
-export interface ImportCustomSVG extends ImportSVG {}
+export interface ImportCustomSVG extends ImportTarget {
+	svg: string;
+}

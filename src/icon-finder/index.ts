@@ -1,4 +1,5 @@
 import type { FigmaToUIMessage } from '../common/messages';
+import { pluginUIEnv } from './figma/env';
 import { getIconImportMessage } from './figma/import';
 import { sendMessageToFigma } from './figma/messages';
 import { Wrapper } from './wrapper';
@@ -27,6 +28,9 @@ function runIconFinder() {
 
 		switch (message.type) {
 			case 'start-plugin':
+				// Set environment
+				pluginUIEnv.app = message.app;
+
 				// Create wrapper
 				wrapper = new Wrapper({
 					container,
@@ -72,7 +76,7 @@ function runIconFinder() {
 						}
 					},
 				});
-				break;
+				return;
 		}
 	};
 
