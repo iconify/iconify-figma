@@ -1,5 +1,4 @@
 import {
-	buildIcon,
 	getIcon,
 	addCollection,
 	_api,

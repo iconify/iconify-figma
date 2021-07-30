@@ -1,4 +1,5 @@
 import type { FigmaToUIMessage } from '../common/messages';
+import { getIconImportMessage } from './figma/import';
 import { sendMessageToFigma } from './figma/messages';
 import { Wrapper } from './wrapper';
 
@@ -54,6 +55,20 @@ function runIconFinder() {
 									route: event.route,
 								});
 								break;
+
+							case 'button': {
+								switch (event.button) {
+									case 'import':
+										// Import icon
+										const message = getIconImportMessage(
+											event
+										);
+										if (message !== void 0) {
+											sendMessageToFigma(message);
+										}
+								}
+								break;
+							}
 						}
 					},
 				});

@@ -6,14 +6,46 @@ import { sendMessageToUI } from '../send-message';
 import { pluginEnv } from './env';
 
 /**
+ * Type for all viable parent nodes
+ */
+export type ViableParentFigmaNode = BaseNode & ChildrenMixin;
+
+/**
  * Check if node is an icon
  */
 function isIconNode(node: SceneNode): boolean {
 	let source = node.getSharedPluginData('iconify', 'source');
 	if (source === 'iconify') {
+		console.log('Debug: found icon.');
+		console.log(
+			'getSharedPluginData: props =',
+			JSON.stringify(node.getSharedPluginData('iconify', 'props'))
+		);
+		console.log(
+			'getSharedPluginData: color =',
+			JSON.stringify(node.getSharedPluginData('iconify', 'color'))
+		);
 		return true;
 	}
 	return false;
+}
+
+/**
+ * Convert and validate node to make sure it can accept child nodes
+ */
+export function filterViableParentNode(
+	node: BaseNode
+): ViableParentFigmaNode | null {
+	switch (node.type) {
+		case 'FRAME':
+		case 'COMPONENT':
+		case 'INSTANCE':
+		case 'GROUP':
+		case 'PAGE':
+			return node;
+	}
+
+	return null;
 }
 
 /**
@@ -58,41 +90,52 @@ export function getTargetLayers(): SelectedPageLayer {
 		// Check node
 		const name = node.name;
 		let item: PossibleTargetChildLayer | undefined;
-		const type = node.type.toLowerCase();
-		switch (node.type) {
-			case 'FRAME':
-			case 'COMPONENT':
-			case 'INSTANCE':
-				item = {
-					id,
-					name,
-					type: type as 'frame', // All types are child types of frame, so using 'frame' to avoid TypeScript notices
-					layoutMode:
-						!node.layoutMode || node.layoutMode === 'NONE'
-							? void 0
-							: node.layoutMode,
-					children: [],
-				};
+		const filteredNode = filterViableParentNode(node);
 
-				// Check for icon
-				if (isIconNode(sceneNode)) {
-					item.isIcon = true;
-					child = void 0; // Cannot import icon to child nodes of another icon
-				}
+		if (filteredNode) {
+			const type = filteredNode.type.toLowerCase();
+			switch (filteredNode.type) {
+				case 'FRAME':
+				case 'COMPONENT':
+				case 'INSTANCE':
+					item = {
+						id,
+						name,
+						type: type as 'frame', // All types are child types of frame, so using 'frame' to avoid TypeScript notices
+						layoutMode:
+							!filteredNode.layoutMode ||
+							filteredNode.layoutMode === 'NONE'
+								? void 0
+								: filteredNode.layoutMode,
+						children: [],
+					};
 
-				break;
+					// Check for icon
+					if (isIconNode(sceneNode)) {
+						item.isIcon = true;
+						child = void 0; // Cannot import icon to child nodes of another icon
+					}
 
-			case 'GROUP':
-				item = {
-					id,
-					name,
-					type: 'group',
-					children: [],
-				};
-				break;
+					break;
 
-			default:
-			// console.log('Debug: node type =', node.type, node);
+				case 'GROUP':
+					item = {
+						id,
+						name,
+						type: 'group',
+						children: [],
+					};
+					break;
+
+				default:
+					console.log(
+						'Debug: filtered node type =',
+						type,
+						filteredNode
+					);
+			}
+		} else {
+			console.log('Debug: skipped node type =', node.type);
 		}
 
 		// Add item to tree
@@ -115,10 +158,10 @@ export function getTargetLayers(): SelectedPageLayer {
 		checkNode(node);
 	});
 
-	// console.log(
-	// 	'getTargetLayers:',
-	// 	pageLayer ? JSON.stringify(pageLayer, null, 4) : 'none'
-	// );
+	console.log(
+		'getTargetLayers:',
+		pageLayer ? JSON.stringify(pageLayer, null, 4) : 'none'
+	);
 	return pageLayer;
 }
 

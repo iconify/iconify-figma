@@ -1,6 +1,7 @@
 import type { IconFinderConfig, PartialRoute } from '@iconify/search-core';
 import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/customisations';
 import type { PluginIconFinderConfig } from './config';
+import type { ImportIcon } from './import';
 import type { SelectedPageLayer } from './layers';
 
 /**
@@ -54,10 +55,16 @@ interface UIToFigmaRouteMessage {
 	route: PartialRoute;
 }
 
+export interface UIToFigmaImportIconMessage {
+	type: 'import-icon';
+	icons: ImportIcon[];
+}
+
 // Combined type
 export type UIToFigmaMessage =
 	| UIToFigmaLoadedMessage
 	| UIToFigmaResizeMessage
 	| UIToFigmaConfigMessage
 	| UIToFigmaCustomisationsMessage
-	| UIToFigmaRouteMessage;
+	| UIToFigmaRouteMessage
+	| UIToFigmaImportIconMessage;

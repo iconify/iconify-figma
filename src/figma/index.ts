@@ -1,4 +1,5 @@
 import type { UIToFigmaMessage } from '../common/messages';
+import { importIcons } from './actions/import-icon';
 import { loadConfig } from './data/config';
 import { pluginEnv } from './data/env';
 import { getTargetLayers, selectionChanged } from './data/layers';
@@ -36,6 +37,11 @@ import { sendMessageToUI } from './send-message';
 					ifConfig: pluginEnv.config.iconFinder,
 					pageLayer: pluginEnv.layersTree,
 				});
+				return;
+
+			case 'import-icon':
+				// Import icon(s)
+				importIcons(event.icons);
 				return;
 		}
 	};
