@@ -4,6 +4,7 @@ import type { PluginApp, PluginIconFinderConfig } from './misc';
 import type { ImportIconCommon, ImportIconItem } from './import';
 import type { SelectedPageLayer } from './layers';
 import type { PluginStorage } from '../figma/data/config';
+import type { IconListType } from './icon-lists';
 
 /**
  * Notice
@@ -83,6 +84,12 @@ export interface UIToFigmaImportIconMessage {
 	icons: ImportIconItem[];
 }
 
+interface UIToFigmaCustomStorageMessage {
+	type: 'custom-icons';
+	storage: IconListType;
+	icons: string[];
+}
+
 interface UIToFigmaCloseMessage {
 	type: 'close-plugin';
 }
@@ -95,4 +102,5 @@ export type UIToFigmaMessage =
 	| UIToFigmaCustomisationsMessage
 	| UIToFigmaRouteMessage
 	| UIToFigmaImportIconMessage
+	| UIToFigmaCustomStorageMessage
 	| UIToFigmaCloseMessage;

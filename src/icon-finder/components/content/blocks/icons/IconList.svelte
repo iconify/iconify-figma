@@ -41,6 +41,12 @@
 	// List of filters
 	export let filters: IconsListFilter[];
 
+	// onDelete
+	export let onDelete: () => void;
+
+	// showTrash
+	export let showTrash: boolean;
+
 	// Get class name
 	const baseClass = 'iif-icon-list';
 	let className: string;
@@ -113,6 +119,10 @@
 					title={filter.item.title === '' ? phrases.filters.uncategorised : filter.item.title}
 					onClick={() => onClick(filter.action, filter.value)} />
 			{/each}
+		{/if}
+		{#if showTrash}
+			<a href="# " class="iif-icon-trash" on:click={onDelete}><UIIcon
+					icon="trash" /></a>
 		{/if}
 	</div>
 </li>

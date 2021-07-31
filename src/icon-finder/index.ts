@@ -1,7 +1,7 @@
 import type { FigmaToUIMessage } from '../common/messages';
 import type { PluginStorageType } from '../common/misc';
 import { pluginUIEnv } from './figma/env';
-import { iconLists } from './figma/icon-lists';
+import { customIconsData, updateCustomIcons } from './figma/icon-lists';
 import { getIconImportMessage } from './figma/import';
 import { sendMessageToFigma } from './figma/messages';
 import { addNotice } from './figma/notices';
@@ -37,11 +37,11 @@ function runIconFinder() {
 				// Set storage
 				const storage = message.storage;
 				if (storage) {
-					for (let key in iconLists) {
+					for (let key in customIconsData) {
 						const attr = key as PluginStorageType;
 						const item = storage[attr];
 						if (item instanceof Array) {
-							iconLists[attr].set(item);
+							updateCustomIcons(attr, item);
 						}
 					}
 				}

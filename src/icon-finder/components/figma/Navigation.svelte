@@ -5,7 +5,7 @@
 	import type { NavigateCallback } from '../../figma/navigation';
 	import { externalLinks } from '../../figma/navigation';
 	import { phrases } from '../../phrases/en';
-	import { iconLists } from '../../figma/icon-lists';
+	import { iconListsStorage } from '../../figma/icon-lists';
 	import Section from './NavigationSection.svelte';
 	import UIIcon from '../ui/UIIcon.svelte';
 	import { icons } from '../../config/theme';
@@ -17,18 +17,23 @@
 	export let navigate: NavigateCallback;
 
 	// Recent icons and bookmarks
-	let hasRecent: boolean = checkCustomIcons('recent', get(iconLists.recent));
-	const unsubscribeRecent = iconLists.recent.subscribe((value) => {
+	let hasRecent: boolean = checkCustomIcons(
+		'recent',
+		get(iconListsStorage.recent)
+	);
+	const unsubscribeRecent = iconListsStorage.recent.subscribe((value) => {
 		hasRecent = checkCustomIcons('recent', value);
 	});
 
 	let hasBookmarks: boolean = checkCustomIcons(
 		'bookmarks',
-		get(iconLists.bookmarks)
+		get(iconListsStorage.bookmarks)
 	);
-	const unsubscribeBookmarks = iconLists.bookmarks.subscribe((value) => {
-		hasBookmarks = checkCustomIcons('bookmarks', value);
-	});
+	const unsubscribeBookmarks = iconListsStorage.bookmarks.subscribe(
+		(value) => {
+			hasBookmarks = checkCustomIcons('bookmarks', value);
+		}
+	);
 
 	function checkCustomIcons(type: string, value: string[]): boolean {
 		const hasIcons = value.length > 0;

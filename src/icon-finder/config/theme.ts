@@ -119,6 +119,18 @@ export function importThemeIcons() {
 				body:
 					'<g fill="none" stroke="currentColor"><path d="M8.5 7v3.5h-7v-7H5" /><path stroke-linecap="square" d="M10 2L5 7M6.5 1.5h4V5" /></g>',
 			},
+			'heart': {
+				body:
+					'<path d="M17 6c0 5-6 10-8 11-2-1-8-6-8-11C1 2 6.5.5 9 3.5 11.5.5 17 2 17 6z" fill="currentColor"/>',
+				width: 18,
+				height: 18,
+			},
+			'trash': {
+				body:
+					'<path fill-rule="evenodd" clip-rule="evenodd" d="M8 2a1 1 0 00-1 1h4a1 1 0 00-1-1H8zm4 1a2 2 0 00-2-2H8a2 2 0 00-2 2H3v1h1v10a2 2 0 002 2h6a2 2 0 002-2V4h1V3h-3zm1 1H5v10a1 1 0 001 1h6a1 1 0 001-1V4zm-6 7V7h1v4H7zm3 0V7h1v4h-1z" fill="currentColor"/>',
+				width: 18,
+				height: 18,
+			},
 		},
 		aliases: {
 			'up': {
@@ -190,10 +202,11 @@ export const icons: Record<string, string | null> = {
 	'mode-inline': customIconsPrefix + ':mode-inline',
 	'selecting-selected': customIconsPrefix + ':confirm',
 	'selecting-unselected': customIconsPrefix + ':empty',
+	'trash': customIconsPrefix + ':trash',
 	// Navigation
 	'menu': customIconsPrefix + ':menu',
 	'ext-link': customIconsPrefix + ':ext-link',
-	'import.bookmarks': 'mdi:heart',
+	'import.bookmarks': customIconsPrefix + ':heart',
 };
 
 /**

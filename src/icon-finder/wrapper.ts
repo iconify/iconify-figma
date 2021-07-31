@@ -43,6 +43,7 @@ import type {
 	UICustomisationEvent,
 	UIFooterButtonEvent,
 	UISelectionEvent,
+	UIDeleteIconEvent,
 } from './events/types';
 import type { WrappedRegistry } from './wrapper/registry';
 import type { ContainerProps } from './wrapper/container';
@@ -59,12 +60,12 @@ import type { WrapperDragStartData } from './wrapper/drag';
 import { importThemeIcons } from './config/theme';
 import { defaultNavigation } from './figma/navigation';
 import type { PluginUINavigation } from '../common/navigation';
+import { customIconsData, updateCustomIcons } from './figma/icon-lists';
+import type { IconListType } from '../common/icon-lists';
 
 // Change import to change container component
 import Container from './components/Container.svelte';
-import { pluginUIEnv } from './figma/env';
-import { iconLists } from './figma/icon-lists';
-import type { IconListType } from '../common/icon-lists';
+import { sendMessageToFigma } from './figma/messages';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-unused-vars-experimental, @typescript-eslint/no-empty-function
 function assertNever(s: never) {}
@@ -161,11 +162,11 @@ export class Wrapper {
 
 		// Custom icons
 		const events = registry.events;
-		for (let iconsListType in iconLists) {
+		for (let iconsListType in customIconsData) {
 			const key = iconsListType as IconListType;
 			events.subscribe('load-' + key, (callback) => {
 				if (typeof callback === 'function') {
-					const iconsList = get(iconLists[key]);
+					const iconsList = customIconsData[key];
 					callback(iconsList);
 				}
 			});
@@ -478,9 +479,50 @@ export class Wrapper {
 				});
 				return;
 
+			case 'delete': {
+				// Delete icon in custom view
+				const customType = (event as UIDeleteIconEvent)
+					.customType as IconListType;
+				const icon = (event as UIDeleteIconEvent).icon;
+
+				// Filter
+				const icons = customIconsData[customType].filter(
+					(item) => item !== icon
+				);
+
+				// Update list
+				this._updateCustomIconsList(customType, icons);
+				return;
+			}
+
 			default:
 				// Should never reach this code
 				assertNever(type);
+		}
+	}
+
+	/**
+	 * Update custom icons list
+	 */
+	_updateCustomIconsList(storage: IconListType, icons: string[]) {
+		// Update storage
+		updateCustomIcons(storage, icons);
+
+		// Update Figma
+		sendMessageToFigma({
+			type: 'custom-icons',
+			storage,
+			icons,
+		});
+
+		// Change route or update view
+		if (!icons.length) {
+			this.navigate({
+				section: 'import',
+				submenu: 'iconify',
+			});
+		} else {
+			this._core.router.action('set', icons);
 		}
 	}
 

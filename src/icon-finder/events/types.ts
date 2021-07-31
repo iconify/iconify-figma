@@ -31,9 +31,17 @@ export interface UIConfigEvent {
 	type: 'config';
 }
 
+// Icon in custom view was deleted
+export interface UIDeleteIconEvent {
+	type: 'delete';
+	customType: string;
+	icon: string;
+}
+
 // Combined type
 export type UIEvent =
 	| UISelectionEvent
 	| UICustomisationEvent
 	| UIFooterButtonEvent
+	| UIDeleteIconEvent
 	| UIConfigEvent;

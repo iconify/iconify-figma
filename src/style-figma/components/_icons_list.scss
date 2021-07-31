@@ -107,7 +107,8 @@
 	}
 
 	.iif-icon-name,
-	.iif-icon-size {
+	.iif-icon-size,
+	.iif-icon-trash {
 		@include plugin-font-ui-pos('medium', 'normal');
 
 		display: block;
@@ -135,6 +136,24 @@
 
 	.iif-icon-size {
 		color: $plugin-palette-color-black-muted;
+	}
+
+	.iif-icon-trash {
+		font-size: 18px;
+		line-height: 18px;
+		width: 1em;
+		height: 1em;
+		padding: 3px;
+		color: $plugin-palette-color-black;
+		border-radius: $plugin-border-radius-small;
+		&:hover {
+			background-color: $plugin-palette-background-darker-white-borderless;
+		}
+		&:active,
+		&:focus {
+			box-shadow: $plugin-button-active-shadow;
+			outline: none;
+		}
 	}
 
 	.iif-filter {
@@ -181,20 +200,6 @@
 		}
 	}
 
-	// Delete button
-	.iif-icon-delete {
-		color: $plugin-palette-color-black;
-		border-radius: $plugin-border-radius-small;
-		&:hover {
-			background-color: $plugin-palette-background-hover;
-		}
-		&:active,
-		&:focus {
-			box-shadow: $plugin-button-active-shadow;
-			outline: none;
-		}
-	}
-
 	// Hover
 	.iif-icon-list {
 		&:hover {
@@ -236,7 +241,7 @@
 			}
 		}
 
-		.iif-icon-delete {
+		.iif-icon-trash {
 			&:hover {
 				background-color: $plugin-palette-background-selected-borderless;
 			}

@@ -62,6 +62,12 @@
 		showPrefix = route.type !== 'collection';
 	}
 
+	// Show trash icon
+	let showTrash: boolean;
+	$: {
+		showTrash = route.type === 'custom';
+	}
+
 	// Event listener for loading icons, which should be loaded only when component is mounted
 	// 0 = not mounted, 1 = just mounted, 2 = has been mounted
 	let mounted = 0;
@@ -87,6 +93,8 @@
 	}
 	interface IncompleteListItem extends IncompleteGridItem {
 		text: string; // Icon name as text (could be shortened, used in list view)
+		showTrash: boolean;
+		onDelete?: (event?: MouseEvent) => void;
 	}
 	interface ListItem extends IncompleteListItem {
 		filters: IconsListFilter[];
@@ -229,6 +237,8 @@
 				exists,
 				link,
 				selected: isIconSelected(selection, icon),
+				showTrash,
+				onDelete: onDelete.bind(null, name),
 			};
 			let item = newItem as ListItem;
 
@@ -287,6 +297,23 @@
 			return;
 		}
 		registry.router.action(event, value as string);
+	}
+
+	// Delete icon
+	function onDelete(icon: string, event?: MouseEvent) {
+		event?.preventDefault();
+		if (route.type === 'custom') {
+			const customType = route.params.customType;
+
+			// UIDeleteIconEvent
+			registry.callback({
+				type: 'delete',
+				customType,
+				icon,
+			});
+
+			console.log('Remove icon:', icon);
+		}
 	}
 
 	// Remove event listener

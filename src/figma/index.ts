@@ -47,6 +47,13 @@ import { sendMessageToUI } from './send-message';
 				importIcons(event.data, event.icons);
 				return;
 
+			case 'custom-icons':
+				if (!pluginEnv.config.storage) {
+					pluginEnv.config.storage = {};
+				}
+				pluginEnv.config.storage[event.storage] = event.icons;
+				return;
+
 			case 'close-plugin':
 				// Close plugin
 				figma.closePlugin();
