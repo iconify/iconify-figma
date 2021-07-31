@@ -3,8 +3,10 @@
 @import 'font';
 @import 'scrollbars';
 @import 'wrapper';
-@import 'navigation';
-@import 'notices';
+
+@import 'plugin/navigation';
+@import 'plugin/wrapper';
+@import 'plugin/notices';
 
 @import 'inputs/input';
 @import 'inputs/button';

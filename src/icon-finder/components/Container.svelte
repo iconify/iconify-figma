@@ -54,10 +54,15 @@
 	}
 
 	// Check if Icon Finder should be shown
-	let showIconFinder: boolean;
+	let showIconFinder: boolean | 'hidden' = false;
 	$: {
 		const page = currentPage.section + '.' + currentPage.submenu;
-		showIconFinder = page === 'import.iconify' || page === 'import.recent';
+		showIconFinder =
+			page === 'import.iconify' || page === 'import.recent'
+				? true
+				: showIconFinder
+				? 'hidden'
+				: false;
 	}
 </script>
 
@@ -65,8 +70,15 @@
 	<Wrapper>
 		<Navigation {route} {currentPage} {navigate} />
 		{#if showIconFinder}
-			<Content {selection} {viewChanged} {error} {route} {blocks} />
-			<Footer {selection} {selectionLength} {route} {customisations} />
+			<div
+				class="plugin-content plugin-content--icon-finder{showIconFinder === true ? '' : ' plugin-content--hidden'}">
+				<Content {selection} {viewChanged} {error} {route} {blocks} />
+				<Footer
+					{selection}
+					{selectionLength}
+					{route}
+					{customisations} />
+			</div>
 		{/if}
 		<Notices />
 	</Wrapper>
