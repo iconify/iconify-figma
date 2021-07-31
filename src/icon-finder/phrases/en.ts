@@ -202,6 +202,7 @@ export const phrases: UITranslation = {
 		},
 		submenu: {
 			svg: 'Paste SVG',
+			repo: 'GitHub',
 		},
 		notices: {
 			failed_icon: 'Error importing icon "{name}"',

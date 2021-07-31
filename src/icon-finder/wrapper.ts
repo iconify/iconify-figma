@@ -805,9 +805,7 @@ export class Wrapper {
 
 		// Update route
 		let newRoute: PartialRoute | undefined;
-
-		const willShowIconify = this.isIconifyImportPage(navigation);
-		if (willShowIconify) {
+		if (this.isIconFinderMainPage(navigation)) {
 			// Revert to last Iconify route
 			newRoute = state.iconifyRoute
 				? state.iconifyRoute
@@ -864,9 +862,9 @@ export class Wrapper {
 	}
 
 	/**
-	 * Check if current page is Iconify import
+	 * Check if current page is Icon Finder main page
 	 */
-	isIconifyImportPage(navigation?: PluginUINavigation): boolean {
+	isIconFinderMainPage(navigation?: PluginUINavigation): boolean {
 		if (!navigation) {
 			navigation = this._state.navigation;
 		}

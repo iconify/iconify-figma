@@ -55,7 +55,7 @@ function runIconFinder() {
 						console.log('Icon Finder event:', event);
 						switch (event.type) {
 							case 'config':
-								if (wrapper.isIconifyImportPage()) {
+								if (wrapper.isIconFinderMainPage()) {
 									sendMessageToFigma({
 										type: 'icon-finder-config',
 										config: event.config,
@@ -71,7 +71,7 @@ function runIconFinder() {
 								break;
 
 							case 'route':
-								if (wrapper.isIconifyImportPage()) {
+								if (wrapper.isIconFinderMainPage()) {
 									sendMessageToFigma({
 										type: 'icon-finder-route',
 										route: event.route,
@@ -85,7 +85,7 @@ function runIconFinder() {
 										// Import icon
 										const message = getIconImportMessage(
 											event,
-											wrapper.isIconifyImportPage()
+											wrapper.isIconFinderMainPage()
 										);
 										if (message !== void 0) {
 											sendMessageToFigma(message);

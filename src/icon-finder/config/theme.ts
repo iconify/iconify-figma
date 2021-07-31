@@ -190,8 +190,10 @@ export const icons: Record<string, string | null> = {
 	'mode-inline': customIconsPrefix + ':mode-inline',
 	'selecting-selected': customIconsPrefix + ':confirm',
 	'selecting-unselected': customIconsPrefix + ':empty',
+	// Navigation
 	'menu': customIconsPrefix + ':menu',
 	'ext-link': customIconsPrefix + ':ext-link',
+	'import.bookmarks': 'mdi:heart',
 };
 
 /**

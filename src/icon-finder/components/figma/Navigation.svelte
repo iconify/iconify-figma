@@ -1,7 +1,6 @@
 <script lang="typescript">
 	import { onDestroy } from 'svelte';
 	import { get } from 'svelte/store';
-	import type { FullRoute } from '@iconify/search-core';
 	import type { PluginUINavigation } from '../../../common/navigation';
 	import type { NavigateCallback } from '../../figma/navigation';
 	import { externalLinks } from '../../figma/navigation';
@@ -9,9 +8,7 @@
 	import { iconLists } from '../../figma/icon-lists';
 	import Section from './NavigationSection.svelte';
 	import UIIcon from '../ui/UIIcon.svelte';
-
-	// Route
-	export let route: FullRoute;
+	import { icons } from '../../config/theme';
 
 	// Current section
 	export let currentPage: PluginUINavigation;
@@ -19,38 +16,36 @@
 	// Callback to change page
 	export let navigate: NavigateCallback;
 
-	// Recent icons
-	let hasRecent: boolean = checkRecentIcons(get(iconLists.recent));
+	// Recent icons and bookmarks
+	let hasRecent: boolean = checkCustomIcons('recent', get(iconLists.recent));
 	const unsubscribeRecent = iconLists.recent.subscribe((value) => {
-		hasRecent = checkRecentIcons(value);
+		hasRecent = checkCustomIcons('recent', value);
 	});
 
-	function checkRecentIcons(value: string[]): boolean {
-		const hasRecent = value.length > 0;
-		if (!hasRecent && currentPage.submenu === 'recent') {
+	let hasBookmarks: boolean = checkCustomIcons(
+		'bookmarks',
+		get(iconLists.bookmarks)
+	);
+	const unsubscribeBookmarks = iconLists.bookmarks.subscribe((value) => {
+		hasBookmarks = checkCustomIcons('bookmarks', value);
+	});
+
+	function checkCustomIcons(type: string, value: string[]): boolean {
+		const hasIcons = value.length > 0;
+		if (!hasIcons && currentPage.submenu === type) {
 			// Switch from recent page
 			navigate({
 				section: 'import',
 				submenu: 'iconify',
 			});
 		}
-		return hasRecent;
-	}
-
-	// Check route
-	$: {
-		if (route.type !== 'custom' && currentPage.submenu === 'recent') {
-			// Navigate from recent icons
-			navigate({
-				section: 'import',
-				submenu: 'iconify',
-			});
-		}
+		return hasIcons;
 	}
 
 	// Unsubscribe from stores
 	onDestroy(() => {
 		unsubscribeRecent();
+		unsubscribeBookmarks();
 	});
 
 	// TypeScript check
@@ -66,6 +61,7 @@
 		className: string;
 		external: boolean;
 		href: string;
+		icon: string | null | undefined;
 		onClick?: (event: MouseEvent) => void;
 	}
 	let leftItems: ListItem[];
@@ -78,6 +74,9 @@
 		function item(item: PluginUINavigation): ListItem {
 			const key = item.submenu;
 			const isSelected = key === currentPage.submenu;
+
+			const iconKey = item.section + '.' + item.submenu;
+			const icon = icons[iconKey];
 
 			// Check for link
 			let href = '# ';
@@ -104,8 +103,13 @@
 				className:
 					baseClass +
 					(isSelected ? ' ' + baseClass + '--selected' : '') +
-					(external ? ' ' + baseClass + '--external' : ''),
+					(icon
+						? ' ' + baseClass + '--icon'
+						: external
+						? ' ' + baseClass + '--external'
+						: ''),
 				href,
+				icon,
 				external,
 				onClick,
 			};
@@ -143,6 +147,14 @@
 						item({
 							section,
 							submenu: 'recent',
+						})
+					);
+				}
+				if (hasBookmarks) {
+					rightItems.push(
+						item({
+							section,
+							submenu: 'bookmarks',
 						})
 					);
 				}
@@ -191,7 +203,10 @@
 				<a
 					href={item.href}
 					class={item.className}
-					on:click={item.onClick}>{item.title}</a>
+					title={item.title}
+					on:click={item.onClick}>{#if item.icon}
+						<UIIcon icon={item.icon} />
+					{:else}{item.title}{/if}</a>
 			{/each}
 		</div>
 		<div class="plugin-header-center" />
@@ -200,10 +215,14 @@
 				<a
 					href={item.href}
 					class={item.className}
+					title={item.title}
 					target={item.external ? '_blank' : void 0}
-					on:click={item.onClick}>{item.title}
-					{#if item.external}
-						<UIIcon icon="ext-link" />
+					on:click={item.onClick}>{#if item.icon}
+						<UIIcon icon={item.icon} />
+					{:else}
+						{item.title}{#if item.external}
+							<UIIcon icon="ext-link" />
+						{/if}
 					{/if}
 				</a>
 			{/each}

@@ -20,3 +20,15 @@ export const externalLinks: Record<string, string> = {
 	repo: 'https://github.com/iconify/iconify-figma',
 	support: 'https://github.com/iconify/iconify-figma/issues',
 };
+
+/**
+ * Check if navigation item is Icon Finder
+ */
+export function isIconFinderNavigation(item: PluginUINavigation): boolean {
+	return (
+		item.section === 'import' &&
+		(item.submenu === 'iconify' ||
+			item.submenu === 'bookmarks' ||
+			item.submenu === 'recent')
+	);
+}

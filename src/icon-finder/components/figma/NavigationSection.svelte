@@ -4,6 +4,7 @@
 		PluginUINavigationSection,
 	} from '../../../common/navigation';
 	import { phrases } from '../../config/phrases';
+	import { icons } from '../../config/theme';
 	import type { NavigateCallback } from '../../figma/navigation';
 	import UIIcon from '../ui/UIIcon.svelte';
 
@@ -25,7 +26,7 @@
 	let icon: string;
 	let text: string;
 	$: {
-		icon = section === 'menu' ? section : '';
+		icon = icons[section] ? icons[section]! : '';
 		text = phrases.figma.menu[section];
 	}
 
