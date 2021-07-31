@@ -14,3 +14,8 @@ export interface PluginIconFinderConfig {
 	customisations?: PartialIconCustomisations;
 	route?: PartialRoute;
 }
+
+/**
+ * Storage
+ */
+export type PluginStorageType = 'recent' | 'bookmarks';

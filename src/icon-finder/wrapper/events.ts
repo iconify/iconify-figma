@@ -4,6 +4,7 @@ import type {
 	IconFinderConfig,
 } from '@iconify/search-core';
 import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/customisations';
+import type { PluginUINavigation } from '../../common/navigation';
 import type { IconFinderState } from './state';
 
 /**
@@ -45,10 +46,17 @@ export interface IconFinderConfigEvent {
 	config: IconFinderConfig;
 }
 
+// Event triggered when current page changes
+export interface IconFinderNavigationEvent {
+	type: 'navigation';
+	navigation: PluginUINavigation;
+}
+
 type IconFinderStateEvents =
 	| IconFinderRouteEvent
 	| IconFinderSelectionEvent
 	| IconFinderCustomisationsEvent
+	| IconFinderNavigationEvent
 	| IconFinderConfigEvent;
 
 /**

@@ -12,7 +12,8 @@ import { phrases } from '../config/phrases';
  * Convert button message from Icon Finder to message to plugin
  */
 export function getIconImportMessage(
-	event: IconFinderButtonEvent
+	event: IconFinderButtonEvent,
+	addRoute: boolean
 ): UIToFigmaImportIconMessage | undefined {
 	const state = event.state;
 	const failed: string[] = [];
@@ -77,7 +78,7 @@ export function getIconImportMessage(
 	}
 
 	// Return data
-	const route = state.route;
+	const route = addRoute ? state.route : void 0;
 	const data: ImportIconCommon = {
 		props,
 	};

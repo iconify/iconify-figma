@@ -1,12 +1,12 @@
 <script lang="typescript">
-	import { setContext, onDestroy } from 'svelte';
-	import { get } from 'svelte/store';
+	import { setContext } from 'svelte';
 	import type { FullRoute, ViewBlocks } from '@iconify/search-core';
 	import type { PluginUINavigation } from '../../common/navigation';
 	import type { SelectedIcons } from '../wrapper/icons';
 	import type { WrappedRegistry } from '../wrapper/registry';
 	import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisations';
-	import { navigation, externalLinks } from '../figma/navigation';
+	import { externalLinks } from '../figma/navigation';
+	import type { NavigateCallback } from '../figma/navigation';
 	import Wrapper from './Wrapper.svelte';
 	import Navigation from './figma/Navigation.svelte';
 	import Content from './content/Content.svelte';
@@ -27,31 +27,21 @@
 	export let error: string;
 	export let route: FullRoute;
 	export let blocks: ViewBlocks | null;
+	export let currentPage: PluginUINavigation;
 
 	// Set context
 	setContext('registry', registry);
 
-	// Manage navigation
-	let currentPage: PluginUINavigation = get(navigation);
-	const unsubscribeNavigation = navigation.subscribe((value) => {
-		currentPage = value;
-	});
-
-	// Unsubscribe from stores
-	onDestroy(() => {
-		unsubscribeNavigation();
-	});
-
 	/**
 	 * Change current page
 	 */
-	function navigate(target: PluginUINavigation) {
+	const navigate: NavigateCallback = (target: PluginUINavigation) => {
 		if (externalLinks[target.submenu] !== void 0) {
 			// Cannot navigate to external link
 			return;
 		}
-		navigation.set(target);
-	}
+		registry.navigate(target);
+	};
 
 	// Check if Icon Finder should be shown
 	let showIconFinder: boolean | 'hidden' = false;

@@ -6,6 +6,7 @@ import {
 	disableCache,
 } from '@iconify/svelte';
 import type { SvelteComponent } from 'svelte';
+import { get } from 'svelte/store';
 import {
 	setIconify,
 	compareObjects,
@@ -56,9 +57,14 @@ import {
 import { addCustomAPIProviders } from './config/api';
 import type { WrapperDragStartData } from './wrapper/drag';
 import { importThemeIcons } from './config/theme';
+import { defaultNavigation } from './figma/navigation';
+import type { PluginUINavigation } from '../common/navigation';
 
 // Change import to change container component
 import Container from './components/Container.svelte';
+import { pluginUIEnv } from './figma/env';
+import { iconLists } from './figma/icon-lists';
+import type { IconListType } from '../common/icon-lists';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-unused-vars-experimental, @typescript-eslint/no-empty-function
 function assertNever(s: never) {}
@@ -88,6 +94,7 @@ export class Wrapper {
 
 	// Current state, always up to date
 	protected _state: IconFinderState = {
+		navigation: defaultNavigation,
 		icons: [],
 		customisations: {},
 	};
@@ -149,6 +156,21 @@ export class Wrapper {
 		// External link callback
 		registry.setCustom('link', this._externalLinkCallback.bind(this));
 
+		// Navigation
+		registry.setCustom('navigate', this.navigate.bind(this));
+
+		// Custom icons
+		const events = registry.events;
+		for (let iconsListType in iconLists) {
+			const key = iconsListType as IconListType;
+			events.subscribe('load-' + key, (callback) => {
+				if (typeof callback === 'function') {
+					const iconsList = get(iconLists[key]);
+					callback(iconsList);
+				}
+			});
+		}
+
 		// Add API providers
 		addCustomAPIProviders(registry);
 
@@ -159,6 +181,9 @@ export class Wrapper {
 		// Store partial route in state
 		const route = registry.partialRoute;
 		state.route = route ? route : void 0;
+		if (state.route && state.route.type !== 'custom') {
+			state.defaultRoute = state.route;
+		}
 
 		if (customState) {
 			// Set custom stuff
@@ -322,6 +347,9 @@ export class Wrapper {
 
 			// Status
 			hidden,
+
+			// Navigation
+			currentPage: state.navigation,
 		};
 
 		// Constructor parameters
@@ -482,6 +510,9 @@ export class Wrapper {
 		// Check if route has changed
 		if (state.route === void 0 || !compareObjects(route, state.route)) {
 			state.route = route;
+			if (route.type !== 'custom') {
+				state.iconifyRoute = route;
+			}
 			this._triggerEvent({
 				type: 'route',
 				route,
@@ -755,5 +786,92 @@ export class Wrapper {
 		}
 
 		console.log(`TODO: import ${icon}...`);
+	}
+
+	/**
+	 * Change current page
+	 */
+	navigate(navigation: PluginUINavigation) {
+		const state = this._state;
+		if (
+			state.navigation.section === navigation.section &&
+			state.navigation.submenu === navigation.submenu
+		) {
+			return;
+		}
+
+		// Set navigation in state
+		state.navigation = navigation;
+
+		// Update route
+		let newRoute: PartialRoute | undefined;
+
+		const willShowIconify = this.isIconifyImportPage(navigation);
+		if (willShowIconify) {
+			// Revert to last Iconify route
+			newRoute = state.iconifyRoute
+				? state.iconifyRoute
+				: state.defaultRoute
+				? state.defaultRoute
+				: {
+						type: 'collections',
+				  };
+			this._setRoute(newRoute);
+		} else {
+			// Change route if needed
+			switch (navigation.section) {
+				case 'import': {
+					const item = navigation.submenu;
+					switch (item) {
+						case 'bookmarks':
+						case 'recent':
+							newRoute = {
+								type: 'custom',
+								params: {
+									customType: item,
+								},
+							};
+							break;
+					}
+				}
+			}
+		}
+
+		// Change current page
+		if (this._container) {
+			const changes: Partial<ContainerProps> = {
+				currentPage: navigation,
+			};
+			if (newRoute) {
+				this._core.router.partialRoute = newRoute;
+			}
+			this._container.$set(changes);
+		} else {
+			if (!this._params.state) {
+				this._params.state = {};
+			}
+			this._params.state.navigation = navigation;
+			if (newRoute) {
+				this._params.state.route = newRoute;
+			}
+		}
+
+		// Trigger event
+		this._triggerEvent({
+			type: 'navigation',
+			navigation,
+		});
+	}
+
+	/**
+	 * Check if current page is Iconify import
+	 */
+	isIconifyImportPage(navigation?: PluginUINavigation): boolean {
+		if (!navigation) {
+			navigation = this._state.navigation;
+		}
+		return (
+			navigation.section === 'import' && navigation.submenu === 'iconify'
+		);
 	}
 }

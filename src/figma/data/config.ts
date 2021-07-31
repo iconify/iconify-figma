@@ -1,4 +1,7 @@
-import type { PluginIconFinderConfig } from '../../common/misc';
+import type {
+	PluginIconFinderConfig,
+	PluginStorageType,
+} from '../../common/misc';
 import type { PluginUINavigation } from '../../common/navigation';
 import { convertLegacyConfig, LegacyPluginConfig } from './legacy-config';
 
@@ -21,10 +24,7 @@ export const defaultPluginOptions: Required<PluginOptions> = {
 /**
  * Storage
  */
-export interface PluginStorage {
-	recent?: string[];
-	bookmarks?: string[];
-}
+export type PluginStorage = Partial<Record<PluginStorageType, string[]>>;
 
 /**
  * Config
@@ -110,7 +110,14 @@ export async function loadConfig(): Promise<PluginConfig> {
 			| PluginConfig
 			| LegacyPluginConfig
 			| undefined = await figma.clientStorage.getAsync('config');
-		if (typeof retrievedConfig === 'object') {
+		if (
+			typeof retrievedConfig === 'object' &&
+			typeof retrievedConfig.version === 'number'
+		) {
+			console.log(
+				'Retrieved config:',
+				JSON.stringify(retrievedConfig, null, 4)
+			);
 			switch (retrievedConfig.version) {
 				case 1:
 					return convertLegacyConfig(retrievedConfig);

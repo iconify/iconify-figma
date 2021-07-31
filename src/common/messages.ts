@@ -3,6 +3,7 @@ import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/cu
 import type { PluginApp, PluginIconFinderConfig } from './misc';
 import type { ImportIconCommon, ImportIconItem } from './import';
 import type { SelectedPageLayer } from './layers';
+import type { PluginStorage } from '../figma/data/config';
 
 /**
  * Notice
@@ -27,7 +28,9 @@ interface FigmaToUIStartMessage
 	extends Partial<Omit<FigmaToUILayersMessage, 'type'>> {
 	type: 'start-plugin';
 	app: PluginApp;
+	command: string;
 	ifConfig: PluginIconFinderConfig;
+	storage?: PluginStorage;
 }
 
 interface FigmaToUINotice {

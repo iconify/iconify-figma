@@ -1,5 +1,7 @@
 import type { FigmaToUIMessage } from '../common/messages';
+import type { PluginStorageType } from '../common/misc';
 import { pluginUIEnv } from './figma/env';
+import { iconLists } from './figma/icon-lists';
 import { getIconImportMessage } from './figma/import';
 import { sendMessageToFigma } from './figma/messages';
 import { addNotice } from './figma/notices';
@@ -32,6 +34,18 @@ function runIconFinder() {
 				// Set environment
 				pluginUIEnv.app = message.app;
 
+				// Set storage
+				const storage = message.storage;
+				if (storage) {
+					for (let key in iconLists) {
+						const attr = key as PluginStorageType;
+						const item = storage[attr];
+						if (item instanceof Array) {
+							iconLists[attr].set(item);
+						}
+					}
+				}
+
 				// Create wrapper
 				wrapper = new Wrapper({
 					container,
@@ -41,10 +55,12 @@ function runIconFinder() {
 						console.log('Icon Finder event:', event);
 						switch (event.type) {
 							case 'config':
-								sendMessageToFigma({
-									type: 'icon-finder-config',
-									config: event.config,
-								});
+								if (wrapper.isIconifyImportPage()) {
+									sendMessageToFigma({
+										type: 'icon-finder-config',
+										config: event.config,
+									});
+								}
 								break;
 
 							case 'customisations':
@@ -55,10 +71,12 @@ function runIconFinder() {
 								break;
 
 							case 'route':
-								sendMessageToFigma({
-									type: 'icon-finder-route',
-									route: event.route,
-								});
+								if (wrapper.isIconifyImportPage()) {
+									sendMessageToFigma({
+										type: 'icon-finder-route',
+										route: event.route,
+									});
+								}
 								break;
 
 							case 'button': {
@@ -66,7 +84,8 @@ function runIconFinder() {
 									case 'import':
 										// Import icon
 										const message = getIconImportMessage(
-											event
+											event,
+											wrapper.isIconifyImportPage()
 										);
 										if (message !== void 0) {
 											sendMessageToFigma(message);

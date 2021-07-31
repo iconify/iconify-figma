@@ -35,8 +35,10 @@ import { sendMessageToUI } from './send-message';
 				sendMessageToUI({
 					type: 'start-plugin',
 					app: pluginEnv.app,
+					command: figma.command,
 					ifConfig: pluginEnv.config.iconFinder,
 					pageLayer: pluginEnv.layersTree,
+					storage: pluginEnv.config.storage,
 				});
 				return;
 

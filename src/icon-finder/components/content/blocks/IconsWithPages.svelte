@@ -74,8 +74,9 @@
 	}
 
 	// Layout mode
-	const canChangeLayout = componentsConfig.toggleList;
-	let isList = componentsConfig.list;
+	let canChangeLayout =
+		route.type === 'custom' ? false : componentsConfig.toggleList;
+	let isList = route.type === 'custom' ? true : componentsConfig.list;
 
 	function changeLayout() {
 		if (canChangeLayout) {

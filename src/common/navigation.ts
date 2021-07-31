@@ -18,7 +18,7 @@ interface PluginUIMenuNavigation extends PluginUINavigationBase {
 
 interface PluginUIImportNavigation extends PluginUINavigationBase {
 	section: 'import';
-	submenu: 'iconify' | 'svg' | 'recent';
+	submenu: 'iconify' | 'svg' | 'recent' | 'bookmarks';
 }
 
 interface PluginUIAboutNavigation extends PluginUINavigationBase {

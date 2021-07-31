@@ -3,6 +3,7 @@ import type { FullIconFinderConfig } from '@iconify/search-core/lib/data/config'
 import type { UIEvent } from '../events/types';
 import type { ComponentsConfig } from '../config/wrapper';
 import type { IconDragEvent } from './drag';
+import type { PluginUINavigation } from '../../common/navigation';
 
 /**
  * Add UI to config
@@ -19,4 +20,5 @@ export interface WrappedRegistry extends Registry {
 	link: (event: MouseEvent) => void;
 	config: WrappedFullIconFinderConfig;
 	ondrag: IconDragEvent;
+	navigate: (target: PluginUINavigation) => void;
 }

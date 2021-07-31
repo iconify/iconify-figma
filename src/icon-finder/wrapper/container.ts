@@ -1,5 +1,6 @@
 import type { FullRoute, RouterEvent } from '@iconify/search-core';
 import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisations';
+import type { PluginUINavigation } from '../../common/navigation';
 import type { SelectedIcons } from './icons';
 import type { WrappedRegistry } from './registry';
 
@@ -24,4 +25,7 @@ export interface ContainerProps extends RouterEvent {
 
 	// UI state
 	hidden: boolean;
+
+	// Current page
+	currentPage: PluginUINavigation;
 }

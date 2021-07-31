@@ -11,6 +11,8 @@ export const phrases: UITranslation = {
 		placeholder: {
 			collection: 'Search {name}',
 			collections: 'Filter collections',
+			recent: 'Search recent icons',
+			bookmarks: 'Search bookmarks',
 		},
 		defaultPlaceholder: 'Search all icons',
 		button: 'Search Icons',
