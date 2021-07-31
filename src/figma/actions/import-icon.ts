@@ -1,8 +1,10 @@
 import type { PartialRoute } from '@iconify/search-core';
 import type { ImportIconCommon, ImportIconItem } from '../../common/import';
+import type { UINotice } from '../../common/messages';
 import { filterViableParentNode, ViableParentFigmaNode } from '../data/layers';
 import type { ImportedIconSharedData } from '../data/node-data';
 import { figmaPhrases } from '../data/phrases';
+import { sendMessageToUI } from '../send-message';
 
 /**
  * Find selected node
@@ -31,6 +33,9 @@ export function importIcons(
 	icons: ImportIconItem[],
 	route?: PartialRoute
 ) {
+	const added: string[] = [];
+	const errors: string[] = [];
+
 	// Find parent layer
 	const parent = findParentLayer(data.layerId);
 
@@ -38,6 +43,7 @@ export function importIcons(
 	icons.forEach((icon) => {
 		const node = figma.createNodeFromSvg(icon.svg);
 		if (!node) {
+			errors.push(icon.name);
 			console.error('Error importing SVG');
 			return;
 		}
@@ -59,5 +65,52 @@ export function importIcons(
 
 		// Move it
 		moveNode(node, parent);
+
+		added.push(icon.name);
+	});
+
+	// Show notice
+	const notices: UINotice[] = [];
+	const text = figmaPhrases.notices;
+	switch (added.length) {
+		case 0:
+			break;
+
+		case 1:
+			notices.push({
+				layout: 'success',
+				message: text.added_icon.replace('{name}', added[0]),
+			});
+			break;
+
+		default:
+			notices.push({
+				layout: 'success',
+				message: text.added_icons.replace('{count}', added.length + ''),
+			});
+	}
+	switch (errors.length) {
+		case 0:
+			break;
+
+		case 1:
+			notices.push({
+				layout: 'error',
+				message: text.failed_icon.replace('{name}', errors[0]),
+			});
+			break;
+
+		default:
+			notices.push({
+				layout: 'error',
+				message: text.failed_icons.replace(
+					'{count}',
+					errors.length + ''
+				),
+			});
+	}
+	sendMessageToUI({
+		type: 'notice',
+		notice: notices,
 	});
 }

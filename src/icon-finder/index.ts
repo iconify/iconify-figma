@@ -2,6 +2,7 @@ import type { FigmaToUIMessage } from '../common/messages';
 import { pluginUIEnv } from './figma/env';
 import { getIconImportMessage } from './figma/import';
 import { sendMessageToFigma } from './figma/messages';
+import { addNotice } from './figma/notices';
 import { Wrapper } from './wrapper';
 
 function runIconFinder() {
@@ -76,6 +77,10 @@ function runIconFinder() {
 						}
 					},
 				});
+				return;
+
+			case 'notice':
+				addNotice(message.notice);
 				return;
 		}
 	};

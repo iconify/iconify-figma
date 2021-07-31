@@ -11,6 +11,7 @@
 	import Navigation from './figma/Navigation.svelte';
 	import Content from './content/Content.svelte';
 	import Footer from './content/Footer.svelte';
+	import Notices from './figma/Notice.svelte';
 
 	/**
 	 * Global exports
@@ -67,5 +68,6 @@
 			<Content {selection} {viewChanged} {error} {route} {blocks} />
 			<Footer {selection} {selectionLength} {route} {customisations} />
 		{/if}
+		<Notices />
 	</Wrapper>
 {/if}

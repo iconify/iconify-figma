@@ -201,5 +201,9 @@ export const phrases: UITranslation = {
 		submenu: {
 			svg: 'Paste SVG',
 		},
+		notices: {
+			failed_icon: 'Error importing icon "{name}"',
+			failed_icons: 'Error importing {count} icons',
+		},
 	},
 };

@@ -115,5 +115,10 @@ export interface UITranslation {
 	figma: {
 		menu: Record<PluginUINavigationSection, string>;
 		submenu: Record<string, string>;
+		// Also see src/figma/data/phrases.ts
+		notices: {
+			failed_icon: string;
+			failed_icons: string;
+		};
 	};
 }

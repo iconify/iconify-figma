@@ -1,0 +1,62 @@
+.plugin-notices {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	padding: 0 16px;
+	z-index: 2;
+
+	&:empty {
+		display: none;
+	}
+}
+
+.plugin-notice {
+	@include plugin-font-ui-neg('xlarge', 'normal');
+
+	margin: 16px 0;
+	padding: 8px 16px;
+
+	color: $plugin-palette-color-white;
+	background: $plugin-palette-background-almost-black;
+	border-radius: $plugin-border-radius-med;
+	box-shadow: 0 5px 17px rgba(0, 0, 0, 0.2), 0 2px 7px rgba(0, 0, 0, 0.15);
+
+	animation-name: plugin-floating-notice;
+	animation-duration: 5s;
+	animation-fill-mode: forwards;
+	cursor: pointer;
+	display: table;
+	margin: 16px auto;
+	text-align: center;
+
+	&--error {
+		background: $plugin-palette-background-red;
+		animation-duration: 10s;
+	}
+	&--warning {
+		background: $plugin-palette-background-blue;
+		animation-duration: 10s;
+	}
+	&--success {
+		background: $plugin-palette-background-green;
+		animation-duration: 3s;
+	}
+}
+
+@keyframes plugin-floating-notice {
+	0% {
+		opacity: 0;
+	}
+
+	10% {
+		opacity: 1;
+	}
+
+	90% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}

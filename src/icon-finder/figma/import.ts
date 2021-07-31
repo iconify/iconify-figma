@@ -5,6 +5,8 @@ import { renderHTML } from '@iconify/search-core/lib/code-samples/html';
 import { defaultCustomisations } from '@iconify/search-core/lib/misc/customisations';
 import { getIcon } from '@iconify/svelte';
 import type { ImportIconCommon, ImportIconItem } from '../../common/import';
+import { addNotice } from './notices';
+import { phrases } from '../config/phrases';
 
 /**
  * Convert button message from Icon Finder to message to plugin
@@ -13,6 +15,7 @@ export function getIconImportMessage(
 	event: IconFinderButtonEvent
 ): UIToFigmaImportIconMessage | undefined {
 	const state = event.state;
+	const failed: string[] = [];
 
 	// Get props
 	const props = state.customisations;
@@ -23,6 +26,7 @@ export function getIconImportMessage(
 			const name = iconToString(icon);
 			const data = getIcon(name);
 			if (!data) {
+				failed.push(name);
 				return null;
 			}
 
@@ -44,6 +48,29 @@ export function getIconImportMessage(
 			return result;
 		})
 		.filter((item) => item !== null) as ImportIconItem[];
+
+	switch (failed.length) {
+		case 0:
+			break;
+
+		case 1:
+			addNotice({
+				layout: 'error',
+				message: phrases.figma.notices.failed_icon.replace(
+					'{name}',
+					failed[0]
+				),
+			});
+
+		default:
+			addNotice({
+				layout: 'error',
+				message: phrases.figma.notices.failed_icons.replace(
+					'{count}',
+					failed.length + ''
+				),
+			});
+	}
 
 	if (!icons.length) {
 		return;

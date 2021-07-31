@@ -1,5 +1,9 @@
+import { writable } from 'svelte/store';
 import type { PluginApp } from '../../common/misc';
 
+/**
+ * Interface for pluginUIEnv
+ */
 interface PluginUIEnv {
 	app: PluginApp;
 }

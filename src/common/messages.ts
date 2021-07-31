@@ -5,6 +5,15 @@ import type { ImportIconCommon, ImportIconItem } from './import';
 import type { SelectedPageLayer } from './layers';
 
 /**
+ * Notice
+ */
+export type UINoticeLayout = 'error' | 'success' | 'warning';
+export interface UINotice {
+	layout: UINoticeLayout;
+	message: string;
+}
+
+/**
  * Messages sent from Figma to UI
  */
 
@@ -21,8 +30,16 @@ interface FigmaToUIStartMessage
 	ifConfig: PluginIconFinderConfig;
 }
 
+interface FigmaToUINotice {
+	type: 'notice';
+	notice: UINotice | UINotice[];
+}
+
 // Combined type
-export type FigmaToUIMessage = FigmaToUIStartMessage | FigmaToUILayersMessage;
+export type FigmaToUIMessage =
+	| FigmaToUIStartMessage
+	| FigmaToUILayersMessage
+	| FigmaToUINotice;
 
 /**
  * Messages sent from UI to Figma
