@@ -44,7 +44,10 @@ import { sendMessageToUI } from './send-message';
 
 			case 'import-icon':
 				// Import icon(s)
-				importIcons(event.data, event.icons);
+				if (importIcons(event.data, event.icons) && event.data.close) {
+					// Import + close
+					figma.closePlugin();
+				}
 				return;
 
 			case 'custom-icons':

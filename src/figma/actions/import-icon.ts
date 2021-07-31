@@ -27,12 +27,14 @@ function moveNode(node: FrameNode, parent: ViableParentFigmaNode) {
 
 /**
  * Import icon(s)
+ *
+ * Returns true on full success
  */
 export function importIcons(
 	data: ImportIconCommon,
 	icons: ImportIconItem[],
 	route?: PartialRoute
-) {
+): boolean {
 	const added: string[] = [];
 	const errors: string[] = [];
 
@@ -113,4 +115,6 @@ export function importIcons(
 		type: 'notice',
 		notice: notices,
 	});
+
+	return errors.length === 0;
 }

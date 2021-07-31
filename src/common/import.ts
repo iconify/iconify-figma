@@ -13,6 +13,9 @@ interface ImportTarget {
 export interface ImportIconCommon extends ImportTarget {
 	// Customisations
 	props: Partial<IconCustomisations>;
+
+	// Close window after import
+	close?: boolean;
 }
 
 // Data for each imported icon

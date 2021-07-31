@@ -82,12 +82,19 @@ function runIconFinder() {
 							case 'button': {
 								switch (event.button) {
 									case 'import':
+									case 'import_close':
 										// Import icon
 										const message = getIconImportMessage(
 											event,
 											wrapper.isIconFinderMainPage()
 										);
 										if (message !== void 0) {
+											if (
+												event.button === 'import_close'
+											) {
+												// Import and close
+												message.data.close = true;
+											}
 											sendMessageToFigma(message);
 										}
 								}
