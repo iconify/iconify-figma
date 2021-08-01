@@ -79,8 +79,15 @@ export interface IconFinderButtonEvent {
 	state: IconFinderState;
 }
 
+// Import SVG
+export interface IconFinderImportSVGEvent {
+	type: 'import-svg';
+	svg: string;
+}
+
 type IconFinderActionEvents =
 	| IconFinderButtonEvent
+	| IconFinderImportSVGEvent
 	| IconFinderExternalLinkEvent;
 
 /**

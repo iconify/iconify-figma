@@ -1,0 +1,76 @@
+.iif-textarea {
+	@include plugin-font-ui-pos('small', 'normal');
+
+	display: block;
+	box-sizing: border-box;
+	position: relative;
+	width: 100%;
+	height: 80px;
+	margin: 0 0 8px;
+	padding: 4px;
+
+	color: $plugin-palette-color-black-dimmed;
+	border: 1px solid transparent;
+	border-radius: $plugin-border-radius-small;
+	outline: none;
+	box-shadow: none;
+	background-color: $plugin-palette-background-white;
+
+	&::selection {
+		color: $plugin-palette-color-black;
+		background-color: $plugin-palette-background-selected-borderless;
+	}
+
+	&::placeholder {
+		color: $plugin-palette-color-black-muted;
+	}
+
+	// Placeholder
+	&:not(:disabled):not(:hover):placeholder-shown {
+		border-color: transparent;
+		border-bottom-color: $plugin-palette-border-darker-grey;
+		box-shadow: none;
+	}
+
+	// Custom styles for normal state. Overwrite placeholder selector if needed
+	&--underlined {
+		border-color: transparent;
+		border-bottom-color: $plugin-palette-border-darker-grey;
+		box-shadow: none;
+	}
+
+	&--outlined {
+		&,
+		&:not(:disabled):not(:hover):placeholder-shown {
+			border-color: $plugin-palette-border-darker-grey;
+			box-shadow: none;
+		}
+	}
+
+	// Additional classes
+	&--invalid {
+		&,
+		&:not(:disabled):not(:hover):placeholder-shown {
+			border-color: $plugin-palette-border-red;
+			box-shadow: 0 0 0 1px $plugin-palette-border-red inset;
+		}
+	}
+
+	// Hover
+	&:hover {
+		color: $plugin-palette-color-black-dimmed;
+		border-color: $plugin-palette-border-darker-grey;
+		box-shadow: none;
+	}
+
+	// Focus and active
+	&:active,
+	&:focus {
+		&,
+		&:not(:disabled):placeholder-shown {
+			color: $plugin-palette-color-black;
+			border-color: $plugin-palette-border-blue;
+			box-shadow: 0 0 0 1px $plugin-palette-border-blue inset;
+		}
+	}
+}

@@ -132,4 +132,17 @@ export interface UITranslation {
 			failed_icons: string;
 		};
 	};
+	svg: {
+		text: string;
+		subtext: string;
+		sample: string;
+		sampleAlt: string;
+		import: string;
+		clear: string;
+		// Errors
+		invalid: string;
+		foreignObject: string;
+		font: string;
+		animated: string;
+	};
 }

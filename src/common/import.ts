@@ -21,7 +21,7 @@ export interface ImportIconCommon extends ImportTarget {
 // Data for each imported icon
 export interface ImportIconItem {
 	// Full name with prefix
-	name: string;
+	name?: string;
 
 	// SVG
 	svg: string;

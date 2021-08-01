@@ -1,5 +1,8 @@
 import type { UITranslation } from './types';
 
+const animatedNotice =
+	'Selected icon has SVG animations that Figma does not support. Icon might be imported incorrectly.';
+
 /**
  * Phrases.
  *
@@ -150,8 +153,7 @@ export const phrases: UITranslation = {
 		blockHint: 'Icon is rendered as is, without custom vertical alignment.',
 	},
 	codeSamples: {
-		animatedNotice:
-			'Selected icon has SVG animations that Figma does not support. Icon might be imported incorrectly.',
+		animatedNotice,
 		copy: 'Copy to clipboard',
 		copied: 'Copied to clipboard.',
 		headingHidden: 'Show code for "{name}" for developers',
@@ -219,5 +221,19 @@ export const phrases: UITranslation = {
 			failed_icon: 'Error importing icon "{name}"',
 			failed_icons: 'Error importing {count} icons',
 		},
+	},
+	svg: {
+		text: 'Paste SVG to import it to Figma document:',
+		subtext:
+			'You can also paste "data:image/svg+xml" URI and plugin will try to decode it.',
+		sample: 'Sample:',
+		sampleAlt: 'Sample image. You can import it or drag it to document',
+		import: 'Import SVG',
+		clear: 'Clear',
+		invalid: 'Invalid SVG code',
+		foreignObject: 'SVG contains dangerous HTML code.',
+		font:
+			'Looks like you are trying to import SVG font. Currently plug-in does not support importing fonts.',
+		animated: animatedNotice,
 	},
 };

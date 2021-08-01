@@ -36,8 +36,8 @@ export function importIcons(
 	icons: ImportIconItem[],
 	route?: PartialRoute
 ): boolean {
-	const added: string[] = [];
-	const errors: string[] = [];
+	const added: (string | undefined)[] = [];
+	const errors: (string | undefined)[] = [];
 
 	// Find parent layer
 	let layerId = data.layerId;
@@ -61,20 +61,26 @@ export function importIcons(
 			return;
 		}
 
-		// Set data
-		node.setSharedPluginData('iconify', 'source', 'iconify');
+		// Stuff for Iconify icon imports
+		if (icon.name !== void 0) {
+			// Set data
+			node.setSharedPluginData('iconify', 'source', 'iconify');
+			const propsData: ImportedIconSharedData = {
+				version: 2,
+				name: icon.name,
+				props: data.props,
+				route,
+			};
+			node.setSharedPluginData(
+				'iconify',
+				'props',
+				JSON.stringify(propsData)
+			);
+			node.setRelaunchData(figmaPhrases.relaunch);
 
-		const propsData: ImportedIconSharedData = {
-			version: 2,
-			name: icon.name,
-			props: data.props,
-			route,
-		};
-		node.setSharedPluginData('iconify', 'props', JSON.stringify(propsData));
-		node.setRelaunchData(figmaPhrases.relaunch);
-
-		// Rename node
-		node.name = icon.name;
+			// Rename node
+			node.name = icon.name;
+		}
 
 		// Move it
 		moveNode(node, parent);
@@ -89,12 +95,17 @@ export function importIcons(
 		case 0:
 			break;
 
-		case 1:
+		case 1: {
+			const name = added[0];
 			notices.push({
 				layout: 'success',
-				message: text.added_icon.replace('{name}', added[0]),
+				message:
+					name === void 0
+						? text.added_unnamed
+						: text.added_icon.replace('{name}', name),
 			});
 			break;
+		}
 
 		default:
 			notices.push({
@@ -106,12 +117,17 @@ export function importIcons(
 		case 0:
 			break;
 
-		case 1:
+		case 1: {
+			const name = errors[0];
 			notices.push({
 				layout: 'error',
-				message: text.failed_icon.replace('{name}', errors[0]),
+				message:
+					name === void 0
+						? text.failed_unnamed
+						: text.failed_icon.replace('{name}', name),
 			});
 			break;
+		}
 
 		default:
 			notices.push({

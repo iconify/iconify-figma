@@ -12,6 +12,7 @@
 	import Content from './content/Content.svelte';
 	import Footer from './content/Footer.svelte';
 	import Notices from './figma/Notice.svelte';
+	import SVGPage from './pages/SVG.svelte';
 
 	/**
 	 * Global exports
@@ -33,6 +34,23 @@
 	setContext('registry', registry);
 
 	// Check if Icon Finder should be shown
+	let iconFinderRendered = false;
+	let showPage: string = 'iconify';
+
+	$: {
+		if (isIconFinderNavigation(currentPage)) {
+			showPage = 'iconify';
+		} else {
+			showPage = currentPage.submenu;
+			console.log('Page:', showPage);
+		}
+
+		if (showPage === 'iconify') {
+			iconFinderRendered = true;
+		}
+	}
+
+	/*
 	let showIconFinder: boolean | 'hidden' = false;
 	$: {
 		showIconFinder = isIconFinderNavigation(currentPage)
@@ -41,15 +59,19 @@
 			? 'hidden'
 			: false;
 	}
+	*/
 </script>
 
 {#if hidden !== true}
 	<Minimized />
 	<Wrapper>
 		<Navigation {currentPage} />
-		{#if showIconFinder}
+		{#if showPage === 'svg'}
+			<SVGPage />
+		{/if}
+		{#if iconFinderRendered || showPage === 'iconify'}
 			<div
-				class="plugin-content plugin-content--icon-finder{showIconFinder === true ? '' : ' plugin-content--hidden'}">
+				class="plugin-content plugin-content--icon-finder{showPage === 'iconify' ? '' : ' plugin-content--hidden'}">
 				<Content {selection} {viewChanged} {error} {route} {blocks} />
 				<Footer
 					{selection}

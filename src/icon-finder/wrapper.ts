@@ -44,6 +44,7 @@ import type {
 	UISelectionEvent,
 	UIDeleteIconEvent,
 	UIWindowEvent,
+	UIImportSVGEvent,
 } from './events/types';
 import type { WrappedRegistry } from './wrapper/registry';
 import type { ContainerProps } from './wrapper/container';
@@ -535,6 +536,12 @@ export class Wrapper {
 
 				// Forward to Figma
 				sendMessageToFigma(e);
+				return;
+			}
+
+			case 'import-svg': {
+				// Forward event to index
+				this._triggerEvent(event as UIImportSVGEvent);
 				return;
 			}
 

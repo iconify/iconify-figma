@@ -95,3 +95,26 @@ export function getIconImportMessage(
 		icons,
 	};
 }
+
+/**
+ * Import message for SVG
+ */
+export function getSVGImportMessage(svg: string): UIToFigmaImportIconMessage {
+	const data: ImportIconCommon = {
+		props: {},
+	};
+
+	if (pluginUIEnv.targetLayer) {
+		data.layerId = pluginUIEnv.targetLayer;
+	}
+
+	return {
+		type: 'import-icon',
+		data,
+		icons: [
+			{
+				svg,
+			},
+		],
+	};
+}

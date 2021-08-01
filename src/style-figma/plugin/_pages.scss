@@ -1,0 +1,39 @@
+.iif-content--page {
+	// Second line of text
+	.plugin-page-comment {
+		@include plugin-font-ui-pos('small', 'normal');
+		color: $plugin-palette-color-black-dimmed;
+		margin-top: -8px;
+	}
+}
+
+// Paste SVG page
+.iif-content--svg {
+	.iif-textarea {
+		height: 300px;
+	}
+}
+
+.plugin-paste-notices {
+	white-space: nowrap;
+	margin: 8px 0;
+	.plugin-paste-notice {
+		margin: 4px 0;
+		padding: 0;
+	}
+	.plugin-paste-notice--error {
+		color: $plugin-palette-border-red;
+	}
+}
+
+.iif-footer-full--paste {
+	img {
+		font-size: 128px;
+		width: 128px;
+		border: 1px solid $plugin-palette-border-blue;
+		&:hover {
+			border-color: transparent;
+			background-color: $plugin-palette-background-darker-white-borderless;
+		}
+	}
+}

@@ -45,6 +45,12 @@ export interface UIWindowEvent {
 	control: PluginUIWindowControls;
 }
 
+// Import SVG
+export interface UIImportSVGEvent {
+	type: 'import-svg';
+	svg: string;
+}
+
 // Combined type
 export type UIEvent =
 	| UISelectionEvent
@@ -52,4 +58,5 @@ export type UIEvent =
 	| UIFooterButtonEvent
 	| UIDeleteIconEvent
 	| UIWindowEvent
+	| UIImportSVGEvent
 	| UIConfigEvent;

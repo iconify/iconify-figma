@@ -1,8 +1,9 @@
 import type { FigmaToUIMessage } from '../common/messages';
 import type { PluginStorageType } from '../common/misc';
+import { replacePhrases } from './config/phrases';
 import { pluginUIEnv } from './figma/env';
 import { customIconsData, updateCustomIcons } from './figma/icon-lists';
-import { getIconImportMessage } from './figma/import';
+import { getIconImportMessage, getSVGImportMessage } from './figma/import';
 import { sendMessageToFigma } from './figma/messages';
 import { addNotice } from './figma/notices';
 import { Wrapper } from './wrapper';
@@ -33,6 +34,11 @@ function runIconFinder() {
 			case 'start-plugin':
 				// Set environment
 				pluginUIEnv.app = message.app;
+				switch (pluginUIEnv.app) {
+					case 'figjam':
+						replacePhrases('Figma', 'FigJam');
+				}
+
 				if (message.selection) {
 					pluginUIEnv.layers.set(message.selection);
 				}
@@ -109,6 +115,14 @@ function runIconFinder() {
 										return;
 								}
 								break;
+							}
+
+							case 'import-svg': {
+								const message = getSVGImportMessage(event.svg);
+								if (message) {
+									sendMessageToFigma(message);
+								}
+								return;
 							}
 						}
 					},
