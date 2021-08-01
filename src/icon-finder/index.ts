@@ -115,6 +115,10 @@ function runIconFinder() {
 			case 'notice':
 				addNotice(message.notice);
 				return;
+
+			case 'target-layers':
+				pluginUIEnv.layers.set(message.selection);
+				return;
 		}
 	};
 

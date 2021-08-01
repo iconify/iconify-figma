@@ -9,7 +9,7 @@ import { sendMessageToUI } from './send-message';
 (async () => {
 	// Startup
 	pluginEnv.config = await loadConfig();
-	pluginEnv.layersTree = getTargetLayers();
+	pluginEnv.selection = getTargetLayers();
 
 	// Track selection
 	figma.on('selectionchange', selectionChanged);
@@ -37,7 +37,7 @@ import { sendMessageToUI } from './send-message';
 					app: pluginEnv.app,
 					command: figma.command,
 					ifConfig: pluginEnv.config.iconFinder,
-					pageLayer: pluginEnv.layersTree,
+					selection: pluginEnv.selection,
 					storage: pluginEnv.config.storage,
 				});
 				return;

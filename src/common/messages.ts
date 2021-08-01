@@ -2,7 +2,7 @@ import type { IconFinderConfig, PartialRoute } from '@iconify/search-core';
 import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/customisations';
 import type { PluginApp, PluginIconFinderConfig } from './misc';
 import type { ImportIconCommon, ImportIconItem } from './import';
-import type { SelectedPageLayer } from './layers';
+import type { SelectedLayers } from './layers';
 import type { PluginStorage } from '../figma/data/config';
 import type { IconListType } from './icon-lists';
 import type { PluginUIWindowControls } from './navigation';
@@ -23,7 +23,7 @@ export interface UINotice {
 // Send message when plugin starts
 interface FigmaToUILayersMessage {
 	type: 'target-layers';
-	pageLayer: SelectedPageLayer;
+	selection: SelectedLayers;
 }
 
 interface FigmaToUIStartMessage

@@ -1,64 +1,64 @@
 /**
- * Page
- */
-export interface SelectedPageLayer {
-	type: 'page';
-	name: string;
-	children: PossibleTargetChildLayer[];
-}
-
-/**
  * Common data
  */
 interface CommonLayerData {
 	id: string;
 	name: string;
+	depth?: number;
 }
 
 /**
- * Base
+ * Page
  */
-interface BaseLayer extends CommonLayerData {
-	children: PossibleTargetChildLayer[];
+export interface SelectedPageLayer extends CommonLayerData {
+	type: 'PAGE';
 }
 
 /**
  * Group
  */
-interface PossibleTargetGroupLayer extends BaseLayer {
-	type: 'group';
+interface SelectedGroupLayer extends CommonLayerData {
+	type: 'GROUP';
 }
 
 /**
  * Frame and components
  */
-interface PossibleTargetFrameBaseLayer extends BaseLayer {
+interface SelectedFrameBaseLayer extends CommonLayerData {
 	layoutMode?: 'HORIZONTAL' | 'VERTICAL';
-	isIcon?: boolean;
 }
-interface PossibleTargetFrameLayer extends PossibleTargetFrameBaseLayer {
-	type: 'frame';
+interface SelectedFrameLayer extends SelectedFrameBaseLayer {
+	type: 'FRAME';
 }
-interface PossibleTargetComponentLayer extends PossibleTargetFrameBaseLayer {
-	type: 'component';
+interface SelectedComponentLayer extends SelectedFrameBaseLayer {
+	type: 'COMPONENT';
 }
-interface PossibleTargetComponentInstanceLayer
-	extends PossibleTargetFrameBaseLayer {
-	type: 'instance';
+interface SelectedComponentInstanceLayer extends SelectedFrameBaseLayer {
+	type: 'INSTANCE';
 }
 
 /**
  * Combinations
  */
-export type PossibleTargetChildLayer =
-	| PossibleTargetGroupLayer
-	| PossibleTargetFrameLayer
-	| PossibleTargetComponentLayer
-	| PossibleTargetComponentInstanceLayer;
+export type SelectedLayer =
+	| SelectedPageLayer
+	| SelectedGroupLayer
+	| SelectedFrameLayer
+	| SelectedComponentLayer
+	| SelectedComponentInstanceLayer;
 
 /**
  * Layer with icon
  */
-export interface ImportedIconLayer extends CommonLayerData {
-	type: 'frame' | 'component' | 'instance';
+export interface SelectedIconLayer extends CommonLayerData {
+	type: 'FRAME' | 'COMPONENT' | 'INSTANCE';
+}
+
+/**
+ * Selected layers and icon
+ */
+export interface SelectedLayers {
+	layers: SelectedLayer[];
+	// Only one icon. If more than one icon is selected, option to replace icon is not shown to avoid messy UI
+	icon?: SelectedIconLayer;
 }

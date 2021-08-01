@@ -1,4 +1,4 @@
-import type { SelectedPageLayer } from '../../common/layers';
+import type { SelectedLayers } from '../../common/layers';
 import type { PluginApp } from '../../common/misc';
 import { emptyPluginConfig, PluginConfig } from './config';
 
@@ -18,8 +18,8 @@ interface PluginEnv {
 	// True if window is currently minimized
 	minimized: boolean;
 
-	// Selected layers, starting with page
-	layersTree?: SelectedPageLayer;
+	// Selected layers
+	selection?: SelectedLayers;
 }
 
 /**

@@ -1,6 +1,7 @@
 import type {
-	PossibleTargetChildLayer,
-	SelectedPageLayer,
+	SelectedIconLayer,
+	SelectedLayer,
+	SelectedLayers,
 } from '../../common/layers';
 import { sendMessageToUI } from '../send-message';
 import { pluginEnv } from './env';
@@ -51,86 +52,117 @@ export function filterViableParentNode(
 /**
  * Find all possible target layers
  */
-export function getTargetLayers(): SelectedPageLayer {
+export function getTargetLayers(): SelectedLayers {
 	const currentPage = figma.currentPage;
 	const selection = currentPage.selection;
-	const pageLayer: SelectedPageLayer = {
-		type: 'page',
-		name: currentPage.name,
+
+	// Layers tree
+	interface LayerAsTree {
+		layer: SelectedLayer;
+		children: LayerAsTree[];
+	}
+	const page: LayerAsTree = {
+		layer: {
+			type: 'PAGE',
+			id: currentPage.id,
+			name: currentPage.name,
+		},
 		children: [],
 	};
-	const items: Map<string, PossibleTargetChildLayer> = new Map();
 
-	function checkNode(node: BaseNode, child?: PossibleTargetChildLayer) {
+	// List of icons, stored by id to avoid duplicates
+	const icons: Record<string, SelectedIconLayer> = Object.create(null);
+
+	// Map of parsed items
+	const parsedLayers: Map<string, LayerAsTree> = new Map();
+
+	// Check node
+	function checkNode(node: BaseNode, depth: number, child?: LayerAsTree) {
 		const existingParent =
-			node.type === 'PAGE' ? pageLayer : items.get(node.id);
+			node.type === 'PAGE' ? page : parsedLayers.get(node.id);
 
 		if (existingParent) {
 			// Already exists: all child node if set
 			if (child) {
 				existingParent.children.push(child);
 				existingParent.children.sort((a, b) =>
-					a.name.localeCompare(b.name)
+					a.layer.name.localeCompare(b.layer.name)
 				);
 			}
 			return;
 		}
 
-		// New node, not tested before
 		const id = node.id;
+
+		// Check for icon
+		if (icons[id] !== void 0) {
+			// Already parsed
+			return;
+		}
+
+		// New node, not tested before
 		const sceneNode = node as SceneNode;
 		if (sceneNode.locked) {
 			// Cannot be used
 			if (sceneNode.parent) {
-				checkNode(sceneNode.parent);
+				checkNode(sceneNode.parent, depth + 1);
 			}
 			return;
 		}
 
 		// Check node
 		const name = node.name;
-		let item: PossibleTargetChildLayer | undefined;
+		let item: SelectedLayer | undefined;
 		const filteredNode = filterViableParentNode(node);
 
 		if (filteredNode) {
-			const type = filteredNode.type.toLowerCase();
 			switch (filteredNode.type) {
 				case 'FRAME':
 				case 'COMPONENT':
-				case 'INSTANCE':
+				case 'INSTANCE': {
+					// Check for icon
+					if (isIconNode(sceneNode)) {
+						if (depth === 0) {
+							// Add icon
+							const icon: SelectedIconLayer = {
+								id,
+								name,
+								type: filteredNode.type,
+							};
+							icons[id] = icon;
+						}
+
+						// Cannot import icon to child nodes of icon
+						child = void 0;
+
+						break;
+					}
+
 					item = {
 						id,
 						name,
-						type: type as 'frame', // All types are child types of frame, so using 'frame' to avoid TypeScript notices
+						type: filteredNode.type,
 						layoutMode:
 							!filteredNode.layoutMode ||
 							filteredNode.layoutMode === 'NONE'
 								? void 0
 								: filteredNode.layoutMode,
-						children: [],
 					};
-
-					// Check for icon
-					if (isIconNode(sceneNode)) {
-						item.isIcon = true;
-						child = void 0; // Cannot import icon to child nodes of another icon
-					}
-
 					break;
+				}
 
 				case 'GROUP':
 					item = {
 						id,
 						name,
-						type: 'group',
-						children: [],
+						type: filteredNode.type,
 					};
 					break;
 
 				default:
 					console.log(
 						'Debug: filtered node type =',
-						type,
+						filteredNode.type,
 						filteredNode
 					);
 			}
@@ -139,30 +171,48 @@ export function getTargetLayers(): SelectedPageLayer {
 		}
 
 		// Add item to tree
+		let treeItem: LayerAsTree | undefined;
 		if (item) {
-			items.set(id, item);
-			if (child) {
-				item.children.push(child);
-			}
+			treeItem = {
+				layer: item,
+				children: child ? [child] : [],
+			};
+			parsedLayers.set(id, treeItem);
 		}
 
 		// Check parent
 		if (node.parent) {
-			checkNode(node.parent, item ? item : child);
+			checkNode(node.parent, depth + 1, treeItem ? treeItem : child);
 		}
 	}
 
 	// Check all nodes
-	checkNode(currentPage);
+	checkNode(currentPage, 0);
 	selection.forEach((node) => {
-		checkNode(node);
+		checkNode(node, 0);
 	});
 
-	console.log(
-		'getTargetLayers:',
-		pageLayer ? JSON.stringify(pageLayer, null, 4) : 'none'
-	);
-	return pageLayer;
+	// Convert tree to list
+	const layers: SelectedLayer[] = [];
+	function convertTree(item: LayerAsTree, depth: number) {
+		const layer = item.layer;
+		layer.depth = depth;
+		layers.push(layer);
+
+		item.children.forEach((child) => {
+			convertTree(child, depth + 1);
+		});
+	}
+	convertTree(page, 0);
+
+	const iconKeys = Object.keys(icons);
+	return {
+		// Do not show less than 2 layers
+		layers: layers.length > 1 ? layers : [],
+
+		// Show only 1 icon
+		icon: iconKeys.length === 1 ? icons[iconKeys[0]] : void 0,
+	};
 }
 
 /**
@@ -180,67 +230,21 @@ export function selectionChanged() {
 		isPendingSelectionChange = false;
 
 		// Get selection, check if it was changed
-		const newPage = getTargetLayers();
-		const oldPage = pluginEnv.layersTree;
+		const newSelection = getTargetLayers();
+		const oldSelection = pluginEnv.selection;
 
-		const hasChanged = () => {
-			if (!oldPage || newPage.name !== oldPage.name) {
-				return true;
-			}
-
-			// Compare child nodes, returns true if changed
-			function childrenChanged(
-				list1: PossibleTargetChildLayer[],
-				list2: PossibleTargetChildLayer[]
-			): boolean {
-				if (list1.length !== list2.length) {
-					return true;
-				}
-				for (let i = 0; i < list1.length; i++) {
-					const layer1 = list1[i];
-					const layer2 = list2[i];
-					if (
-						layer1.type !== layer2.type ||
-						layer1.id !== layer2.id ||
-						layer1.name !== layer2.name
-					) {
-						return true;
-					}
-
-					// TODO: do comparison specific to layer type
-					switch (layer1.type) {
-						case 'frame':
-							if (
-								layer1.layoutMode !==
-									(layer2 as typeof layer1).layoutMode ||
-								layer1.isIcon !==
-									(layer2 as typeof layer1).isIcon
-							) {
-								return true;
-							}
-					}
-
-					// Compare children
-					if (childrenChanged(layer1.children, layer2.children)) {
-						return true;
-					}
-				}
-
-				return false;
-			}
-
-			return childrenChanged(oldPage.children, newPage.children);
-		};
-
-		if (!hasChanged()) {
+		if (
+			oldSelection &&
+			JSON.stringify(oldSelection) === JSON.stringify(newSelection)
+		) {
 			return;
 		}
 
 		// Update UI
-		pluginEnv.layersTree = newPage;
+		pluginEnv.selection = newSelection;
 		sendMessageToUI({
 			type: 'target-layers',
-			pageLayer: newPage,
+			selection: newSelection,
 		});
 	}, 250);
 }
