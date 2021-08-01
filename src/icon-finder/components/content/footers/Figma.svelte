@@ -23,6 +23,7 @@
 	import IconsList from './parts/Icons.svelte';
 	import FooterBlock from './parts/FooterBlock.svelte';
 	import InfoBlock from '../blocks/CollectionInfo.svelte';
+	import LayersBlock from './parts/Layers.svelte';
 
 	/* Various components for icon name. Uncomment one you want to use */
 	// import IconName from './parts/name/Simple.svelte';
@@ -163,6 +164,9 @@
 				{/if}
 				{#if showCode && icon}
 					<CodeBlock {icon} {customisations} />
+				{/if}
+				{#if hasIcons}
+					<LayersBlock />
 				{/if}
 				{#if showButtons}
 					<ButtonsContainer {icons} {route} />

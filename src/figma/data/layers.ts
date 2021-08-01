@@ -194,11 +194,21 @@ export function getTargetLayers(): SelectedLayers {
 
 	// Convert tree to list
 	const layers: SelectedLayer[] = [];
+	let maxDepth = -1;
+	let isSimpleTree = true;
 	function convertTree(item: LayerAsTree, depth: number) {
+		// Check if tree is simple
+		if (depth <= maxDepth) {
+			isSimpleTree = false;
+		}
+		maxDepth = depth;
+
+		// Add layer
 		const layer = item.layer;
 		layer.depth = depth;
 		layers.push(layer);
 
+		// Parse children
 		item.children.forEach((child) => {
 			convertTree(child, depth + 1);
 		});
@@ -209,6 +219,12 @@ export function getTargetLayers(): SelectedLayers {
 	return {
 		// Do not show less than 2 layers
 		layers: layers.length > 1 ? layers : [],
+
+		// Default layer
+		defaultLayer:
+			isSimpleTree && layers.length > 1
+				? layers[layers.length - 1].id
+				: '',
 
 		// Show only 1 icon
 		icon: iconKeys.length === 1 ? icons[iconKeys[0]] : void 0,

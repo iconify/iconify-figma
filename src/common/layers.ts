@@ -59,6 +59,10 @@ export interface SelectedIconLayer extends CommonLayerData {
  */
 export interface SelectedLayers {
 	layers: SelectedLayer[];
+
+	// Default layer id
+	defaultLayer: string;
+
 	// Only one icon. If more than one icon is selected, option to replace icon is not shown to avoid messy UI
 	icon?: SelectedIconLayer;
 }

@@ -33,6 +33,9 @@ function runIconFinder() {
 			case 'start-plugin':
 				// Set environment
 				pluginUIEnv.app = message.app;
+				if (message.selection) {
+					pluginUIEnv.layers.set(message.selection);
+				}
 
 				// Set storage
 				const storage = message.storage;

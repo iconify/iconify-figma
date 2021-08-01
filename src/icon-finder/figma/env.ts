@@ -14,6 +14,11 @@ interface PluginUIEnv {
 
 	// Selected layers
 	layers: Writable<PartialSelectedLayers>;
+
+	// Target layer id
+	// Modified only by layers list component, read only for everything else
+	// Validated by plugin when importing icons
+	targetLayer: string;
 }
 
 /**
@@ -22,4 +27,5 @@ interface PluginUIEnv {
 export const pluginUIEnv: PluginUIEnv = {
 	app: 'figma',
 	layers: writable({}),
+	targetLayer: '',
 };

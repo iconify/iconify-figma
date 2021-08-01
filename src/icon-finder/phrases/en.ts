@@ -212,6 +212,9 @@ export const phrases: UITranslation = {
 			maximize: 'Show Plug-in',
 			close: 'Close Plug-in',
 		},
+		layers: {
+			title: 'Parent layer',
+		},
 		notices: {
 			failed_icon: 'Error importing icon "{name}"',
 			failed_icons: 'Error importing {count} icons',

@@ -7,6 +7,7 @@ import { getIcon } from '@iconify/svelte';
 import type { ImportIconCommon, ImportIconItem } from '../../common/import';
 import { addNotice } from './notices';
 import { phrases } from '../config/phrases';
+import { pluginUIEnv } from './env';
 
 /**
  * Convert button message from Icon Finder to message to plugin
@@ -82,6 +83,10 @@ export function getIconImportMessage(
 	const data: ImportIconCommon = {
 		props,
 	};
+
+	if (pluginUIEnv.targetLayer) {
+		data.layerId = pluginUIEnv.targetLayer;
+	}
 
 	return {
 		type: 'import-icon',

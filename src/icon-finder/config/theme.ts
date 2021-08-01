@@ -19,11 +19,10 @@ export const collectionClickable = false;
 /**
  * Import custom icons
  */
-const customIconsPrefix = 'icon-finder-theme';
-const customIconsPrefix2 = 'icon-finder-theme2';
+const prefix = 'icon-finder-theme';
 export function importThemeIcons() {
 	addCollection({
-		prefix: customIconsPrefix,
+		prefix,
 		icons: {
 			'reset': {
 				body:
@@ -150,7 +149,7 @@ export function importThemeIcons() {
 
 	// Bigger icons, used mostly for navigation
 	addCollection({
-		prefix: customIconsPrefix2,
+		prefix,
 		icons: {
 			menu: {
 				body:
@@ -176,51 +175,94 @@ export function importThemeIcons() {
 		width: 18,
 		height: 18,
 	});
+
+	// Layers list
+	addCollection({
+		prefix,
+		icons: {
+			'page': {
+				body:
+					'<path d="M3.5 10.5h5l4 4v7h-9v-11z" stroke="currentColor" fill="none"/>',
+			},
+			'frame': {
+				body:
+					'<path d="M2.5 13.5h11m-11 5h11m-8-8v11m5-11v11" fill="none" stroke-linecap="square" stroke="currentColor"/>',
+			},
+			'group': {
+				body:
+					'<g fill="none" stroke="currentColor"><path d="M4.5 20.5h-1v-1m0-7v-1h1l-1 1zm8-1h1v1l-1-1zm1 8v1h-1l1-1z"/><path d="M12.5 15v2M7 11.5h2-2zm0 9h2-2zM3.5 15v2-2z" stroke-linecap="square"/></g>',
+			},
+			'component': {
+				body:
+					'<path d="M8 9l7 7-7 7-7-7 7-7z" stroke="currentColor" fill="none"/>',
+			},
+			'frame-h': {
+				body:
+					'<path fill-rule="evenodd" clip-rule="evenodd" d="M6 12.5H3v7h3v-7zm7 0h-3v7h3v-7zm-11-1v9h5v-9H2zm7 0v9h5v-9H9z" fill="currentColor"/>',
+			},
+			'frame-v': {
+				body:
+					'<path fill-rule="evenodd" clip-rule="evenodd" d="M4 18v3h8v-3H4zm0-7v3h8v-3H4zm-1 4h10v-5H3v5zm0 7h10v-5H3v5z" fill="currentColor"/>',
+			},
+		},
+		width: 16,
+		height: 32,
+	});
 }
 
 /**
  * Icons used by UI
  */
 export const icons: Record<string, string | null> = {
-	'reset': customIconsPrefix + ':reset',
-	'search': customIconsPrefix + ':search',
-	'up': customIconsPrefix + ':up',
-	'down': customIconsPrefix + ':down',
-	'left': customIconsPrefix + ':left',
-	'right': customIconsPrefix + ':right',
-	'parent': customIconsPrefix + ':parent',
-	'expand': customIconsPrefix + ':right',
-	'grid': customIconsPrefix + ':grid',
-	'list': customIconsPrefix + ':list',
-	'check-list': customIconsPrefix + ':confirm2',
-	'check-list-checked': customIconsPrefix + ':reset',
-	'error-loading': customIconsPrefix + ':error-loading',
-	'icon-width': customIconsPrefix + ':icon-width',
-	'icon-height': customIconsPrefix + ':icon-height',
-	'color': customIconsPrefix + ':color',
-	'color-filled': customIconsPrefix + ':color-filled',
-	'rotate0': customIconsPrefix + ':reset',
-	'rotate1': customIconsPrefix + ':rotate1',
-	'rotate2': customIconsPrefix + ':rotate2',
-	'rotate3': customIconsPrefix + ':rotate3',
-	'h-flip': customIconsPrefix + ':h-flip',
-	'v-flip': customIconsPrefix + ':v-flip',
-	'plus': customIconsPrefix + ':plus',
-	'link': customIconsPrefix + ':link',
-	'clipboard': customIconsPrefix + ':clipboard',
-	'confirm': customIconsPrefix + ':confirm',
-	'docs': customIconsPrefix + ':docs',
-	'mode-block': customIconsPrefix + ':mode-block',
-	'mode-inline': customIconsPrefix + ':mode-inline',
-	'selecting-selected': customIconsPrefix + ':confirm',
-	'selecting-unselected': customIconsPrefix + ':empty',
-	'trash': customIconsPrefix2 + ':trash',
+	'reset': prefix + ':reset',
+	'search': prefix + ':search',
+	'up': prefix + ':up',
+	'down': prefix + ':down',
+	'left': prefix + ':left',
+	'right': prefix + ':right',
+	'parent': prefix + ':parent',
+	'expand': prefix + ':right',
+	'grid': prefix + ':grid',
+	'list': prefix + ':list',
+	'check-list': prefix + ':confirm2',
+	'check-list-checked': prefix + ':reset',
+	'error-loading': prefix + ':error-loading',
+	'icon-width': prefix + ':icon-width',
+	'icon-height': prefix + ':icon-height',
+	'color': prefix + ':color',
+	'color-filled': prefix + ':color-filled',
+	'rotate0': prefix + ':reset',
+	'rotate1': prefix + ':rotate1',
+	'rotate2': prefix + ':rotate2',
+	'rotate3': prefix + ':rotate3',
+	'h-flip': prefix + ':h-flip',
+	'v-flip': prefix + ':v-flip',
+	'plus': prefix + ':plus',
+	'link': prefix + ':link',
+	'clipboard': prefix + ':clipboard',
+	'confirm': prefix + ':confirm',
+	'docs': prefix + ':docs',
+	'mode-block': prefix + ':mode-block',
+	'mode-inline': prefix + ':mode-inline',
+	'selecting-selected': prefix + ':confirm',
+	'selecting-unselected': prefix + ':empty',
+	'trash': prefix + ':trash',
+
+	// Layers list
+	'layer.page': prefix + ':page',
+	'layer.frame': prefix + ':frame',
+	'layer.group': prefix + ':group',
+	'layer.component': prefix + ':component',
+	'layer.instance': prefix + ':component',
+	'layer.h': prefix + ':frame-h',
+	'layer.v': prefix + ':frame-v',
+
 	// Navigation
-	'menu': customIconsPrefix2 + ':menu',
-	'ext-link': customIconsPrefix + ':ext-link',
-	'minimize': customIconsPrefix2 + ':minimize',
-	'compact': customIconsPrefix2 + ':compact',
-	'import.bookmarks': customIconsPrefix2 + ':heart',
+	'menu': prefix + ':menu',
+	'ext-link': prefix + ':ext-link',
+	'minimize': prefix + ':minimize',
+	'compact': prefix + ':compact',
+	'import.bookmarks': prefix + ':heart',
 };
 
 /**

@@ -1,6 +1,7 @@
 import type { PartialRoute } from '@iconify/search-core';
 import type { ImportIconCommon, ImportIconItem } from '../../common/import';
 import type { UINotice } from '../../common/messages';
+import { pluginEnv } from '../data/env';
 import { filterViableParentNode, ViableParentFigmaNode } from '../data/layers';
 import type { ImportedIconSharedData } from '../data/node-data';
 import { figmaPhrases } from '../data/phrases';
@@ -39,7 +40,17 @@ export function importIcons(
 	const errors: string[] = [];
 
 	// Find parent layer
-	const parent = findParentLayer(data.layerId);
+	let layerId = data.layerId;
+	if (
+		layerId &&
+		// Make sure id is in currently available layers list
+		!pluginEnv.selection?.layers.find((item) => item.id === layerId)
+	) {
+		layerId = '';
+	}
+	const parent = findParentLayer(
+		data.layerId ? data.layerId : pluginEnv.selection?.defaultLayer
+	);
 
 	// Import all icons
 	icons.forEach((icon) => {

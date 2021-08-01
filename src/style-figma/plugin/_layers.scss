@@ -1,0 +1,43 @@
+a.plugin-layer {
+	@include plugin-font-ui-pos('medium', 'normal');
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	width: 100%;
+	padding-left: 8px;
+	line-height: $plugin-layer-height;
+	text-decoration: none;
+	color: $plugin-palette-color-black;
+	box-sizing: border-box;
+	color: $plugin-palette-color-black;
+
+	// Icon
+	svg {
+		font-size: 32px;
+		line-height: 1em;
+		margin-right: 4px;
+		color: $plugin-palette-color-black-muted;
+	}
+
+	// Levels
+	&--0 {
+		font-weight: bold;
+	}
+	@for $level from 1 through 5 {
+		&--#{$level} {
+			padding-left: $plugin-layer-padding * $level;
+		}
+	}
+
+	&--selected {
+		background: $plugin-palette-background-selected-borderless;
+	}
+
+	&:hover {
+		box-shadow: 0 0 0 1px $plugin-palette-border-blue inset;
+	}
+	&:not(:hover):focus {
+		outline: none;
+		color: $plugin-palette-color-link-hover;
+	}
+}

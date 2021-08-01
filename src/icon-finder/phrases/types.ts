@@ -123,6 +123,9 @@ export interface UITranslation {
 			maximize: string;
 			close: string;
 		};
+		layers: {
+			title: string;
+		};
 		// Also see src/figma/data/phrases.ts
 		notices: {
 			failed_icon: string;
