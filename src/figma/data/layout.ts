@@ -4,18 +4,24 @@ import { pluginEnv } from './env';
  * UI dimensions
  */
 const dimensions = {
-	width: {
-		full: 690,
-		compact: 514,
-		mini: 200,
+	mini: {
+		width: 200,
+		height: 104,
 	},
-	height: {
+	full: {
+		width: 690,
+		// Height
 		min: 500,
-		default: 720, // same as max
-		diff: 90, // difference with window.innerHeight
 		max: 720,
-		mini: 104,
 	},
+	compact: {
+		width: 514,
+		// Height
+		min: 400,
+		max: 600,
+	},
+	// Difference with window.innerHeight
+	diff: 90,
 };
 
 interface UISize {
@@ -28,31 +34,25 @@ interface UISize {
  */
 export function getUISize(): UISize {
 	if (pluginEnv.minimized) {
-		return {
-			width: dimensions.width.mini,
-			height: dimensions.height.mini,
-		};
+		return dimensions.mini;
 	}
 
 	const compact = pluginEnv.config.options.compactWidth;
-	const width = dimensions.width[compact ? 'compact' : 'full'];
+	const item = dimensions[compact ? 'compact' : 'full'];
 
 	// Get height
 	let height: number;
 	if (pluginEnv.windowHeight) {
 		height = Math.max(
-			Math.min(
-				pluginEnv.windowHeight - dimensions.height.diff,
-				dimensions.height.max
-			),
-			dimensions.height.min
+			Math.min(pluginEnv.windowHeight - dimensions.diff, item.max),
+			item.min
 		);
 	} else {
-		height = dimensions.height.default;
+		height = item.max;
 	}
 
 	return {
-		width,
+		width: item.width,
 		height,
 	};
 }

@@ -38,8 +38,13 @@
 		color: $plugin-palette-color-white;
 		background-color: $plugin-palette-background-medium-black;
 
+		&:hover {
+			background-color: $plugin-palette-background-full-black;
+		}
+
 		&:active,
 		&:not(:hover):focus {
+			background-color: $plugin-palette-background-medium-black;
 			border: 2px solid $plugin-palette-background-full-black;
 		}
 
@@ -47,10 +52,15 @@
 		&.plugin-mini-close {
 			padding: 8px 16px;
 			color: $plugin-palette-color-white;
-			background-color: $plugin-palette-background-muted-black;
+			background-color: $plugin-palette-background-dimmed-black;
+
+			&:hover {
+				background-color: $plugin-palette-background-full-black;
+			}
 
 			&:active,
 			&:not(:hover):focus {
+				background-color: $plugin-palette-background-dimmed-black;
 				border: 2px solid $plugin-palette-color-black-muted;
 			}
 		}
