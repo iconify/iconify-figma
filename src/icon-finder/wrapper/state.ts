@@ -7,6 +7,14 @@ import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/cu
 import type { PluginUINavigation } from '../../common/navigation';
 
 /**
+ * UI window state
+ */
+export interface PluginUIWindowState {
+	compact: boolean;
+	minimized: boolean;
+}
+
+/**
  * Icon finder state.
  *
  * All elements could be empty
@@ -30,6 +38,9 @@ export interface InitialIconFinderState {
 	// Last Iconify route and default route
 	defaultRoute?: PartialRoute;
 	iconifyRoute?: PartialRoute;
+
+	// Window state
+	window: PluginUIWindowState;
 }
 
 // Override icons

@@ -5,10 +5,10 @@
 	import type { SelectedIcons } from '../wrapper/icons';
 	import type { WrappedRegistry } from '../wrapper/registry';
 	import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisations';
-	import { externalLinks, isIconFinderNavigation } from '../figma/navigation';
-	import type { NavigateCallback } from '../figma/navigation';
+	import { isIconFinderNavigation } from '../figma/navigation';
 	import Wrapper from './Wrapper.svelte';
 	import Navigation from './figma/Navigation.svelte';
+	import Minimized from './figma/Minimized.svelte';
 	import Content from './content/Content.svelte';
 	import Footer from './content/Footer.svelte';
 	import Notices from './figma/Notice.svelte';
@@ -32,17 +32,6 @@
 	// Set context
 	setContext('registry', registry);
 
-	/**
-	 * Change current page
-	 */
-	const navigate: NavigateCallback = (target: PluginUINavigation) => {
-		if (externalLinks[target.submenu] !== void 0) {
-			// Cannot navigate to external link
-			return;
-		}
-		registry.navigate(target);
-	};
-
 	// Check if Icon Finder should be shown
 	let showIconFinder: boolean | 'hidden' = false;
 	$: {
@@ -55,8 +44,9 @@
 </script>
 
 {#if hidden !== true}
+	<Minimized />
 	<Wrapper>
-		<Navigation {currentPage} {navigate} />
+		<Navigation {currentPage} />
 		{#if showIconFinder}
 			<div
 				class="plugin-content plugin-content--icon-finder{showIconFinder === true ? '' : ' plugin-content--hidden'}">

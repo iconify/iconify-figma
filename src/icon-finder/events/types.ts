@@ -1,5 +1,6 @@
 import type { Icon } from '@iconify/search-core';
 import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisations';
+import type { PluginUIWindowControls } from '../../common/navigation';
 
 // Icon selection
 export interface UISelectionEvent {
@@ -38,10 +39,17 @@ export interface UIDeleteIconEvent {
 	icon: string;
 }
 
+// Toggle window layout
+export interface UIWindowEvent {
+	type: 'window';
+	control: PluginUIWindowControls;
+}
+
 // Combined type
 export type UIEvent =
 	| UISelectionEvent
 	| UICustomisationEvent
 	| UIFooterButtonEvent
 	| UIDeleteIconEvent
+	| UIWindowEvent
 	| UIConfigEvent;

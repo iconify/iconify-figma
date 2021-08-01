@@ -1,20 +1,35 @@
 <script lang="typescript">
-	import { onDestroy } from 'svelte';
+	import { onDestroy, getContext } from 'svelte';
 	import { get } from 'svelte/store';
-	import type { PluginUINavigation } from '../../../common/navigation';
+	import type { WrappedRegistry } from '../../wrapper/registry';
+	import type {
+		PluginUINavigation,
+		PluginUIWindowControls,
+	} from '../../../common/navigation';
 	import type { NavigateCallback } from '../../figma/navigation';
 	import { externalLinks } from '../../figma/navigation';
-	import { phrases } from '../../phrases/en';
+	import { phrases } from '../../config/phrases';
 	import { iconListsStorage } from '../../figma/icon-lists';
 	import Section from './NavigationSection.svelte';
 	import UIIcon from '../ui/UIIcon.svelte';
 	import { icons } from '../../config/theme';
 
-	// Current section
+	// Current page
 	export let currentPage: PluginUINavigation;
 
-	// Callback to change page
-	export let navigate: NavigateCallback;
+	// Registry
+	const registry = getContext('registry') as WrappedRegistry;
+
+	/**
+	 * Change current page
+	 */
+	const navigate: NavigateCallback = (target: PluginUINavigation) => {
+		if (externalLinks[target.submenu] !== void 0) {
+			// Cannot navigate to external link
+			return;
+		}
+		registry.navigate(target);
+	};
 
 	// Recent icons and bookmarks
 	let hasRecent: boolean = checkCustomIcons(
@@ -188,6 +203,18 @@
 				assertNever(section);
 		}
 	}
+
+	// Window controls
+	const windowControls: PluginUIWindowControls[] = ['compact', 'minimize'];
+	const windowText = phrases.figma.window;
+	const windowBaseClass = baseClass + ' ' + baseClass + '--icon';
+
+	function windowControlClicked(control: PluginUIWindowControls) {
+		registry.callback({
+			type: 'window',
+			control,
+		});
+	}
 </script>
 
 <div class="plugin-header plugin-header--with-menu">
@@ -199,6 +226,15 @@
 		<div class="plugin-header-center" />
 		<div class="plugin-header-right">
 			<Section {currentPage} {navigate} section="about" />
+			{#each windowControls as item, i (item)}
+				<a
+					href="# "
+					class={windowBaseClass}
+					title={windowText[item]}
+					on:click|preventDefault={() => windowControlClicked(item)}>
+					<UIIcon icon={item} />
+				</a>
+			{/each}
 		</div>
 	</div>
 
@@ -208,7 +244,7 @@
 				<a
 					href={item.href}
 					class={item.className}
-					title={item.title}
+					title={item.icon ? item.title : void 0}
 					on:click={item.onClick}>{#if item.icon}
 						<UIIcon icon={item.icon} />
 					{:else}{item.title}{/if}</a>
@@ -220,7 +256,7 @@
 				<a
 					href={item.href}
 					class={item.className}
-					title={item.title}
+					title={item.icon ? item.title : void 0}
 					target={item.external ? '_blank' : void 0}
 					on:click={item.onClick}>{#if item.icon}
 						<UIIcon icon={item.icon} />

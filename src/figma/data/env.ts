@@ -15,6 +15,9 @@ interface PluginEnv {
 	// Window height
 	windowHeight?: number;
 
+	// True if window is currently minimized
+	minimized: boolean;
+
 	// Selected layers, starting with page
 	layersTree?: SelectedPageLayer;
 }
@@ -50,4 +53,5 @@ export const pluginEnv: PluginEnv = {
 	app: detectApp(),
 	loaded: false,
 	config: emptyPluginConfig,
+	minimized: false,
 };

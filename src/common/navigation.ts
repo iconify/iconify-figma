@@ -1,4 +1,9 @@
 /**
+ * Window controls
+ */
+export type PluginUIWindowControls = 'compact' | 'minimize';
+
+/**
  * Main navigation sections
  */
 export type PluginUINavigationSection = 'menu' | 'import' | 'about';

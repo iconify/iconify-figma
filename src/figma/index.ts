@@ -28,7 +28,7 @@ import { sendMessageToUI } from './send-message';
 		}
 
 		const event = msg as UIToFigmaMessage;
-		console.log('Got event from UI:', event);
+		// console.log('Got event from UI:', event);
 		switch (event.type) {
 			case 'ui-loaded':
 				// UI has loaded - send message to start Icon Finder
@@ -61,6 +61,27 @@ import { sendMessageToUI } from './send-message';
 				// Close plugin
 				figma.closePlugin();
 				return;
+
+			case 'window':
+				switch (event.control) {
+					case 'minimize':
+						pluginEnv.minimized = !pluginEnv.minimized;
+						break;
+
+					case 'compact':
+						pluginEnv.config.options.compactWidth = !pluginEnv
+							.config.options.compactWidth;
+						break;
+
+					default:
+						return;
+				}
+				const size = getUISize();
+				figma.ui.resize(size.width, size.height);
+				return;
+
+			default:
+				console.log('Unhandled event from UI:', event);
 		}
 	};
 })();

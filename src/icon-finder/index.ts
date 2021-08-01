@@ -97,6 +97,13 @@ function runIconFinder() {
 											}
 											sendMessageToFigma(message);
 										}
+										return;
+
+									case 'close':
+										sendMessageToFigma({
+											type: 'close-plugin',
+										});
+										return;
 								}
 								break;
 							}

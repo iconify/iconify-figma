@@ -5,6 +5,7 @@ import type { ImportIconCommon, ImportIconItem } from './import';
 import type { SelectedPageLayer } from './layers';
 import type { PluginStorage } from '../figma/data/config';
 import type { IconListType } from './icon-lists';
+import type { PluginUIWindowControls } from './navigation';
 
 /**
  * Notice
@@ -94,6 +95,11 @@ interface UIToFigmaCloseMessage {
 	type: 'close-plugin';
 }
 
+interface UIToFigmaWindowMessage {
+	type: 'window';
+	control: PluginUIWindowControls;
+}
+
 // Combined type
 export type UIToFigmaMessage =
 	| UIToFigmaLoadedMessage
@@ -103,4 +109,5 @@ export type UIToFigmaMessage =
 	| UIToFigmaRouteMessage
 	| UIToFigmaImportIconMessage
 	| UIToFigmaCustomStorageMessage
+	| UIToFigmaWindowMessage
 	| UIToFigmaCloseMessage;

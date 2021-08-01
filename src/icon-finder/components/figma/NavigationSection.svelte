@@ -72,10 +72,12 @@
 	}
 </script>
 
-<a class={className} href="# " on:click|preventDefault={onClick} title={text}>
-	{#if icon === ''}
-		{text}
-	{:else}
+<a
+	class={className}
+	href="# "
+	on:click|preventDefault={onClick}
+	title={icon ? text : void 0}>
+	{#if icon}
 		<UIIcon {icon} />
-	{/if}
+	{:else}{text}{/if}
 </a>

@@ -10,3 +10,58 @@
 	@include plugin-font-ui-pos('medium', 'normal');
 	padding: 16px;
 }
+
+// Minimize
+.plugin-mini {
+	display: none;
+
+	width: 100%;
+	background: $plugin-palette-background-white;
+
+	a {
+		cursor: pointer;
+		white-space: nowrap;
+		display: block;
+		text-align: center;
+		height: 24px;
+		margin: 0;
+		padding: 16px;
+
+		text-decoration: none;
+
+		border: 2px solid transparent;
+		outline: none;
+
+		@include plugin-font-ui-neg('xlarge', 'medium');
+		line-height: 24px;
+
+		color: $plugin-palette-color-white;
+		background-color: $plugin-palette-background-medium-black;
+
+		&:active,
+		&:not(:hover):focus {
+			border: 2px solid $plugin-palette-background-full-black;
+		}
+
+		// Close
+		&.plugin-mini-close {
+			padding: 8px 16px;
+			color: $plugin-palette-color-white;
+			background-color: $plugin-palette-background-muted-black;
+
+			&:active,
+			&:not(:hover):focus {
+				border: 2px solid $plugin-palette-color-black-muted;
+			}
+		}
+	}
+}
+
+.plugin-minimized {
+	.plugin-mini {
+		display: block;
+	}
+	.iif-wrapper {
+		display: none;
+	}
+}

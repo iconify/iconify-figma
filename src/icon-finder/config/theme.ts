@@ -20,6 +20,7 @@ export const collectionClickable = false;
  * Import custom icons
  */
 const customIconsPrefix = 'icon-finder-theme';
+const customIconsPrefix2 = 'icon-finder-theme2';
 export function importThemeIcons() {
 	addCollection({
 		prefix: customIconsPrefix,
@@ -109,27 +110,9 @@ export function importThemeIcons() {
 			'empty': {
 				body: '',
 			},
-			'menu': {
-				body:
-					'<path d="M16 13H2v1h14v-1zm0-5H2v1h14V8zm0-5H2v1h14V3z" fill-rule="nonzero" fill="currentColor" stroke="none" />',
-				width: 18,
-				height: 18,
-			},
 			'ext-link': {
 				body:
 					'<g fill="none" stroke="currentColor"><path d="M8.5 7v3.5h-7v-7H5" /><path stroke-linecap="square" d="M10 2L5 7M6.5 1.5h4V5" /></g>',
-			},
-			'heart': {
-				body:
-					'<path d="M17 6c0 5-6 10-8 11-2-1-8-6-8-11C1 2 6.5.5 9 3.5 11.5.5 17 2 17 6z" fill="currentColor"/>',
-				width: 18,
-				height: 18,
-			},
-			'trash': {
-				body:
-					'<path fill-rule="evenodd" clip-rule="evenodd" d="M8 2a1 1 0 00-1 1h4a1 1 0 00-1-1H8zm4 1a2 2 0 00-2-2H8a2 2 0 00-2 2H3v1h1v10a2 2 0 002 2h6a2 2 0 002-2V4h1V3h-3zm1 1H5v10a1 1 0 001 1h6a1 1 0 001-1V4zm-6 7V7h1v4H7zm3 0V7h1v4h-1z" fill="currentColor"/>',
-				width: 18,
-				height: 18,
 			},
 		},
 		aliases: {
@@ -163,6 +146,35 @@ export function importThemeIcons() {
 		},
 		width: 12,
 		height: 12,
+	});
+
+	// Bigger icons, used mostly for navigation
+	addCollection({
+		prefix: customIconsPrefix2,
+		icons: {
+			menu: {
+				body:
+					'<path d="M16 13H2v1h14v-1zm0-5H2v1h14V8zm0-5H2v1h14V3z" fill-rule="nonzero" fill="currentColor" stroke="none" />',
+			},
+			heart: {
+				body:
+					'<path d="M17 6c0 5-6 10-8 11-2-1-8-6-8-11C1 2 6.5.5 9 3.5 11.5.5 17 2 17 6z" fill="currentColor"/>',
+			},
+			trash: {
+				body:
+					'<path fill-rule="evenodd" clip-rule="evenodd" d="M8 2a1 1 0 00-1 1h4a1 1 0 00-1-1H8zm4 1a2 2 0 00-2-2H8a2 2 0 00-2 2H3v1h1v10a2 2 0 002 2h6a2 2 0 002-2V4h1V3h-3zm1 1H5v10a1 1 0 001 1h6a1 1 0 001-1V4zm-6 7V7h1v4H7zm3 0V7h1v4h-1z" fill="currentColor"/>',
+			},
+			minimize: {
+				body:
+					'<path stroke="currentColor" d="M2.5 3.5h13v3h-13z"/><path fill="currentColor" d="M15 9h1v2h-1zM2 9h1v2H2zM6 14h2v1H6zM10 14h2v1h-2zM2 13h1v1h1v1H2v-2zM15 13h1v2h-2v-1h1v-1z"/>',
+			},
+			compact: {
+				body:
+					'<path d="M3 2h8v2h-1V3H4v12h6v-1h1v2H3V2zM14 6h1v2h-1zM15 4V2h-2v1h1v1h1zM14 10h1v2h-1zM14 14h1v2h-2v-1h1v-1z" fill="currentColor"/><path fill="currentColor" d="M10 6h1v2h-1zM10 10h1v2h-1z"/>',
+			},
+		},
+		width: 18,
+		height: 18,
 	});
 }
 
@@ -202,11 +214,13 @@ export const icons: Record<string, string | null> = {
 	'mode-inline': customIconsPrefix + ':mode-inline',
 	'selecting-selected': customIconsPrefix + ':confirm',
 	'selecting-unselected': customIconsPrefix + ':empty',
-	'trash': customIconsPrefix + ':trash',
+	'trash': customIconsPrefix2 + ':trash',
 	// Navigation
-	'menu': customIconsPrefix + ':menu',
+	'menu': customIconsPrefix2 + ':menu',
 	'ext-link': customIconsPrefix + ':ext-link',
-	'import.bookmarks': customIconsPrefix + ':heart',
+	'minimize': customIconsPrefix2 + ':minimize',
+	'compact': customIconsPrefix2 + ':compact',
+	'import.bookmarks': customIconsPrefix2 + ':heart',
 };
 
 /**

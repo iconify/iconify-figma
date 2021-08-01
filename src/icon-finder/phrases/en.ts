@@ -204,6 +204,14 @@ export const phrases: UITranslation = {
 			svg: 'Paste SVG',
 			repo: 'GitHub',
 		},
+		window: {
+			compact: 'Toggle compact layout',
+			minimize: 'Minimize plugin',
+		},
+		minimized: {
+			maximize: 'Show Plug-in',
+			close: 'Close Plug-in',
+		},
 		notices: {
 			failed_icon: 'Error importing icon "{name}"',
 			failed_icons: 'Error importing {count} icons',

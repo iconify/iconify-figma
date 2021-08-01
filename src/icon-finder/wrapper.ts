@@ -6,7 +6,6 @@ import {
 	disableCache,
 } from '@iconify/svelte';
 import type { SvelteComponent } from 'svelte';
-import { get } from 'svelte/store';
 import {
 	setIconify,
 	compareObjects,
@@ -35,7 +34,7 @@ import {
 	mergeCustomisations,
 } from '@iconify/search-core/lib/misc/customisations';
 import type { IconFinderWrapperParams } from './wrapper/params';
-import type { IconFinderState } from './wrapper/state';
+import type { IconFinderState, PluginUIWindowState } from './wrapper/state';
 import type { WrapperStatus } from './wrapper/status';
 import type { IconFinderEvent } from './wrapper/events';
 import type {
@@ -44,6 +43,7 @@ import type {
 	UIFooterButtonEvent,
 	UISelectionEvent,
 	UIDeleteIconEvent,
+	UIWindowEvent,
 } from './events/types';
 import type { WrappedRegistry } from './wrapper/registry';
 import type { ContainerProps } from './wrapper/container';
@@ -98,6 +98,10 @@ export class Wrapper {
 		navigation: defaultNavigation,
 		icons: [],
 		customisations: {},
+		window: {
+			compact: false,
+			minimized: false,
+		},
 	};
 
 	// Selected icons as nested object
@@ -209,10 +213,27 @@ export class Wrapper {
 					registry.partialRoute = customState.route!;
 				});
 			}
+
+			// Window
+			if (customState.window) {
+				const data = (customState.window as unknown) as Record<
+					string,
+					boolean
+				>;
+				for (let key in state.window) {
+					if (typeof data[key] === 'boolean') {
+						state.window[key as keyof PluginUIWindowState] =
+							data[key];
+					}
+				}
+			}
 		}
 
 		// Add onDrag callback
 		registry.setCustom('ondrag', this._onDrag.bind(this));
+
+		// Toggle classes for window
+		this._updatePluginWindow();
 	}
 
 	/**
@@ -492,6 +513,28 @@ export class Wrapper {
 
 				// Update list
 				this._updateCustomIconsList(customType, icons);
+				return;
+			}
+
+			case 'window': {
+				// Window control clicked
+				const e = event as UIWindowEvent;
+
+				// Toggle classes for window
+				const state = this._state.window;
+				switch (e.control) {
+					case 'compact':
+						state.compact = !state.compact;
+						break;
+
+					case 'minimize':
+						state.minimized = !state.minimized;
+						break;
+				}
+				this._updatePluginWindow();
+
+				// Forward to Figma
+				sendMessageToFigma(e);
 				return;
 			}
 
@@ -913,5 +956,19 @@ export class Wrapper {
 		return (
 			navigation.section === 'import' && navigation.submenu === 'iconify'
 		);
+	}
+
+	/**
+	 * Update plugin window
+	 */
+	_updatePluginWindow() {
+		const state = this._state.window;
+		const container = document.body;
+		container.classList[state.compact ? 'add' : 'remove']('plugin-compact');
+		container.classList[state.compact ? 'remove' : 'add']('plugin-full');
+		container.classList[state.minimized ? 'add' : 'remove'](
+			'plugin-minimized'
+		);
+		console.log('Body class:', container.className);
 	}
 }

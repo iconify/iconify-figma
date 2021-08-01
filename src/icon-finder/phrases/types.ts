@@ -6,7 +6,10 @@ import type {
 import type { ComponentCodeOutput } from '@iconify/search-core/lib/code-samples/code';
 import type { IconsListMode } from '../components/types';
 import type { APIProviderError } from '../provider/add-provider';
-import type { PluginUINavigationSection } from '../../common/navigation';
+import type {
+	PluginUINavigationSection,
+	PluginUIWindowControls,
+} from '../../common/navigation';
 
 export interface UITranslationAddForm {
 	title?: string;
@@ -115,6 +118,11 @@ export interface UITranslation {
 	figma: {
 		menu: Record<PluginUINavigationSection, string>;
 		submenu: Record<string, string>;
+		window: Record<PluginUIWindowControls, string>;
+		minimized: {
+			maximize: string;
+			close: string;
+		};
 		// Also see src/figma/data/phrases.ts
 		notices: {
 			failed_icon: string;
