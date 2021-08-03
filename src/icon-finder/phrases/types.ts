@@ -10,6 +10,7 @@ import type {
 	PluginUINavigationSection,
 	PluginUIWindowControls,
 } from '../../common/navigation';
+import type { ActionAfterImport } from '../../common/options';
 
 export interface UITranslationAddForm {
 	title?: string;
@@ -123,6 +124,11 @@ export interface UITranslation {
 			maximize: string;
 			close: string;
 		};
+		importActionTitle: {
+			icon: string;
+			icons: string;
+		};
+		importAction: Record<ActionAfterImport, string>;
 		layers: {
 			title: string;
 		};

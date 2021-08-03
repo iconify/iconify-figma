@@ -1,3 +1,4 @@
+import { defaultPluginOptions } from '../../common/options';
 import type { PluginConfig } from './config';
 
 /**
@@ -61,8 +62,10 @@ export interface LegacyPluginConfig {
 export function convertLegacyConfig(config: LegacyPluginConfig): PluginConfig {
 	const result: PluginConfig = {
 		version: 2,
-		options: {},
-		iconFinder: {},
+		options: {
+			...defaultPluginOptions,
+		},
+		state: {},
 	};
 
 	// Copy options

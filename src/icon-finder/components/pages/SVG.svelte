@@ -5,7 +5,6 @@
 	import type { WrappedRegistry } from '../../wrapper/registry';
 	import PageContainer from './parts/PageContainer.svelte';
 	import Layers from '../content/footers/parts/Layers.svelte';
-	import type { ImportIconCommon } from '../../../common/import';
 
 	// Registry
 	const registry = getContext('registry') as WrappedRegistry;

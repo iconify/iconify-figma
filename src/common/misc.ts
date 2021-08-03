@@ -7,9 +7,9 @@ import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/cu
 export type PluginApp = 'figma' | 'figjam';
 
 /**
- * Icon Finder config
+ * Icon Finder state
  */
-export interface PluginIconFinderConfig {
+export interface PluginIconFinderState {
 	config?: IconFinderConfig;
 	customisations?: PartialIconCustomisations;
 	route?: PartialRoute;

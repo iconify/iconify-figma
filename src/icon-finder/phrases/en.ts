@@ -221,6 +221,15 @@ export const phrases: UITranslation = {
 			failed_icon: 'Error importing icon "{name}"',
 			failed_icons: 'Error importing {count} icons',
 		},
+		importActionTitle: {
+			icon: 'After importing icon:',
+			icons: 'After importing icons:',
+		},
+		importAction: {
+			none: 'Keep plug-in window open',
+			minimize: 'Minimize plug-in window',
+			close: 'Close plug-in window',
+		},
 	},
 	svg: {
 		text: 'Paste SVG to import it to Figma document:',

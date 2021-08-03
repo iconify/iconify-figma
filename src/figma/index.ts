@@ -1,6 +1,6 @@
 import type { UIToFigmaMessage } from '../common/messages';
 import { importIcons } from './actions/import-icon';
-import { loadConfig } from './data/config';
+import { loadConfig } from './actions/load-config';
 import { pluginEnv } from './data/env';
 import { getTargetLayers, selectionChanged } from './data/layers';
 import { getUISize } from './data/layout';
@@ -36,9 +36,12 @@ import { sendMessageToUI } from './send-message';
 					type: 'start-plugin',
 					app: pluginEnv.app,
 					command: figma.command,
-					ifConfig: pluginEnv.config.iconFinder,
 					selection: pluginEnv.selection,
 					storage: pluginEnv.config.storage,
+					// Plugin options
+					options: pluginEnv.config.options,
+					// Icon Finder state
+					state: pluginEnv.config.state,
 				});
 				return;
 
@@ -62,23 +65,26 @@ import { sendMessageToUI } from './send-message';
 				figma.closePlugin();
 				return;
 
-			case 'window':
-				switch (event.control) {
-					case 'minimize':
-						pluginEnv.minimized = !pluginEnv.minimized;
-						break;
-
-					case 'compact':
-						pluginEnv.config.options.compactWidth = !pluginEnv
-							.config.options.compactWidth;
-						break;
-
-					default:
-						return;
-				}
+			case 'minimize': {
+				// Minimize/restore window
+				pluginEnv.minimized = event.minimized;
 				const size = getUISize();
 				figma.ui.resize(size.width, size.height);
 				return;
+			}
+
+			case 'update-options': {
+				// Update options
+				const config = pluginEnv.config;
+				const oldCompactWidth = config.options.compactWidth;
+				config.options = event.options;
+				if (oldCompactWidth !== config.options.compactWidth) {
+					// Resize window
+					const size = getUISize();
+					figma.ui.resize(size.width, size.height);
+				}
+				return;
+			}
 
 			default:
 				console.log('Unhandled event from UI:', event);

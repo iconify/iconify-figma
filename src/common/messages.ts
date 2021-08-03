@@ -1,11 +1,12 @@
 import type { IconFinderConfig, PartialRoute } from '@iconify/search-core';
 import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/customisations';
-import type { PluginApp, PluginIconFinderConfig } from './misc';
+import type { PluginApp, PluginIconFinderState } from './misc';
 import type { ImportIconCommon, ImportIconItem } from './import';
 import type { SelectedLayers } from './layers';
 import type { PluginStorage } from '../figma/data/config';
 import type { IconListType } from './icon-lists';
 import type { PluginUIWindowControls } from './navigation';
+import type { PluginOptions } from './options';
 
 /**
  * Notice
@@ -31,7 +32,8 @@ interface FigmaToUIStartMessage
 	type: 'start-plugin';
 	app: PluginApp;
 	command: string;
-	ifConfig: PluginIconFinderConfig;
+	options: PluginOptions;
+	state: PluginIconFinderState;
 	storage?: PluginStorage;
 }
 
@@ -95,9 +97,14 @@ interface UIToFigmaCloseMessage {
 	type: 'close-plugin';
 }
 
-interface UIToFigmaWindowMessage {
-	type: 'window';
-	control: PluginUIWindowControls;
+interface UIToFigmaMinimizeMessage {
+	type: 'minimize';
+	minimized: boolean;
+}
+
+interface UIToFigmaOptionsMessage {
+	type: 'update-options';
+	options: PluginOptions;
 }
 
 // Combined type
@@ -109,5 +116,6 @@ export type UIToFigmaMessage =
 	| UIToFigmaRouteMessage
 	| UIToFigmaImportIconMessage
 	| UIToFigmaCustomStorageMessage
-	| UIToFigmaWindowMessage
+	| UIToFigmaMinimizeMessage
+	| UIToFigmaOptionsMessage
 	| UIToFigmaCloseMessage;

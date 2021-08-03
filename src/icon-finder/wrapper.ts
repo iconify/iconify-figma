@@ -34,7 +34,7 @@ import {
 	mergeCustomisations,
 } from '@iconify/search-core/lib/misc/customisations';
 import type { IconFinderWrapperParams } from './wrapper/params';
-import type { IconFinderState, PluginUIWindowState } from './wrapper/state';
+import type { IconFinderState } from './wrapper/state';
 import type { WrapperStatus } from './wrapper/status';
 import type { IconFinderEvent } from './wrapper/events';
 import type {
@@ -67,6 +67,8 @@ import type { IconListType } from '../common/icon-lists';
 // Change import to change container component
 import Container from './components/Container.svelte';
 import { sendMessageToFigma } from './figma/messages';
+import { getOptions, setOptions } from './figma/options';
+import { defaultPluginOptions } from '../common/options';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-unused-vars-experimental, @typescript-eslint/no-empty-function
 function assertNever(s: never) {}
@@ -99,10 +101,7 @@ export class Wrapper {
 		navigation: defaultNavigation,
 		icons: [],
 		customisations: {},
-		window: {
-			compact: false,
-			minimized: false,
-		},
+		minimized: false,
 	};
 
 	// Selected icons as nested object
@@ -215,19 +214,10 @@ export class Wrapper {
 				});
 			}
 
-			// Window
-			if (customState.window) {
-				const data = (customState.window as unknown) as Record<
-					string,
-					boolean
-				>;
-				for (let key in state.window) {
-					if (typeof data[key] === 'boolean') {
-						state.window[key as keyof PluginUIWindowState] =
-							data[key];
-					}
-				}
-			}
+			// Minimize window on start?
+			// if (customState.minimized) {
+			// 	state.minimized = customState.minimized;
+			// }
 		}
 
 		// Add onDrag callback
@@ -521,21 +511,28 @@ export class Wrapper {
 				// Window control clicked
 				const e = event as UIWindowEvent;
 
-				// Toggle classes for window
-				const state = this._state.window;
 				switch (e.control) {
-					case 'compact':
-						state.compact = !state.compact;
+					case 'compact': {
+						// Toggle compact layout
+						setOptions({
+							compactWidth: !getOptions().compactWidth,
+						});
 						break;
+					}
 
-					case 'minimize':
+					case 'minimize': {
+						// Minimize window
+						const state = this._state;
 						state.minimized = !state.minimized;
+						sendMessageToFigma({
+							type: 'minimize',
+							minimized: state.minimized,
+						});
 						break;
+					}
 				}
-				this._updatePluginWindow();
 
-				// Forward to Figma
-				sendMessageToFigma(e);
+				this._updatePluginWindow();
 				return;
 			}
 
@@ -892,6 +889,15 @@ export class Wrapper {
 			return;
 		}
 
+		// Reset options
+		if (navigation.submenu === 'reset') {
+			setOptions(defaultPluginOptions);
+			navigation = {
+				section: 'import',
+				submenu: 'iconify',
+			};
+		}
+
 		// Set navigation in state
 		state.navigation = navigation;
 
@@ -909,6 +915,7 @@ export class Wrapper {
 			this._setRoute(newRoute);
 		} else {
 			// Change route if needed
+			const item = navigation.submenu;
 			switch (navigation.section) {
 				case 'import': {
 					const item = navigation.submenu;
@@ -923,6 +930,7 @@ export class Wrapper {
 							};
 							break;
 					}
+					break;
 				}
 			}
 		}
@@ -969,13 +977,12 @@ export class Wrapper {
 	 * Update plugin window
 	 */
 	_updatePluginWindow() {
-		const state = this._state.window;
+		const compact = getOptions().compactWidth;
+		const minimized = this._state.minimized;
 		const container = document.body;
-		container.classList[state.compact ? 'add' : 'remove']('plugin-compact');
-		container.classList[state.compact ? 'remove' : 'add']('plugin-full');
-		container.classList[state.minimized ? 'add' : 'remove'](
-			'plugin-minimized'
-		);
-		console.log('Body class:', container.className);
+
+		container.classList[compact ? 'add' : 'remove']('plugin-compact');
+		container.classList[compact ? 'remove' : 'add']('plugin-full');
+		container.classList[minimized ? 'add' : 'remove']('plugin-minimized');
 	}
 }
