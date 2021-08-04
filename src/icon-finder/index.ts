@@ -6,7 +6,7 @@ import { customIconsData, updateCustomIcons } from './figma/icon-lists';
 import { getIconImportMessage, getSVGImportMessage } from './figma/import';
 import { sendMessageToFigma } from './figma/messages';
 import { addNotice } from './figma/notices';
-import { setOptions } from './figma/options';
+import { getOptions, setOptions } from './figma/options';
 import { Wrapper } from './wrapper';
 
 function runIconFinder() {
@@ -15,6 +15,33 @@ function runIconFinder() {
 		console.log('Cannot find container!');
 		return;
 	}
+
+	// Scroll to icon
+	let justScrolled = false;
+	const scrollToIcon = () => {
+		if (justScrolled || !getOptions().scrollToIcon) {
+			return;
+		}
+		justScrolled = true;
+
+		// Scroll to icon
+		setTimeout(() => {
+			try {
+				const iconsNav = container.querySelector(
+					'div.iif-icons-navigation'
+				);
+				const footer = container.querySelector('div.iif-footer-full');
+				const node = iconsNav ? iconsNav.parentElement : footer;
+				if (node) {
+					node.scrollIntoView({
+						behavior: 'smooth',
+					});
+				}
+			} catch (err) {
+				//
+			}
+		});
+	};
 
 	// Wrapper
 	let wrapper: Wrapper;
@@ -85,6 +112,7 @@ function runIconFinder() {
 								break;
 
 							case 'route':
+								justScrolled = false; // Re-enable scroll if route has changed
 								if (wrapper.isIconFinderMainPage()) {
 									sendMessageToFigma({
 										type: 'icon-finder-route',
@@ -92,6 +120,14 @@ function runIconFinder() {
 									});
 								}
 								break;
+
+							case 'selection': {
+								if (event.icons.length === 1) {
+									// Scroll to icon
+									scrollToIcon();
+								}
+								break;
+							}
 
 							case 'button': {
 								switch (event.button) {

@@ -15,6 +15,9 @@ export interface PluginOptions {
 
 	// What to do after importing icon
 	windowAction: ActionAfterImport;
+
+	// Automatically scroll to footer when icon is selected
+	scrollToIcon: boolean;
 }
 
 /**
@@ -24,4 +27,5 @@ export const defaultPluginOptions: PluginOptions = {
 	compactWidth: false,
 	storageLimit: 200,
 	windowAction: 'none',
+	scrollToIcon: true,
 };

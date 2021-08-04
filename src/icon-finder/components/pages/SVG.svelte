@@ -1,5 +1,5 @@
 <script lang="typescript">
-	import { getContext } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import { replaceIDs } from '@iconify/svelte';
 	import { phrases } from '../../config/phrases';
 	import type { WrappedRegistry } from '../../wrapper/registry';
@@ -207,6 +207,16 @@
 		content = '';
 		testContent();
 	}
+
+	/**
+	 * Focus on mount
+	 */
+	onMount(() => {
+		const node = document.querySelector('.iif-content--svg textarea');
+		if (node) {
+			(node as HTMLTextAreaElement).focus();
+		}
+	});
 </script>
 
 <PageContainer type="svg">
