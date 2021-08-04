@@ -11,9 +11,8 @@ export const canAddProviders = false;
  *
  * Do not change value to true, comment out code below it. It checks for mobile devices
  */
-export const canFocusSearch = true;
+// export const canFocusSearch = false;
 
-/*
 export const canFocusSearch = (() => {
 	try {
 		return (
@@ -26,7 +25,6 @@ export const canFocusSearch = (() => {
 		return false;
 	}
 })();
-*/
 
 /**
  * Show collection information block (author, license, etc...) when browsing collection
