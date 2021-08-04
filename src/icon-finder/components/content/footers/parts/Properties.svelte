@@ -14,7 +14,7 @@
 	} from '../../../../config/components';
 	import ColorBlock from './props/Color.svelte';
 	import SizeBlock from './props/Size.svelte';
-	import RotateBlock from './props/Rotate.svelte';
+	import RotateBlock from './props/RotateFigma.svelte';
 	import FlipBlock from './props/Flip.svelte';
 	import InlineBlock from './props/Inline.svelte';
 

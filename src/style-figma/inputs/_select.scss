@@ -22,6 +22,7 @@
 		list-style-type: none;
 		margin: 0;
 		padding: 8px 0;
+		min-width: 180px;
 		border-radius: $plugin-border-radius-small;
 		background: $plugin-palette-background-almost-black;
 		box-shadow: 0 0 0 1px $plugin-palette-background-full-black inset,
@@ -73,5 +74,12 @@
 	.iif-input--up ul {
 		top: auto;
 		bottom: -1px;
+	}
+
+	.iif-input--small {
+		&,
+		& ul {
+			min-width: 100px;
+		}
 	}
 }

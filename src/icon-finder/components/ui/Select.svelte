@@ -10,8 +10,8 @@
 	// Icon to show before text
 	export let icon: string = '';
 
-	// Direction of popup
-	export let up: boolean = false;
+	// Extra custom classes, such as 'iif-input--up'
+	export let extra: string = '';
 
 	// Action
 	export let onChange: (value: string) => void;
@@ -49,8 +49,8 @@
 			' ' +
 			baseClass +
 			'--without-placeholder' +
-			// Direction of popup
-			(up ? ' ' + baseClass + '--up' : '') +
+			// Custom stuff
+			(extra ? ' ' + extra : '') +
 			// Icon
 			(icon !== '' ? ' ' + baseClass + '--with-icon' : '');
 	}
@@ -64,7 +64,9 @@
 <div class="iif-input-wrapper iif-input-wrapper--select">
 	<div class={className}>
 		{#if icon !== ''}
-			<UIIcon {icon} />
+			<div class="iif-input-icon">
+				<UIIcon {icon} />
+			</div>
 		{/if}
 		<a
 			href="# "

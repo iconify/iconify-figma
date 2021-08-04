@@ -41,7 +41,11 @@
 {#if count}
 	<Block name="window-action" title="">
 		<OptionRow {text}>
-			<Select {options} selected={currentAction} {onChange} up={true} />
+			<Select
+				{options}
+				selected={currentAction}
+				{onChange}
+				extra="iif-input--up" />
 		</OptionRow>
 	</Block>
 {/if}

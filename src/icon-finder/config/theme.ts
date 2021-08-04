@@ -62,6 +62,11 @@ export function importThemeIcons() {
 				body:
 					'<rect width="12" height="12" rx="2" fill="currentColor"/>',
 			},
+			'angle': {
+				body:
+					'<path fill-rule="evenodd" clip-rule="evenodd" d="M2 2v8h8V9H7c0-2.21-1.79-4-4-4V2H2zm1 4v3h3a3 3 0 00-3-3z" fill="currentColor"/>',
+			},
+			/*
 			'rotate1': {
 				body:
 					'<g fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 6a3 3 0 00-3-3V2a4 4 0 014 4v1H9V6z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 6.793L7.854 5.146l-.708.708L9.5 8.207l2.354-2.353-.708-.708L9.5 6.793z"/></g>',
@@ -74,6 +79,7 @@ export function importThemeIcons() {
 				body:
 					'<g fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 6a3 3 0 00-3-3V2a4 4 0 11-4 4V4.833h1V6a3 3 0 006 0z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M2.5 3.793l2.354 2.353-.708.708L2.5 5.207.854 6.854l-.708-.708L2.5 3.793z"/></g>',
 			},
+			*/
 			'plus': {
 				body:
 					'<path d="M5.5 5.5V0.5H6.5V5.5H11.5V6.5H6.5V11.5H5.5V6.5H0.5V5.5H5.5Z" fill="currentColor"/>',
@@ -235,10 +241,11 @@ export const icons: Record<string, string | null> = {
 	'icon-height': prefix + ':icon-height',
 	'color': prefix + ':color',
 	'color-filled': prefix + ':color-filled',
-	'rotate0': prefix + ':reset',
-	'rotate1': prefix + ':rotate1',
-	'rotate2': prefix + ':rotate2',
-	'rotate3': prefix + ':rotate3',
+	'angle': prefix + ':angle',
+	// 'rotate0': prefix + ':reset',
+	// 'rotate1': prefix + ':rotate1',
+	// 'rotate2': prefix + ':rotate2',
+	// 'rotate3': prefix + ':rotate3',
 	'h-flip': prefix + ':h-flip',
 	'v-flip': prefix + ':v-flip',
 	'plus': prefix + ':plus',

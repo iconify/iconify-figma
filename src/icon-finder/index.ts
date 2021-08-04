@@ -121,13 +121,12 @@ function runIconFinder() {
 								}
 								break;
 
-							case 'selection': {
+							case 'selection':
 								if (event.icons.length === 1) {
 									// Scroll to icon
 									scrollToIcon();
 								}
 								break;
-							}
 
 							case 'button': {
 								switch (event.button) {
@@ -158,6 +157,11 @@ function runIconFinder() {
 								}
 								return;
 							}
+
+							case 'navigation':
+								// Re-enable scroll if route has changed
+								justScrolled = false;
+								return;
 						}
 					},
 				});
