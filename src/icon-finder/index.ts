@@ -6,6 +6,7 @@ import { customIconsData, updateCustomIcons } from './figma/icon-lists';
 import { getIconImportMessage, getSVGImportMessage } from './figma/import';
 import { sendMessageToFigma } from './figma/messages';
 import { addNotice } from './figma/notices';
+import { setOptions } from './figma/options';
 import { Wrapper } from './wrapper';
 
 function runIconFinder() {
@@ -55,9 +56,13 @@ function runIconFinder() {
 					}
 				}
 
+				// Set options
+				setOptions(message.options);
+
 				// Create wrapper
 				wrapper = new Wrapper({
 					container,
+					state: message.state,
 
 					// Handle callbacks
 					callback: (event) => {
@@ -91,19 +96,12 @@ function runIconFinder() {
 							case 'button': {
 								switch (event.button) {
 									case 'import':
-									case 'import_close':
 										// Import icon
 										const message = getIconImportMessage(
 											event,
 											wrapper.isIconFinderMainPage()
 										);
 										if (message !== void 0) {
-											if (
-												event.button === 'import_close'
-											) {
-												// Import and close
-												message.data.close = true;
-											}
 											sendMessageToFigma(message);
 										}
 										return;
@@ -135,6 +133,10 @@ function runIconFinder() {
 
 			case 'target-layers':
 				pluginUIEnv.layers.set(message.selection);
+				return;
+
+			case 'toggle-minimize':
+				wrapper.minimizeFromPlugin(message.minimized);
 				return;
 		}
 	};

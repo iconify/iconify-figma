@@ -5,6 +5,7 @@
 	import type { WrappedRegistry } from '../../wrapper/registry';
 	import PageContainer from './parts/PageContainer.svelte';
 	import Layers from '../content/footers/parts/Layers.svelte';
+	import WindowAction from '../content/footers/parts/WindowAction.svelte';
 
 	// Registry
 	const registry = getContext('registry') as WrappedRegistry;
@@ -240,6 +241,7 @@
 			</div>
 			<div class="iif-footer-full-content">
 				<Layers />
+				<WindowAction count={1} />
 				<div class="iif-footer-buttons">
 					<button
 						class="iif-form-button iif-form-button--primary"

@@ -171,6 +171,10 @@ export function importThemeIcons() {
 				body:
 					'<path d="M3 2h8v2h-1V3H4v12h6v-1h1v2H3V2zM14 6h1v2h-1zM15 4V2h-2v1h1v1h1zM14 10h1v2h-1zM14 14h1v2h-2v-1h1v-1z" fill="currentColor"/><path fill="currentColor" d="M10 6h1v2h-1zM10 10h1v2h-1z"/>',
 			},
+			check: {
+				body:
+					'<path fill-rule="evenodd" clip-rule="evenodd" d="M14.207 6.207l-5.5 5.5-.707.707-.707-.707-3-3 1.414-1.414L8 9.586l4.793-4.793 1.414 1.414z" fill="currentColor"/>',
+			},
 		},
 		width: 18,
 		height: 18,
@@ -247,6 +251,7 @@ export const icons: Record<string, string | null> = {
 	'selecting-selected': prefix + ':confirm',
 	'selecting-unselected': prefix + ':empty',
 	'trash': prefix + ':trash',
+	'check': prefix + ':check',
 
 	// Layers list
 	'layer.page': prefix + ':page',

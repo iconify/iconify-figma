@@ -985,4 +985,15 @@ export class Wrapper {
 		container.classList[compact ? 'remove' : 'add']('plugin-full');
 		container.classList[minimized ? 'add' : 'remove']('plugin-minimized');
 	}
+
+	/**
+	 * Minimize window, message from plugin
+	 */
+	minimizeFromPlugin(value: boolean) {
+		const state = this._state;
+		if (state.minimized !== value) {
+			state.minimized = value;
+			this._updatePluginWindow();
+		}
+	}
 }

@@ -113,3 +113,8 @@ $plugin-input-icon-padding: 18px;
 $plugin-layer-height: 32px;
 $plugin-layer-padding: 12px; // Figma uses 24px. Changed for more compact layout
 $plugin-layer-icon-width: 16px;
+
+// z-index hierarchy
+$plugin-navigation-z-index: 10; // Sticky navigation
+$plugin-notice-z-index: 100;
+$plugin-select-z-index: 20; // Options popup

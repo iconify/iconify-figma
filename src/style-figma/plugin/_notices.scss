@@ -3,7 +3,7 @@
 	bottom: 0;
 	left: 0;
 	padding: 0 16px;
-	z-index: 2;
+	z-index: $plugin-notice-z-index;
 
 	&:empty {
 		display: none;

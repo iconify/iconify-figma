@@ -1,4 +1,5 @@
 import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisations';
+import type { ActionAfterImport } from './options';
 
 // Target for import
 interface ImportTarget {
@@ -14,8 +15,8 @@ export interface ImportIconCommon extends ImportTarget {
 	// Customisations
 	props: Partial<IconCustomisations>;
 
-	// Close window after import
-	close?: boolean;
+	// Window action
+	windowAction?: ActionAfterImport;
 }
 
 // Data for each imported icon

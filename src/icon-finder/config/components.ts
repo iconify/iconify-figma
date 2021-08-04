@@ -95,11 +95,6 @@ export const footerButtons: Record<string, FooterButton> = {
 		text: (params) =>
 			params.icons.length > 1 ? 'Import Icons' : 'Import Icon',
 	},
-	import_close: {
-		type: 'primary',
-		display: 'icons', // Show only when icon(s) have been selected
-		text: 'Import + Close',
-	},
 	// Import as component(s)
 	/*
 	component: {

@@ -1,0 +1,77 @@
+.iif-input-wrapper--select {
+	position: relative;
+
+	.iif-input-content {
+		line-height: 20px;
+		color: $plugin-palette-color-black;
+		text-decoration: none;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	// Popup
+	ul {
+		display: none;
+		position: absolute;
+		right: -1px;
+		top: -1px;
+		z-index: $plugin-select-z-index;
+
+		flex-direction: column;
+		list-style-type: none;
+		margin: 0;
+		padding: 8px 0;
+		border-radius: $plugin-border-radius-small;
+		background: $plugin-palette-background-almost-black;
+		box-shadow: 0 0 0 1px $plugin-palette-background-full-black inset,
+			0 5px 17px rgba(0, 0, 0, 0.2), 0 2px 7px rgba(0, 0, 0, 0.15);
+	}
+
+	&:focus-within ul {
+		display: flex;
+	}
+
+	li {
+		display: block;
+		margin: 0;
+		padding: 0;
+
+		a {
+			display: block;
+			white-space: normal;
+			//white-space: nowrap;
+			//overflow: hidden;
+			//text-overflow: ellipsis;
+			cursor: pointer;
+			color: $plugin-palette-color-white;
+			text-decoration: none;
+			margin: 0;
+			padding: 4px 8px 4px 32px;
+			position: relative;
+
+			@include plugin-font-ui-neg('medium', 'normal');
+
+			&:hover,
+			&:focus {
+				background: $plugin-palette-background-blue;
+				outline: none;
+				box-shadow: none;
+			}
+
+			svg {
+				position: absolute;
+				left: 7px;
+				top: 50%;
+				margin-top: -9px;
+				font-size: 18px;
+				line-height: 1em;
+			}
+		}
+	}
+
+	.iif-input--up ul {
+		top: auto;
+		bottom: -1px;
+	}
+}

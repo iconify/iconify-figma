@@ -47,9 +47,23 @@ import { sendMessageToUI } from './send-message';
 
 			case 'import-icon':
 				// Import icon(s)
-				if (importIcons(event.data, event.icons) && event.data.close) {
-					// Import + close
-					figma.closePlugin();
+				if (importIcons(event.data, event.icons)) {
+					// Action
+					switch (event.data.windowAction) {
+						case 'minimize':
+							pluginEnv.minimized = true;
+							const size = getUISize();
+							figma.ui.resize(size.width, size.height);
+							sendMessageToUI({
+								type: 'toggle-minimize',
+								minimized: true,
+							});
+							break;
+
+						case 'close':
+							figma.closePlugin();
+							break;
+					}
 				}
 				return;
 

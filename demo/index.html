@@ -53,7 +53,18 @@
 						case 'ui-loaded':
 							fakeMessage({
 								type: 'start-plugin',
-								ifConfig: {},
+								state: {
+									route: {
+										type: 'collection',
+										params: {
+											prefix: 'mdi-light',
+										},
+										parent: {
+											type: 'collections',
+										},
+									},
+									icons: ['mdi-light:cart'],
+								},
 								app: 'figma',
 								storage: {
 									recent: [

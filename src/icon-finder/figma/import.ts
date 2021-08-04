@@ -8,6 +8,7 @@ import type { ImportIconCommon, ImportIconItem } from '../../common/import';
 import { addNotice } from './notices';
 import { phrases } from '../config/phrases';
 import { pluginUIEnv } from './env';
+import { getOptions } from './options';
 
 /**
  * Convert button message from Icon Finder to message to plugin
@@ -83,10 +84,7 @@ export function getIconImportMessage(
 	const data: ImportIconCommon = {
 		props,
 	};
-
-	if (pluginUIEnv.targetLayer) {
-		data.layerId = pluginUIEnv.targetLayer;
-	}
+	addOptions(data);
 
 	return {
 		type: 'import-icon',
@@ -103,10 +101,7 @@ export function getSVGImportMessage(svg: string): UIToFigmaImportIconMessage {
 	const data: ImportIconCommon = {
 		props: {},
 	};
-
-	if (pluginUIEnv.targetLayer) {
-		data.layerId = pluginUIEnv.targetLayer;
-	}
+	addOptions(data);
 
 	return {
 		type: 'import-icon',
@@ -117,4 +112,14 @@ export function getSVGImportMessage(svg: string): UIToFigmaImportIconMessage {
 			},
 		],
 	};
+}
+
+/**
+ * Add options to data
+ */
+function addOptions(data: ImportIconCommon) {
+	data.windowAction = getOptions().windowAction;
+	if (pluginUIEnv.targetLayer) {
+		data.layerId = pluginUIEnv.targetLayer;
+	}
 }

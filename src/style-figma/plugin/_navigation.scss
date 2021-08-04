@@ -125,7 +125,7 @@
 	@media (max-width: 600px) {
 		.plugin-wrapper-header--primary {
 			position: relative;
-			z-index: 2;
+			z-index: $plugin-navigation-z-index;
 		}
 		.plugin-wrapper-header--secondary {
 			position: relative;

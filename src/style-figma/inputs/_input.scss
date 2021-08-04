@@ -128,8 +128,12 @@
 			padding: 0;
 		}
 	}
+	span.iif-input-reset {
+		pointer-events: none;
+	}
 
-	input {
+	input,
+	.iif-input-content {
 		position: absolute;
 		box-sizing: border-box;
 		width: 100%;
@@ -154,7 +158,8 @@
 		}
 	}
 	&--with-icon {
-		input {
+		input,
+		.iif-input-content {
 			padding-left: $plugin-input-icon-padding + 8px;
 		}
 		.iif-input-placeholder {

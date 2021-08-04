@@ -42,10 +42,16 @@ interface FigmaToUINotice {
 	notice: UINotice | UINotice[];
 }
 
+interface FigmaToUIMinimizeMessage {
+	type: 'toggle-minimize';
+	minimized: boolean;
+}
+
 // Combined type
 export type FigmaToUIMessage =
 	| FigmaToUIStartMessage
 	| FigmaToUILayersMessage
+	| FigmaToUIMinimizeMessage
 	| FigmaToUINotice;
 
 /**

@@ -1,0 +1,34 @@
+.iif-option-row {
+	display: flex;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+
+	dt,
+	dd {
+		display: block;
+		margin: 0;
+		padding: 0;
+		@include plugin-font-ui-pos('medium', 'normal');
+	}
+
+	dt {
+		text-align: right;
+		flex-grow: 1;
+		padding-top: 8px; // (32px for input height - 16px for line-height) / 2
+	}
+
+	dd {
+		margin-left: 16px;
+		width: 240px;
+	}
+
+	@media (max-width: 400px) {
+		display: block;
+		dt,
+		dd {
+			text-align: left;
+			width: auto;
+		}
+	}
+}

@@ -24,6 +24,7 @@
 	import FooterBlock from './parts/FooterBlock.svelte';
 	import InfoBlock from '../blocks/CollectionInfo.svelte';
 	import LayersBlock from './parts/Layers.svelte';
+	import WindowAction from './parts/WindowAction.svelte';
 
 	/* Various components for icon name. Uncomment one you want to use */
 	// import IconName from './parts/name/Simple.svelte';
@@ -167,6 +168,7 @@
 				{/if}
 				{#if hasIcons}
 					<LayersBlock />
+					<WindowAction count={icons.length} />
 				{/if}
 				{#if showButtons}
 					<ButtonsContainer {icons} {route} />
