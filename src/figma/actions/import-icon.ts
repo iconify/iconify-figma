@@ -80,6 +80,28 @@ export function importIcons(
 
 			// Rename node
 			node.name = icon.name;
+		} else {
+			// SVG paste: fix 1px imports when height is set to "1em"
+			if (node.height === 1) {
+				// Get viewBox
+				const search = 'viewBox="';
+				const index = icon.svg.indexOf(search);
+				if (index !== -1) {
+					const viewBox = icon.svg
+						.slice(index + search.length)
+						.split('"')
+						.shift()!
+						.split(' ');
+					if (viewBox.length === 4) {
+						const width = parseInt(viewBox[2]);
+						const height = parseInt(viewBox[3]);
+						if (width && height) {
+							node.resize(width, height);
+						}
+					}
+				}
+				const parts = icon.svg.split('viewBox=');
+			}
 		}
 
 		// Move it
