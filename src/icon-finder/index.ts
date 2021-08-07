@@ -131,6 +131,7 @@ function runIconFinder() {
 							case 'button': {
 								switch (event.button) {
 									case 'import':
+									case 'component':
 										// Import icon
 										const message = getIconImportMessage(
 											event,

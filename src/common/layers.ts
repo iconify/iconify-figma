@@ -5,7 +5,6 @@ interface CommonLayerData {
 	id: string;
 	name: string;
 	depth?: number;
-	canAcceptComponent?: boolean;
 }
 
 /**

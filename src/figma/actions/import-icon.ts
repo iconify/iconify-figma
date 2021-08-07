@@ -1,5 +1,9 @@
 import type { PartialRoute } from '@iconify/search-core';
-import type { ImportIconCommon, ImportIconItem } from '../../common/import';
+import type {
+	ImportIconCommon,
+	ImportIconItem,
+	ImportMode,
+} from '../../common/import';
 import type { UINotice } from '../../common/messages';
 import { pluginEnv } from '../data/env';
 import {
@@ -11,6 +15,7 @@ import { figmaPhrases } from '../data/phrases';
 import { sendMessageToUI } from '../send-message';
 import { moveNode } from '../functions/move-node';
 import { updateSelection } from '../functions/update-selection';
+import { ImportedNode, importSVG } from '../functions/import-svg';
 
 /**
  * Find selected node
@@ -36,7 +41,7 @@ export function importIcons(
 ): boolean {
 	const added: (string | undefined)[] = [];
 	const errors: (string | undefined)[] = [];
-	const addedNodes: FrameNode[] = [];
+	const addedNodes: ImportedNode[] = [];
 
 	// Find parent layer
 	let layerId = data.layerId;
@@ -53,8 +58,10 @@ export function importIcons(
 
 	// Import all icons
 	icons.forEach((icon) => {
-		const node = figma.createNodeFromSvg(icon.svg);
-		if (!node) {
+		let node: ImportedNode;
+		try {
+			node = importSVG(icon.svg, data.mode);
+		} catch (err) {
 			errors.push(icon.name);
 			console.error('Error importing SVG');
 			return;

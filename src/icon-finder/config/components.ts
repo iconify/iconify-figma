@@ -106,29 +106,17 @@ export const footerButtons: Record<string, FooterButton> = {
 	// Import
 	import: {
 		type: 'primary',
-		display: 'icons', // Show only when icon(s) have been selected
-		text: (params) =>
-			params.icons.length > 1 ? 'Import Icons' : 'Import Icon',
+		display: 'icons',
+		text: (params) => 'Import Icon' + (params.icons.length > 1 ? 's' : ''),
 	},
-	// Import as component(s)
-	/*
+
+	// Import as component
 	component: {
 		type: 'secondary',
 		display: 'icons',
 		text: (params) =>
-			params.icons.length > 1
-				? 'Import as Components'
-				: 'Import as Component',
+			'Import as Component' + (params.icons.length > 1 ? 's' : ''),
 	},
-	*/
-	// Import as variants (import as components, then combine them)
-	/*
-	variants: {
-		type: 'secondary',
-		display: 'many-icons',
-		text: 'Import as Variants',
-	},
-	*/
 };
 
 /**

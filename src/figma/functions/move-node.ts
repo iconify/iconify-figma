@@ -1,3 +1,4 @@
+import type { ImportedNode } from './import-svg';
 import {
 	FilteredFrameNode,
 	isAutoLayoutNode,
@@ -8,7 +9,7 @@ import {
 /**
  * Move node to parent
  */
-export function moveNode(node: FrameNode, parent: ViableParentFigmaNode) {
+export function moveNode(node: ImportedNode, parent: ViableParentFigmaNode) {
 	const width = node.width;
 	const height = node.height;
 

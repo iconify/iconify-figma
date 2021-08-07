@@ -84,7 +84,7 @@ export function getIconImportMessage(
 	}
 
 	// Import mode
-	let mode: ImportMode = 'frame';
+	let mode: ImportMode = event.button === 'component' ? 'component' : 'frame';
 
 	// Return data
 	const route = addRoute ? state.route : void 0;

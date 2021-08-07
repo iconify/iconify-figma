@@ -1,4 +1,5 @@
 import type { SelectAfterImport } from '../../common/options';
+import type { ImportedNode } from './import-svg';
 
 function assertNever(v: never) {
 	//
@@ -8,7 +9,7 @@ function assertNever(v: never) {
  * Update selected nodes after import
  */
 export function updateSelection(
-	addedNodes: FrameNode[],
+	addedNodes: ImportedNode[],
 	option: SelectAfterImport
 ) {
 	const page = figma.currentPage;
