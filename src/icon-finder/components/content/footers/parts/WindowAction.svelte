@@ -1,6 +1,6 @@
 <script lang="typescript">
 	import { onDestroy } from 'svelte';
-	import type { ActionAfterImport } from '../../../../../common/options';
+	import type { WindowAfterImport } from '../../../../../common/options';
 	import { phrases } from '../../../../config/phrases';
 	import { setOptions, watchedOptions } from '../../../../figma/options';
 	import Block from './FooterBlock.svelte';
@@ -9,22 +9,14 @@
 
 	export let count: number;
 
-	// Options
-	const optionsText = phrases.figma.importAction;
-	const options: Record<ActionAfterImport, string> = {
-		none: optionsText.none,
-		minimize: optionsText.minimize,
-		close: optionsText.close,
-	};
-
 	// Text
 	let text: string;
 	$: {
-		text = phrases.figma.importActionTitle[count > 1 ? 'icons' : 'icon'];
+		text = phrases.figma.windowActionTitle[count > 1 ? 'icons' : 'icon'];
 	}
 
 	// Get action
-	let currentAction: ActionAfterImport;
+	let currentAction: WindowAfterImport;
 	const unsubscribe = watchedOptions.subscribe((options) => {
 		currentAction = options.windowAction;
 	});
@@ -33,7 +25,7 @@
 	// Change
 	function onChange(value: string) {
 		setOptions({
-			windowAction: value as ActionAfterImport,
+			windowAction: value as WindowAfterImport,
 		});
 	}
 </script>
@@ -42,7 +34,7 @@
 	<Block name="window-action" title="">
 		<OptionRow {text}>
 			<Select
-				{options}
+				options={phrases.figma.windowAction}
 				selected={currentAction}
 				{onChange}
 				extra="iif-input--up" />

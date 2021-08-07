@@ -20,10 +20,10 @@
 
 	dd {
 		margin-left: 16px;
-		width: 240px;
+		width: 280px;
 	}
 
-	@media (max-width: 400px) {
+	@media (max-width: 600px) {
 		display: block;
 		dt,
 		dd {

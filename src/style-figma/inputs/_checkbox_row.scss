@@ -1,0 +1,29 @@
+.iif-checkbox-row {
+	margin: 8px 0 16px;
+	padding: 16px 0;
+
+	label {
+		display: block;
+		cursor: pointer;
+		@include plugin-font-ui-pos('medium', 'normal');
+
+		span {
+			display: inline-block;
+			padding-left: 8px;
+		}
+
+		&:not(:hover) input:focus + span {
+			color: $plugin-palette-color-link-hover;
+		}
+	}
+	p {
+		@include plugin-font-ui-pos('small', 'medium');
+		color: $plugin-palette-color-black-muted;
+		margin: 2px 0 0 20px;
+		padding: 0;
+	}
+
+	@media (min-width: 400px) {
+		padding-left: 25%;
+	}
+}

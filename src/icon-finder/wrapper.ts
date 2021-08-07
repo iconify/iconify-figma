@@ -891,11 +891,25 @@ export class Wrapper {
 
 		// Reset options
 		if (navigation.submenu === 'reset') {
-			setOptions(defaultPluginOptions);
+			// Default navigation
 			navigation = {
 				section: 'import',
 				submenu: 'iconify',
 			};
+
+			// Default route
+			state.iconifyRoute = state.route = {
+				type: 'collections',
+			};
+
+			// Default customisations
+			this.setCustomisations({});
+
+			// Selection
+			this.selectIcons([]);
+
+			// Default options
+			setOptions(defaultPluginOptions);
 		}
 
 		// Set navigation in state

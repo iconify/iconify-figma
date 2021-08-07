@@ -221,14 +221,30 @@ export const phrases: UITranslation = {
 			failed_icon: 'Error importing icon "{name}"',
 			failed_icons: 'Error importing {count} icons',
 		},
-		importActionTitle: {
+		windowActionTitle: {
 			icon: 'After importing icon:',
 			icons: 'After importing icons:',
 		},
-		importAction: {
+		windowAction: {
 			none: 'Keep plug-in window open',
 			minimize: 'Minimize plug-in window',
 			close: 'Close plug-in window',
+		},
+		selectAction: {
+			auto: 'Automatic, depending on current selection',
+			add: 'Add imported icon to current selection',
+			replace: 'Select imported icon, deselect previously selected nodes',
+			ignore: 'Do not select imported icons',
+		},
+		optionSections: {
+			layout: 'Layout options',
+			import: 'Import options',
+		},
+		options: {
+			compact: 'Enable compact width.',
+			compactHint: 'Smaller plug-in window for small laptops.',
+			scroll: 'Scroll to icon when selecting new icon.',
+			select: 'Select imported icon:',
 		},
 	},
 	svg: {

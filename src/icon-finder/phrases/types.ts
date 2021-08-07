@@ -10,7 +10,10 @@ import type {
 	PluginUINavigationSection,
 	PluginUIWindowControls,
 } from '../../common/navigation';
-import type { ActionAfterImport } from '../../common/options';
+import type {
+	SelectAfterImport,
+	WindowAfterImport,
+} from '../../common/options';
 
 export interface UITranslationAddForm {
 	title?: string;
@@ -124,13 +127,24 @@ export interface UITranslation {
 			maximize: string;
 			close: string;
 		};
-		importActionTitle: {
+		windowActionTitle: {
 			icon: string;
 			icons: string;
 		};
-		importAction: Record<ActionAfterImport, string>;
+		windowAction: Record<WindowAfterImport, string>;
+		selectAction: Record<SelectAfterImport, string>;
 		layers: {
 			title: string;
+		};
+		optionSections: {
+			layout: string;
+			import: string;
+		};
+		options: {
+			compact: string;
+			compactHint: string;
+			scroll: string;
+			select: string;
 		};
 		// Also see src/figma/data/phrases.ts
 		notices: {

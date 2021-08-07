@@ -13,6 +13,7 @@
 	import Footer from './content/Footer.svelte';
 	import Notices from './figma/Notice.svelte';
 	import SVGPage from './pages/SVG.svelte';
+	import OptionsPage from './pages/Options.svelte';
 
 	/**
 	 * Global exports
@@ -68,6 +69,8 @@
 		<Navigation {currentPage} />
 		{#if showPage === 'svg'}
 			<SVGPage />
+		{:else if showPage === 'options'}
+			<OptionsPage />
 		{/if}
 		{#if iconFinderRendered || showPage === 'iconify'}
 			<div

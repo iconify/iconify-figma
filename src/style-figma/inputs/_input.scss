@@ -41,6 +41,12 @@
 	&--color {
 		min-width: 140px;
 	}
+	&--no-border {
+		border-color: transparent;
+	}
+	&--full-border {
+		border-color: $plugin-palette-border-darker-grey;
+	}
 
 	// Without placeholder
 

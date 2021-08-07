@@ -1,6 +1,7 @@
 import type { PartialRoute } from '@iconify/search-core';
 import type { ImportIconCommon, ImportIconItem } from '../../common/import';
 import type { UINotice } from '../../common/messages';
+import type { SelectAfterImport } from '../../common/options';
 import { pluginEnv } from '../data/env';
 import {
 	FilteredFrameNode,
@@ -12,6 +13,10 @@ import {
 import type { ImportedIconSharedData } from '../data/node-data';
 import { figmaPhrases } from '../data/phrases';
 import { sendMessageToUI } from '../send-message';
+
+function assertNever(v: never) {
+	//
+}
 
 /**
  * Find selected node
@@ -247,6 +252,38 @@ function moveNode(node: FrameNode, parent: ViableParentFigmaNode) {
 }
 
 /**
+ * Update selected nodes
+ */
+function updateSelection(addedNodes: FrameNode[], option: SelectAfterImport) {
+	const page = figma.currentPage;
+
+	let keepSelection: boolean = false;
+	switch (option) {
+		case 'ignore':
+			return;
+
+		case 'auto':
+			if (page.selection.length > 1) {
+				keepSelection = true;
+			}
+			break;
+
+		case 'add':
+			keepSelection = true;
+			break;
+
+		case 'replace':
+			break;
+
+		default:
+			assertNever(option);
+	}
+
+	const selection: SceneNode[] = keepSelection ? page.selection.slice(0) : [];
+	page.selection = selection.concat(addedNodes);
+}
+
+/**
  * Import icon(s)
  *
  * Returns true on full success
@@ -335,11 +372,7 @@ export function importIcons(
 
 	// Update selection
 	if (addedNodes.length) {
-		let selection: SceneNode[] = [];
-		if (figma.currentPage.selection.length > 1) {
-			selection = figma.currentPage.selection.slice(0);
-		}
-		figma.currentPage.selection = selection.concat(addedNodes);
+		updateSelection(addedNodes, pluginEnv.config.options.selectAfterImport);
 	}
 
 	// Show notice

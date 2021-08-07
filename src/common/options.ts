@@ -1,7 +1,12 @@
 /**
- * Action after importing icon
+ * Window state after importing icon
  */
-export type ActionAfterImport = 'none' | 'minimize' | 'close';
+export type WindowAfterImport = 'none' | 'minimize' | 'close';
+
+/**
+ * Select after import
+ */
+export type SelectAfterImport = 'auto' | 'add' | 'replace' | 'ignore';
 
 /**
  * Plugin options that are not part of Icon Finder state
@@ -14,7 +19,10 @@ export interface PluginOptions {
 	storageLimit: number;
 
 	// What to do after importing icon
-	windowAction: ActionAfterImport;
+	windowAction: WindowAfterImport;
+
+	// Layer selection after import
+	selectAfterImport: SelectAfterImport;
 
 	// Automatically scroll to footer when icon is selected
 	scrollToIcon: boolean;
@@ -27,5 +35,6 @@ export const defaultPluginOptions: PluginOptions = {
 	compactWidth: false,
 	storageLimit: 200,
 	windowAction: 'none',
+	selectAfterImport: 'auto',
 	scrollToIcon: true,
 };

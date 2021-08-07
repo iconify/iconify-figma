@@ -45,6 +45,10 @@
 	$: {
 		className =
 			baseClass +
+			// No border
+			' ' +
+			baseClass +
+			'--no-border' +
 			// Placeholder
 			' ' +
 			baseClass +
