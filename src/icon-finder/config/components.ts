@@ -1,3 +1,4 @@
+import { pluginUIEnv } from '../figma/env';
 import type { FooterButton, FooterButtonCallbackParams } from '../footer/types';
 
 /**
@@ -110,10 +111,11 @@ export const footerButtons: Record<string, FooterButton> = {
 		text: (params) => 'Import Icon' + (params.icons.length > 1 ? 's' : ''),
 	},
 
-	// Import as component
+	// Import as component, not available in FigJam
 	component: {
 		type: 'secondary',
-		display: 'icons',
+		display: (state) =>
+			pluginUIEnv.app === 'figma' && state.icons.length > 0,
 		text: (params) =>
 			'Import as Component' + (params.icons.length > 1 ? 's' : ''),
 	},

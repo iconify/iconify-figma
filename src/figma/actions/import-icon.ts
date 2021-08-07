@@ -63,7 +63,7 @@ export function importIcons(
 			node = importSVG(icon.svg, data.mode);
 		} catch (err) {
 			errors.push(icon.name);
-			console.error('Error importing SVG');
+			console.error('Error importing SVG', err);
 			return;
 		}
 
