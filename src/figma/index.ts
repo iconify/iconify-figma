@@ -1,9 +1,12 @@
 import type { UIToFigmaMessage } from '../common/messages';
 import { importIcons } from './actions/import-icon';
-import { loadConfig } from './actions/load-config';
+import { loadConfig } from './functions/load-config';
 import { pluginEnv } from './data/env';
-import { getTargetLayers, selectionChanged } from './data/layers';
-import { getUISize } from './data/layout';
+import {
+	selectionChanged,
+	getTargetLayers,
+} from './functions/get-target-layers';
+import { getUISize } from './functions/ui-size';
 import { sendMessageToUI } from './send-message';
 
 (async () => {

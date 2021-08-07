@@ -4,7 +4,11 @@ import { iconToString } from '@iconify/search-core';
 import { renderHTML } from '@iconify/search-core/lib/code-samples/html';
 import { defaultCustomisations } from '@iconify/search-core/lib/misc/customisations';
 import { getIcon } from '@iconify/svelte';
-import type { ImportIconCommon, ImportIconItem } from '../../common/import';
+import type {
+	ImportIconCommon,
+	ImportIconItem,
+	ImportMode,
+} from '../../common/import';
 import { addNotice } from './notices';
 import { phrases } from '../config/phrases';
 import { pluginUIEnv } from './env';
@@ -79,10 +83,14 @@ export function getIconImportMessage(
 		return;
 	}
 
+	// Import mode
+	let mode: ImportMode = 'frame';
+
 	// Return data
 	const route = addRoute ? state.route : void 0;
 	const data: ImportIconCommon = {
 		props,
+		mode,
 	};
 	addOptions(data);
 

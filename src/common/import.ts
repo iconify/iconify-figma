@@ -1,6 +1,11 @@
 import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisations';
 import type { WindowAfterImport } from './options';
 
+/**
+ * Import modes
+ */
+export type ImportMode = 'frame' | 'component';
+
 // Target for import
 interface ImportTarget {
 	// Layer
@@ -17,6 +22,9 @@ export interface ImportIconCommon extends ImportTarget {
 
 	// Window action
 	windowAction?: WindowAfterImport;
+
+	// Import mode
+	mode?: ImportMode;
 }
 
 // Data for each imported icon

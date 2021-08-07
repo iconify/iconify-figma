@@ -1,4 +1,4 @@
-import { pluginEnv } from './env';
+import { pluginEnv } from '../data/env';
 
 /**
  * UI dimensions
