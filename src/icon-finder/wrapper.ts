@@ -65,7 +65,11 @@ import {
 import { importThemeIcons } from './config/theme';
 import { defaultNavigation } from './figma/navigation';
 import type { PluginUINavigation } from '../common/navigation';
-import { customIconsData, updateCustomIcons } from './figma/icon-lists';
+import {
+	customIconsData,
+	iconListsStorage,
+	updateCustomIcons,
+} from './figma/icon-lists';
 import type { IconListType } from '../common/icon-lists';
 
 // Change import to change container component
@@ -172,10 +176,25 @@ export class Wrapper {
 		const events = registry.events;
 		for (let iconsListType in customIconsData) {
 			const key = iconsListType as IconListType;
+
+			// Set data on demand
 			events.subscribe('load-' + key, (callback) => {
 				if (typeof callback === 'function') {
 					const iconsList = customIconsData[key];
 					callback(iconsList);
+				}
+			});
+
+			// Update data when it changes
+			iconListsStorage[key].subscribe((value) => {
+				const route = this._state.route;
+				if (
+					route &&
+					route.type === 'custom' &&
+					route.params.customType === key
+				) {
+					// Re-render
+					core.router.action('set', value);
 				}
 			});
 		}

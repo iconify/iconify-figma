@@ -10,7 +10,6 @@ import type {
 import type { SelectedLayers } from './layers';
 import type { PluginStorage } from '../figma/data/config';
 import type { IconListType } from './icon-lists';
-import type { PluginUIWindowControls } from './navigation';
 import type { PluginOptions } from './options';
 
 /**
@@ -45,6 +44,8 @@ interface FigmaToUIStartMessage
 interface FigmaToUINotice {
 	type: 'notice';
 	notice: UINotice | UINotice[];
+	// Combine with imported icons list
+	importedIcons?: string[];
 }
 
 interface FigmaToUIMinimizeMessage {

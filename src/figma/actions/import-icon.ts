@@ -1,16 +1,11 @@
 import type { PartialRoute } from '@iconify/search-core';
-import type {
-	ImportIconCommon,
-	ImportIconItem,
-	ImportMode,
-} from '../../common/import';
+import type { ImportIconCommon, ImportIconItem } from '../../common/import';
 import type { UINotice } from '../../common/messages';
 import { pluginEnv } from '../data/env';
 import {
 	filterViableParentNode,
 	ViableParentFigmaNode,
 } from '../functions/layers';
-import type { ImportedIconSharedData } from '../data/node-data';
 import { figmaPhrases } from '../data/phrases';
 import { sendMessageToUI } from '../send-message';
 import { moveNode } from '../functions/move-node';
@@ -146,6 +141,9 @@ export function importIcons(
 	sendMessageToUI({
 		type: 'notice',
 		notice: notices,
+		importedIcons: added.filter(
+			(icon) => typeof icon === 'string'
+		) as string[],
 	});
 
 	return errors.length === 0;

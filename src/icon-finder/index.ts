@@ -168,9 +168,33 @@ function runIconFinder() {
 				});
 				return;
 
-			case 'notice':
+			case 'notice': {
 				addNotice(message.notice);
+
+				if (message.importedIcons && message.importedIcons.length) {
+					// Update recent icons list
+					let icons = customIconsData.recent;
+					message.importedIcons.forEach((name) => {
+						icons = icons.filter((item) => item !== name);
+						icons.unshift(name);
+					});
+
+					// Check limit
+					const limit = getOptions().storageLimit;
+					if (limit && icons.length > limit) {
+						icons = icons.slice(0, limit - 1);
+					}
+
+					// Update
+					updateCustomIcons('recent', icons);
+					sendMessageToFigma({
+						type: 'custom-icons',
+						storage: 'recent',
+						icons,
+					});
+				}
 				return;
+			}
 
 			case 'target-layers':
 				pluginUIEnv.layers.set(message.selection);

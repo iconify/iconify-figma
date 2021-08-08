@@ -1,6 +1,5 @@
 import type { DropIconCoordinates, DropIconData } from '../../common/import';
 import { pluginEnv } from '../data/env';
-import type { ImportedIconSharedData } from '../data/node-data';
 import { figmaPhrases } from '../data/phrases';
 import { ImportedNode, importSVG } from '../functions/import-svg';
 import { fixImportedSVG, setIconData } from '../functions/set-icon-data';
@@ -87,6 +86,7 @@ export function dropIcon(data: DropIconData, target: DropIconCoordinates) {
 	updateSelection([node], pluginEnv.config.options.selectAfterImport);
 
 	// Success
+	const importedIcons: string[] = name === void 0 ? [] : [name];
 	sendMessageToUI({
 		type: 'notice',
 		notice: {
@@ -96,5 +96,6 @@ export function dropIcon(data: DropIconData, target: DropIconCoordinates) {
 					? text.added_unnamed
 					: text.added_icon.replace('{name}', name),
 		},
+		importedIcons,
 	});
 }
