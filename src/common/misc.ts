@@ -13,6 +13,7 @@ export interface PluginIconFinderState {
 	config?: IconFinderConfig;
 	customisations?: PartialIconCustomisations;
 	route?: PartialRoute;
+	icons?: string[];
 }
 
 /**

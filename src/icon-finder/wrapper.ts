@@ -214,6 +214,7 @@ export class Wrapper {
 		}
 
 		if (customState) {
+			// console.log('customState:', JSON.stringify(customState, null, 4));
 			// Set custom stuff
 			if (customState.icons) {
 				customState.icons.forEach((icon) => {

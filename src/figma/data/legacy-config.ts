@@ -1,3 +1,4 @@
+import type { IconCustomisations } from '../../../../core/lib/misc/customisations';
 import { defaultPluginOptions } from '../../common/options';
 import type { PluginConfig } from './config';
 
@@ -65,7 +66,9 @@ export function convertLegacyConfig(config: LegacyPluginConfig): PluginConfig {
 		options: {
 			...defaultPluginOptions,
 		},
-		state: {},
+		state: {
+			customisations: {},
+		},
 	};
 
 	// Copy options
@@ -78,6 +81,28 @@ export function convertLegacyConfig(config: LegacyPluginConfig): PluginConfig {
 		}
 		if (oldOptions.storageLimit !== void 0) {
 			options.storageLimit = oldOptions.storageLimit;
+		}
+
+		// Customisations
+		const customisations = result.state.customisations;
+		const convertKeys: (keyof IconCustomisations)[] = [
+			'width',
+			'height',
+			'hFlip',
+			'vFlip',
+			'rotate',
+			'color',
+		];
+		convertKeys.forEach((key) => {
+			const value = (oldOptions as Record<string, unknown>)[key];
+			if (value !== void 0) {
+				(customisations as Record<string, unknown>)[key] = value;
+			}
+		});
+
+		// Selected icon
+		if (oldOptions.icon) {
+			result.state.icons = [oldOptions.icon];
 		}
 	}
 
