@@ -8,6 +8,7 @@ import {
 } from './functions/get-target-layers';
 import { getUISize } from './functions/ui-size';
 import { sendMessageToUI } from './send-message';
+import { dropIcon } from './actions/drop-icon';
 
 (async () => {
 	// Startup
@@ -68,6 +69,11 @@ import { sendMessageToUI } from './send-message';
 							break;
 					}
 				}
+				return;
+
+			case 'drop-icon':
+				// Drop icon(s)
+				dropIcon(event.data, event.target);
 				return;
 
 			case 'custom-icons':

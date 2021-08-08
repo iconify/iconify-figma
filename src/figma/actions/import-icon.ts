@@ -16,6 +16,7 @@ import { sendMessageToUI } from '../send-message';
 import { moveNode } from '../functions/move-node';
 import { updateSelection } from '../functions/update-selection';
 import { ImportedNode, importSVG } from '../functions/import-svg';
+import { fixImportedSVG, setIconData } from '../functions/set-icon-data';
 
 /**
  * Find selected node
@@ -70,44 +71,13 @@ export function importIcons(
 		// Stuff for Iconify icon imports
 		if (icon.name !== void 0) {
 			// Set data
-			node.setSharedPluginData('iconify', 'source', 'iconify');
-			const propsData: ImportedIconSharedData = {
-				version: 2,
-				name: icon.name,
-				props: data.props,
-				route,
-			};
-			node.setSharedPluginData(
-				'iconify',
-				'props',
-				JSON.stringify(propsData)
-			);
-			node.setRelaunchData(figmaPhrases.relaunch);
+			setIconData(node, icon.name, data.props, route);
 
 			// Rename node
 			node.name = icon.name;
 		} else {
 			// SVG paste: fix 1px imports when height is set to "1em"
-			if (node.height === 1) {
-				// Get viewBox
-				const search = 'viewBox="';
-				const index = icon.svg.indexOf(search);
-				if (index !== -1) {
-					const viewBox = icon.svg
-						.slice(index + search.length)
-						.split('"')
-						.shift()!
-						.split(' ');
-					if (viewBox.length === 4) {
-						const width = parseInt(viewBox[2]);
-						const height = parseInt(viewBox[3]);
-						if (width && height) {
-							node.resize(width, height);
-						}
-					}
-				}
-				const parts = icon.svg.split('viewBox=');
-			}
+			fixImportedSVG(node, icon.svg);
 		}
 
 		// Move it

@@ -190,7 +190,12 @@
 
 	// onDrag event
 	function onDrag(start: boolean, event: MouseEvent) {
-		registry.ondrag(start, event, icon, true);
+		registry.ondrag(start, event, {
+			itemType: 'icon',
+			icon,
+			item: '',
+			customise: true,
+		});
 	}
 </script>
 

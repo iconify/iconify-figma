@@ -217,6 +217,16 @@
 			(node as HTMLTextAreaElement).focus();
 		}
 	});
+
+	// Drag
+	function onDrag(start: boolean, event: MouseEvent) {
+		if (svg) {
+			registry.ondrag(start, event, {
+				itemType: 'svg',
+				item: svg.code,
+			});
+		}
+	}
 </script>
 
 <PageContainer type="svg">
@@ -247,7 +257,18 @@
 		<div class="iif-footer-full iif-footer-full--paste">
 			<div
 				class="iif-footer-sample iif-footer-sample--block iif-footer-sample--loaded">
-				<img src={svg.src} alt={text.sampleAlt} />
+				<a
+					href="# "
+					on:click|preventDefault={() => {}}
+					draggable={true}
+					on:dragstart={(event) => {
+						onDrag(true, event);
+					}}
+					on:dragend={(event) => {
+						onDrag(false, event);
+					}}>
+					<img src={svg.src} alt={text.sampleAlt} />
+				</a>
 			</div>
 			<div class="iif-footer-full-content">
 				<Layers />

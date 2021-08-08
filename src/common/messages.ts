@@ -1,7 +1,12 @@
 import type { IconFinderConfig, PartialRoute } from '@iconify/search-core';
 import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/customisations';
 import type { PluginApp, PluginIconFinderState } from './misc';
-import type { ImportIconCommon, ImportIconItem } from './import';
+import type {
+	DropIconCoordinates,
+	DropIconData,
+	ImportIconCommon,
+	ImportIconItem,
+} from './import';
 import type { SelectedLayers } from './layers';
 import type { PluginStorage } from '../figma/data/config';
 import type { IconListType } from './icon-lists';
@@ -93,6 +98,12 @@ export interface UIToFigmaImportIconMessage {
 	icons: ImportIconItem[];
 }
 
+export interface UIToFigmaDragMessage {
+	type: 'drop-icon';
+	data: DropIconData;
+	target: DropIconCoordinates;
+}
+
 interface UIToFigmaCustomStorageMessage {
 	type: 'custom-icons';
 	storage: IconListType;
@@ -121,6 +132,7 @@ export type UIToFigmaMessage =
 	| UIToFigmaCustomisationsMessage
 	| UIToFigmaRouteMessage
 	| UIToFigmaImportIconMessage
+	| UIToFigmaDragMessage
 	| UIToFigmaCustomStorageMessage
 	| UIToFigmaMinimizeMessage
 	| UIToFigmaOptionsMessage

@@ -3,7 +3,7 @@
 	import type { Icon } from '@iconify/search-core';
 	import type { IconifyIcon } from '@iconify/types';
 	import { phrases } from '../../../../config/phrases';
-	import type { IconDragEvent } from '../../../../wrapper/drag';
+	import type { IconsListDragEvent } from '../../../../figma/drag';
 	import type { IconsListFilter } from '../../../types';
 	import UIIcon from '../../../ui/UIIcon.svelte';
 	import Filter from '../../../ui/Filter.svelte';
@@ -33,7 +33,7 @@
 	export let onClick: (event: string, value: string | Icon) => void;
 
 	// onDrag
-	export let onDrag: IconDragEvent;
+	export let onDrag: IconsListDragEvent;
 
 	// Selecting multiple icons
 	export let isSelecting: boolean;
@@ -85,10 +85,10 @@
 			title={tooltip}
 			draggable={true}
 			on:dragstart={(event) => {
-				onDrag(true, event, icon, false);
+				onDrag(true, event, icon);
 			}}
 			on:dragend={(event) => {
-				onDrag(false, event, icon, false);
+				onDrag(false, event, icon);
 			}}
 			on:click|preventDefault={handleClick}>
 			{#if exists}

@@ -121,7 +121,14 @@
 	}
 
 	// Drag
-	const onDrag = registry.ondrag;
+	const onDrag = (start: boolean, event: MouseEvent, icon: Icon) => {
+		registry.ondrag(start, event, {
+			itemType: 'icon',
+			icon,
+			item: '',
+			customise: true,
+		});
+	};
 </script>
 
 <OptionsBlock type="icons">
@@ -132,10 +139,10 @@
 					href="# "
 					draggable={true}
 					on:dragstart={(event) => {
-						onDrag(true, event, item.icon, true);
+						onDrag(true, event, item.icon);
 					}}
 					on:dragend={(event) => {
-						onDrag(false, event, item.icon, true);
+						onDrag(false, event, item.icon);
 					}}
 					on:click|preventDefault={() => {
 						onClick(true, item.icon);

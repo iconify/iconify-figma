@@ -21,6 +21,7 @@
 	import IconList from './IconList.svelte';
 	import IconGrid from './IconGrid.svelte';
 	import type { IconsListFilter } from '../../../types';
+	import type { IconsListDragEvent } from '../../../../figma/drag';
 
 	// Current route
 	export let route: FullRoute;
@@ -41,7 +42,14 @@
 	const registry = getContext('registry') as WrappedRegistry;
 
 	// onDrag event
-	const onDrag = registry.ondrag;
+	const onDrag: IconsListDragEvent = (start, event, icon) => {
+		registry.ondrag(start, event, {
+			itemType: 'icon',
+			icon,
+			item: '',
+			customise: false,
+		});
+	};
 
 	// Base class name
 	const baseClass = 'iif-icons';

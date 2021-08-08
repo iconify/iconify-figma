@@ -1,7 +1,7 @@
 <script lang="typescript">
 	import IconComponent from '@iconify/svelte';
 	import type { Icon } from '@iconify/search-core';
-	import type { IconDragEvent } from '../../../../wrapper/drag';
+	import type { IconsListDragEvent } from '../../../../figma/drag';
 	import UIIcon from '../../../ui/UIIcon.svelte';
 
 	// Icon name
@@ -29,7 +29,7 @@
 	export let onClick: (event: string, value: string | Icon) => void;
 
 	// onDrag
-	export let onDrag: IconDragEvent;
+	export let onDrag: IconsListDragEvent;
 
 	// Selecting multiple icons
 	export let isSelecting: boolean;
@@ -62,10 +62,10 @@
 		title={tooltip}
 		draggable={true}
 		on:dragstart={(event) => {
-			onDrag(true, event, icon, false);
+			onDrag(true, event, icon);
 		}}
 		on:dragend={(event) => {
-			onDrag(false, event, icon, false);
+			onDrag(false, event, icon);
 		}}
 		on:click|preventDefault={handleClick}>
 		{#if exists}

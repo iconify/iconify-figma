@@ -57,7 +57,11 @@ import {
 	selectionToArray,
 } from './wrapper/icons';
 import { addCustomAPIProviders } from './config/api';
-import type { WrapperDragStartData } from './wrapper/drag';
+import {
+	getDragMessage,
+	WrapperDragItem,
+	WrapperDragStartData,
+} from './figma/drag';
 import { importThemeIcons } from './config/theme';
 import { defaultNavigation } from './figma/navigation';
 import type { PluginUINavigation } from '../common/navigation';
@@ -815,26 +819,16 @@ export class Wrapper {
 	/**
 	 * Drag event
 	 */
-	_onDrag(
-		start: boolean,
-		event: MouseEvent,
-		icon: Icon | string,
-		customise: boolean
-	) {
-		if (typeof icon !== 'string') {
-			icon = iconToString(icon);
-		}
-
+	_onDrag(start: boolean, event: MouseEvent, item: WrapperDragItem) {
 		// Start dragging
 		if (start) {
 			try {
 				const rect = (event.target as Element).getBoundingClientRect();
 				this._dragging = {
-					icon,
-					customise,
-					rect: {
-						x: event.clientX - rect.x,
-						y: event.clientY - rect.y,
+					...item,
+					diff: {
+						x: rect.width / 2 - event.offsetX,
+						y: rect.height / 2 - event.offsetY,
 					},
 					min: {
 						x: event.screenX - event.clientX,
@@ -845,6 +839,12 @@ export class Wrapper {
 						y: event.screenY - event.clientY + window.innerHeight,
 					},
 				};
+				/*
+				console.log(
+					'_dragging = ',
+					JSON.stringify(this._dragging, null, 4)
+				);
+				*/
 			} catch (err) {}
 			return;
 		}
@@ -858,7 +858,10 @@ export class Wrapper {
 		const data = this._dragging;
 		this._dragging = null;
 
-		if (data.icon !== icon) {
+		const currentItem = item.icon ? iconToString(item.icon) : item.item;
+		const oldItem = data.icon ? iconToString(data.icon) : data.item;
+		if (currentItem !== oldItem) {
+			// Wrong icon or SVG
 			this._dragging = null;
 			return;
 		}
@@ -874,7 +877,11 @@ export class Wrapper {
 			return;
 		}
 
-		console.log(`TODO: import ${icon}...`);
+		// Get import message
+		const message = getDragMessage(data, this._state.customisations, event);
+		if (message) {
+			sendMessageToFigma(message);
+		}
 	}
 
 	/**

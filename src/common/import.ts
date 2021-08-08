@@ -42,3 +42,30 @@ export interface ImportIconItem {
 export interface ImportCustomSVG extends ImportTarget {
 	svg: string;
 }
+
+/**
+ * Drop icon data
+ */
+export interface DropIconData {
+	// Customisations, if present
+	props?: Partial<IconCustomisations>;
+
+	// Icon name
+	name?: string;
+
+	// SVG
+	svg: string;
+}
+
+export interface DropIconCoordinates {
+	// Target coordinates
+	coords: {
+		x: number;
+		y: number;
+	};
+	// Window size
+	window: {
+		width: number;
+		height: number;
+	};
+}

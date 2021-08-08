@@ -1,9 +1,11 @@
 <script lang="typescript">
+	import { getContext } from 'svelte';
 	import IconComponent from '@iconify/svelte';
 	import type { IconProps } from '@iconify/svelte';
 	import type { Icon } from '@iconify/search-core';
 	import { iconToString } from '@iconify/search-core';
 	import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisations';
+	import type { WrappedRegistry } from '../../../../../wrapper/registry';
 	import { phrases } from '../../../../../config/phrases';
 	import { iconSampleSize } from '../../../../../config/components';
 
@@ -12,6 +14,9 @@
 
 	// Current customisations
 	export let customisations: IconCustomisations;
+
+	// Registry
+	const registry = getContext('registry') as WrappedRegistry;
 
 	const samplePhrases = phrases.footer.inlineSample;
 
@@ -65,13 +70,31 @@
 			}
 		}
 	}
+
+	// onDrag event
+	function onDrag(start: boolean, event: MouseEvent) {
+		registry.ondrag(start, event, {
+			itemType: 'icon',
+			icon,
+			item: '',
+			customise: true,
+		});
+	}
 </script>
 
 <div
 	class="iif-footer-sample iif-footer-sample--inline iif-footer-sample--loaded">
 	<p>
 		{samplePhrases.before}
-		<span {style}>
+		<span
+			{style}
+			draggable={true}
+			on:dragstart={(event) => {
+				onDrag(true, event);
+			}}
+			on:dragend={(event) => {
+				onDrag(false, event);
+			}}>
 			{#each [props] as iconProps (iconProps.icon)}
 				<IconComponent {...iconProps} />
 			{/each}
