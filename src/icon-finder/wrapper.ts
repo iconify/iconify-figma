@@ -59,6 +59,7 @@ import {
 import { addCustomAPIProviders } from './config/api';
 import {
 	getDragMessage,
+	OnDragParams,
 	WrapperDragItem,
 	WrapperDragStartData,
 } from './figma/drag';
@@ -839,7 +840,7 @@ export class Wrapper {
 	/**
 	 * Drag event
 	 */
-	_onDrag(start: boolean, event: MouseEvent, item: WrapperDragItem) {
+	_onDrag(start: boolean, event: MouseEvent, item: OnDragParams) {
 		// Start dragging
 		if (start) {
 			try {
@@ -847,8 +848,14 @@ export class Wrapper {
 				this._dragging = {
 					...item,
 					diff: {
-						x: rect.width / 2 - event.offsetX,
-						y: rect.height / 2 - event.offsetY,
+						x:
+							rect.width / 2 -
+							event.offsetX +
+							(item.offset ? item.offset.x : 0),
+						y:
+							rect.height / 2 -
+							event.offsetY +
+							(item.offset ? item.offset.y : 0),
 					},
 					min: {
 						x: event.screenX - event.clientX,

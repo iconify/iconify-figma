@@ -16,7 +16,7 @@ function assertNever(v: never) {
 export type IconDragEvent = (
 	start: boolean,
 	event: MouseEvent,
-	item: WrapperDragItem
+	item: OnDragParams
 ) => void;
 
 export type IconsListDragEvent = (
@@ -33,6 +33,16 @@ export interface WrapperDragItem {
 	icon?: Icon;
 	item: string;
 	customise?: boolean;
+}
+
+/**
+ * Extra params for event
+ */
+export interface OnDragParams extends WrapperDragItem {
+	offset?: {
+		x: number;
+		y: number;
+	};
 }
 
 /**

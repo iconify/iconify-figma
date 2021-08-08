@@ -221,9 +221,22 @@
 	// Drag
 	function onDrag(start: boolean, event: MouseEvent) {
 		if (svg) {
+			// Weird shenanigans with dropping from this page: offset by half of sample
+			let x = 0;
+			let y = 0;
+			try {
+				x -= (event.target as HTMLElement).offsetWidth / 2;
+				y = (event.target as HTMLElement).offsetHeight / 2;
+			} catch (err) {
+				//
+			}
 			registry.ondrag(start, event, {
 				itemType: 'svg',
 				item: svg.code,
+				offset: {
+					x,
+					y,
+				},
 			});
 		}
 	}
