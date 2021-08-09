@@ -1,6 +1,7 @@
 import type { UIToFigmaMessage } from '../common/messages';
 import { importIcons } from './actions/import-icon';
 import { loadConfig } from './functions/load-config';
+import { finishStoringConfig, storeConfig } from './functions/store-config';
 import { pluginEnv } from './data/env';
 import {
 	selectionChanged,
@@ -10,6 +11,22 @@ import { getUISize } from './functions/ui-size';
 import { sendMessageToUI } from './send-message';
 import { dropIcon } from './actions/drop-icon';
 
+/**
+ * Close plugin
+ */
+async function closePluginAsync() {
+	return finishStoringConfig()
+		.then(() => {
+			figma.closePlugin();
+		})
+		.catch((err) => {
+			//
+		});
+}
+
+/**
+ * Do stuff
+ */
 (async () => {
 	// Startup
 	pluginEnv.config = await loadConfig();
@@ -17,6 +34,10 @@ import { dropIcon } from './actions/drop-icon';
 
 	// Track selection
 	figma.on('selectionchange', selectionChanged);
+	figma.on('currentpagechange', selectionChanged);
+
+	// Close stuff
+	figma.on('close', closePluginAsync);
 
 	// Show UI
 	figma.showUI(__html__, getUISize());
@@ -65,7 +86,7 @@ import { dropIcon } from './actions/drop-icon';
 							break;
 
 						case 'close':
-							figma.closePlugin();
+							closePluginAsync();
 							break;
 					}
 				}
@@ -81,11 +102,12 @@ import { dropIcon } from './actions/drop-icon';
 					pluginEnv.config.storage = {};
 				}
 				pluginEnv.config.storage[event.storage] = event.icons;
+				storeConfig();
 				return;
 
 			case 'close-plugin':
 				// Close plugin
-				figma.closePlugin();
+				closePluginAsync();
 				return;
 
 			case 'minimize': {
@@ -106,8 +128,30 @@ import { dropIcon } from './actions/drop-icon';
 					const size = getUISize();
 					figma.ui.resize(size.width, size.height);
 				}
+				storeConfig();
 				return;
 			}
+
+			// Update state
+			case 'icon-finder-config':
+				pluginEnv.config.state.config = event.config;
+				storeConfig();
+				break;
+
+			case 'icon-finder-customisations':
+				pluginEnv.config.state.customisations = event.customisations;
+				storeConfig();
+				break;
+
+			case 'icon-finder-route':
+				pluginEnv.config.state.route = event.route;
+				storeConfig();
+				break;
+
+			case 'icon-finder-selection':
+				pluginEnv.config.state.icons = event.icons;
+				storeConfig();
+				break;
 
 			default:
 				console.log('Unhandled event from UI:', event);

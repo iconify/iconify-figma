@@ -1,5 +1,6 @@
 import type { SelectedLayers } from '../../common/layers';
 import type { PluginApp } from '../../common/misc';
+import { expandConfig } from '../functions/load-config';
 import { emptyPluginConfig, PluginConfig } from './config';
 
 interface PluginEnv {
@@ -52,6 +53,6 @@ function detectApp(): PluginApp {
 export const pluginEnv: PluginEnv = {
 	app: detectApp(),
 	loaded: false,
-	config: emptyPluginConfig,
+	config: expandConfig(emptyPluginConfig),
 	minimized: false,
 };

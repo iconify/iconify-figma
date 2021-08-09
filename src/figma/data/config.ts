@@ -3,7 +3,7 @@ import type {
 	PluginStorageType,
 } from '../../common/misc';
 import type { PluginUINavigation } from '../../common/navigation';
-import { defaultPluginOptions, PluginOptions } from '../../common/options';
+import type { PluginOptions } from '../../common/options';
 
 /**
  * Storage
@@ -13,8 +13,7 @@ export type PluginStorage = Partial<Record<PluginStorageType, string[]>>;
 /**
  * Config
  */
-export interface PluginConfig {
-	version: 2;
+interface PluginConfigOptional {
 	page?: PluginUINavigation;
 	storage?: PluginStorage;
 
@@ -25,8 +24,20 @@ export interface PluginConfig {
 	state: PluginIconFinderState;
 }
 
-export const emptyPluginConfig: PluginConfig = {
+interface PluginConfigVersion {
+	version: 2;
+}
+
+export interface PluginConfig
+	extends PluginConfigVersion,
+		PluginConfigOptional {}
+
+export interface PartialPluginConfig
+	extends PluginConfigVersion,
+		Omit<Partial<PluginConfigOptional>, 'options'> {
+	options?: Partial<PluginOptions>;
+}
+
+export const emptyPluginConfig: PartialPluginConfig = {
 	version: 2,
-	options: { ...defaultPluginOptions },
-	state: {},
 };

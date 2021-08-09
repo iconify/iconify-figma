@@ -92,6 +92,11 @@ interface UIToFigmaRouteMessage {
 	route: PartialRoute;
 }
 
+interface UIToFigmaSelectionMessage {
+	type: 'icon-finder-selection';
+	icons: string[];
+}
+
 export interface UIToFigmaImportIconMessage {
 	type: 'import-icon';
 	data: ImportIconCommon;
@@ -132,6 +137,7 @@ export type UIToFigmaMessage =
 	| UIToFigmaConfigMessage
 	| UIToFigmaCustomisationsMessage
 	| UIToFigmaRouteMessage
+	| UIToFigmaSelectionMessage
 	| UIToFigmaImportIconMessage
 	| UIToFigmaDragMessage
 	| UIToFigmaCustomStorageMessage

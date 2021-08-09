@@ -1,3 +1,4 @@
+import { iconToString } from '../../../core/lib';
 import type { FigmaToUIMessage } from '../common/messages';
 import type { PluginStorageType } from '../common/misc';
 import { replacePhrases } from './config/phrases';
@@ -126,6 +127,10 @@ function runIconFinder() {
 									// Scroll to icon
 									scrollToIcon();
 								}
+								sendMessageToFigma({
+									type: 'icon-finder-selection',
+									icons: event.icons.map(iconToString),
+								});
 								break;
 
 							case 'button': {
