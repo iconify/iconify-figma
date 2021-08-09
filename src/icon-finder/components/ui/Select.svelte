@@ -13,6 +13,9 @@
 	// Extra custom classes, such as 'iif-input--up'
 	export let extra: string = '';
 
+	type SelectBorder = '' | 'full-border' | 'no-border';
+	export let border: SelectBorder = 'no-border';
+
 	// Action
 	export let onChange: (value: string) => void;
 
@@ -45,10 +48,8 @@
 	$: {
 		className =
 			baseClass +
-			// No border
-			' ' +
-			baseClass +
-			'--no-border' +
+			// Border
+			(border === '' ? '' : ' ' + baseClass + '--' + border) +
 			// Placeholder
 			' ' +
 			baseClass +

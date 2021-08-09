@@ -57,14 +57,16 @@
 				options={text.windowAction}
 				selected={options.windowAction}
 				onChange={(value) => setOption('windowAction', value)}
-				extra="iif-input--up" />
+				extra="iif-input--up"
+				border="" />
 		</OptionRow>
 		<OptionRow text={text.options.select}>
 			<Select
 				options={text.selectAction}
 				selected={options.selectAfterImport}
 				onChange={(value) => setOption('selectAfterImport', value)}
-				extra="iif-input--up" />
+				extra="iif-input--up"
+				border="" />
 		</OptionRow>
 	</section>
 </PageContainer>
