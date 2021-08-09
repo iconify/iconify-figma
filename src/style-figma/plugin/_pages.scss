@@ -37,3 +37,13 @@
 		}
 	}
 }
+
+// Options
+.iif-options-section {
+	+ .iif-options-section {
+		margin-top: 32px;
+	}
+	h1 {
+		@include plugin-font-ui-pos('xxlarge', 'bold');
+	}
+}
