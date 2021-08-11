@@ -86,8 +86,14 @@ export function getIconImportMessage(
 	// Import mode
 	let mode: ImportMode = event.button === 'component' ? 'component' : 'frame';
 
+	// Route. Do not store route for custom pages
+	const currentRoute = state.routes[state.currentRouteType];
+	let route: typeof currentRoute | undefined;
+	if (addRoute && currentRoute && currentRoute.type !== 'custom') {
+		route = currentRoute;
+	}
+
 	// Return data
-	const route = addRoute ? state.route : void 0;
 	const data: ImportIconCommon = {
 		props,
 		mode,

@@ -7,6 +7,11 @@ import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/cu
 export type PluginApp = 'figma' | 'figjam';
 
 /**
+ * Commands
+ */
+export type FigmaCommand = '' | 'replace' | 'code';
+
+/**
  * Icon Finder state
  */
 export interface PluginIconFinderState {

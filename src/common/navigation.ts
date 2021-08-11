@@ -1,3 +1,5 @@
+import type { IconListType } from './icon-lists';
+
 /**
  * Window controls
  */
@@ -23,7 +25,7 @@ interface PluginUIMenuNavigation extends PluginUINavigationBase {
 
 interface PluginUIImportNavigation extends PluginUINavigationBase {
 	section: 'import';
-	submenu: 'iconify' | 'svg' | 'recent' | 'bookmarks';
+	submenu: 'iconify' | 'replace' | 'svg' | IconListType;
 }
 
 interface PluginUIAboutNavigation extends PluginUINavigationBase {

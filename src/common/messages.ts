@@ -1,6 +1,6 @@
 import type { IconFinderConfig, PartialRoute } from '@iconify/search-core';
 import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/customisations';
-import type { PluginApp, PluginIconFinderState } from './misc';
+import type { FigmaCommand, PluginApp, PluginIconFinderState } from './misc';
 import type {
 	DropIconCoordinates,
 	DropIconData,
@@ -35,7 +35,7 @@ interface FigmaToUIStartMessage
 	extends Partial<Omit<FigmaToUILayersMessage, 'type'>> {
 	type: 'start-plugin';
 	app: PluginApp;
-	command: string;
+	command: FigmaCommand;
 	options: PluginOptions;
 	state: PluginIconFinderState;
 	storage?: PluginStorage;

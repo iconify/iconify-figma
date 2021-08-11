@@ -5,7 +5,7 @@ import type {
 } from '@iconify/search-core';
 import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/customisations';
 import type { PluginUINavigation } from '../../common/navigation';
-import type { IconFinderState } from './state';
+import type { IconFinderRouteType, IconFinderState } from './state';
 
 /**
  * Life cycle events

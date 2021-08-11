@@ -49,6 +49,7 @@ export function isAutoLayoutNode(node: BaseNode): boolean {
 export function isIconNode(node: SceneNode): boolean {
 	let source = node.getSharedPluginData('iconify', 'source');
 	if (source === 'iconify') {
+		/*
 		console.log('Debug: found icon.');
 		console.log(
 			'getSharedPluginData: props =',
@@ -58,6 +59,7 @@ export function isIconNode(node: SceneNode): boolean {
 			'getSharedPluginData: color =',
 			JSON.stringify(node.getSharedPluginData('iconify', 'color'))
 		);
+		*/
 		return true;
 	}
 	return false;

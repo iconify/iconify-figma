@@ -10,6 +10,7 @@ import {
 import { getUISize } from './functions/ui-size';
 import { sendMessageToUI } from './send-message';
 import { dropIcon } from './actions/drop-icon';
+import type { FigmaCommand } from '../common/misc';
 
 /**
  * Close plugin
@@ -60,7 +61,7 @@ async function closePluginAsync() {
 				sendMessageToUI({
 					type: 'start-plugin',
 					app: pluginEnv.app,
-					command: figma.command,
+					command: figma.command as FigmaCommand,
 					selection: pluginEnv.selection,
 					storage: pluginEnv.config.storage,
 					// Plugin options

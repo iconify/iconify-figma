@@ -9,6 +9,11 @@ import { sendMessageToFigma } from './figma/messages';
 import { addNotice } from './figma/notices';
 import { getOptions, setOptions } from './figma/options';
 import { Wrapper } from './wrapper';
+import type { InitialIconFinderState } from './wrapper/state';
+
+function assertNever(v: never) {
+	//
+}
 
 function runIconFinder() {
 	const container = document.getElementById('container');
@@ -60,7 +65,7 @@ function runIconFinder() {
 		console.log('Message from Figma:', message);
 
 		switch (message.type) {
-			case 'start-plugin':
+			case 'start-plugin': {
 				// Set environment
 				pluginUIEnv.app = message.app;
 				switch (pluginUIEnv.app) {
@@ -87,10 +92,41 @@ function runIconFinder() {
 				// Set options
 				setOptions(message.options);
 
+				// Convert state
+				const state = message.state;
+				const convertedState: Partial<InitialIconFinderState> = {};
+				for (const key in state) {
+					const attr = key as keyof typeof state;
+					switch (attr) {
+						case 'config':
+						case 'customisations':
+							convertedState[attr] = state[attr];
+							break;
+
+						case 'icons':
+							convertedState.icons = state.icons;
+							break;
+
+						case 'route': {
+							const route = state.route;
+							if (route) {
+								convertedState.routes = {
+									iconify: route,
+								};
+							}
+							break;
+						}
+
+						default:
+							assertNever(attr);
+					}
+				}
+
 				// Create wrapper
 				wrapper = new Wrapper({
 					container,
-					state: message.state,
+					state: convertedState,
+					command: message.command,
 
 					// Handle callbacks
 					callback: (event) => {
@@ -172,6 +208,7 @@ function runIconFinder() {
 					},
 				});
 				return;
+			}
 
 			case 'notice': {
 				addNotice(message.notice);

@@ -24,10 +24,10 @@ export async function loadConfig(): Promise<PluginConfig> {
 			typeof retrievedConfig === 'object' &&
 			typeof retrievedConfig.version === 'number'
 		) {
-			console.log(
-				'Retrieved config:',
-				JSON.stringify(retrievedConfig, null, 4)
-			);
+			// console.log(
+			// 	'Retrieved config:',
+			// 	JSON.stringify(retrievedConfig, null, 4)
+			// );
 			switch (retrievedConfig.version) {
 				case 1:
 					return expandConfig(convertLegacyConfig(retrievedConfig));

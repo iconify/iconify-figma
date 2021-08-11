@@ -34,7 +34,7 @@ import {
 	mergeCustomisations,
 } from '@iconify/search-core/lib/misc/customisations';
 import type { IconFinderWrapperParams } from './wrapper/params';
-import type { IconFinderState } from './wrapper/state';
+import type { IconFinderRouteType, IconFinderState } from './wrapper/state';
 import type { WrapperStatus } from './wrapper/status';
 import type { IconFinderEvent } from './wrapper/events';
 import type {
@@ -60,11 +60,10 @@ import { addCustomAPIProviders } from './config/api';
 import {
 	getDragMessage,
 	OnDragParams,
-	WrapperDragItem,
 	WrapperDragStartData,
 } from './figma/drag';
 import { importThemeIcons } from './config/theme';
-import { defaultNavigation } from './figma/navigation';
+import { defaultNavigation, isIconFinderNavigation } from './figma/navigation';
 import type { PluginUINavigation } from '../common/navigation';
 import {
 	customIconsData,
@@ -72,12 +71,12 @@ import {
 	updateCustomIcons,
 } from './figma/icon-lists';
 import type { IconListType } from '../common/icon-lists';
-
-// Change import to change container component
-import Container from './components/Container.svelte';
 import { sendMessageToFigma } from './figma/messages';
 import { getOptions, setOptions } from './figma/options';
 import { defaultPluginOptions } from '../common/options';
+
+// Change import to change container component
+import Container from './components/Container.svelte';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-unused-vars-experimental, @typescript-eslint/no-empty-function
 function assertNever(s: never) {}
@@ -109,6 +108,8 @@ export class Wrapper {
 	protected _state: IconFinderState = {
 		navigation: defaultNavigation,
 		icons: [],
+		currentRouteType: 'iconify',
+		routes: Object.create(null),
 		customisations: {},
 		minimized: false,
 	};
@@ -188,13 +189,7 @@ export class Wrapper {
 
 			// Update data when it changes
 			iconListsStorage[key].subscribe((value) => {
-				const route = this._state.route;
-				if (
-					route &&
-					route.type === 'custom' &&
-					route.params.customType === key
-				) {
-					// Re-render
+				if (this._state.currentRouteType === key) {
 					core.router.action('set', value);
 				}
 			});
@@ -209,9 +204,8 @@ export class Wrapper {
 
 		// Store partial route in state
 		const route = registry.partialRoute;
-		state.route = route ? route : void 0;
-		if (state.route && state.route.type !== 'custom') {
-			state.defaultRoute = state.route;
+		if (route) {
+			state.routes[state.currentRouteType] = route;
 		}
 
 		if (customState) {
@@ -231,12 +225,29 @@ export class Wrapper {
 			if (customState.customisations) {
 				state.customisations = customState.customisations;
 			}
-			if (customState.route) {
-				setTimeout(() => {
-					// Set on next tick
-					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-					registry.partialRoute = customState.route!;
-				});
+
+			if (customState.routes) {
+				// Copy routes
+				const routes = customState.routes;
+				const currentRouteType = state.currentRouteType;
+				for (const key in routes) {
+					const attr = key as keyof typeof routes;
+					const route = routes[attr];
+					if (route) {
+						if (attr === currentRouteType) {
+							setTimeout(() => {
+								// Set on next tick
+								if (state.currentRouteType === attr) {
+									registry.partialRoute = route;
+								} else {
+									state.routes[attr] = route;
+								}
+							});
+						} else {
+							state.routes[attr] = route;
+						}
+					}
+				}
 			}
 
 			// Minimize window on start?
@@ -589,6 +600,7 @@ export class Wrapper {
 
 		// Change route or update view
 		if (!icons.length) {
+			// Return to import
 			this.navigate({
 				section: 'import',
 				submenu: 'iconify',
@@ -618,19 +630,27 @@ export class Wrapper {
 	/**
 	 * Set route
 	 */
-	_setRoute(route: PartialRoute): boolean {
+	_setRoute(route: PartialRoute, routeType?: IconFinderRouteType): boolean {
 		const state = this._state;
+		const routes = state.routes;
+
+		if (!routeType) {
+			routeType = state.currentRouteType;
+		}
 
 		// Check if route has changed
-		if (state.route === void 0 || !compareObjects(route, state.route)) {
-			state.route = route;
-			if (route.type !== 'custom') {
-				state.iconifyRoute = route;
+		if (
+			routes[routeType] === void 0 ||
+			!compareObjects(route, routes[routeType])
+		) {
+			routes[routeType] = route;
+			if (routeType === 'iconify') {
+				// Send message only for iconify route
+				this._triggerEvent({
+					type: 'route',
+					route,
+				});
 			}
-			this._triggerEvent({
-				type: 'route',
-				route,
-			});
 
 			return true;
 		}
@@ -640,21 +660,30 @@ export class Wrapper {
 	/**
 	 * Set route
 	 */
-	setRoute(route: PartialRoute | null) {
+	setRoute(route: PartialRoute | null, routeType?: IconFinderRouteType) {
 		if (this._status === 'destroyed') {
 			return;
 		}
 
-		const router = this._core.router;
-		function loadRoute() {
-			router.partialRoute = route;
+		const state = this._state;
+		if (!routeType) {
+			routeType = state.currentRouteType;
 		}
 
-		if (!this._container) {
-			// Load on next tick
-			setTimeout(loadRoute);
-		} else {
-			loadRoute();
+		if (routeType === state.currentRouteType) {
+			const router = this._core.router;
+			function loadRoute() {
+				router.partialRoute = route;
+			}
+
+			if (!this._container) {
+				// Load on next tick
+				setTimeout(loadRoute);
+			} else {
+				loadRoute();
+			}
+		} else if (route) {
+			state.routes[routeType] = route;
 		}
 	}
 
@@ -932,7 +961,7 @@ export class Wrapper {
 			};
 
 			// Default route
-			state.iconifyRoute = state.route = {
+			state.routes.iconify = {
 				type: 'collections',
 			};
 
@@ -951,36 +980,33 @@ export class Wrapper {
 
 		// Update route
 		let newRoute: PartialRoute | undefined;
-		if (this.isIconFinderMainPage(navigation)) {
-			// Revert to last Iconify route
-			newRoute = state.iconifyRoute
-				? state.iconifyRoute
-				: state.defaultRoute
-				? state.defaultRoute
-				: {
-						type: 'collections',
-				  };
-			this._setRoute(newRoute);
-		} else {
-			// Change route if needed
-			const item = navigation.submenu;
-			switch (navigation.section) {
-				case 'import': {
-					const item = navigation.submenu;
-					switch (item) {
-						case 'bookmarks':
-						case 'recent':
-							newRoute = {
-								type: 'custom',
-								params: {
-									customType: item,
-								},
-							};
-							break;
-					}
-					break;
-				}
-			}
+		const routeType = isIconFinderNavigation(navigation);
+
+		switch (routeType) {
+			case 'iconify':
+				newRoute = state.routes.iconify
+					? state.routes.iconify
+					: {
+							type: 'collections',
+					  };
+				this._setRoute(newRoute);
+				break;
+
+			case 'bookmarks':
+			case 'recent':
+				newRoute = {
+					type: 'custom',
+					params: {
+						customType: routeType,
+					},
+				};
+				break;
+
+			case false:
+				break;
+
+			default:
+				assertNever(routeType);
 		}
 
 		// Change current page
@@ -988,6 +1014,9 @@ export class Wrapper {
 			const changes: Partial<ContainerProps> = {
 				currentPage: navigation,
 			};
+			if (routeType) {
+				this._state.currentRouteType = routeType;
+			}
 			if (newRoute) {
 				this._core.router.partialRoute = newRoute;
 			}
@@ -996,9 +1025,14 @@ export class Wrapper {
 			if (!this._params.state) {
 				this._params.state = {};
 			}
-			this._params.state.navigation = navigation;
-			if (newRoute) {
-				this._params.state.route = newRoute;
+			const customState = this._params.state;
+			customState.navigation = navigation;
+			if (newRoute && routeType) {
+				if (!customState.routes) {
+					customState.routes = Object.create(null);
+				}
+				customState.currentRouteType = routeType;
+				customState.routes![routeType] = newRoute;
 			}
 		}
 
@@ -1013,11 +1047,10 @@ export class Wrapper {
 	 * Check if current page is Icon Finder main page
 	 */
 	isIconFinderMainPage(navigation?: PluginUINavigation): boolean {
-		if (!navigation) {
-			navigation = this._state.navigation;
-		}
 		return (
-			navigation.section === 'import' && navigation.submenu === 'iconify'
+			isIconFinderNavigation(
+				navigation ? navigation : this._state.navigation
+			) === 'iconify'
 		);
 	}
 

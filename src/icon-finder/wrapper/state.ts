@@ -4,7 +4,10 @@ import type {
 	IconFinderConfig,
 } from '@iconify/search-core';
 import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/customisations';
+import type { IconListType } from '../../common/icon-lists';
 import type { PluginUINavigation } from '../../common/navigation';
+
+export type IconFinderRouteType = 'iconify' | IconListType;
 
 /**
  * Icon finder state.
@@ -21,15 +24,12 @@ export interface InitialIconFinderState {
 	// Customisations
 	customisations: PartialIconCustomisations;
 
-	// Current route
-	route?: PartialRoute;
+	// Current route, per page
+	currentRouteType: IconFinderRouteType;
+	routes: Partial<Record<IconFinderRouteType, PartialRoute>>;
 
 	// Config changes
 	config?: IconFinderConfig;
-
-	// Last Iconify route and default route
-	defaultRoute?: PartialRoute;
-	iconifyRoute?: PartialRoute;
 
 	// Minimized?
 	minimized: boolean;

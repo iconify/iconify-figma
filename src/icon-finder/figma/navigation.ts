@@ -1,4 +1,5 @@
 import type { PluginUINavigation } from '../../common/navigation';
+import type { IconFinderRouteType } from '../wrapper/state';
 
 /**
  * Callback for navigation
@@ -24,11 +25,21 @@ export const externalLinks: Record<string, string> = {
 /**
  * Check if navigation item is Icon Finder
  */
-export function isIconFinderNavigation(item: PluginUINavigation): boolean {
-	return (
-		item.section === 'import' &&
-		(item.submenu === 'iconify' ||
-			item.submenu === 'bookmarks' ||
-			item.submenu === 'recent')
-	);
+export function isIconFinderNavigation(
+	item: PluginUINavigation
+): IconFinderRouteType | false {
+	if (item.section !== 'import') {
+		return false;
+	}
+
+	const submenu = item.submenu;
+	switch (submenu) {
+		case 'iconify':
+		case 'bookmarks':
+		case 'recent':
+			return submenu;
+
+		default:
+			return false;
+	}
 }

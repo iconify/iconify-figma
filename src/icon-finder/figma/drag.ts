@@ -86,12 +86,13 @@ export function getDragMessage(
 				props.width || props.height
 					? {}
 					: {
-							height: 'auto',
+							width: iconData.width + '',
+							height: iconData.height + '',
 					  };
 			const svg = renderHTML(iconData, {
 				...defaultCustomisations,
-				...size,
 				...props,
+				...size,
 			});
 
 			// Set data
