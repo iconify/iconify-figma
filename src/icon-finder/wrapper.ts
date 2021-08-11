@@ -869,7 +869,7 @@ export class Wrapper {
 	/**
 	 * Drag event
 	 */
-	_onDrag(start: boolean, event: MouseEvent, item: OnDragParams) {
+	_onDrag(start: boolean, event: DragEvent, item: OnDragParams) {
 		// Start dragging
 		if (start) {
 			try {
