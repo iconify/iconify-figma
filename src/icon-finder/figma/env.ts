@@ -1,6 +1,5 @@
 import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
-import type { PartialRoute } from '../../../../core/lib';
 import type { SelectedLayers } from '../../common/layers';
 import type { PluginApp } from '../../common/misc';
 

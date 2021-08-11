@@ -34,6 +34,9 @@ export interface ImportIconItem {
 
 	// SVG
 	svg: string;
+
+	// Layer to replace
+	replace?: string;
 }
 
 /**

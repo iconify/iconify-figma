@@ -173,6 +173,7 @@ function runIconFinder() {
 								switch (event.button) {
 									case 'import':
 									case 'component':
+									case 'replace': {
 										// Import icon
 										const message = getIconImportMessage(
 											event,
@@ -182,6 +183,7 @@ function runIconFinder() {
 											sendMessageToFigma(message);
 										}
 										return;
+									}
 
 									case 'close':
 										sendMessageToFigma({

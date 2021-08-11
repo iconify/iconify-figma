@@ -19,6 +19,8 @@ export type FooterButtonDisplay =
 	| 'one-icon'
 	// Show button only when multiple icons have been selected
 	| 'many-icons'
+	// Replace one icon
+	| 'replace'
 	// Show button when one or more icons have been selected (combination of 'one-icon' and 'many-icons')
 	| 'icons';
 
@@ -40,6 +42,9 @@ export interface FooterButtonCallbackParams {
 
 	// Selected icon(s)
 	icons: Icon[];
+
+	// Icon to replace
+	replace: string;
 }
 
 /**

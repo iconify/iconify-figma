@@ -15,5 +15,6 @@ export const figmaPhrases = {
 		added_icons: 'Imported {count} icons',
 		added_unnamed: 'Imported icon',
 		failed_unnamed: 'Error importing icon',
+		failed_replace: 'Cannot find node to replace',
 	},
 };

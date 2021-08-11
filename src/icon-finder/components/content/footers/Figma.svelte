@@ -170,10 +170,10 @@
 					<LayersBlock />
 					<WindowAction count={icons.length} />
 				{/if}
-				{#if showButtons}
-					<ButtonsContainer {icons} {route} />
-				{/if}
 			</div>
 		</div>
+		{#if showButtons}
+			<ButtonsContainer {icons} {route} />
+		{/if}
 	</Block>
 {/if}

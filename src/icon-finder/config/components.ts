@@ -104,6 +104,13 @@ export const iconSampleSize = {
 export const showButtons = true;
 
 export const footerButtons: Record<string, FooterButton> = {
+	// Replace icon
+	replace: {
+		type: 'secondary',
+		display: 'replace',
+		text: (params) => 'Replace "' + params.replace + '"',
+	},
+
 	// Import
 	import: {
 		type: 'primary',

@@ -3,7 +3,9 @@ import type { ImportIconCommon, ImportIconItem } from '../../common/import';
 import type { UINotice } from '../../common/messages';
 import { pluginEnv } from '../data/env';
 import {
+	FilteredFrameNode,
 	filterViableParentNode,
+	isFrameNode,
 	ViableParentFigmaNode,
 } from '../functions/layers';
 import { figmaPhrases } from '../data/phrases';
@@ -38,25 +40,43 @@ export function importIcons(
 	const added: (string | undefined)[] = [];
 	const errors: (string | undefined)[] = [];
 	const addedNodes: ImportedNode[] = [];
+	let replaceError = false;
 
 	// Find parent layer
-	let layerId = data.layerId;
-	if (
-		layerId &&
-		// Make sure id is in currently available layers list
-		!pluginEnv.selection?.layers.find((item) => item.id === layerId)
-	) {
-		layerId = '';
+	let parent: ViableParentFigmaNode | undefined;
+	function getParent(): ViableParentFigmaNode {
+		if (!parent) {
+			let layerId = data.layerId;
+			if (
+				layerId &&
+				// Make sure id is in currently available layers list
+				!pluginEnv.selection?.layers.find((item) => item.id === layerId)
+			) {
+				layerId = '';
+			}
+			parent = findParentLayer(
+				data.layerId ? data.layerId : pluginEnv.selection?.defaultLayer
+			);
+		}
+		return parent;
 	}
-	const parent = findParentLayer(
-		data.layerId ? data.layerId : pluginEnv.selection?.defaultLayer
-	);
 
 	// Import all icons
 	icons.forEach((icon) => {
+		let replacedNode: FilteredFrameNode | null = null;
+		if (icon.replace) {
+			replacedNode = figma.currentPage.findOne(
+				(node) => node.id === icon.replace
+			) as FilteredFrameNode;
+			if (!replacedNode || !isFrameNode(replacedNode)) {
+				replaceError = true;
+				return;
+			}
+		}
+
 		let node: ImportedNode;
 		try {
-			node = importSVG(icon.svg, data.mode);
+			node = importSVG(icon.svg, data.mode, replacedNode);
 		} catch (err) {
 			errors.push(icon.name);
 			console.error('Error importing SVG', err);
@@ -76,7 +96,9 @@ export function importIcons(
 		}
 
 		// Move it
-		moveNode(node, parent);
+		if (!replacedNode) {
+			moveNode(node, getParent());
+		}
 
 		// Add to lists
 		added.push(icon.name);
@@ -113,6 +135,12 @@ export function importIcons(
 				message: text.added_icons.replace('{count}', added.length + ''),
 			});
 	}
+	if (replaceError) {
+		notices.push({
+			layout: 'error',
+			message: text.failed_replace,
+		});
+	}
 	switch (errors.length) {
 		case 0:
 			break;
@@ -146,5 +174,5 @@ export function importIcons(
 		) as string[],
 	});
 
-	return errors.length === 0;
+	return !replaceError && errors.length === 0;
 }

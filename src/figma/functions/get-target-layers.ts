@@ -98,7 +98,8 @@ export function getTargetLayers(): SelectedLayers {
 				// Not icon: valid target
 				item = {
 					id,
-					name,
+					// Remove first part for variants
+					name: name.split('=').pop()!,
 					type: frameNode.type,
 					layoutMode:
 						!frameNode.layoutMode || frameNode.layoutMode === 'NONE'

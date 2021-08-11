@@ -1,3 +1,4 @@
+import { get } from 'svelte/store';
 import type { IconFinderButtonEvent } from '../wrapper/events';
 import type { UIToFigmaImportIconMessage } from '../../common/messages';
 import { iconToString } from '@iconify/search-core';
@@ -41,17 +42,33 @@ export function getIconImportMessage(
 				props.width || props.height
 					? {}
 					: {
-							height: 'auto',
+							width: data.width,
+							height: data.height,
 					  };
 			const svg = renderHTML(data, {
 				...defaultCustomisations,
-				...size,
 				...props,
+				...size,
 			});
+			/*
+			console.log(
+				'Rendering SVG: size =',
+				JSON.stringify(size),
+				', props =',
+				JSON.stringify(props)
+			);
+			console.log('SVG:', svg);
+			*/
 			const result: ImportIconItem = {
 				svg,
 				name,
 			};
+
+			// Replace icon
+			if (event.button === 'replace') {
+				result.replace = get(pluginUIEnv.layers).icon?.id;
+			}
+
 			return result;
 		})
 		.filter((item) => item !== null) as ImportIconItem[];

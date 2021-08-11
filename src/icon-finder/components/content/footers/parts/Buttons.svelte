@@ -1,5 +1,5 @@
 <script lang="typescript">
-	import { getContext } from 'svelte';
+	import { getContext, onDestroy } from 'svelte';
 	import type { Icon, FullRoute } from '@iconify/search-core';
 	import { iconToString } from '@iconify/search-core';
 	import { getIcon } from '@iconify/svelte';
@@ -11,6 +11,7 @@
 	import { phrases } from '../../../../config/phrases';
 	import { footerButtons } from '../../../../config/components';
 	import UIIcon from '../../../ui/UIIcon.svelte';
+	import { pluginUIEnv } from '../../../../figma/env';
 
 	// Selected icons
 	export let icons: Icon[];
@@ -20,6 +21,13 @@
 
 	// Registry
 	const registry = getContext('registry') as WrappedRegistry;
+
+	// Check if replace is available
+	let replace: string;
+	const unsubscribe = pluginUIEnv.layers.subscribe((value) => {
+		replace = value.icon ? value.icon.name : '';
+	});
+	onDestroy(unsubscribe);
 
 	// Custom properties for buttons
 	interface ListItem extends FooterButton {
@@ -72,6 +80,7 @@
 			registry,
 			icons,
 			route,
+			replace,
 		};
 	}
 
@@ -144,6 +153,9 @@
 
 				case 'many-icons':
 					return total > 1;
+
+				case 'replace':
+					return total === 1 && replace !== '';
 
 				default:
 					if (typeof display === 'function') {
