@@ -17,20 +17,19 @@ function colorToString(color: RGB): string {
  */
 export function getDocumentColors(): string[] {
 	try {
-		const colors: (string | null)[] = figma
-			.getLocalPaintStyles()
-			.map((item) => {
-				const paints = item.paints;
-				if (paints.length !== 1) {
-					return null;
-				}
-				const paint = paints[0]!;
-				return paint.type === 'SOLID' && paint.blendMode === 'NORMAL'
-					? colorToString(paint.color)
-					: null;
-			});
+		const colors: Set<string> = new Set();
+		figma.getLocalPaintStyles().forEach((item) => {
+			const paints = item.paints;
+			if (paints.length !== 1) {
+				return;
+			}
+			const paint = paints[0]!;
+			if (paint.type === 'SOLID' && paint.blendMode === 'NORMAL') {
+				colors.add(colorToString(paint.color));
+			}
+		});
 
-		return colors.filter((item) => item !== null) as string[];
+		return Array.from(colors);
 	} catch (err) {
 		return [];
 	}
