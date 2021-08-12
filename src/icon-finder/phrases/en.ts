@@ -249,6 +249,11 @@ export const phrases: UITranslation = {
 			scroll: 'Scroll to icon when selecting new icon.',
 			select: 'Select imported icon:',
 		},
+		colorPicker: {
+			document: 'Document Colors',
+			gray: 'Gray',
+			figjam: 'FigJam Colors',
+		},
 	},
 	svg: {
 		text: 'Paste SVG to import it to Figma document:',

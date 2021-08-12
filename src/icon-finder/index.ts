@@ -8,6 +8,7 @@ import { getIconImportMessage, getSVGImportMessage } from './figma/import';
 import { sendMessageToFigma } from './figma/messages';
 import { addNotice } from './figma/notices';
 import { getOptions, setOptions } from './figma/options';
+import { setFigmaDocumentColors } from './figma/palette';
 import { Wrapper } from './wrapper';
 import type { InitialIconFinderState } from './wrapper/state';
 
@@ -73,6 +74,12 @@ function runIconFinder() {
 						replacePhrases('Figma', 'FigJam');
 				}
 
+				// Set palette
+				if (message.colors) {
+					setFigmaDocumentColors(message.colors);
+				}
+
+				// Set selected layers
 				if (message.selection) {
 					pluginUIEnv.layers.set(message.selection);
 				}

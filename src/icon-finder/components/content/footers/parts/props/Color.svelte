@@ -11,6 +11,7 @@
 	import { defaultColor } from '../../../../../config/components';
 	import Input from '../../../../ui/Input.svelte';
 	import OptionsBlock from '../OptionsBlock.svelte';
+	import ColorPicker from './ColorPicker.svelte';
 
 	// Selected icons
 	export let icons: Icon[];
@@ -95,5 +96,6 @@
 			icon={value === void 0 || value === '' ? 'color' : 'color-filled'}
 			extra={value === void 0 ? '' : value}
 			type="color" />
+		<ColorPicker {onInput} />
 	</OptionsBlock>
 {/if}

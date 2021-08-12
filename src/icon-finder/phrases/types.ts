@@ -146,6 +146,11 @@ export interface UITranslation {
 			scroll: string;
 			select: string;
 		};
+		colorPicker: {
+			document: string;
+			gray: string;
+			figjam: string;
+		};
 		// Also see src/figma/data/phrases.ts
 		notices: {
 			failed_icon: string;

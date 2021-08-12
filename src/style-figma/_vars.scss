@@ -118,3 +118,4 @@ $plugin-layer-icon-width: 16px;
 $plugin-navigation-z-index: 10; // Sticky navigation
 $plugin-notice-z-index: 100;
 $plugin-select-z-index: 20; // Options popup
+$plugin-color-picker-z-index: $plugin-select-z-index; // Color picker

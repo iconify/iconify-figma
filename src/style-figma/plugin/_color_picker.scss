@@ -1,0 +1,64 @@
+$picker-button-size: 24px;
+$picker-button-margin: 6px;
+
+.iif-color-picker {
+	position: absolute;
+	left: 8px;
+	top: 48px;
+	display: none;
+	z-index: $plugin-color-picker-z-index;
+	color: $plugin-palette-color-white;
+
+	border-radius: $plugin-border-radius-small;
+	background: $plugin-palette-background-almost-black;
+	box-shadow: 0 0 0 1px $plugin-palette-background-full-black inset,
+		0 5px 17px rgba(0, 0, 0, 0.2), 0 2px 7px rgba(0, 0, 0, 0.15);
+
+	margin: 0;
+	padding: 8px;
+	width: ($picker-button-size + $picker-button-margin * 2) * 8;
+
+	.iif-footer-options-block--color:hover &,
+	.iif-footer-options-block--color:focus-within & {
+		display: block;
+	}
+
+	// Section
+	section {
+		margin: 8px 0;
+		padding: 0;
+
+		h1 {
+			@include plugin-font-ui-neg('medium', 'normal');
+			margin: 0;
+			padding: 0 8px;
+			color: $plugin-palette-color-white;
+		}
+	}
+}
+
+// Colors list
+.iif-color-picker-list {
+	display: flex;
+	flex-wrap: wrap;
+	button {
+		display: block;
+		width: 0;
+		height: $picker-button-size;
+		border: 1px solid $plugin-palette-background-colored-overlay;
+		border-radius: $picker-button-size / 2;
+		margin: $picker-button-margin;
+		padding: 0 ($picker-button-size / 2) - 1px;
+		cursor: pointer;
+		color: $plugin-palette-background-almost-black;
+
+		&:not(:focus) {
+			box-shadow: none !important;
+		}
+
+		&:focus {
+			border-color: $plugin-palette-background-colored-overlay;
+			outline: none;
+		}
+	}
+}

@@ -11,6 +11,7 @@ import { getUISize } from './functions/ui-size';
 import { sendMessageToUI } from './send-message';
 import { dropIcon } from './actions/drop-icon';
 import type { FigmaCommand } from '../common/misc';
+import { getDocumentColors } from './functions/get-colors';
 
 /**
  * Close plugin
@@ -68,6 +69,8 @@ async function closePluginAsync() {
 					options: pluginEnv.config.options,
 					// Icon Finder state
 					state: pluginEnv.config.state,
+					// Document colors
+					colors: getDocumentColors(),
 				});
 				return;
 

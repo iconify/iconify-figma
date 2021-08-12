@@ -39,6 +39,7 @@ interface FigmaToUIStartMessage
 	options: PluginOptions;
 	state: PluginIconFinderState;
 	storage?: PluginStorage;
+	colors?: string[];
 }
 
 interface FigmaToUINotice {
