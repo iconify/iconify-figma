@@ -1,3 +1,8 @@
+import type {
+	ImportedIconSharedData,
+	LegacyImportedIconSharedData,
+} from '../data/node-data';
+
 function assertNever(v: never) {
 	//
 }
@@ -46,23 +51,51 @@ export function isAutoLayoutNode(node: BaseNode): boolean {
 /**
  * Check if node is an icon
  */
-export function isIconNode(node: SceneNode): boolean {
+export function isIconNode(node: SceneNode): ImportedIconSharedData | null {
 	let source = node.getSharedPluginData('iconify', 'source');
 	if (source === 'iconify') {
-		/*
-		console.log('Debug: found icon.');
-		console.log(
-			'getSharedPluginData: props =',
-			JSON.stringify(node.getSharedPluginData('iconify', 'props'))
-		);
-		console.log(
-			'getSharedPluginData: color =',
-			JSON.stringify(node.getSharedPluginData('iconify', 'color'))
-		);
-		*/
-		return true;
+		let iconProps:
+			| ImportedIconSharedData
+			| LegacyImportedIconSharedData
+			| undefined;
+		try {
+			iconProps = JSON.parse(
+				node.getSharedPluginData('iconify', 'props')
+			);
+			// console.log('Icon layer props:', iconProps);
+		} catch (err) {
+			//
+		}
+
+		// Convert props
+		if (typeof iconProps === 'object') {
+			switch ((iconProps as ImportedIconSharedData).version) {
+				case 2:
+					return iconProps as ImportedIconSharedData;
+
+				case void 0: {
+					const legacyProps = iconProps as LegacyImportedIconSharedData;
+					if (typeof legacyProps.name === 'string') {
+						return {
+							version: 2,
+							name: legacyProps.name,
+							props: {
+								color: legacyProps.color,
+								...legacyProps.props,
+							},
+						};
+					}
+				}
+			}
+		}
+
+		// Look like an icon, but missing props
+		return {
+			version: 2,
+			name: node.name,
+		};
 	}
-	return false;
+	return null;
 }
 
 /**

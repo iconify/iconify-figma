@@ -81,13 +81,15 @@ export function getTargetLayers(): SelectedLayers {
 		if (filteredNode && isFrameNode(filteredNode)) {
 			const frameNode = filteredNode as FilteredFrameNode;
 			// Check for icon
-			if (isIconNode(frameNode)) {
+			const iconData = isIconNode(frameNode);
+			if (iconData) {
 				if (depth === 0) {
 					// Add icon
 					const icon: SelectedIconLayer = {
 						id,
 						name,
 						type: frameNode.type,
+						data: iconData,
 					};
 					icons[id] = icon;
 				}

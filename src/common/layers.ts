@@ -1,3 +1,5 @@
+import type { ImportedIconSharedData } from '../figma/data/node-data';
+
 /**
  * Common data
  */
@@ -52,6 +54,7 @@ export type SelectedLayer =
  */
 export interface SelectedIconLayer extends CommonLayerData {
 	type: 'FRAME' | 'COMPONENT' | 'INSTANCE';
+	data: ImportedIconSharedData;
 }
 
 /**

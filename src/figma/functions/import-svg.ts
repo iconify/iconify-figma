@@ -37,6 +37,10 @@ export function importSVG(
 		for (const child of frame.children) {
 			newParent.appendChild(child);
 		}
+
+		// Remove old parent
+		frame.remove();
+
 		return newParent;
 	}
 	return frame;

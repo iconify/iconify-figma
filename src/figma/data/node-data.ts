@@ -10,3 +10,10 @@ export interface ImportedIconSharedData {
 	props?: Partial<IconCustomisations>;
 	route?: PartialRoute;
 }
+
+// From version 2 of plugin
+export interface LegacyImportedIconSharedData {
+	name: string;
+	props?: Partial<IconCustomisations>;
+	color?: string;
+}

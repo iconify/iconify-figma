@@ -6,6 +6,7 @@ import {
 	disableCache,
 } from '@iconify/svelte';
 import type { SvelteComponent } from 'svelte';
+import { get } from 'svelte/store';
 import {
 	setIconify,
 	compareObjects,
@@ -77,6 +78,7 @@ import { defaultPluginOptions } from '../common/options';
 
 // Change import to change container component
 import Container from './components/Container.svelte';
+import { pluginUIEnv } from './figma/env';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-unused-vars-experimental, @typescript-eslint/no-empty-function
 function assertNever(s: never) {}
@@ -138,7 +140,7 @@ export class Wrapper {
 	 */
 	constructor(params: IconFinderWrapperParams) {
 		this._params = params;
-		const customState = params.state;
+		let customState = params.state;
 
 		// Set core parameters
 		const coreParams: IconFinderCoreParams = {
@@ -206,6 +208,39 @@ export class Wrapper {
 		const route = registry.partialRoute;
 		if (route) {
 			state.routes[state.currentRouteType] = route;
+		}
+
+		// Check command
+		switch (params.command) {
+			case 'replace':
+			case 'code': {
+				// Select icon
+				const selection = get(pluginUIEnv.layers);
+				if (selection.icon) {
+					const data = selection.icon.data;
+					const icon = stringToIcon(data.name);
+					if (icon) {
+						// Valid icon: select it and copy data
+						if (!customState) {
+							customState = {};
+						}
+						customState.icons = [icon];
+
+						// Set customisations
+						if (data.props) {
+							customState.customisations = data.props;
+						}
+
+						// Set route
+						if (data.route) {
+							if (!customState.routes) {
+								customState.routes = Object.create(null);
+							}
+							customState.routes!.iconify = data.route;
+						}
+					}
+				}
+			}
 		}
 
 		if (customState) {

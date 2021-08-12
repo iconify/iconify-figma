@@ -76,7 +76,7 @@ async function closePluginAsync() {
 
 			case 'import-icon':
 				// Import icon(s)
-				if (importIcons(event.data, event.icons)) {
+				if (importIcons(event.data, event.icons, event.route)) {
 					// Action
 					switch (event.data.windowAction) {
 						case 'minimize':
