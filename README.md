@@ -1,12 +1,6 @@
-This is a development version!
-
-Unlike version 2 that was built with React, this version is built with Svelte. Plug-in is based on [Iconify Icon Finder](https://github.com/iconify/icon-finder). Using shared code base with other icon pickers makes it easier to maintain plug-in.
-
-Currently, this plug-in does not work. UI is working, you can see it by building plug-in (run `npm run build`) and opening demo/index.html in browser. If you want a working version, use plug-in from master branch of this repository.
-
 # Iconify plug-in for Figma
 
-Import Material Design Icons, FontAwesome, Jam Icons, EmojiOne, Twitter Emoji and many other icons (more than 60 icon sets containing over 50,000 icons) to Figma document as vector shapes.
+Import Material Design Icons, FontAwesome, Jam Icons, EmojiOne, Twitter Emoji and many other icons (more than 100 icon sets containing over 100,000 icons) to Figma document as vector shapes.
 
 ## What is Iconify?
 
@@ -16,9 +10,9 @@ Material Design Icons, Firefox Emoji and more on a web page without loading many
 
 See [https://iconify.design/](https://iconify.design/) for details.
 
-In addition to SVG framework script, Iconify is available as React component, Angular component and soon will be available as Vue component.
+In addition to SVG framework script, Iconify is available as React, Vue and Svelte components.
 
-See [https://github.com/iconify/iconify-react](https://github.com/iconify/iconify-react) and [https://github.com/iconify/iconify-angular](https://github.com/iconify/iconify-angular)
+See [Iconify icon components documentation](http://docs.iconify.design/icon-components/).
 
 ## What can Figma plug-in do?
 
@@ -91,22 +85,6 @@ To install the Figma plug-in from the repository you need to build it.
 
 The first build plugin using `npm run build`, then open Figma, in menu select Plugins -> Development -> New Plugin. Click "Link existing plugin", navigate to manifest.json
 
-Build modes:
-
--   `npm run build` - build production code. The output is stored in "dist".
--   `npm run dev` - build development code. The output is stored in "dist". Change debug stuff in ui/plugin-ui.js (see conditional statements that check process.env.SEARCH_DEV).
--   `npm run watch` - same as "dev", but also watches files for changes and automatically rebuilds files.
--   `npm run start` - debug UI without Figma. Creates web server on http://localhost:8080/ and shows UI. Change UI configuration in ui/dev-ui.js
--   `npm run test` - test Icon Finder core.
-
-# Custom builds
-
-To create custom build you need to change plug-in hash and name in manifest.json. This is enough for Figma to treat plug-in as a separate plug-in, so it won't share configuration with Iconify plug-in.
-
-This plug-in can be limited to one collection, making it easy to create custom plug-ins for collections. To set collection, add parameter "prefix" in ui/plugin-ui.js and ui/dev-ui.js. Code is already there, you only need to uncomment it and set to correct values.
-
-You can disable any menu sections that you do not need in `ui/src/components/header/navigation.jsx`. Just comment out what you do not need. In the "About/GitHub" menu please keep information about Iconify project and author. You can add your information about your icon set as well.
-
 # License
 
 Iconify Icon Finder is dual-licensed under Apache 2.0 and GPL 2.0 license. You may select, at your option, one of the above-listed licenses.
@@ -115,4 +93,4 @@ Iconify Icon Finder is dual-licensed under Apache 2.0 and GPL 2.0 license. You m
 
 Iconify plug-in for Figma is based on Iconify Icon Finder and shares the same license as Icon Finder.
 
-© 2019 - 2020 Vjacheslav Trushkin
+© 2019 - 2021 Vjacheslav Trushkin
