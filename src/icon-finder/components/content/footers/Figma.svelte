@@ -1,5 +1,5 @@
 <script lang="typescript">
-	import { getContext } from 'svelte';
+	import { getContext, onDestroy } from 'svelte';
 	import type {
 		Icon,
 		FullRoute,
@@ -13,8 +13,6 @@
 		showCollectionInfoBlock,
 		showButtons,
 		showInfoInFooter,
-		showCustomisatons,
-		showCode,
 	} from '../../../config/components';
 	import Block from '../Block.svelte';
 	import ButtonsContainer from './parts/Buttons.svelte';
@@ -33,6 +31,7 @@
 
 	/* Switch to Empty.svelte if you do not want to show code samples block. Also see ../../../config/components.ts */
 	import CodeBlock from './parts/code/Container.svelte';
+	import { getOptions, watchedOptions } from '../../../figma/options';
 	// import CodeBlock from './parts/Empty.svelte';
 
 	// Selected icons
@@ -137,43 +136,52 @@
 			infoBlockTitle = '';
 		}
 	}
+
+	// Show full button
+	let buttonContainerClass: string;
+	const unsubscribe = watchedOptions.subscribe((value) => {
+		buttonContainerClass = value.stickyFooter
+			? 'iif-footer-buttons-sticky-container'
+			: 'iif-footer-buttons-container';
+	});
+	onDestroy(unsubscribe);
 </script>
 
-{#if showFooter && (showButtons || hasIcons)}
-	<Block type="footer">
-		{#if icon}
-			<IconName {icon} {route} />
-		{:else if hasIcons}
-			<IconsList {route} {icons} {customisations} />
-		{/if}
-		<div class={icon ? 'iif-footer-full' : ''}>
+{#if showFooter}
+	{#if hasIcons}
+		<Block type="footer">
 			{#if icon}
-				<Sample {icon} {customisations} />
+				<IconName {icon} {route} />
+			{:else}
+				<IconsList {route} {icons} {customisations} />
 			{/if}
-			<div class={icon ? 'iif-footer-full-content' : ''}>
-				{#if infoBlock}
-					<FooterBlock name="info" title={infoBlockTitle}>
-						<InfoBlock
-							name="info"
-							block={infoBlock}
-							short={true}
-							showTitle={false} />
-					</FooterBlock>
+			<div class={icon ? 'iif-footer-full' : ''}>
+				{#if icon}
+					<Sample {icon} {customisations} />
 				{/if}
-				{#if showCustomisatons && hasIcons}
+				<div class={icon ? 'iif-footer-full-content' : ''}>
+					{#if infoBlock}
+						<FooterBlock name="info" title={infoBlockTitle}>
+							<InfoBlock
+								name="info"
+								block={infoBlock}
+								short={true}
+								showTitle={false} />
+						</FooterBlock>
+					{/if}
 					<PropertiesContainer {icons} {customise} {customisations} />
-				{/if}
-				{#if showCode && icon}
-					<CodeBlock {icon} {customisations} />
-				{/if}
-				{#if hasIcons}
+					{#if icon}
+						<CodeBlock {icon} {customisations} />
+					{/if}
 					<LayersBlock />
 					<WindowAction count={icons.length} />
-				{/if}
+				</div>
 			</div>
-		</div>
-		{#if showButtons}
+		</Block>
+	{/if}
+	{#if showButtons}
+		<div class={buttonContainerClass}>
 			<ButtonsContainer {icons} {route} />
-		{/if}
-	</Block>
+		</div>
+	{/if}
 {/if}

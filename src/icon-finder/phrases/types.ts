@@ -147,6 +147,7 @@ export interface UITranslation {
 			compactHint: string;
 			scroll: string;
 			select: string;
+			stickyFooter: string;
 			customizeDrop: string;
 			dropToFrame: string;
 		};

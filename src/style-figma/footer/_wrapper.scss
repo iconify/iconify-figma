@@ -1,6 +1,10 @@
 .iif-block--footer {
 	// Footer is not in content wrapper, so it must have same padding as content
-	padding: 0 16px 16px;
+	padding: 0 16px;
+
+	&:last-child {
+		padding-bottom: 16px;
+	}
 }
 
 // Full footer
@@ -88,10 +92,55 @@
 	}
 }
 
+// Buttons
 .iif-footer-buttons {
+	margin: 0;
+	padding: 16px;
 	text-align: right;
+
 	button:last-child {
 		margin-right: 0;
+	}
+}
+
+.iif-footer-buttons-container {
+	// Buttons in normal flow
+	padding: 0;
+	.iif-footer-buttons {
+		padding-top: 0;
+	}
+}
+
+.iif-footer-buttons-sticky-container {
+	// Buttons as sticky
+	height: 48px;
+
+	.iif-footer-buttons {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		padding: 6px 16px 8px;
+		background-color: rgba($plugin-palette-background-darker-white, 0.8);
+		border-top: 2px solid $plugin-palette-background-white;
+
+		&:hover {
+			background-color: $plugin-palette-background-darker-white;
+		}
+
+		button {
+			max-width: 240px;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+
+			@media (max-width: 500px) {
+				max-width: 180px;
+				padding-left: 6px;
+				padding-right: 6px;
+				margin-left: 6px;
+			}
+		}
 	}
 }
 

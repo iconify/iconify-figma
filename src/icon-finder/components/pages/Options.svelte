@@ -49,6 +49,10 @@
 			checked={options.scrollToIcon}
 			text={text.options.scroll}
 			onClick={() => onToggle('scrollToIcon')} />
+		<CheckboxRow
+			checked={options.stickyFooter}
+			text={text.options.stickyFooter}
+			onClick={() => onToggle('stickyFooter')} />
 	</section>
 	<section class="iif-options-section">
 		<h1>{text.optionSections.drop}</h1>

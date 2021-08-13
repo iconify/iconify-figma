@@ -27,6 +27,9 @@ export interface PluginOptions {
 	// Automatically scroll to footer when icon is selected
 	scrollToIcon: boolean;
 
+	// Sticky footer
+	stickyFooter: boolean;
+
 	// Apply customisations to dropped icons
 	customizeDrop: boolean;
 
@@ -45,4 +48,5 @@ export const defaultPluginOptions: PluginOptions = {
 	scrollToIcon: true,
 	customizeDrop: false,
 	dropToFrame: true,
+	stickyFooter: false,
 };

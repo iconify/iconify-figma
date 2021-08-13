@@ -254,6 +254,7 @@ export const phrases: UITranslation = {
 			customizeDrop:
 				'Apply icon customizations to drag and dropped icons.',
 			dropToFrame: 'Drop to nearest frame instead of current page.',
+			stickyFooter: 'Always show footer buttons.',
 		},
 		colorPicker: {
 			document: 'Document Colors',
