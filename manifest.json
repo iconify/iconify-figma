@@ -1,9 +1,9 @@
 {
-	"name": "Iconify v3",
+	"name": "Iconify",
 	"id": "735098390272716381",
 	"api": "1.0.0",
 	"main": "dist/plugin.js",
 	"ui": "dist/ui.html",
 	"relaunchButtons": [{ "command": "replace", "name": "Iconify" }],
-	"editorType": ["figma", "figjam"]
+	"editorType": ["figma"]
 }
