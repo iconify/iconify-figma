@@ -20,6 +20,7 @@ export const defaultNavigation: PluginUINavigation = {
 export const externalLinks: Record<string, string> = {
 	repo: 'https://github.com/iconify/iconify-figma',
 	support: 'https://github.com/iconify/iconify-figma/issues',
+	donate: 'https://github.com/sponsors/cyberalien',
 };
 
 /**

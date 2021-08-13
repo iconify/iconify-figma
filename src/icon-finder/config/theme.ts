@@ -181,6 +181,10 @@ export function importThemeIcons() {
 				body:
 					'<path fill-rule="evenodd" clip-rule="evenodd" d="M14.207 6.207l-5.5 5.5-.707.707-.707-.707-3-3 1.414-1.414L8 9.586l4.793-4.793 1.414 1.414z" fill="currentColor"/>',
 			},
+			donate: {
+				body:
+					'<path d="M8 2h1v1.05a2.5 2.5 0 012 2.45h-1A1.5 1.5 0 108.5 7a2.5 2.5 0 01.5 4.95V13H8v-1.05A2.5 2.5 0 016 9.5h1A1.5 1.5 0 108.5 8 2.5 2.5 0 018 3.05V2z" fill="currentColor"/><path d="M6 13.5H1.5V17M11 13.5h4.5V17M14 15.5H3" stroke="currentColor" fill="none"/>',
+			},
 		},
 		width: 18,
 		height: 18,
@@ -275,6 +279,7 @@ export const icons: Record<string, string | null> = {
 	'minimize': prefix + ':minimize',
 	'compact': prefix + ':compact',
 	'import.bookmarks': prefix + ':heart',
+	'about.donate': prefix + ':donate',
 };
 
 /**

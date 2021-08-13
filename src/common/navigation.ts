@@ -30,7 +30,7 @@ interface PluginUIImportNavigation extends PluginUINavigationBase {
 
 interface PluginUIAboutNavigation extends PluginUINavigationBase {
 	section: 'about';
-	submenu: 'about' | 'repo' | 'support';
+	submenu: 'about' | 'repo' | 'support' | 'donate';
 }
 
 /**

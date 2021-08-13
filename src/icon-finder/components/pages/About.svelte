@@ -58,7 +58,7 @@
 		</p>
 		<p>
 			<a
-				href="http://github.com/sponsors/cyberalien"
+				href="https://github.com/sponsors/cyberalien"
 				target="_blank">Sponsorship is available via GitHub sponsors
 				<UIIcon icon="ext-link" /></a>.
 		</p>

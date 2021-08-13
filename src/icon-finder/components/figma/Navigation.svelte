@@ -190,6 +190,10 @@
 				rightItems = [
 					item({
 						section,
+						submenu: 'donate',
+					}),
+					item({
+						section,
 						submenu: 'repo',
 					}),
 					item({
