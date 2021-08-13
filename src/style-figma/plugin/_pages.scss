@@ -51,3 +51,42 @@
 		}
 	}
 }
+
+// About
+.iif-content--about {
+	a {
+		color: $plugin-palette-color-link;
+		text-decoration: none;
+		&:hover,
+		&:focus {
+			color: $plugin-palette-color-link-hover;
+			text-decoration: underline;
+		}
+	}
+
+	svg {
+		font-size: 12px;
+		line-height: 12px;
+	}
+
+	section {
+		margin: 0 0 32px;
+		@include plugin-font-ui-pos('medium', 'normal');
+
+		h1 {
+			@include plugin-font-ui-pos('xxlarge', 'bold');
+			svg {
+				margin-left: 2px;
+			}
+		}
+
+		section {
+			border-left: 2px solid $plugin-palette-color-link;
+			margin-bottom: 16px;
+			padding: 0 8px 0 12px;
+			h1 {
+				@include plugin-font-ui-pos('large', 'normal');
+			}
+		}
+	}
+}

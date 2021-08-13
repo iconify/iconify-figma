@@ -14,6 +14,7 @@
 	import Notices from './figma/Notice.svelte';
 	import SVGPage from './pages/SVG.svelte';
 	import OptionsPage from './pages/Options.svelte';
+	import AboutPage from './pages/About.svelte';
 
 	/**
 	 * Global exports
@@ -43,7 +44,7 @@
 			showPage = 'iconify';
 		} else {
 			showPage = currentPage.submenu;
-			console.log('Page:', showPage);
+			// console.log('Page:', showPage);
 		}
 
 		if (showPage === 'iconify') {
@@ -71,6 +72,8 @@
 			<SVGPage />
 		{:else if showPage === 'options'}
 			<OptionsPage />
+		{:else if showPage === 'about'}
+			<AboutPage />
 		{/if}
 		{#if iconFinderRendered || showPage === 'iconify'}
 			<div
