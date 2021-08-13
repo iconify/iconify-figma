@@ -1,6 +1,6 @@
 .iif-checkbox-row {
 	margin: 16px 0;
-	padding: 0;
+	padding: 0 0 0 25%;
 
 	label {
 		display: block;
@@ -23,7 +23,7 @@
 		padding: 0;
 	}
 
-	@media (min-width: 400px) {
-		padding-left: 25%;
+	@media (max-width: 600px) {
+		padding-left: 24px;
 	}
 }
