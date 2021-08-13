@@ -51,6 +51,18 @@
 			onClick={() => onToggle('scrollToIcon')} />
 	</section>
 	<section class="iif-options-section">
+		<h1>{text.optionSections.drop}</h1>
+		<p>{text.optionSections.dropIntro}</p>
+		<CheckboxRow
+			checked={options.customizeDrop}
+			text={text.options.customizeDrop}
+			onClick={() => onToggle('customizeDrop')} />
+		<CheckboxRow
+			checked={options.dropToFrame}
+			text={text.options.dropToFrame}
+			onClick={() => onToggle('dropToFrame')} />
+	</section>
+	<section class="iif-options-section">
 		<h1>{text.optionSections.import}</h1>
 		<OptionRow text={text.windowActionTitle.icons}>
 			<Select

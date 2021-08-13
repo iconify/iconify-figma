@@ -1,6 +1,7 @@
 import type { DropIconCoordinates, DropIconData } from '../../common/import';
 import { pluginEnv } from '../data/env';
 import { figmaPhrases } from '../data/phrases';
+import { findNearestFrame } from '../functions/find-nearest-frame';
 import { ImportedNode, importSVG } from '../functions/import-svg';
 import { fixImportedSVG, setIconData } from '../functions/set-icon-data';
 import { updateSelection } from '../functions/update-selection';
@@ -30,8 +31,8 @@ export function dropIcon(data: DropIconData, target: DropIconCoordinates) {
 	const topCoords = bounds.y - topDiff / zoom;
 
 	// Target coordinates
-	const targetX = leftCoords + target.coords.x / zoom;
-	const targetY = topCoords + target.coords.y / zoom;
+	let targetX = leftCoords + target.coords.x / zoom;
+	let targetY = topCoords + target.coords.y / zoom;
 
 	/*
 	console.log('Zoom:', zoom);
@@ -77,8 +78,24 @@ export function dropIcon(data: DropIconData, target: DropIconCoordinates) {
 		fixImportedSVG(node, data.svg);
 	}
 
+	// Attempt to find nearest frame
+	let parent: PageNode | FrameNode | GroupNode = figma.currentPage;
+	if (pluginEnv.config.options.dropToFrame) {
+		const frame = findNearestFrame(targetX, targetY);
+		if (frame) {
+			parent = frame.node;
+			targetX = frame.x;
+			targetY = frame.y;
+			/*
+			console.log(
+				`Nearest frame: ${frame.node.name} at ${targetX}, ${targetY}`
+			);
+			*/
+		}
+	}
+
 	// Move node
-	figma.currentPage.appendChild(node);
+	parent.appendChild(node);
 	node.x = Math.round(targetX - node.width / 2);
 	node.y = Math.round(targetY - node.height / 2);
 

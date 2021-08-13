@@ -139,12 +139,16 @@ export interface UITranslation {
 		optionSections: {
 			layout: string;
 			import: string;
+			drop: string;
+			dropIntro: string;
 		};
 		options: {
 			compact: string;
 			compactHint: string;
 			scroll: string;
 			select: string;
+			customizeDrop: string;
+			dropToFrame: string;
 		};
 		colorPicker: {
 			document: string;

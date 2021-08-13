@@ -214,8 +214,8 @@ export const phrases: UITranslation = {
 			minimize: 'Minimize plugin',
 		},
 		minimized: {
-			maximize: 'Show Plug-in',
-			close: 'Close Plug-in',
+			maximize: 'Show plugin',
+			close: 'Close plugin',
 		},
 		layers: {
 			title: 'Parent layer',
@@ -229,9 +229,9 @@ export const phrases: UITranslation = {
 			icons: 'After importing icons:',
 		},
 		windowAction: {
-			none: 'Keep plug-in window open',
-			minimize: 'Minimize plug-in window',
-			close: 'Close plug-in window',
+			none: 'Keep plugin window open',
+			minimize: 'Minimize plugin window',
+			close: 'Close plugin window',
 		},
 		selectAction: {
 			auto: 'Automatic, depending on current selection',
@@ -242,12 +242,18 @@ export const phrases: UITranslation = {
 		optionSections: {
 			layout: 'Layout options',
 			import: 'Import options',
+			drop: 'Drag and drop options',
+			dropIntro:
+				'You can drag icons from plug-in to Figma instead of clicking Import button. Change options below to change drag and drop behavior.',
 		},
 		options: {
 			compact: 'Enable compact width.',
-			compactHint: 'Smaller plug-in window for small laptops.',
+			compactHint: 'Smaller plugin window for small laptops.',
 			scroll: 'Scroll to icon when selecting new icon.',
 			select: 'Select imported icon:',
+			customizeDrop:
+				'Apply icon customizations to drag and dropped icons.',
+			dropToFrame: 'Drop to nearest frame instead of current page.',
 		},
 		colorPicker: {
 			document: 'Document Colors',
@@ -266,7 +272,7 @@ export const phrases: UITranslation = {
 		invalid: 'Invalid SVG code',
 		foreignObject: 'SVG contains dangerous HTML code.',
 		font:
-			'Looks like you are trying to import SVG font. Currently plug-in does not support importing fonts.',
+			'Looks like you are trying to import SVG font. Currently plugin does not support importing fonts.',
 		animated: animatedNotice,
 	},
 };

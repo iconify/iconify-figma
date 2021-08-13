@@ -5,6 +5,7 @@ import { getIcon } from '@iconify/svelte';
 import type { IconCustomisations } from '../../../../core/lib/misc/customisations';
 import type { DropIconCoordinates, DropIconData } from '../../common/import';
 import type { UIToFigmaDragMessage } from '../../common/messages';
+import { getOptions } from './options';
 
 function assertNever(v: never) {
 	//
@@ -81,7 +82,10 @@ export function getDragMessage(
 				return null;
 			}
 
-			const props = start.customise ? customisations : {};
+			const props =
+				start.customise || getOptions().customizeDrop
+					? customisations
+					: {};
 			const size =
 				props.width || props.height
 					? {}

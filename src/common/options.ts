@@ -26,6 +26,12 @@ export interface PluginOptions {
 
 	// Automatically scroll to footer when icon is selected
 	scrollToIcon: boolean;
+
+	// Apply customisations to dropped icons
+	customizeDrop: boolean;
+
+	// Drop icon to nearest frame
+	dropToFrame: boolean;
 }
 
 /**
@@ -37,4 +43,6 @@ export const defaultPluginOptions: PluginOptions = {
 	windowAction: 'none',
 	selectAfterImport: 'auto',
 	scrollToIcon: true,
+	customizeDrop: false,
+	dropToFrame: true,
 };

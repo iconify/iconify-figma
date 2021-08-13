@@ -45,5 +45,9 @@
 	}
 	h1 {
 		@include plugin-font-ui-pos('xxlarge', 'bold');
+		+ p {
+			@include plugin-font-ui-pos('small', 'normal');
+			color: $plugin-palette-color-black-dimmed;
+		}
 	}
 }

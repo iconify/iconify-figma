@@ -91,8 +91,11 @@ async function closePluginAsync() {
 
 						case 'close':
 							closePluginAsync();
-							break;
+							return;
 					}
+
+					// Reload layers list
+					selectionChanged();
 				}
 				return;
 
