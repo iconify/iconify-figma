@@ -24,7 +24,7 @@ function findParentLayer(id?: string): ViableParentFigmaNode {
 		return figma.currentPage;
 	}
 	const match = figma.getNodeById(id);
-	const node = match ? filterViableParentNode(match) : null;
+	const node = match ? filterViableParentNode(match, true) : null;
 	return node ? node : figma.currentPage;
 }
 

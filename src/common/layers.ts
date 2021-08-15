@@ -35,9 +35,9 @@ interface SelectedFrameLayer extends SelectedFrameBaseLayer {
 interface SelectedComponentLayer extends SelectedFrameBaseLayer {
 	type: 'COMPONENT';
 }
-interface SelectedComponentInstanceLayer extends SelectedFrameBaseLayer {
-	type: 'INSTANCE';
-}
+// interface SelectedComponentInstanceLayer extends SelectedFrameBaseLayer {
+// 	type: 'INSTANCE';
+// }
 
 /**
  * Combinations
@@ -46,14 +46,14 @@ export type SelectedLayer =
 	| SelectedPageLayer
 	| SelectedGroupLayer
 	| SelectedFrameLayer
-	| SelectedComponentLayer
-	| SelectedComponentInstanceLayer;
+	| SelectedComponentLayer;
+// | SelectedComponentInstanceLayer;
 
 /**
  * Layer with icon
  */
 export interface SelectedIconLayer extends CommonLayerData {
-	type: 'FRAME' | 'COMPONENT' | 'INSTANCE';
+	type: 'FRAME' | 'COMPONENT'; // | 'INSTANCE';
 	data: ImportedIconSharedData;
 }
 

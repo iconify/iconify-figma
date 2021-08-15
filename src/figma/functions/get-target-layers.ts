@@ -76,10 +76,14 @@ export function getTargetLayers(): SelectedLayers {
 		// Check node
 		const name = node.name;
 		let item: SelectedLayer | undefined;
-		const filteredNode = filterViableParentNode(node);
+		const frameNode = isFrameNode(node)
+			? (node as FilteredFrameNode)
+			: null;
+		const filteredNode = frameNode
+			? frameNode
+			: filterViableParentNode(node, false);
 
-		if (filteredNode && isFrameNode(filteredNode)) {
-			const frameNode = filteredNode as FilteredFrameNode;
+		if (frameNode) {
 			// Check for icon
 			const iconData = isIconNode(frameNode);
 			if (iconData) {
@@ -119,19 +123,16 @@ export function getTargetLayers(): SelectedLayers {
 					};
 					break;
 
-				case 'COMPONENT_SET':
-					// Cannot import as child node for component set
-					break;
-
 				default:
-					console.log(
-						'Debug: filtered node type =',
-						filteredNode.type,
-						filteredNode
-					);
+				// Page
 			}
 		} else {
-			console.log('Debug: skipped node type =', node.type);
+			switch (node.type) {
+				case 'COMPONENT_SET':
+				case 'INSTANCE':
+					// Cannot change children nodes
+					child = void 0;
+			}
 		}
 
 		// Add item to tree
@@ -177,6 +178,7 @@ export function getTargetLayers(): SelectedLayers {
 			convertTree(child, depth + 1);
 		});
 	}
+	// console.log('Tree:', JSON.stringify(page, null, 4));
 	convertTree(page, 0);
 
 	const iconKeys = Object.keys(icons);

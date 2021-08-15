@@ -8,14 +8,15 @@ function assertNever(v: never) {
 }
 
 /**
- * Type for all viable parent nodes
- */
-export type ViableParentFigmaNode = BaseNode & ChildrenMixin;
-
-/**
  * Frames
  */
-export type FilteredFrameNode = FrameNode | ComponentNode | InstanceNode;
+export type FilteredFrameNode = FrameNode | ComponentNode; // | InstanceNode;
+
+/**
+ * Type for all viable parent nodes
+ */
+type ViableOtherParentNodes = PageNode | GroupNode;
+export type ViableParentFigmaNode = FilteredFrameNode | ViableOtherParentNodes;
 
 /**
  * Check if node is a frame or one of frame variations
@@ -25,7 +26,7 @@ export function isFrameNode(node: BaseNode): boolean {
 	switch (type) {
 		case 'FRAME':
 		case 'COMPONENT':
-		case 'INSTANCE':
+			// case 'INSTANCE':
 			return true;
 
 		default:
@@ -51,7 +52,9 @@ export function isAutoLayoutNode(node: BaseNode): boolean {
 /**
  * Check if node is an icon
  */
-export function isIconNode(node: SceneNode): ImportedIconSharedData | null {
+export function isIconNode(
+	node: FilteredFrameNode
+): ImportedIconSharedData | null {
 	let source = node.getSharedPluginData('iconify', 'source');
 	if (source === 'iconify') {
 		let iconProps:
@@ -102,16 +105,21 @@ export function isIconNode(node: SceneNode): ImportedIconSharedData | null {
  * Convert and validate node to make sure it can accept child nodes
  */
 export function filterViableParentNode(
-	node: BaseNode
+	node: BaseNode,
+	checkFrame: boolean
 ): ViableParentFigmaNode | null {
-	if (isFrameNode(node)) {
+	if (checkFrame && isFrameNode(node)) {
 		return node as ViableParentFigmaNode;
 	}
 
-	switch (node.type) {
+	const type = (node as ViableOtherParentNodes).type;
+	switch (type) {
 		case 'GROUP':
 		case 'PAGE':
-			return node;
+			return node as ViableParentFigmaNode;
+
+		default:
+			assertNever(type);
 	}
 
 	return null;
