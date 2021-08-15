@@ -70,8 +70,8 @@ import {
 	customIconsData,
 	iconListsStorage,
 	updateCustomIcons,
-} from './figma/icon-lists';
-import type { IconListType } from '../common/icon-lists';
+} from './figma/lists';
+import type { IconListType } from '../common/lists';
 import { sendMessageToFigma } from './figma/messages';
 import { getOptions, setOptions } from './figma/options';
 import { defaultPluginOptions } from '../common/options';

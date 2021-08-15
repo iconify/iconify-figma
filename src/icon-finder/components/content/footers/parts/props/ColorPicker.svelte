@@ -1,9 +1,16 @@
 <script lang="typescript">
+	import { onDestroy } from 'svelte';
+	import { recentColors } from '../../../../../figma/lists';
 	import { getPalette } from '../../../../../figma/palette';
+	import type { ColorPickerPalette } from '../../../../../figma/palette';
 
 	export let onInput: (newValue: string) => void;
 
-	const palette = getPalette();
+	let palette: ColorPickerPalette;
+	const unsubscribe = recentColors.subscribe((value) => {
+		palette = getPalette(value);
+	});
+	onDestroy(unsubscribe);
 </script>
 
 <div class="iif-color-picker">

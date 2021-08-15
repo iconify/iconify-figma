@@ -1,5 +1,5 @@
-import type { PartialRoute } from '../../../../core/lib';
-import type { IconCustomisations } from '../../../../core/lib/misc/customisations';
+import type { PartialRoute } from '@iconify/search-core/lib';
+import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisations';
 import type { ImportedIconSharedData } from '../data/node-data';
 import { figmaPhrases } from '../data/phrases';
 import type { ImportedNode } from './import-svg';

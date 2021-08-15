@@ -1,9 +1,13 @@
-import { iconToString } from '../../../core/lib';
+import { iconToString } from '@iconify/search-core/lib';
 import type { FigmaToUIMessage } from '../common/messages';
 import type { PluginStorageType } from '../common/misc';
 import { replacePhrases } from './config/phrases';
 import { pluginUIEnv } from './figma/env';
-import { customIconsData, updateCustomIcons } from './figma/icon-lists';
+import {
+	customIconsData,
+	recentColors,
+	updateCustomIcons,
+} from './figma/lists';
 import { getIconImportMessage, getSVGImportMessage } from './figma/import';
 import { sendMessageToFigma } from './figma/messages';
 import { addNotice } from './figma/notices';
@@ -85,7 +89,7 @@ function runIconFinder() {
 				}
 
 				// Set storage
-				const storage = message.storage;
+				const storage = message.iconsStorage;
 				if (storage) {
 					for (let key in customIconsData) {
 						const attr = key as PluginStorageType;
@@ -94,6 +98,9 @@ function runIconFinder() {
 							updateCustomIcons(attr, item);
 						}
 					}
+				}
+				if (message.recentColors) {
+					recentColors.set(message.recentColors);
 				}
 
 				// Set options
@@ -253,6 +260,10 @@ function runIconFinder() {
 
 			case 'toggle-minimize':
 				wrapper.minimizeFromPlugin(message.minimized);
+				return;
+
+			case 'update-recent-colors':
+				recentColors.set(message.colors);
 				return;
 		}
 	};

@@ -9,7 +9,7 @@
 	import type { NavigateCallback } from '../../figma/navigation';
 	import { externalLinks } from '../../figma/navigation';
 	import { phrases } from '../../config/phrases';
-	import { iconListsStorage } from '../../figma/icon-lists';
+	import { iconListsStorage } from '../../figma/lists';
 	import Section from './NavigationSection.svelte';
 	import UIIcon from '../ui/UIIcon.svelte';
 	import { icons } from '../../config/theme';

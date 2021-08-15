@@ -3,6 +3,7 @@ import { pluginEnv } from '../data/env';
 import { figmaPhrases } from '../data/phrases';
 import { findNearestFrame } from '../functions/find-nearest-frame';
 import { ImportedNode, importSVG } from '../functions/import-svg';
+import { setRecentColor } from '../functions/recent-color';
 import { fixImportedSVG, setIconData } from '../functions/set-icon-data';
 import { updateSelection } from '../functions/update-selection';
 import { sendMessageToUI } from '../send-message';
@@ -115,4 +116,9 @@ export function dropIcon(data: DropIconData, target: DropIconCoordinates) {
 		},
 		importedIcons,
 	});
+
+	// Update recent colors
+	if (data.props && typeof data.props.color === 'string') {
+		setRecentColor(data.props.color);
+	}
 }

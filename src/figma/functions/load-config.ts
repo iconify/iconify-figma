@@ -57,8 +57,14 @@ export function expandConfig(config: PartialPluginConfig): PluginConfig {
 	};
 
 	// Copy other stuff
-	for (const key in config) {
-		const attr = key as keyof typeof config;
+	for (const configKey in config) {
+		const value = config[configKey as keyof typeof config];
+
+		// Rename 'storage' to 'iconsStorage' (from first version 3 config)
+		const attr = (configKey === 'storage'
+			? 'iconsStorage'
+			: configKey) as keyof typeof config;
+
 		switch (attr) {
 			case 'version':
 			case 'state':
@@ -70,8 +76,8 @@ export function expandConfig(config: PartialPluginConfig): PluginConfig {
 				if (config.options) {
 					const customOptions = config.options;
 					const options = newConfig.options;
-					for (const key in options) {
-						const option = key as keyof typeof options;
+					for (const optionKey in options) {
+						const option = optionKey as keyof typeof options;
 						if (customOptions[option] !== void 0) {
 							((options as unknown) as Record<string, unknown>)[
 								option
@@ -83,12 +89,13 @@ export function expandConfig(config: PartialPluginConfig): PluginConfig {
 			}
 
 			case 'page':
-			case 'storage':
+			case 'iconsStorage':
+			case 'recentColors':
 				// Copy
-				if (config[attr] !== void 0) {
+				if (value !== void 0) {
 					((newConfig as unknown) as Record<string, unknown>)[
 						attr
-					] = JSON.parse(JSON.stringify(config[attr]));
+					] = JSON.parse(JSON.stringify(value));
 				}
 				break;
 

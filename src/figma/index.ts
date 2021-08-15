@@ -64,7 +64,8 @@ async function closePluginAsync() {
 					app: pluginEnv.app,
 					command: figma.command as FigmaCommand,
 					selection: pluginEnv.selection,
-					storage: pluginEnv.config.storage,
+					iconsStorage: pluginEnv.config.iconsStorage,
+					recentColors: pluginEnv.config.recentColors,
 					// Plugin options
 					options: pluginEnv.config.options,
 					// Icon Finder state
@@ -105,10 +106,10 @@ async function closePluginAsync() {
 				return;
 
 			case 'custom-icons':
-				if (!pluginEnv.config.storage) {
-					pluginEnv.config.storage = {};
+				if (!pluginEnv.config.iconsStorage) {
+					pluginEnv.config.iconsStorage = {};
 				}
-				pluginEnv.config.storage[event.storage] = event.icons;
+				pluginEnv.config.iconsStorage[event.storage] = event.icons;
 				storeConfig();
 				return;
 

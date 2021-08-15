@@ -8,8 +8,8 @@ import type {
 	ImportIconItem,
 } from './import';
 import type { SelectedLayers } from './layers';
-import type { PluginStorage } from '../figma/data/config';
-import type { IconListType } from './icon-lists';
+import type { PluginIconsStorage } from '../figma/data/config';
+import type { IconListType, RecentColorsList } from './lists';
 import type { PluginOptions } from './options';
 
 /**
@@ -38,7 +38,8 @@ interface FigmaToUIStartMessage
 	command: FigmaCommand;
 	options: PluginOptions;
 	state: PluginIconFinderState;
-	storage?: PluginStorage;
+	iconsStorage?: PluginIconsStorage;
+	recentColors?: RecentColorsList;
 	colors?: string[];
 }
 
@@ -54,11 +55,17 @@ interface FigmaToUIMinimizeMessage {
 	minimized: boolean;
 }
 
+interface FigmaToUIRecentColorsMessage {
+	type: 'update-recent-colors';
+	colors: RecentColorsList;
+}
+
 // Combined type
 export type FigmaToUIMessage =
 	| FigmaToUIStartMessage
 	| FigmaToUILayersMessage
 	| FigmaToUIMinimizeMessage
+	| FigmaToUIRecentColorsMessage
 	| FigmaToUINotice;
 
 /**

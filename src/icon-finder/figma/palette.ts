@@ -86,8 +86,16 @@ export function setFigmaDocumentColors(values: string[]) {
 /**
  * Get palette
  */
-export function getPalette(): ColorPickerPalette {
+export function getPalette(recent?: string[]): ColorPickerPalette {
 	let result: ColorPickerPalette = [];
+
+	// Recent colors
+	if (recent && recent.length) {
+		result.push({
+			title: titles.recent,
+			colors: recent.map(color),
+		});
+	}
 
 	// Document colors
 	if (figmaDocumentColors.length) {

@@ -258,6 +258,7 @@ export const phrases: UITranslation = {
 		},
 		colorPicker: {
 			document: 'Document Colors',
+			recent: 'Recent Colors',
 			gray: 'Gray',
 			figjam: 'FigJam Colors',
 		},

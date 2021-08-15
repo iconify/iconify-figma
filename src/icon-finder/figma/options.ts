@@ -1,4 +1,5 @@
 import { writable, Writable } from 'svelte/store';
+import { compareObjects } from '@iconify/search-core/lib';
 import { defaultPluginOptions, PluginOptions } from '../../common/options';
 import { sendMessageToFigma } from './messages';
 
@@ -23,11 +24,14 @@ export function setOptions(
 	values: Partial<PluginOptions>,
 	sendToPlugin = true
 ) {
-	watchedOptions.set((options = Object.assign({}, options, values)));
-	if (sendToPlugin) {
-		sendMessageToFigma({
-			type: 'update-options',
-			options,
-		});
+	const newOptions = Object.assign({}, options, values);
+	if (!compareObjects(options, newOptions)) {
+		watchedOptions.set((options = newOptions));
+		if (sendToPlugin) {
+			sendMessageToFigma({
+				type: 'update-options',
+				options,
+			});
+		}
 	}
 }

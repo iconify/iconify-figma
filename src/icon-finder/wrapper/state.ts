@@ -4,7 +4,7 @@ import type {
 	IconFinderConfig,
 } from '@iconify/search-core';
 import type { PartialIconCustomisations } from '@iconify/search-core/lib/misc/customisations';
-import type { IconListType } from '../../common/icon-lists';
+import type { IconListType } from '../../common/lists';
 import type { PluginUINavigation } from '../../common/navigation';
 
 export type IconFinderRouteType = 'iconify' | IconListType;

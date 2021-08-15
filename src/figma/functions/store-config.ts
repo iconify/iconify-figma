@@ -46,7 +46,8 @@ function minifyConfig(config: PluginConfig): PartialPluginConfig {
 			}
 
 			case 'state':
-			case 'storage':
+			case 'iconsStorage':
+			case 'recentColors':
 			case 'page': {
 				// Copy as is
 				((newConfig as unknown) as Record<string, unknown>)[attr] =

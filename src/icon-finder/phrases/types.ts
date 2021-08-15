@@ -153,6 +153,7 @@ export interface UITranslation {
 		};
 		colorPicker: {
 			document: string;
+			recent: string;
 			gray: string;
 			figjam: string;
 		};

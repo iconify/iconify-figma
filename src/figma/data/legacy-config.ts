@@ -1,4 +1,4 @@
-import type { IconCustomisations } from '../../../../core/lib/misc/customisations';
+import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisations';
 import { defaultPluginOptions } from '../../common/options';
 import type { PluginConfig } from './config';
 
@@ -108,7 +108,7 @@ export function convertLegacyConfig(config: LegacyPluginConfig): PluginConfig {
 
 	// Copy storage
 	if (config.storage) {
-		result.storage = config.storage;
+		result.iconsStorage = config.storage;
 	}
 
 	return result;

@@ -1,3 +1,4 @@
+import type { RecentColorsList } from '../../common/lists';
 import type {
 	PluginIconFinderState,
 	PluginStorageType,
@@ -8,14 +9,15 @@ import type { PluginOptions } from '../../common/options';
 /**
  * Storage
  */
-export type PluginStorage = Partial<Record<PluginStorageType, string[]>>;
+export type PluginIconsStorage = Partial<Record<PluginStorageType, string[]>>;
 
 /**
  * Config
  */
 interface PluginConfigOptional {
 	page?: PluginUINavigation;
-	storage?: PluginStorage;
+	iconsStorage?: PluginIconsStorage;
+	recentColors?: RecentColorsList;
 
 	// Configurable options
 	options: PluginOptions;

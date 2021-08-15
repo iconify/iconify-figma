@@ -14,6 +14,7 @@ import { moveNode } from '../functions/move-node';
 import { updateSelection } from '../functions/update-selection';
 import { ImportedNode, importSVG } from '../functions/import-svg';
 import { fixImportedSVG, setIconData } from '../functions/set-icon-data';
+import { setRecentColor } from '../functions/recent-color';
 
 /**
  * Find selected node
@@ -173,6 +174,11 @@ export function importIcons(
 			(icon) => typeof icon === 'string'
 		) as string[],
 	});
+
+	// Update recent colors
+	if (typeof data.props.color === 'string') {
+		setRecentColor(data.props.color);
+	}
 
 	return !replaceError && errors.length === 0;
 }

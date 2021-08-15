@@ -1,4 +1,4 @@
-import type { IconListType } from './icon-lists';
+import type { IconListType } from './lists';
 
 /**
  * Window controls
