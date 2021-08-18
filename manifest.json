@@ -5,5 +5,5 @@
 	"main": "dist/plugin.js",
 	"ui": "dist/ui.html",
 	"relaunchButtons": [{ "command": "replace", "name": "Iconify" }],
-	"editorType": ["figma"]
+	"editorType": ["figma", "figjam"]
 }
