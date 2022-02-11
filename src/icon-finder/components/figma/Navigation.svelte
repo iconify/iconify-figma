@@ -230,7 +230,7 @@
 		<div class="plugin-header-center" />
 		<div class="plugin-header-right">
 			<a
-				href="# "
+				href={externalLinks.around}
 				class={windowBaseClass}
 				title="Sponsored by Around"
 				target="_blank">
