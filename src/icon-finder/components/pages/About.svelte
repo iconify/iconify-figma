@@ -1,6 +1,7 @@
 <script lang="typescript">
 	import PageContainer from './parts/PageContainer.svelte';
 	import UIIcon from '../ui/UIIcon.svelte';
+	import { externalLinks } from '../../figma/navigation';
 </script>
 
 <PageContainer type="about">
@@ -46,9 +47,27 @@
 	<section>
 		<h1>Sponsoring Iconify</h1>
 
+		<section>
+			<h1 class="around-logo">
+				<UIIcon icon="icon-finder-theme:around" />
+			</h1>
+			<p>
+				Huge thanks to
+				<a href={externalLinks.around} target="_blank">Around</a>
+				for sponsoring Iconify!
+			</p>
+			<p>
+				<a href={externalLinks.around} target="_blank">Try Around</a>
+				for video calls. Designed for developers! Oh... and Around team
+				uses Figma!
+			</p>
+		</section>
+
+		<p>You can contribute too!</p>
+
 		<p>
-			Project is open source, it does not have commercial part. There are
-			ads on website, but they barely cover server costs. Iconify needs
+			Iconify is open source, servers and development costs money. It is a
+			big project, which requires full time development. Iconify needs
 			your help!
 		</p>
 
@@ -63,84 +82,16 @@
 				<UIIcon icon="ext-link" /></a>.
 		</p>
 
-		<p>Iconify is a big project, which requires full time development.</p>
-		<p>Parts of project:</p>
-
-		<section>
-			<h1>
-				<a
-					href="https://docs.iconify.design/sources/api/"
-					target="_blank">Iconify API
-					<UIIcon icon="ext-link" /></a>
-			</h1>
-			<p>
-				API is hosted on many servers, placed in different parts of the
-				world to make sure visitors get icons as fast as possible.
-			</p>
-			<p>
-				Servers cost money. Development and maintenance of API software
-				requires time.
-			</p>
-		</section>
-
-		<section>
-			<h1>
-				<a
-					href="https://docs.iconify.design/sources/json/"
-					target="_blank">Icon Sets
-					<UIIcon icon="ext-link" /></a>
-			</h1>
-			<p>
-				While icon sets are maintained by their authors, they need to be
-				automatically updated by Iconify update script, which also
-				cleans them up. That requires custom software, which takes a lot
-				of time to develop and maintain.
-			</p>
-		</section>
-
-		<section>
-			<h1>
-				<a
-					href="https://docs.iconify.design/icon-components/"
-					target="_blank">Icon Components
-					<UIIcon icon="ext-link" /></a>
-			</h1>
-			<p>
-				There are many websites offering huge collections of SVG. But
-				they do not offer easy to use icon components. Iconify does
-				provide components for various frameworks (React, Vue, Svelte)
-				that load icon data dynamically from Iconify API.
-			</p>
-			<p>Components require a lot of time to develop and maintain.</p>
-		</section>
-
-		<section>
-			<h1>
-				<a
-					href="https://docs.iconify.design/icon-finder/"
-					target="_blank">Icon Finder
-					<UIIcon icon="ext-link" /></a>
-			</h1>
-			<p>
-				Iconify Icon Finder is an icon picker, designed to be used in
-				projects such as website builders, theme customizers. This
-				plugin is built on top of it.
-			</p>
-			<p>Icon Finder is currently in development.</p>
-		</section>
-
-		<section>
-			<h1>
-				<a
-					href="https://docs.iconify.design/tools/"
-					target="_blank">Iconify Tools
-					<UIIcon icon="ext-link" /></a>
-			</h1>
-			<p>
-				To help manage all sub-projects listed above, set of tools is
-				available. It also takes a lot of time to develop and maintain.
-			</p>
-		</section>
+		<p>
+			Check out
+			<a href="https://iconify.design/" target="_blank">Iconify website
+				<UIIcon icon="ext-link" /></a>
+			to learn about Iconify and
+			<a href="https://iconify.design/about/" target="_blank">page about
+				Iconify
+				<UIIcon icon="ext-link" /></a>
+			to see project goals.
+		</p>
 	</section>
 
 	<section>
@@ -149,7 +100,8 @@
 			Support for plugin is provided at
 			<a
 				href="https://github.com/iconify/iconify-figma/issues"
-				target="_blank">GitHub repository for plugin</a>.
+				target="_blank">GitHub repository for plugin
+				<UIIcon icon="ext-link" /></a>.
 		</p>
 	</section>
 </PageContainer>
