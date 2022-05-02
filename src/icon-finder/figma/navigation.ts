@@ -21,7 +21,8 @@ export const externalLinks: Record<string, string> = {
 	repo: 'https://github.com/iconify/iconify-figma',
 	support: 'https://github.com/iconify/iconify-figma/issues',
 	donate: 'https://github.com/sponsors/cyberalien',
-	around: 'https://www.around.co/?utm_source=iconify&utm_medium=partnership',
+	around:
+		'https://go.around.co/iconify?utm_source=iconify&utm_medium=partnership',
 };
 
 /**

@@ -149,6 +149,7 @@ export class Wrapper {
 		if (customState && customState.config) {
 			coreParams.config = customState.config;
 		}
+		/*
 		if (params.iconSets) {
 			coreParams.iconSets =
 				params.iconSets instanceof Array
@@ -159,6 +160,7 @@ export class Wrapper {
 
 			// console.log('Params.iconSets:', coreParams.iconSets);
 		}
+		*/
 
 		// Disable Iconify cache
 		disableCache('all');
