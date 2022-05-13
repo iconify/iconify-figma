@@ -14,6 +14,7 @@ import { addNotice } from './notices';
 import { phrases } from '../config/phrases';
 import { pluginUIEnv } from './env';
 import { getOptions } from './options';
+import { cleanupSVG } from './cleanup-svg';
 
 /**
  * Convert button message from Icon Finder to message to plugin
@@ -45,11 +46,13 @@ export function getIconImportMessage(
 							width: data.width,
 							height: data.height,
 					  };
-			const svg = renderHTML(data, {
-				...defaultCustomisations,
-				...props,
-				...size,
-			});
+			const svg = cleanupSVG(
+				renderHTML(data, {
+					...defaultCustomisations,
+					...props,
+					...size,
+				})
+			);
 			/*
 			console.log(
 				'Rendering SVG: size =',
@@ -139,7 +142,7 @@ export function getSVGImportMessage(svg: string): UIToFigmaImportIconMessage {
 		data,
 		icons: [
 			{
-				svg,
+				svg: cleanupSVG(svg),
 			},
 		],
 	};

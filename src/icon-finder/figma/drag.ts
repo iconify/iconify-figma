@@ -6,6 +6,7 @@ import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisa
 import type { DropIconCoordinates, DropIconData } from '../../common/import';
 import type { UIToFigmaDragMessage } from '../../common/messages';
 import { getOptions } from './options';
+import { cleanupSVG } from './cleanup-svg';
 
 function assertNever(v: never) {
 	//
@@ -93,11 +94,13 @@ export function getDragMessage(
 							width: iconData.width + '',
 							height: iconData.height + '',
 					  };
-			const svg = renderHTML(iconData, {
-				...defaultCustomisations,
-				...props,
-				...size,
-			});
+			const svg = cleanupSVG(
+				renderHTML(iconData, {
+					...defaultCustomisations,
+					...props,
+					...size,
+				})
+			);
 
 			// Set data
 			data = {
