@@ -104,6 +104,7 @@ export function cleanupSVG(code: string): string {
 				return;
 			}
 
+			/*
 			case 'path': {
 				// Fix Figma bug
 				const pathValue = node.getAttribute('d');
@@ -137,6 +138,7 @@ export function cleanupSVG(code: string): string {
 					}
 				}
 			}
+			*/
 		}
 
 		testChildren(node);
