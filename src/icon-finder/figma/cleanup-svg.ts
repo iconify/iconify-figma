@@ -7,6 +7,7 @@ export function cleanupSVG(code: string): string {
 		mode: 'open',
 	});
 	shadow.innerHTML = code;
+	let modified = false;
 
 	const svg = shadow.querySelector('svg');
 	const removeAttributes = ['stroke-dasharray', 'stroke-dashoffset'];
@@ -56,6 +57,7 @@ export function cleanupSVG(code: string): string {
 			}
 
 			if (newValue) {
+				modified = true;
 				parent.setAttribute(attr, newValue);
 			}
 		}
@@ -63,7 +65,10 @@ export function cleanupSVG(code: string): string {
 		// Remove stroke attributes that confuse Figma
 		removeAttributes.forEach((attr) => {
 			try {
-				node.removeAttribute(attr);
+				if (node.hasAttribute(attr)) {
+					modified = true;
+					node.removeAttribute(attr);
+				}
 			} catch {}
 		});
 
@@ -73,11 +78,13 @@ export function cleanupSVG(code: string): string {
 			case 'animateMotion':
 			case 'animateTransform': {
 				// Not supported and should be removed
+				modified = true;
 				parent.removeChild(node);
 				return;
 			}
 
 			case 'set': {
+				modified = true;
 				const attr = node.getAttribute('attributeName');
 				const value = node.getAttribute('to');
 				if (attr && value) {
@@ -88,6 +95,7 @@ export function cleanupSVG(code: string): string {
 			}
 
 			case 'animate': {
+				modified = true;
 				const attr = node.getAttribute('attributeName');
 				const values = node.getAttribute('values');
 				if (attr && values) {
@@ -121,6 +129,7 @@ export function cleanupSVG(code: string): string {
 							return;
 						}
 
+						modified = true;
 						node.setAttribute('d', path.shift() as string);
 						const nextNode = node.nextSibling;
 
@@ -146,7 +155,7 @@ export function cleanupSVG(code: string): string {
 
 	if (svg) {
 		testChildren(svg);
-		return svg.outerHTML;
+		return modified ? svg.outerHTML.replace(/currentcolor/ig, 'currentColor') : code;
 	} else {
 		return code;
 	}

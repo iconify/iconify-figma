@@ -42,7 +42,10 @@ async function closePluginAsync() {
 	figma.on('close', closePluginAsync);
 
 	// Show UI
-	figma.showUI(__html__, getUISize());
+	figma.showUI(__html__, {
+		...getUISize(),
+		themeColors: false
+	});
 
 	// Event handler
 	figma.ui.onmessage = (msg) => {
