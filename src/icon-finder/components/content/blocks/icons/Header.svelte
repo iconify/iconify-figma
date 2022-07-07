@@ -25,6 +25,9 @@
 	// Callback
 	export let toggleSelection: () => void;
 
+	// Select all
+	export let swapSelection: () => void;
+
 	// Show buttons only when mounted to avoid rendering buttons for SSR
 	let mounted = false;
 	onMount(() => {
@@ -52,6 +55,10 @@
 	{#if mounted && (canChangeLayout || canSelectMultiple)}
 		<div class="iif-icons-header-modes">
 			{#if canSelectMultiple}
+				<IconButton
+					icon='check-all'
+					onClick={swapSelection}
+					title={text.swap} />
 				<IconButton
 					icon={selectionIcon}
 					onClick={toggleSelection}

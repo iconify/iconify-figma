@@ -95,6 +95,22 @@
 	function toggleSelection() {
 		isSelecting = !isSelecting;
 	}
+
+	function swapSelection() {
+		// Select: force selection if not selecting, toggle if selecting
+		const selected = !isSelecting ? true : void 0;
+		if (!isSelecting) {
+			isSelecting = true;
+		}
+
+		// Toggle all visible icons
+		const iconsBlock = (blocks as CollectionViewBlocks).icons;
+		registry.callback({
+			type: 'selection',
+			icons: iconsBlock.icons,
+			selected
+		});
+	}
 </script>
 
 {#if isEmpty}
@@ -108,7 +124,8 @@
 			{changeLayout}
 			{canSelectMultiple}
 			{isSelecting}
-			{toggleSelection} />
+			{toggleSelection}
+			{swapSelection} />
 		<IconsContainer {selection} {blocks} {route} {isList} {isSelecting} />
 		<Pagination name="pagination" block={pagination} />
 	</Block>

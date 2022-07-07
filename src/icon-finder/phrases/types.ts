@@ -41,6 +41,7 @@ export interface UITranslation {
 			more: string;
 			modes: Record<IconsListMode, string>;
 			select: string;
+			swap: string;
 		};
 		headerWithCount: Record<number, string>;
 		tooltip: {

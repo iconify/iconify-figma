@@ -119,6 +119,9 @@ export function importThemeIcons() {
 				body:
 					'<g fill="none" stroke="currentColor"><path d="M8.5 7v3.5h-7v-7H5" /><path stroke-linecap="square" d="M10 2L5 7M6.5 1.5h4V5" /></g>',
 			},
+			'check-all': {
+				body: '<path fill="none" stroke="currentColor" d="M.5.5h11v11H.5z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M3.176 4.824 5.06 6.706l3.764-3.765L10 4.118 5.059 9.059 2 6l1.176-1.176Z" fill="currentColor"/>'
+			}
 		},
 		aliases: {
 			'up': {
@@ -274,6 +277,7 @@ export const icons: Record<string, string | null> = {
 	'mode-inline': prefix + ':mode-inline',
 	'selecting-selected': prefix + ':confirm',
 	'selecting-unselected': prefix + ':empty',
+	'check-all': prefix + ':check-all',
 	'trash': prefix + ':trash',
 	'check': prefix + ':check',
 

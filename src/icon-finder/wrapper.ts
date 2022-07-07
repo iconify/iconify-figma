@@ -522,22 +522,30 @@ export class Wrapper {
 
 		const type = event.type;
 		switch (type) {
-			case 'selection':
+			case 'selection': {
 				// Selected icon changed: trigger event and update container (this event does not automatically update container)
 				selectionEvent = event as UISelectionEvent;
-				if (typeof selectionEvent.icon === 'string') {
-					icon = stringToIcon(selectionEvent.icon);
+				const select: SelectIcon = typeof selectionEvent.selected === 'boolean' 
+					? selectionEvent.selected
+					: (selectionEvent.icons ? 'toggle' : 'force');
+				if (selectionEvent.icons) {
+					// Select multiple icons
+					this._selectIcon(
+						selectionEvent.icons,
+						select,
+						true
+					);
 				} else {
-					icon = selectionEvent.icon;
+					// Select one icon
+					const selectedIcon = selectionEvent.icon;
+					this._selectIcon(
+						typeof selectedIcon === 'string' ? stringToIcon(selectedIcon) : (selectedIcon || null),
+						select,
+						true
+					);
 				}
-				this._selectIcon(
-					icon,
-					typeof selectionEvent.selected === 'boolean'
-						? selectionEvent.selected
-						: 'force',
-					true
-				);
 				return;
+			}
 
 			case 'customisation':
 				// Customisation was clicked: trigger event
@@ -728,7 +736,7 @@ export class Wrapper {
 	 * Select icon
 	 */
 	_selectIcon(
-		icon: Icon | null,
+		icon: Icon | Icon[] | null,
 		select: SelectIcon,
 		updateContainer: boolean
 	): boolean {
@@ -762,26 +770,32 @@ export class Wrapper {
 			return true;
 		}
 
-		// Check if icon is selected
-		const selected: boolean =
-			!!this._selectionLength && isIconSelected(this._selection, icon);
-		if (selected === select || (selected && select === 'force')) {
+		// Check if selection is changed
+		let changed = false;
+		(icon instanceof Array ? icon : [icon]).forEach(icon => {
+			const selected: boolean = !!this._selectionLength && isIconSelected(this._selection, icon);
+			if (selected === select || (selected && select === 'force')) {
+				return;
+			}
+			
+			if (
+				!changed && 
+				((!selected && select === 'force') || !this._registry.config.components.multiSelect)
+			){
+				// Clear selection if multiple icons cannot be selected and icon is not selected
+				this._selection = Object.create(null);
+			}
+				
+			// Toggle icon
+			if (selected) {
+				removeFromSelection(this._selection, icon);
+			} else {
+				addToSelection(this._selection, icon);
+			}
+			changed = true;
+		});
+		if (!changed) { 
 			return false;
-		}
-
-		if (
-			(!selected && select === 'force') ||
-			!this._registry.config.components.multiSelect
-		) {
-			// Clear selection if multiple icons cannot be selected and icon is not selected
-			this._selection = Object.create(null);
-		}
-
-		// Toggle icon
-		if (selected) {
-			removeFromSelection(this._selection, icon);
-		} else {
-			addToSelection(this._selection, icon);
 		}
 
 		// Update stuff

@@ -44,6 +44,7 @@ export const phrases: UITranslation = {
 				grid: 'Display icons as grid',
 			},
 			select: 'Select multiple icons',
+			swap: 'Select/Unselect icons on current page (inverts current selection)'
 		},
 		headerWithCount: {
 			0: 'No icons to display.',

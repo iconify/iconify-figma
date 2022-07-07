@@ -5,8 +5,10 @@ import type { PluginUIWindowControls } from '../../common/navigation';
 // Icon selection
 export interface UISelectionEvent {
 	type: 'selection';
+	// If set, multiple icons are handled and `icon` is ignored
+	icons?: Icon[];
 	// If Icon value is a string, empty string = null
-	icon: string | Icon | null;
+	icon?: string | Icon | null;
 	// Selection: if set, it toggles icon
 	selected?: boolean;
 }
