@@ -44,7 +44,7 @@ async function closePluginAsync() {
 	// Show UI
 	figma.showUI(__html__, {
 		...getUISize(),
-		themeColors: false
+		themeColors: false,
 	});
 
 	// Event handler
@@ -60,7 +60,15 @@ async function closePluginAsync() {
 		const event = msg as UIToFigmaMessage;
 		// console.log('Got event from UI:', event);
 		switch (event.type) {
-			case 'ui-loaded':
+			case 'ui-loaded': {				
+				/*
+				// Resize window: currently bugged in Figma
+				pluginEnv.windowHeight = event.height;
+				const size = getUISize();
+				console.log('Resizing:', size)
+				figma.ui.resize(size.width, size.height);
+				*/
+
 				// UI has loaded - send message to start Icon Finder
 				sendMessageToUI({
 					type: 'start-plugin',
@@ -77,8 +85,9 @@ async function closePluginAsync() {
 					colors: getDocumentColors(),
 				});
 				return;
+			}
 
-			case 'import-icon':
+			case 'import-icon': {
 				// Import icon(s)
 				if (importIcons(event.data, event.icons, event.route)) {
 					// Action
@@ -102,6 +111,7 @@ async function closePluginAsync() {
 					selectionChanged();
 				}
 				return;
+			}
 
 			case 'drop-icon':
 				// Drop icon(s)
