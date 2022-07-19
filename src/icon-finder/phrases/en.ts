@@ -213,6 +213,7 @@ export const phrases: UITranslation = {
 		window: {
 			compact: 'Toggle compact layout',
 			minimize: 'Minimize plugin',
+			close: 'Close plugin'
 		},
 		minimized: {
 			maximize: 'Show plugin',

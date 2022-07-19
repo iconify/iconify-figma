@@ -209,7 +209,7 @@
 	}
 
 	// Window controls
-	const windowControls: PluginUIWindowControls[] = ['compact', 'minimize'];
+	const windowControls: PluginUIWindowControls[] = ['compact', 'minimize', 'close'];
 	const windowText = phrases.figma.window;
 	const windowBaseClass = baseClass + ' ' + baseClass + '--icon';
 

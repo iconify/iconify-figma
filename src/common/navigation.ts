@@ -3,7 +3,7 @@ import type { IconListType } from './lists';
 /**
  * Window controls
  */
-export type PluginUIWindowControls = 'compact' | 'minimize';
+export type PluginUIWindowControls = 'compact' | 'minimize' | 'close';
 
 /**
  * Main navigation sections

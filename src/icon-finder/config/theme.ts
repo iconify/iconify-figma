@@ -188,6 +188,9 @@ export function importThemeIcons() {
 				body:
 					'<path d="M8 2h1v1.05a2.5 2.5 0 012 2.45h-1A1.5 1.5 0 108.5 7a2.5 2.5 0 01.5 4.95V13H8v-1.05A2.5 2.5 0 016 9.5h1A1.5 1.5 0 108.5 8 2.5 2.5 0 018 3.05V2z" fill="currentColor"/><path d="M6 13.5H1.5V17M11 13.5h4.5V17M14 15.5H3" stroke="currentColor" fill="none"/>',
 			},
+			close: {
+				body: '<path d="M9.498 8.79 14.287 4l.707.708-4.79 4.79 4.79 4.789-.707.707-4.79-4.79-4.789 4.79-.707-.707 4.79-4.79L4 4.708l.708-.707 4.79 4.79V8.79Z" fill="currentColor"/>'
+			}
 		},
 		width: 18,
 		height: 18,
@@ -295,6 +298,7 @@ export const icons: Record<string, string | null> = {
 	'ext-link': prefix + ':ext-link',
 	'minimize': prefix + ':minimize',
 	'compact': prefix + ':compact',
+	'close': prefix + ':close',
 	'import.bookmarks': prefix + ':heart',
 	'about.donate': prefix + ':donate',
 };

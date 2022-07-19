@@ -611,6 +611,15 @@ export class Wrapper {
 						});
 						break;
 					}
+
+					case 'close': {
+						this._triggerEvent({
+							type: 'button',
+							button: 'close',
+							state: this._state,
+						});
+						return;
+					}
 				}
 
 				this._updatePluginWindow();
