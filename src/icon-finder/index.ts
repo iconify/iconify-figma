@@ -269,10 +269,10 @@ function runIconFinder() {
 	};
 
 	// Send message to Figma
-	const height = window.innerHeight ? window.innerHeight : void 0;
 	sendMessageToFigma({
 		type: 'ui-loaded',
-		height,
+		innerHeight: window.innerHeight,
+		outerHeight: window.outerHeight,
 	});
 }
 

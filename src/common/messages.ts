@@ -75,7 +75,8 @@ export type FigmaToUIMessage =
 // Parent window has been resized
 interface UIToFigmaResizeMessage {
 	type: 'resize';
-	height: number;
+	innerHeight: number;
+	outerHeight: number;
 }
 
 // Send message when UI has been loaded

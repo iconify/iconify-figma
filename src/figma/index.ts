@@ -61,13 +61,12 @@ async function closePluginAsync() {
 		// console.log('Got event from UI:', event);
 		switch (event.type) {
 			case 'ui-loaded': {				
-				/*
-				// Resize window: currently bugged in Figma
-				pluginEnv.windowHeight = event.height;
+				// Resize window
+				pluginEnv.windowInnerHeight = event.innerHeight;
+				pluginEnv.windowOuterHeight = event.outerHeight;
 				const size = getUISize();
-				console.log('Resizing:', size)
+				// console.log('Resizing:', size);
 				figma.ui.resize(size.width, size.height);
-				*/
 
 				// UI has loaded - send message to start Icon Finder
 				sendMessageToUI({

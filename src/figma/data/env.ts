@@ -14,7 +14,8 @@ interface PluginEnv {
 	config: PluginConfig;
 
 	// Window height
-	windowHeight?: number;
+	windowInnerHeight?: number;
+	windowOuterHeight?: number;
 
 	// True if window is currently minimized
 	minimized: boolean;

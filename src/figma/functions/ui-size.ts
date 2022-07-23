@@ -11,7 +11,7 @@ const dimensions = {
 	full: {
 		width: 690,
 		// Height
-		min: 500,
+		min: 460,
 		max: 720,
 	},
 	compact: {
@@ -20,8 +20,9 @@ const dimensions = {
 		min: 400,
 		max: 600,
 	},
-	// Difference with window.innerHeight
-	diff: 90,
+	// Difference with window.innerHeight and window.outerHeight
+	innerDiff: 90,
+	outerDiff: 150,
 };
 
 interface UISize {
@@ -42,15 +43,14 @@ export function getUISize(): UISize {
 
 	// Get height
 	let height: number;
-	if (pluginEnv.windowHeight) {
-		height = Math.max(
-			Math.min(pluginEnv.windowHeight - dimensions.diff, item.max),
-			item.min
-		);
+	if (pluginEnv.windowInnerHeight) {
+		const pluginHeight = pluginEnv.windowOuterHeight ? pluginEnv.windowOuterHeight - dimensions.outerDiff : pluginEnv.windowInnerHeight - dimensions.innerDiff;
+		height = Math.max(Math.min(pluginHeight, item.max), item.min);
 	} else {
 		height = item.max;
 	}
 
+	console.log('Setting window height to:', height);
 	return {
 		width: item.width,
 		height,
