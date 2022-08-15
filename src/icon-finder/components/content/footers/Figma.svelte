@@ -23,16 +23,12 @@
 	import InfoBlock from '../blocks/CollectionInfo.svelte';
 	import LayersBlock from './parts/Layers.svelte';
 	import WindowAction from './parts/WindowAction.svelte';
+	import { watchedOptions } from '../../../figma/options';
 
 	/* Various components for icon name. Uncomment one you want to use */
 	// import IconName from './parts/name/Simple.svelte';
 	// import IconName from './parts/name/SimpleEditable.svelte';
 	import IconName from './parts/name/Block.svelte';
-
-	/* Switch to Empty.svelte if you do not want to show code samples block. Also see ../../../config/components.ts */
-	import CodeBlock from './parts/code/Container.svelte';
-	import { getOptions, watchedOptions } from '../../../figma/options';
-	// import CodeBlock from './parts/Empty.svelte';
 
 	// Selected icons
 	export let icons: Icon[];
@@ -170,9 +166,6 @@
 						</FooterBlock>
 					{/if}
 					<PropertiesContainer {icons} {customise} {customisations} />
-					{#if icon}
-						<CodeBlock {icon} {customisations} />
-					{/if}
 					<LayersBlock />
 					<WindowAction count={icons.length} />
 				</div>

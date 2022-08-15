@@ -98,7 +98,7 @@
 	padding: 16px;
 	text-align: right;
 
-	button:last-child {
+	button:last-child, a:last-child {
 		margin-right: 0;
 	}
 }
@@ -128,7 +128,7 @@
 			background-color: $plugin-palette-background-darker-white;
 		}
 
-		button {
+		a, button {
 			max-width: 240px;
 			overflow: hidden;
 			white-space: nowrap;

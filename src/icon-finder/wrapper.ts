@@ -100,6 +100,14 @@ importThemeIcons();
 setComponentsConfig(defaultComponentsConfig);
 
 /**
+ * Remove unused customisations
+ */
+function skipUnusedCustomisations(props: PartialIconCustomisations): PartialIconCustomisations {
+	const { width, height, color } = props;
+	return { width, height, color };
+}
+
+/**
  * Wrapper class
  */
 export class Wrapper {
@@ -260,7 +268,8 @@ export class Wrapper {
 				this._selectionLength = state.icons.length;
 			}
 			if (customState.customisations) {
-				state.customisations = customState.customisations;
+				// Ignore everything except few supported props
+				state.customisations = skipUnusedCustomisations(customState.customisations);
 			}
 
 			if (customState.routes) {
@@ -920,9 +929,8 @@ export class Wrapper {
 		if (this._status === 'destroyed') {
 			return;
 		}
-
 		this._setCustomisations(
-			mergeCustomisations(defaultCustomisations, customisations)
+			mergeCustomisations(defaultCustomisations, skipUnusedCustomisations(customisations))
 		);
 	}
 

@@ -131,6 +131,7 @@
 
 	let buttons: ListItem[];
 	let iconName: string;
+	let href: string | null;
 	$: {
 		const total = icons.length;
 
@@ -166,7 +167,9 @@
 		});
 
 		// Get icon name for first icon
-		iconName = total > 0 ? iconToString(icons[0]) : 'icon';
+		const firstIcon = icons[0];
+		iconName = total > 0 ? iconToString(firstIcon) : 'icon';
+		href = total === 1 ? 'https://icon-sets.iconify.design/' + firstIcon.prefix + '/' + firstIcon.name + '/' : null;
 	}
 
 	function onClick(button: string) {
@@ -179,7 +182,7 @@
 </script>
 
 {#if selectedIconData && selectedIconData.animated}
-	<p class="iif-footer-notice">{phrases.codeSamples.animatedNotice}</p>
+	<p class="iif-footer-notice">{phrases.svg.animated}</p>
 {/if}
 
 <div class="iif-footer-buttons">
@@ -195,4 +198,7 @@
 				.replace('{count}', icons.length + '')}
 		</button>
 	{/each}
+	{#if href}
+		<a class={baseClassName + ' ' + baseClassName + '--secondary'} href={href} target="_blank">Icon Code</a>
+	{/if}
 </div>

@@ -8,6 +8,7 @@
 	padding: 5px 16px 5px 16px;
 
 	text-decoration: none;
+	box-sizing: border-box;
 
 	border: 2px solid transparent;
 	border-radius: $plugin-border-radius-large;
@@ -97,4 +98,10 @@
 		position: relative;
 		left: -4px; // assuming button is before text
 	}
+}
+
+a.iif-form-button {
+	display: block;
+	float: right;
+	line-height: 18px;
 }

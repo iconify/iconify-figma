@@ -73,53 +73,15 @@ export interface UITranslation {
 	collection: {
 		by: string;
 	};
-	providers: {
-		section: string;
-		add: string;
-		addForm: UITranslationAddForm;
-		status: Record<APIProviderError, string>;
-	};
 	footer: {
 		iconName: string;
 		iconNamePlaceholder: string;
-		inlineSample: {
-			before: string;
-			after: string;
-		};
 		remove: string;
 		select: string;
 		about: string;
 	};
 	footerButtons: Record<string, string>;
 	footerBlocks: Record<string, string>;
-	footerOptionButtons: {
-		hFlip: string;
-		vFlip: string;
-		rotate: string;
-		rotateTitle: string;
-		inline: string;
-		block: string;
-		inlineHint: string;
-		blockHint: string;
-	};
-	codeSamples: {
-		animatedNotice: string;
-		copy: string;
-		copied: string;
-		heading: string;
-		headingHidden: string;
-		childTabTitle: string;
-		childTabTitles: Partial<Record<CodeSampleTab, string>>;
-		docsDefault: string;
-		docs: Partial<Record<CodeSampleKey, string>>;
-		intro: Partial<Record<CodeSampleMode, string>>;
-		component: Record<keyof ComponentCodeOutput, string>;
-		iconify: {
-			intro1: string;
-			intro2: string;
-			head: string;
-		};
-	};
 	figma: {
 		menu: Record<PluginUINavigationSection, string>;
 		submenu: Record<string, string>;

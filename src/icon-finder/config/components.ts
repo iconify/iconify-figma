@@ -42,12 +42,12 @@ export const canShortenIconName = false;
 /**
  * Show title for footer blocks?
  */
-export const showFooterBlockTitles = true;
+export const showFooterBlockTitles = false;
 
 /**
  * Toggle footer blocks?
  */
-export const canToggleFooterBlocks = true;
+export const canToggleFooterBlocks = false;
 
 /**
  * Show info block in footer?
@@ -75,10 +75,10 @@ export const customiseWidth = false;
 export const customiseHeight = true;
 
 // Rotation
-export const customiseRotate = true;
+export const customiseRotate = false;
 
 // Flip
-export const customiseFlip = true;
+export const customiseFlip = false;
 
 // Inline / block
 export const customiseInline = false;
@@ -132,4 +132,4 @@ export const footerButtons: Record<string, FooterButton> = {
  * Sample code
  */
 // To disable code block, also change link for CodeBlock to Empty.svelte in ../components/footer/*.svelte (it will remove component from bundle)
-export const showCode = true;
+export const showCode = false;
