@@ -22,7 +22,7 @@ export const externalLinks: Record<string, string> = {
 	support: 'https://github.com/iconify/iconify-figma/issues',
 	donate: 'https://github.com/sponsors/cyberalien',
 	around:
-		'https://go.around.co/iconify?utm_source=iconify&utm_medium=partnership',
+		'https://around.co/?utm_source=iconify&utm_medium=partnership',
 };
 
 /**
