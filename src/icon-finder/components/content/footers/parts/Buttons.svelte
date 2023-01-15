@@ -2,7 +2,7 @@
 	import { getContext, onDestroy } from 'svelte';
 	import type { Icon, FullRoute } from '@iconify/search-core';
 	import { iconToString } from '@iconify/search-core';
-	import { getIcon } from '@iconify/svelte';
+	import { getIcon } from '@iconify/svelte/dist/Icon.svelte';
 	import type { WrappedRegistry } from '../../../../wrapper/registry';
 	import type {
 		FooterButton,

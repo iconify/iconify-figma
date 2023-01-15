@@ -127,9 +127,3 @@ export const footerButtons: Record<string, FooterButton> = {
 			'Import as Component' + (params.icons.length > 1 ? 's' : ''),
 	},
 };
-
-/**
- * Sample code
- */
-// To disable code block, also change link for CodeBlock to Empty.svelte in ../components/footer/*.svelte (it will remove component from bundle)
-export const showCode = false;

@@ -1,5 +1,5 @@
 <script lang="typescript">
-	import IconComponent from '@iconify/svelte';
+	import IconComponent from '@iconify/svelte/dist/Icon.svelte';
 	import type { FullRoute, Icon } from '@iconify/search-core';
 	import { iconToString } from '@iconify/search-core';
 	import { Iconify } from '@iconify/search-core/lib/iconify';

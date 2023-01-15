@@ -4,14 +4,14 @@ import {
 	_api,
 	addAPIProvider,
 	disableCache,
-} from '@iconify/svelte';
+} from '@iconify/svelte/dist/Icon.svelte';
 import type { SvelteComponent } from 'svelte';
 import { get } from 'svelte/store';
 import {
 	setIconify,
 	compareObjects,
 	stringToIcon,
-	validateIcon,
+	validateIconName,
 	customisedConfig,
 	IconFinderCore,
 	setComponentsConfig,
@@ -88,8 +88,8 @@ function assertNever(s: never) {}
 const functions: Omit<Required<CoreIconifyFunctions>, 'getVersion'> = {
 	getIcon,
 	addCollection,
-	getAPI: _api.getAPI,
 	addAPIProvider,
+	..._api
 };
 setIconify(functions);
 
@@ -260,7 +260,7 @@ export class Wrapper {
 				customState.icons.forEach((icon) => {
 					let iconValue: Icon | null =
 						typeof icon === 'string' ? stringToIcon(icon) : icon;
-					if (validateIcon(iconValue)) {
+					if (validateIconName(iconValue)) {
 						addToSelection(this._selection, iconValue!);
 					}
 				});

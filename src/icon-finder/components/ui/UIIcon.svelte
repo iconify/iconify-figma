@@ -3,7 +3,7 @@
 </script>
 
 <script lang="typescript">
-	import Icon, { loadIcons } from '@iconify/svelte';
+	import Icon, { loadIcons } from '@iconify/svelte/dist/Icon.svelte';
 	import { onMount } from 'svelte';
 	import { icons, iconsClass } from '../../config/theme';
 
@@ -45,7 +45,7 @@
 	}
 </script>
 
-{#if iconName !== null}
+{#if iconName}
 	<Icon
 		icon={iconName}
 		class={iconsClass}

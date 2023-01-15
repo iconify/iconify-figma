@@ -1,6 +1,6 @@
 <script lang="typescript">
 	import { getContext, onDestroy } from 'svelte';
-	import IconComponent, { iconExists, loadIcons } from '@iconify/svelte';
+	import IconComponent, { iconExists, loadIcons } from '@iconify/svelte/dist/Icon.svelte';
 	import type { FullRoute, Icon } from '@iconify/search-core';
 	import { iconToString } from '@iconify/search-core';
 	import type { WrappedRegistry } from '../../../../../wrapper/registry';

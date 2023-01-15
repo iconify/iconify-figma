@@ -1,5 +1,5 @@
 <script lang="typescript">
-	import IconComponent from '@iconify/svelte';
+	import IconComponent from '@iconify/svelte/dist/Icon.svelte';
 	import type { Icon } from '@iconify/search-core';
 	import type { IconsListDragEvent } from '../../../../figma/drag';
 	import UIIcon from '../../../ui/UIIcon.svelte';

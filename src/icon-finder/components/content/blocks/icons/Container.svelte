@@ -1,6 +1,6 @@
 <script lang="typescript">
 	import { getContext, onMount } from 'svelte';
-	import { getIcon, loadIcons } from '@iconify/svelte';
+	import { getIcon, loadIcons } from '@iconify/svelte/dist/Icon.svelte';
 	import {
 		iconToString,
 		cloneObject,

@@ -1,6 +1,6 @@
 <script lang="typescript">
 	import { getContext, onMount } from 'svelte';
-	import { replaceIDs } from '@iconify/svelte';
+	import { replaceIDs } from '@iconify/svelte/dist/Icon.svelte';
 	import { phrases } from '../../config/phrases';
 	import type { WrappedRegistry } from '../../wrapper/registry';
 	import PageContainer from './parts/PageContainer.svelte';

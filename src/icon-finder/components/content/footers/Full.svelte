@@ -14,7 +14,6 @@
 		showButtons,
 		showInfoInFooter,
 		showCustomisatons,
-		showCode,
 		customiseInline,
 	} from '../../../config/components';
 	import Block from '../Block.svelte';
@@ -30,10 +29,6 @@
 	import IconName from './parts/name/Simple.svelte';
 	// import IconName from './parts/name/SimpleEditable.svelte';
 	// import IconName from './parts/name/Block.svelte';
-
-	/* Switch to Empty.svelte if you do not want to show code samples block. Also see ../../../config/components.ts */
-	import CodeBlock from './parts/code/Container.svelte';
-	// import CodeBlock from './parts/Empty.svelte';
 
 	// Selected icons
 	export let icons: Icon[];
@@ -160,9 +155,6 @@
 				{/if}
 				{#if showCustomisatons && hasIcons}
 					<PropertiesContainer {icons} {customise} {customisations} />
-				{/if}
-				{#if showCode && icon}
-					<CodeBlock {icon} {customisations} />
 				{/if}
 				{#if showButtons}
 					<ButtonsContainer {icons} {route} />

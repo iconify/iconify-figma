@@ -1,4 +1,4 @@
-import { addCollection } from '@iconify/svelte';
+import { addCollection } from '@iconify/svelte/dist/Icon.svelte';
 
 /**
  * Maximum color index (number of colors in rotation - 1)

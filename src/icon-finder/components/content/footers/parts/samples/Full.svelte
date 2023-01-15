@@ -1,7 +1,7 @@
 <script lang="typescript">
 	import { getContext } from 'svelte';
-	import IconComponent from '@iconify/svelte';
-	import type { IconifyIcon } from '@iconify/svelte';
+	import IconComponent from '@iconify/svelte/dist/Icon.svelte';
+	import type { IconifyIcon } from '@iconify/svelte/dist/Icon.svelte';
 	import type { Icon } from '@iconify/search-core';
 	import { iconToString } from '@iconify/search-core';
 	import { Iconify } from '@iconify/search-core/lib/iconify';

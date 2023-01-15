@@ -4,7 +4,7 @@ import type { UIToFigmaImportIconMessage } from '../../common/messages';
 import { iconToString } from '@iconify/search-core';
 import { renderHTML } from '@iconify/search-core/lib/code-samples/html';
 import { defaultCustomisations } from '@iconify/search-core/lib/misc/customisations';
-import { getIcon } from '@iconify/svelte';
+import { getIcon } from '@iconify/svelte/dist/Icon.svelte';
 import type {
 	ImportIconCommon,
 	ImportIconItem,

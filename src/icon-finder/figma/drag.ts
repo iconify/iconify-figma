@@ -1,7 +1,7 @@
 import { Icon, iconToString } from '@iconify/search-core';
 import { renderHTML } from '@iconify/search-core/lib/code-samples/html';
 import { defaultCustomisations } from '@iconify/search-core/lib/misc/customisations';
-import { getIcon } from '@iconify/svelte';
+import { getIcon } from '@iconify/svelte/dist/Icon.svelte';
 import type { IconCustomisations } from '@iconify/search-core/lib/misc/customisations';
 import type { DropIconCoordinates, DropIconData } from '../../common/import';
 import type { UIToFigmaDragMessage } from '../../common/messages';

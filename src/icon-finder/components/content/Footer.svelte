@@ -1,6 +1,6 @@
 <script lang="typescript">
 	import { onMount, getContext, onDestroy } from 'svelte';
-	import { loadIcons } from '@iconify/svelte';
+	import { loadIcons } from '@iconify/svelte/dist/Icon.svelte';
 	import type { Icon } from '@iconify/search-core';
 	import { iconToString } from '@iconify/search-core';
 	import { Iconify } from '@iconify/search-core/lib/iconify';

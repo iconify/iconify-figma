@@ -1,4 +1,4 @@
-import { calculateSize } from '@iconify/svelte';
+import { calculateSize } from '@iconify/svelte/dist/Icon.svelte';
 
 export interface IconDimensions {
 	width: number | string;

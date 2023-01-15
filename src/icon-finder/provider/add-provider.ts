@@ -5,6 +5,7 @@ import {
 	addProvider,
 	listProviders,
 } from '@iconify/search-core';
+import { _api } from '@iconify/svelte/dist/Icon.svelte';
 
 // Errors
 export type APIProviderError = 'loading' | 'error' | 'unsupported' | 'exists';
@@ -75,8 +76,10 @@ export function retrieveProvider(
 	callback: RetrieveProviderCallback
 ): void {
 	// console.log('retrieveProvider:', host);
-	const api = registry.api;
-	api.sendQuery(host, '/provider', (status, data) => {
+	_api.sendAPIQuery(host, {
+		type: 'custom',
+		uri: '/provider'
+	}, (status, data) => {
 		const providerData = data as APIProviderRawData;
 		let convertedData: APIProviderSource | null;
 		let error: APIProviderError = 'error';
