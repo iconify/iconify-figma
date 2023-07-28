@@ -93,6 +93,11 @@ const functions: Omit<Required<CoreIconifyFunctions>, 'getVersion'> = {
 };
 setIconify(functions);
 
+// Override API to remove redundancy
+addAPIProvider('', {
+	resources: ['https://api.iconify.design']
+})
+
 // Import theme icons
 importThemeIcons();
 

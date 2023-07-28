@@ -230,17 +230,17 @@ export function importThemeIcons() {
 	});
 
 	// around.co logo
-	addCollection({
-		prefix,
-		icons: {
-			around: {
-				body:
-					'<g filter="url(#a)"><path fill-rule="evenodd" clip-rule="evenodd" d="M262.766 0c-27.614 0-49.999 22.386-49.999 50s22.385 50 49.999 50 50-22.386 50-50-22.386-50-50-50ZM48.059 5.883C22.07 5.883 1 26.952 1 52.94 1 78.931 22.068 100 48.058 100h47.06V52.941c0-25.99-21.069-47.058-47.059-47.058Zm382.356 45.166c0-24.945 19.752-45.166 44.118-45.166 24.365 0 44.117 20.221 44.117 45.166V100h-88.235V51.049Zm100-45.166V100h47.059c25.99 0 47.059-21.069 47.059-47.058 0-25.99-21.069-47.06-47.059-47.06h-47.059Zm-205.884 0V52.94c0 25.99 21.069 47.059 47.059 47.059s47.058-21.069 47.058-47.059V5.883H324.531ZM106.883 52.94c0-25.99 21.069-47.058 47.059-47.058H201V52.94h-47.058V100h-47.059V52.941ZM616.294 20h3.028v-9.539h3.292V8h-9.613v2.461h3.293V20Zm18.035 0h2.672V8h-3.508l-3.011 7.709h-.066L627.404 8h-3.507v12h2.672v-7.493h.066l2.945 7.368h1.737l2.954-7.368h.058V20Z" fill="url(#b)"/></g><defs><linearGradient id="b" x1="-171.148" y1="32.205" x2="645.146" y2="217.239" gradientUnits="userSpaceOnUse"><stop stop-color="#003C91"/><stop offset=".093" stop-color="#059DFF"/><stop offset=".203" stop-color="#14B3F4"/><stop offset=".505" stop-color="#6549D5"/><stop offset=".695" stop-color="#E33FA1"/><stop offset=".796" stop-color="#FB5343"/><stop offset=".935" stop-color="#FD7B42"/></linearGradient><filter id="a" x="0" y="0" width="638.001" height="102" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dy="1"/><feGaussianBlur stdDeviation=".5"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0"/><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_2_314"/><feBlend in="SourceGraphic" in2="effect1_dropShadow_2_314" result="shape"/></filter></defs>',
-				width: 638,
-				height: 102,
-			},
-		},
-	});
+	// addCollection({
+	// 	prefix,
+	// 	icons: {
+	// 		around: {
+	// 			body:
+	// 				'<g filter="url(#a)"><path fill-rule="evenodd" clip-rule="evenodd" d="M262.766 0c-27.614 0-49.999 22.386-49.999 50s22.385 50 49.999 50 50-22.386 50-50-22.386-50-50-50ZM48.059 5.883C22.07 5.883 1 26.952 1 52.94 1 78.931 22.068 100 48.058 100h47.06V52.941c0-25.99-21.069-47.058-47.059-47.058Zm382.356 45.166c0-24.945 19.752-45.166 44.118-45.166 24.365 0 44.117 20.221 44.117 45.166V100h-88.235V51.049Zm100-45.166V100h47.059c25.99 0 47.059-21.069 47.059-47.058 0-25.99-21.069-47.06-47.059-47.06h-47.059Zm-205.884 0V52.94c0 25.99 21.069 47.059 47.059 47.059s47.058-21.069 47.058-47.059V5.883H324.531ZM106.883 52.94c0-25.99 21.069-47.058 47.059-47.058H201V52.94h-47.058V100h-47.059V52.941ZM616.294 20h3.028v-9.539h3.292V8h-9.613v2.461h3.293V20Zm18.035 0h2.672V8h-3.508l-3.011 7.709h-.066L627.404 8h-3.507v12h2.672v-7.493h.066l2.945 7.368h1.737l2.954-7.368h.058V20Z" fill="url(#b)"/></g><defs><linearGradient id="b" x1="-171.148" y1="32.205" x2="645.146" y2="217.239" gradientUnits="userSpaceOnUse"><stop stop-color="#003C91"/><stop offset=".093" stop-color="#059DFF"/><stop offset=".203" stop-color="#14B3F4"/><stop offset=".505" stop-color="#6549D5"/><stop offset=".695" stop-color="#E33FA1"/><stop offset=".796" stop-color="#FB5343"/><stop offset=".935" stop-color="#FD7B42"/></linearGradient><filter id="a" x="0" y="0" width="638.001" height="102" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dy="1"/><feGaussianBlur stdDeviation=".5"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0"/><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_2_314"/><feBlend in="SourceGraphic" in2="effect1_dropShadow_2_314" result="shape"/></filter></defs>',
+	// 			width: 638,
+	// 			height: 102,
+	// 		},
+	// 	},
+	// });
 }
 
 /**

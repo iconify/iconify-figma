@@ -229,10 +229,17 @@
 		</div>
 		<div class="plugin-header-center" />
 		<div class="plugin-header-right">
+			<a
+				href={externalLinks.around}
+				class={windowBaseClass}
+				title="Sponsored by Around"
+				target="_blank">
+				<UIIcon icon="icon-finder-theme:around" />
+			</a>
 			<Section {currentPage} {navigate} section="about" />
 			{#each windowControls as item, i (item)}
 				<a
-					href="# "
+					href={externalLinks.around}
 					class={windowBaseClass}
 					title={windowText[item]}
 					on:click|preventDefault={() => windowControlClicked(item)}>

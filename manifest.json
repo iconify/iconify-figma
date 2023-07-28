@@ -7,5 +7,12 @@
 	"relaunchButtons": [
 		{ "command": "replace", "name": "Iconify", "multipleSelection": true }
 	],
-	"editorType": ["figma", "figjam"]
+	"editorType": ["figma", "figjam"],
+	"networkAccess": {
+		"allowedDomains": [
+		  "https://code.iconify.design",
+		  "https://api.iconify.design"
+		],
+		"reasoning": "Network access to Iconify API is required to retrieve icons"
+	  }
 }

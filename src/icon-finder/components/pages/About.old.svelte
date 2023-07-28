@@ -29,18 +29,30 @@
 					target="_blank"
 				>GitHub repository for plugin <UIIcon icon="ext-link" /></a>.
 			</li>
-			<li>
-				<a 
-					href="https://iconify.design/discord/"
-					target="_blank"
-				>Discord (in #iconify channel) <UIIcon icon="ext-link" /></a>.
-			</li>
 		</ul>
 		
 	</section>
 
 	<section>
 		<h1>Sponsoring Iconify</h1>
+
+		<section>
+			<h1 class="around-logo">
+				<UIIcon icon="icon-finder-theme:around" />
+			</h1>
+			<p>
+				Huge thanks to
+				<a href={externalLinks.around} target="_blank">Around</a>
+				for sponsoring Iconify!
+			</p>
+			<p>
+				<a href={externalLinks.around} target="_blank">Try Around</a>
+				for video calls. Designed for developers! Oh... and Around team
+				uses Figma!
+			</p>
+		</section>
+
+		<p>You can contribute too!</p>
 
 		<p>
 			Iconify is open source, servers and development costs money. It is a
@@ -54,7 +66,7 @@
 		</p>
 		<p>
 			<a
-				href={externalLinks.sponsors}
+				href="https://github.com/sponsors/cyberalien"
 				target="_blank">Sponsorship is available via GitHub sponsors
 				<UIIcon icon="ext-link" /></a>.
 		</p>
