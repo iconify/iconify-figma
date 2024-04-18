@@ -1,0 +1,20 @@
+{
+	"name": "Iconify Dev",
+	"id": "1234567890",
+	"api": "1.0.0",
+	"main": "dist/plugin.js",
+	"ui": "dist/index.html",
+	"relaunchButtons": [
+		{ "command": "replace", "name": "Iconify", "multipleSelection": true }
+	],
+	"editorType": ["figma", "figjam"],
+	"networkAccess": {
+		"allowedDomains": [
+			"https://code.iconify.design",
+			"https://api.iconify.design",
+			"https://api.simplesvg.com",
+			"https://api.unisvg.com"
+		],
+		"reasoning": "Network access to Iconify API is required to retrieve icons"
+	}
+}
