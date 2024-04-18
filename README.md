@@ -41,18 +41,18 @@ UI has been re-designed to fit as much information as possible in a small plugin
 
 ### Icon sets
 
-[Iconify for Figma - icon sets](https://iconify.github.io/iconify-figma/samples/icon-sets.png)
+![Iconify for Figma - icon sets](https://iconify.github.io/iconify-figma/samples/icon-sets.png)
 
 Icon sets list is shorter, but offers a lot more:
 - Hints when you hover icon set, showing various details, including extended license information.
 - Favorite and recent icon sets. You can mark any icon set as favorite to access it quicker.
 - Advanced filters. You can filter icon sets by category, grid, license, license details.
 
-[Iconify for Figma - icon sets filters](https://iconify.github.io/iconify-figma/samples/filters.png)
+![Iconify for Figma - icon sets filters](https://iconify.github.io/iconify-figma/samples/filters.png)
 
 ### Icon set
 
-[Iconify for Figma - icon sets filters](https://iconify.github.io/iconify-figma/samples/icon-set.png)
+![Iconify for Figma - icon set](https://iconify.github.io/iconify-figma/samples/icon-set.png)
 
 Icon set page now has:
 - Advanced license details: attribution, commercial use.
@@ -60,11 +60,11 @@ Icon set page now has:
 - Scrolling for icons. No more pagination (though it is available if you prefer to click pages).
 - You can select multiple icons. To enable multi-select, click "Select multiple icons" box.
 
-[Iconify for Figma - icon sets filters](https://iconify.github.io/iconify-figma/samples/multi-select.png)
+![Iconify for Figma - multi-select](https://iconify.github.io/iconify-figma/samples/multi-select.png)
 
 ### Search
 
-[Iconify for Figma - icon sets filters](https://iconify.github.io/iconify-figma/samples/search.png)
+![Iconify for Figma - search results](https://iconify.github.io/iconify-figma/samples/search.png)
 
 Search results feature:
 - Infinite scroll for icons, same as in icon set view. It is not typical slow infinite scroll, it is very fast and renders only icons that are visible.
