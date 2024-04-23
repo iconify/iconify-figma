@@ -26,7 +26,7 @@ This is a preview version.
 
 Functions that do not work yet:
 
--   Various pages (About, Recent icons)
+-   About page
 
 ### New features
 
