@@ -22,11 +22,11 @@ To run it, go to Plugins -> Development, select "Iconify Dev".
 
 ## Functionality
 
-This is a preview version. 
+This is a preview version.
 
 Functions that do not work yet:
-- Various pages (About, Recent icons)
-- Color picker (icons are imported as black for now)
+
+-   Various pages (About, Recent icons)
 
 ### New features
 
@@ -36,7 +36,7 @@ Version 3 has been completely rewritten. It includes many new shiny features, wh
 
 Plugin has completely new UI.
 
-Many Figma users have small monitors, plugin takes precious space. 
+Many Figma users have small monitors, plugin takes precious space.
 UI has been re-designed to fit as much information as possible in a small plugin window.
 
 ### Icon sets
@@ -44,9 +44,10 @@ UI has been re-designed to fit as much information as possible in a small plugin
 ![Iconify for Figma - icon sets](https://iconify.github.io/iconify-figma/samples/icon-sets.png)
 
 Icon sets list is shorter, but offers a lot more:
-- Hints when you hover icon set, showing various details, including extended license information.
-- Favorite and recent icon sets. You can mark any icon set as favorite to access it quicker.
-- Advanced filters. You can filter icon sets by category, grid, license, license details.
+
+-   Hints when you hover icon set, showing various details, including extended license information.
+-   Favorite and recent icon sets. You can mark any icon set as favorite to access it quicker.
+-   Advanced filters. You can filter icon sets by category, grid, license, license details.
 
 ![Iconify for Figma - icon sets filters](https://iconify.github.io/iconify-figma/samples/filters.png)
 
@@ -55,10 +56,11 @@ Icon sets list is shorter, but offers a lot more:
 ![Iconify for Figma - icon set](https://iconify.github.io/iconify-figma/samples/icon-set.png)
 
 Icon set page now has:
-- Advanced license details: attribution, commercial use.
-- You can add icon set to favorite icon sets list to quickly access it.
-- Scrolling for icons. No more pagination (though it is available if you prefer to click pages).
-- You can select multiple icons. To enable multi-select, click "Select multiple icons" box.
+
+-   Advanced license details: attribution, commercial use.
+-   You can add icon set to favorite icon sets list to quickly access it.
+-   Scrolling for icons. No more pagination (though it is available if you prefer to click pages).
+-   You can select multiple icons. To enable multi-select, click "Select multiple icons" box.
 
 ![Iconify for Figma - multi-select](https://iconify.github.io/iconify-figma/samples/multi-select.png)
 
@@ -67,27 +69,43 @@ Icon set page now has:
 ![Iconify for Figma - search results](https://iconify.github.io/iconify-figma/samples/search.png)
 
 Search results feature:
-- Infinite scroll for icons, same as in icon set view. It is not typical slow infinite scroll, it is very fast and renders only icons that are visible.
-- License information for each icon.
+
+-   Infinite scroll for icons, same as in icon set view. It is not typical slow infinite scroll, it is very fast and renders only icons that are visible.
+-   License information for each icon.
 
 ### Drag and drop
 
 Drag and drop has been redesigned. It is now more precise, dropping icon to correct layer.
 
 There are some caveats though:
-- Cannot drop icon to component instance: Figma plugin system limitation. Must drop it to main component.
-- If layer has auto-layout, icon will be imported as first item in frame, not necessary where you drop it.
+
+-   Cannot drop icon to component instance: Figma plugin system limitation. Must drop it to main component.
+-   If layer has auto-layout, icon will be imported as first item in frame, not necessary where you drop it.
+
+### Color styles
+
+Plugin now supports Figma color styles.
+
+Color styles are shown in color picker. When importing icon, if color style is selected, it will be applied to icon.
+
+![Iconify for Figma - color styles](https://iconify.github.io/iconify-figma/samples/color-styles.png)
+
+Behavior:
+
+-   Works when importing icon, works when using drag/drop.
+-   When replacing icon, color value is ignored. Instead, plugin will reuse color or color style from old icon.
+-   In Figma, plugins can find only local styles. Shared styles from other documents (remote styles) are not available. However, when selecting a layer, plugin can see styles that are used in that layer, including remote style. Iconify plugin checks selected layers for remote styles, so if you want to use a remote style, select any layer that uses it and it will appear in plugin's color picker.
 
 ## Feedback
 
 Feedback is very welcome.
 
 Please open issues at this repository if:
-- You think this version is missing a critical feature that older version used to have.
-- You have a suggestion.
-- You found something that does not feel right, which might be a bug or bad design.
+
+-   You think this version is missing a critical feature that older version used to have.
+-   You have a suggestion.
+-   You found something that does not feel right, which might be a bug or bad design.
 
 ## Source code
 
 Source code for this version is not available yet.
-
