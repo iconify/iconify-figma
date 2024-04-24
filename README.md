@@ -2,7 +2,7 @@
 
 Import Material Design Icons, FontAwesome, Jam Icons, EmojiOne, Twitter Emoji and many other icons (more than 150 icon sets containing over 200,000 icons) to Figma document as vector shapes.
 
-## Pre-release
+## Version 3
 
 This is an archive version of plugin version 3.
 
@@ -24,4 +24,4 @@ This version is not supported and not updated. It should work as long as Figma p
 
 This will install plugin to your Figma app.
 
-To run it, go to Plugins -> Development, select "Iconify Dev".
+To run it, go to Plugins -> Development, select "Iconify v3".
