@@ -4,7 +4,7 @@ Import Material Design Icons, FontAwesome, Jam Icons, EmojiOne, Twitter Emoji an
 
 ## Pre-release
 
-This is a pre-release branch for version 3 of plug-in.
+This is a pre-release branch for version 4 of plug-in.
 
 It contains built files that you can use in Figma.
 
