@@ -22,11 +22,11 @@ To run it, go to Plugins -> Development, select "Iconify Dev".
 
 ## Functionality
 
-This is a preview version.
+This plugin is fully functional. Everything should work correctly.
 
-Functions that do not work yet:
+However, it is currently available only here. Figma community shows old version.
 
--   About page
+Before publishing new version, I need to create a video tutorial to help users migrate. This should take few weeks...
 
 ### New features
 
