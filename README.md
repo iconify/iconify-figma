@@ -30,7 +30,7 @@ Functions that do not work yet:
 
 ### New features
 
-Version 3 has been completely rewritten. It includes many new shiny features, which should all work in development preview.
+Version 4 has been completely rewritten. It includes many new shiny features, which should all work in development preview.
 
 ### New UI
 
