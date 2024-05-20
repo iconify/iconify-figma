@@ -26,8 +26,6 @@ This plugin is fully functional. Everything should work correctly.
 
 However, it is currently available only here. Figma community shows old version.
 
-Before publishing new version, I need to create a video tutorial to help users migrate. This should take few weeks...
-
 ### New features
 
 Version 4 has been completely rewritten. It includes many new shiny features, which should all work in development preview.
