@@ -49,7 +49,7 @@ Screenshots below show new redesigned UI, not initial mess.
 
 ### Icon sets
 
-![Iconify for Figma - icon sets](https://iconify.github.io/iconify-figma/samples/icon-sets.png)
+![Iconify for Figma - icon sets](https://iconify.github.io/iconify-figma/samples/icon-sets-v2.png)
 
 Icon sets list is shorter, but offers a lot more:
 
@@ -60,7 +60,7 @@ Icon sets list is shorter, but offers a lot more:
 
 ### Icon set
 
-![Iconify for Figma - icon set](https://iconify.github.io/iconify-figma/samples/icon-set.png)
+![Iconify for Figma - icon set](https://iconify.github.io/iconify-figma/samples/icon-set-v2.png)
 
 Icon set page now has:
 
@@ -69,11 +69,11 @@ Icon set page now has:
 -   You can select multiple icons. To enable multi-select, click "Select multiple icons" box.
 -   Quick import for icons. Click menu (3 dots icon) button for any icon, you'll see buttons to quickly import it. Drag/drop is also supported, so you can use whatever you prefer.
 
-![Iconify for Figma - multi-select](https://iconify.github.io/iconify-figma/samples/multi-select.png)
+![Iconify for Figma - multi-select](https://iconify.github.io/iconify-figma/samples/multi-select-v2.png)
 
 ### Search
 
-![Iconify for Figma - search results](https://iconify.github.io/iconify-figma/samples/search.png)
+![Iconify for Figma - search results](https://iconify.github.io/iconify-figma/samples/search-v2.png)
 
 Search results feature:
 
@@ -97,7 +97,7 @@ Plugin now supports Figma color styles.
 
 Color styles are shown in color picker. When importing icon, if color style is selected, it will be applied to icon.
 
-![Iconify for Figma - color styles](https://iconify.github.io/iconify-figma/samples/color-styles.png)
+![Iconify for Figma - color styles](https://iconify.github.io/iconify-figma/samples/color-styles-v2.png)
 
 Behavior:
 
