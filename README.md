@@ -37,6 +37,16 @@ Plugin has completely new UI.
 Many Figma users have small monitors, plugin takes precious space.
 UI has been re-designed to fit as much information as possible in a small plugin window.
 
+### Redesign attempt 2
+
+Initial redesign was a failure. It resulted in very bad UX, making things worse.
+
+New version of plugin was live for only 3 days before it was restored to old version.
+
+So after many months of hard work, UI has been redesigned again.
+
+Screenshots below show new redesigned UI, not initial mess.
+
 ### Icon sets
 
 ![Iconify for Figma - icon sets](https://iconify.github.io/iconify-figma/samples/icon-sets.png)
@@ -46,8 +56,7 @@ Icon sets list is shorter, but offers a lot more:
 -   Hints when you hover icon set, showing various details, including extended license information.
 -   Favorite and recent icon sets. You can mark any icon set as favorite to access it quicker.
 -   Advanced filters. You can filter icon sets by category, grid, license, license details.
-
-![Iconify for Figma - icon sets filters](https://iconify.github.io/iconify-figma/samples/filters.png)
+-   Custom lists of icon sets.
 
 ### Icon set
 
@@ -56,9 +65,9 @@ Icon sets list is shorter, but offers a lot more:
 Icon set page now has:
 
 -   Advanced license details: attribution, commercial use.
--   You can add icon set to favorite icon sets list to quickly access it.
 -   Scrolling for icons. No more pagination (though it is available if you prefer to click pages).
 -   You can select multiple icons. To enable multi-select, click "Select multiple icons" box.
+-   Quick import for icons. Click menu (3 dots icon) button for any icon, you'll see buttons to quickly import it. Drag/drop is also supported, so you can use whatever you prefer.
 
 ![Iconify for Figma - multi-select](https://iconify.github.io/iconify-figma/samples/multi-select.png)
 
@@ -68,6 +77,8 @@ Icon set page now has:
 
 Search results feature:
 
+-   Search is now shown on all pages, making it easy to access at all times.
+-   If you are viewing filtered icon sets (such as filtered by category) or custom icon sets list (favorite, recent or any other list), you can search only icon sets in that list.
 -   Infinite scroll for icons, same as in icon set view. It is not typical slow infinite scroll, it is very fast and renders only icons that are visible.
 -   License information for each icon.
 
